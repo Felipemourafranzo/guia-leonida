@@ -96,8 +96,8 @@ window.GLCatalogo = (function () {
       b.setAttribute('aria-pressed', novoEstado ? 'true' : 'false');
     });
     GL.anunciar(novoEstado
-      ? item.nome + ' adicionado aos favoritos.'
-      : item.nome + ' removido dos favoritos.');
+      ? 'Adicionado aos favoritos: ' + item.nome + '.'
+      : 'Removido dos favoritos: ' + item.nome + '.');
   }
 
   /* ---------------------------------------------------------------------

@@ -45,6 +45,9 @@ body {
 
 main { flex: 1 0 auto; }
 
+/* O atributo hidden sempre vence classes como .d-flex do Bootstrap */
+[hidden] { display: none !important; }
+
 h1, h2, h3, h4, .titulo-display {
   font-family: var(--fonte-titulo);
   font-weight: 700;
