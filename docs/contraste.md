@@ -86,6 +86,23 @@ Todos os textos foram avaliados com o limite de **texto normal** (4,5:1), mesmo 
 | Contorno de foco sobre o fundo *(UI, 3:1)* | `#FFFF00` `foco` | `#000000` `fundo` | **19,56:1** | ✅ Passa | — |
 | Contorno de foco sobre os cards *(UI, 3:1)* | `#FFFF00` `foco` | `#000000` `superficie` | **19,56:1** | ✅ Passa | — |
 
+## Textos sobre o degradê do topo (hero)
+
+O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão foi medida contra cada ponto do degradê e a tabela mostra o **pior caso**. O título em degradê (`.texto-neon`) usa só as cores primária, secundária e roxo do tema.
+
+| Modo | Texto | Pior ponto do degradê | Pior razão | AA |
+|---|---|---|---|---|
+| Claro | `#1C1230` `texto` | `#ECE3FF` | **14,42:1** | ✅ Passa |
+| Claro | `#4F4566` `texto-suave` | `#ECE3FF` | **7,16:1** | ✅ Passa |
+| Claro | `#B8175E` `primaria` | `#ECE3FF` | **5,12:1** | ✅ Passa |
+| Claro | `#A3410B` `secundaria` | `#ECE3FF` | **5,12:1** | ✅ Passa |
+| Claro | `#5B2BC4` `roxo` | `#ECE3FF` | **6,57:1** | ✅ Passa |
+| Escuro | `#F5F0FF` `texto` | `#0F2240` | **14,20:1** | ✅ Passa |
+| Escuro | `#C9BEE8` `texto-suave` | `#0F2240` | **9,08:1** | ✅ Passa |
+| Escuro | `#FF6BB0` `primaria` | `#0F2240` | **6,03:1** | ✅ Passa |
+| Escuro | `#FF9F5A` `secundaria` | `#0F2240` | **7,83:1** | ✅ Passa |
+| Escuro | `#B9A2FF` `roxo` | `#0F2240` | **7,31:1** | ✅ Passa |
+
 ## Antes e depois: cores que falharam e foram corrigidas
 
 | Caso | Antes | Razão antes | Depois | Razão depois | Fundo |
@@ -93,10 +110,12 @@ Todos os textos foram avaliados com o limite de **texto normal** (4,5:1), mesmo 
 | Rosa neon do botão principal no modo claro | `#FF2D95` | 3,29:1 ❌ Falha | `#B8175E` | 6,01:1 ✅ Passa | `#FFF8F2` |
 | Ciano dos links no modo claro | `#22D3EE` | 1,81:1 ❌ Falha | `#0B6577` | 6,68:1 ✅ Passa | `#FFFFFF` |
 | Roxo dos rótulos de categoria no modo escuro | `#7C3AED` | 3,09:1 ❌ Falha | `#B9A2FF` | 8,12:1 ✅ Passa | `#1A1433` |
+| Título em degradê neon no modo claro | `#FF8A3D` | 2,00:1 ❌ Falha | `#A3410B` | 5,39:1 ✅ Passa | `#FFE9D6` |
 
 - **Rosa neon do botão principal no modo claro:** O rosa neon original (#FF2D95) é a cor mais 'Vice City' da paleta, mas sobre o fundo areia ele não chega nem a 4,5:1. Escurecemos o rosa mantendo o matiz (framboesa) até passar no AA com folga.
 - **Ciano dos links no modo claro:** O ciano neon é ótimo no modo escuro, mas no branco quase desaparece (cerca de 1,8:1). No modo claro usamos um azul-petróleo do mesmo matiz.
 - **Roxo dos rótulos de categoria no modo escuro:** O roxo saturado (#7C3AED) combina com a noite de Vice City, mas sobre o card escuro fica abaixo de 3:1. Clareamos para um lilás que mantém o tom e passa até no AAA.
+- **Título em degradê neon no modo claro:** O título 'Leonida' usava o degradê neon puro (rosa, laranja e roxo). O ponto laranja (#FF8A3D) sobre o degradê areia do topo ficava abaixo de 3:1, reprovando até como texto grande. O degradê do texto passou a usar as cores de texto do tema.
 
 ## Resultado
 

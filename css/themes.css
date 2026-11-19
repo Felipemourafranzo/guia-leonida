@@ -150,6 +150,7 @@
   --bs-form-valid-border-color: var(--cor-sucesso);
   --bs-font-sans-serif: var(--fonte-texto);
   --bs-body-font-family: var(--fonte-texto);
+  --bs-code-color: var(--cor-roxo);
   --bs-border-radius: var(--raio-pequeno);
   --bs-border-radius-lg: var(--raio);
 }

@@ -138,7 +138,25 @@ ANTES_DEPOIS = [
             "o tom e passa até no AAA."
         ),
     },
+    {
+        "nome": "Título em degradê neon no modo claro",
+        "antes": "#FF8A3D",
+        "depois": "#A3410B",
+        "fundo": "#FFE9D6",
+        "explicacao": (
+            "O título 'Leonida' usava o degradê neon puro (rosa, laranja e roxo). "
+            "O ponto laranja (#FF8A3D) sobre o degradê areia do topo ficava abaixo "
+            "de 3:1, reprovando até como texto grande. O degradê do texto passou a "
+            "usar as cores de texto do tema."
+        ),
+    },
 ]
+
+# Pontos do degradê de fundo do hero (--gradiente-marca em css/themes.css)
+DEGRADE_HERO = {
+    "Claro": ["#FFE1EE", "#FFE9D6", "#ECE3FF"],
+    "Escuro": ["#2A0F33", "#1A1433", "#0F2240"],
+}
 
 LIMITES = {"texto": (4.5, 7.0), "grande": (3.0, 4.5), "ui": (3.0, None)}
 
@@ -231,6 +249,29 @@ def gerar() -> tuple[str, int]:
                 f"| **{fmt(r)}** | {aa} | {aaa} |"
             )
         linhas.append("")
+
+    # Textos sobre o degradê do hero: mede contra CADA ponto do degradê
+    # e mostra o pior caso (o ponto de menor contraste).
+    linhas += [
+        "## Textos sobre o degradê do topo (hero)",
+        "",
+        "O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão foi medida "
+        "contra cada ponto do degradê e a tabela mostra o **pior caso**. O título em degradê "
+        "(`.texto-neon`) usa só as cores primária, secundária e roxo do tema.",
+        "",
+        "| Modo | Texto | Pior ponto do degradê | Pior razão | AA |",
+        "|---|---|---|---|---|",
+    ]
+    for nome, pontos in DEGRADE_HERO.items():
+        paleta = PALETAS[nome]
+        for frente in ("texto", "texto-suave", "primaria", "secundaria", "roxo"):
+            pior = min(pontos, key=lambda p: razao(paleta[frente], p))
+            r = razao(paleta[frente], pior)
+            aa, _ = avaliar(r, "texto")
+            if "Falha" in aa:
+                falhas += 1
+            linhas.append(f"| {nome} | {amostra(paleta[frente])} `{frente}` | {amostra(pior)} | **{fmt(r)}** | {aa} |")
+    linhas.append("")
 
     linhas += [
         "## Antes e depois: cores que falharam e foram corrigidas",

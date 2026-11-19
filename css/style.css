@@ -76,10 +76,12 @@ main li a:not(.btn):not(.nav-link),
 
 img, svg { max-width: 100%; height: auto; }
 
-/* Destaque de texto com o degradê da marca (decorativo; no alto contraste
-   vira texto amarelo puro) */
+/* Destaque de texto em degradê. Usa só as cores de TEXTO do tema
+   (primária, secundária e roxo), que passam em 4,5:1 sobre o fundo:
+   os neons puros (#FF2D95, #FF8A3D) falhavam no modo claro.
+   No alto contraste vira texto amarelo puro. */
 .texto-neon {
-  background: var(--gradiente-neon);
+  background: linear-gradient(120deg, var(--cor-primaria), var(--cor-secundaria) 55%, var(--cor-roxo));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -193,8 +195,9 @@ main:focus { outline: none; }
 
 @media (max-width: 575.98px) {
   .esconder-xs { display: none; }
-  .marca { font-size: 1rem; }
+  .marca { font-size: 1rem; margin-right: .25rem; gap: .35rem; }
   .marca img { width: 2rem; height: 2rem; }
+  .barra-ferramentas { gap: .25rem; }
 }
 
 /* 4. Botões --------------------------------------------------------------- */
@@ -215,14 +218,18 @@ main:focus { outline: none; }
   inset: auto 0 0 0;
   z-index: -1;
   width: 100%;
-  height: 55%;
+  height: 40%;
   object-fit: cover;
   object-position: bottom;
-  opacity: .35;
+  opacity: .22;
   -webkit-mask-image: linear-gradient(to top, #000 30%, transparent);
   mask-image: linear-gradient(to top, #000 30%, transparent);
 }
-[data-bs-theme="dark"] .hero-fundo { opacity: .5; }
+[data-bs-theme="dark"] .hero-fundo { opacity: .35; }
+/* Botões e campos do hero com fundo sólido: o texto nunca fica direto
+   sobre a ilustração (contraste garantido) */
+.hero .btn-outline-primary { background-color: var(--cor-superficie); }
+.hero .btn-outline-primary:hover { background-color: var(--cor-primaria); }
 
 .hero-selo {
   display: inline-flex;
@@ -726,7 +733,8 @@ main:focus { outline: none; }
 
 /* 13. Painel de acessibilidade -------------------------------------------- */
 .offcanvas { background: var(--cor-superficie); color: var(--cor-texto); }
-.painel-a11y { display: grid; gap: 1.25rem; }
+.painel-a11y { display: grid; gap: 1.25rem; min-width: 0; }
+.painel-a11y fieldset { min-width: 0; } /* fieldset não estoura em telas de 320px */
 .painel-a11y fieldset,
 .painel-a11y .grupo-a11y {
   border: 1px solid var(--cor-borda);
@@ -743,7 +751,7 @@ main:focus { outline: none; }
   margin-bottom: .5rem;
   padding: 0;
 }
-.painel-a11y .opcoes-tema { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; }
+.painel-a11y .opcoes-tema { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr)); gap: .4rem; }
 .painel-a11y .opcoes-tema .btn-check + label {
   flex-direction: column;
   gap: .2rem;
@@ -758,7 +766,7 @@ main:focus { outline: none; }
   border-color: var(--cor-primaria);
 }
 .painel-a11y .opcoes-tema .btn-check:focus-visible + label { outline: var(--largura-foco) solid var(--cor-foco); outline-offset: 2px; }
-.painel-a11y .controle-fonte { display: flex; align-items: center; gap: .5rem; }
+.painel-a11y .controle-fonte { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
 .painel-a11y .controle-fonte output {
   min-width: 4rem;
   text-align: center;
