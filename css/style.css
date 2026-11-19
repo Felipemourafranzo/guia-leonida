@@ -952,3 +952,12 @@ main:focus { outline: none; }
 .card-guia .card-imagem { aspect-ratio: 16 / 9; object-fit: cover; }
 .hero-foto-real::before { z-index: 0; }
 .hero-foto-real > .container { position: relative; z-index: 1; }
+
+/* Menu sempre visível no topo (sem botão de menu): em telas menores ele
+   desce para uma segunda linha e rola para o lado se não couber */
+.cabecalho .navbar-expand > .container { flex-wrap: wrap; }
+@media (max-width: 1199.98px) {
+  .cabecalho .navbar-collapse { flex-basis: 100%; order: 3; }
+  .cabecalho .navbar-nav { flex-wrap: nowrap; overflow-x: auto; gap: .25rem; padding-bottom: .25rem; scrollbar-width: thin; }
+  .cabecalho .nav-link { white-space: nowrap; padding-inline: .6rem !important; }
+}

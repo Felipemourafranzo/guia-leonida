@@ -2,7 +2,7 @@
 
 **Desenvolvimento de Interfaces 2/2026**. Prof. Dr. Felipe Batista da Silva
 
-- **Nome:** [NOME]
+- **Nome:** Felipe Moura Franzo
 - **RA:** [RA]
 - **Site:** Guia Leonida, guia de fã não oficial de GTA VI
 - **Repositório:** [URL DO REPOSITÓRIO NO GITHUB]

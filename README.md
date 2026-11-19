@@ -259,7 +259,7 @@ feita em **18/11/2026**. As referências completas, em formato ABNT, estão em
 
 ## 11. Créditos
 
-- Desenvolvimento: **[NOME]**, disciplina Desenvolvimento de Interfaces (2/2026).
+- Desenvolvimento: **Felipe Moura Franzo**, disciplina Desenvolvimento de Interfaces (2/2026).
 - Assistência de IA: Claude Opus 5.5 (Anthropic), via Claude Code. O uso está descrito na Parte D do
   relatório.
 - [Bootstrap](https://getbootstrap.com/) e [Bootstrap Icons](https://icons.getbootstrap.com/) (licença MIT).
