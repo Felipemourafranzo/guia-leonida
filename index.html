@@ -1,48 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="pt-BR" data-bs-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guia Leonida | Guia de fã não oficial de GTA VI</title>
-  <meta name="description" content="Guia de fã não oficial de GTA VI: Jason e Lucia, as seis regiões de Leonida, veículos, dicas e um checklist do seu progresso.">
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0B1630">
+  <meta name="description" content="Guia de fã não oficial de GTA VI: veículos, personagens, regiões de Leonida, dicas para iniciantes, novidades e checklist de progresso.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0E0A1F">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
   <!-- Tema e preferências de acessibilidade aplicados antes de desenhar a página (evita "flash") -->
   <script src="js/theme.js"></script>
 
-  <!-- Fontes: Archivo (eixo de largura 62 a 125) e Atkinson Hyperlegible (opção para dislexia) -->
+  <!-- Fontes: Inter (texto), Sora (títulos) e Atkinson Hyperlegible (opção para dislexia) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap">
 
-  <!-- Bootstrap 5.3.3, Bootstrap Icons 1.11.3 e Lenis 1.3.27 (versões fixas, com SRI) -->
+  <!-- Bootstrap 5.3.3 e Bootstrap Icons 1.11.3 (versões fixas, com verificação de integridade SRI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.css" integrity="sha384-gvLq/iOMNnPchdosgVym5huSVkKipHCQaqSw2Eg0V52Mzmlf169ZOsXcNc2cNu8x" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/leonida.css">
 
-  <link rel="preload" as="image" href="assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp"
-        imagesrcset="assets/img/jogo/hero-jason-lucia-por-do-sol-800.webp 800w, assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp 1600w" imagesizes="100vw">
+  <!-- Estilos do site (themes.css depois do Bootstrap para sobrescrever as variáveis) -->
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-  <header class="cabecalho">
+  <header class="cabecalho sticky-top">
     <nav class="navbar navbar-expand-xl" aria-label="Navegação principal">
-      <div class="wrap">
-        <a class="marca" href="index.html">Guia Leonida</a>
+      <div class="container">
+        <a class="marca" href="index.html">
+          <img src="assets/img/logo-guia-leonida.svg" alt="" width="36" height="36">
+          <span>Guia <strong>Leonida</strong></span>
+        </a>
 
-        <div class="barra-ferramentas order-xl-last ms-auto ms-xl-0">
-          <a class="btn-icone" href="guia.html#busca" aria-label="Buscar no guia" title="Buscar no guia">
-            <i class="bi bi-search" aria-hidden="true"></i>
-          </a>
-          <button type="button" class="btn-icone" data-alternar-tema aria-label="Mudar para o modo claro" title="Mudar para o modo claro">
-            <i class="bi bi-sun-fill" aria-hidden="true"></i>
+        <div class="barra-ferramentas order-xl-last ms-auto ms-xl-3">
+          <button type="button" class="btn-icone" data-alternar-tema aria-label="Mudar para o modo escuro" title="Mudar para o modo escuro">
+            <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
           </button>
           <button type="button" class="btn-icone" data-bs-toggle="offcanvas" data-bs-target="#painel-a11y"
-                  aria-controls="painel-a11y" title="Abrir o painel de acessibilidade">
+                  aria-controls="painel-a11y" aria-label="Acessibilidade" title="Abrir o painel de acessibilidade">
             <i class="bi bi-universal-access-circle" aria-hidden="true"></i><span class="esconder-xs">Acessibilidade</span>
           </button>
           <button class="btn-icone d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal"
@@ -53,12 +52,12 @@
 
         <div class="collapse navbar-collapse" id="menu-principal">
           <ul class="navbar-nav ms-xl-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html" aria-current="page">Início</a></li>
-            <li class="nav-item"><a class="nav-link" href="guia.html">Guia</a></li>
-            <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa</a></li>
-            <li class="nav-item"><a class="nav-link" href="checklist.html">Checklist</a></li>
-            <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
-            <li class="nav-item"><a class="nav-link" href="login.html" data-link-conta><span data-link-conta-texto>Entrar</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html" aria-current="page"><i class="bi bi-house-door" aria-hidden="true"></i>Início</a></li>
+            <li class="nav-item"><a class="nav-link" href="guia.html"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>Guia</a></li>
+            <li class="nav-item"><a class="nav-link" href="mapa.html"><i class="bi bi-map" aria-hidden="true"></i>Mapa</a></li>
+            <li class="nav-item"><a class="nav-link" href="checklist.html"><i class="bi bi-check2-square" aria-hidden="true"></i>Checklist</a></li>
+            <li class="nav-item"><a class="nav-link" href="contato.html"><i class="bi bi-envelope" aria-hidden="true"></i>Contato</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.html" data-link-conta><i class="bi bi-person-circle" aria-hidden="true"></i><span data-link-conta-texto>Entrar</span></a></li>
           </ul>
         </div>
       </div>
@@ -68,111 +67,128 @@
   <main id="conteudo" tabindex="-1">
 
     <!-- ================= HERO ================= -->
-    <section class="hero" aria-labelledby="titulo-principal">
-      <div class="hero-midia">
-        <img class="hero-foto"
-             src="assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp"
-             srcset="assets/img/jogo/hero-jason-lucia-por-do-sol-800.webp 800w, assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp 1600w"
-             sizes="100vw" width="1600" height="900" fetchpriority="high"
-             alt="Pôr do sol alaranjado sobre uma colina de capim em Leonida, com uma árvore grande em silhueta e um casal sentado no capô de um carro">
+    <section class="hero hero-foto-real" data-bs-theme="dark" aria-labelledby="titulo-principal">
+      <img class="hero-fundo" src="assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp" srcset="assets/img/jogo/hero-jason-lucia-por-do-sol-800.webp 800w, assets/img/jogo/hero-jason-lucia-por-do-sol-1600.webp 1600w" sizes="100vw" fetchpriority="high" alt="" width="1600" height="900">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <p class="hero-selo mb-3">Guia de fã não oficial de GTA VI</p>
+            <h1 id="titulo-principal" class="mb-3">Seu guia para explorar <span class="texto-primaria">Leonida</span></h1>
+            <p class="lead mb-4">
+              Veículos, personagens, regiões, dicas para iniciantes e um checklist para acompanhar seu
+              progresso em Grand Theft Auto VI. Tudo com fontes, e sem inventar o que ainda não foi confirmado.
+            </p>
+
+            <form class="mb-4" role="search" action="guia.html" method="get" aria-label="Busca rápida no guia">
+              <label for="busca-rapida" class="form-label">O que você procura?</label>
+              <div class="d-flex flex-column flex-sm-row gap-2">
+                <div class="campo-busca flex-grow-1">
+                  <i class="bi bi-search" aria-hidden="true"></i>
+                  <input type="search" class="form-control" id="busca-rapida" name="q" placeholder="Ex.: Lucia, lancha, Vice City" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+              </div>
+            </form>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-outline-primary" href="guia.html"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Ver o catálogo</a>
+              <a class="btn btn-outline-primary" href="mapa.html"><i class="bi bi-map" aria-hidden="true"></i> Conhecer as regiões</a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <!-- Status do lançamento: contagem regressiva que vira "Já disponível" -->
+            <section class="status-lancamento" data-contagem aria-labelledby="titulo-status">
+              <h2 class="h4 mb-1" id="titulo-status" data-contagem-titulo>Contagem para o lançamento</h2>
+              <p class="texto-suave mb-0">19 de novembro de 2026 · PS5 e Xbox Series X|S</p>
+              <ul class="contagem" data-contagem-bloco aria-hidden="true">
+                <li><span class="numero" data-unidade="dias">--</span><span class="unidade">dias</span></li>
+                <li><span class="numero" data-unidade="horas">--</span><span class="unidade">horas</span></li>
+                <li><span class="numero" data-unidade="minutos">--</span><span class="unidade">min</span></li>
+                <li><span class="numero"><i class="bi bi-controller" aria-hidden="true"></i></span><span class="unidade">jogar</span></li>
+              </ul>
+              <p class="mb-3" data-contagem-texto>Lançamento em 19 de novembro de 2026.</p>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-contagem-pausar aria-pressed="false">
+                <i class="bi bi-pause-fill" aria-hidden="true"></i><span>Pausar atualização</span>
+              </button>
+              <p class="small texto-suave mt-3 mb-0">
+                PC e GTA Online: a confirmar. Fonte:
+                <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">site oficial<span class="visually-hidden"> de GTA VI (abre em nova aba)</span></a>.
+              </p>
+            </section>
+          </div>
+        </div>
       </div>
-      <div class="hero-veu" aria-hidden="true"></div>
-      <div class="hero-sombra" aria-hidden="true"></div>
+    </section>
 
-      <div class="hero-conteudo wrap">
-        <h1 id="titulo-principal"><span class="hero-nome" aria-hidden="true">Leonida</span><span class="visually-hidden">Leonida: guia de GTA VI</span></h1>
-        <div class="hero-rodape">
-          <p class="hero-linha" data-entrada>O estado de GTA VI, de Vice City às Keys.</p>
+    <!-- ================= CARROSSEL ================= -->
+    <section class="secao" aria-labelledby="titulo-carrossel">
+      <div class="container">
+        <div class="secao-cabecalho">
+          <span class="sobretitulo">Galeria</span>
+          <h2 id="titulo-carrossel">Um passeio por Leonida</h2>
+          <p class="texto-suave mb-0">Use os botões abaixo das imagens ou as setas do teclado. A troca automática pode ser pausada a qualquer momento.</p>
+        </div>
 
-          <!-- Status do lançamento: js/main.js troca o texto conforme a data -->
-          <div class="hero-status" data-contagem data-status-curto data-entrada>
-            <h2 class="visually-hidden" data-contagem-titulo>Lançamento</h2>
-            <ul data-contagem-bloco hidden>
-              <li><span data-unidade="dias"></span></li>
-              <li><span data-unidade="horas"></span></li>
-              <li><span data-unidade="minutos"></span></li>
-            </ul>
-            <p data-contagem-texto>Lançamento em 19 de novembro de 2026 no PS5 e no Xbox Series X|S.</p>
-            <button type="button" class="btn btn-sm btn-outline-claro" data-contagem-pausar aria-pressed="false" hidden>
-              <i class="bi bi-pause-fill" aria-hidden="true"></i><span>Pausar atualização</span>
+        <div class="carrossel" data-carrossel role="region" aria-roledescription="carrossel" aria-label="Paisagens e personagens de Leonida">
+          <div class="carrossel-trilho" id="carrossel-slides" aria-live="off">
+            <div class="carrossel-slide ativo" role="group" aria-roledescription="slide" aria-label="1 de 5">
+              <img src="assets/img/jogo/galeria-vice-city-noite-1600.webp" srcset="assets/img/jogo/galeria-vice-city-noite-800.webp 800w, assets/img/jogo/galeria-vice-city-noite-1600.webp 1600w" sizes="(min-width: 992px) 60vw, 100vw" width="1600" height="900"
+                   alt="Prédios de Vice City iluminados à noite, vistos do alto, com um helicóptero sobre o centro">
+              <div class="carrossel-legenda">
+                <h3>Vice City à noite</h3>
+                <p>A maior cidade de Leonida, inspirada em Miami, com praias, festas e muito neon.</p>
+              </div>
+            </div>
+            <div class="carrossel-slide" role="group" aria-roledescription="slide" aria-label="2 de 5">
+              <img src="assets/img/jogo/regiao-leonida-keys-1600.webp" srcset="assets/img/jogo/regiao-leonida-keys-800.webp 800w, assets/img/jogo/regiao-leonida-keys-1600.webp 1600w" sizes="(min-width: 992px) 60vw, 100vw" width="1600" height="900"
+                   alt="Vista aérea das Leonida Keys: ilhas verdes, mar turquesa, uma ponte longa e um hidroavião">
+              <div class="carrossel-legenda">
+                <h3>Leonida Keys</h3>
+                <p>Ilhas ligadas por pontes, barcos e pesca. É onde Jason vive no começo da história.</p>
+              </div>
+            </div>
+            <div class="carrossel-slide" role="group" aria-roledescription="slide" aria-label="3 de 5">
+              <img src="assets/img/jogo/galeria-jason-lucia-abraco-1600.webp" srcset="assets/img/jogo/galeria-jason-lucia-abraco-800.webp 800w, assets/img/jogo/galeria-jason-lucia-abraco-1600.webp 1600w" sizes="(min-width: 992px) 60vw, 100vw" width="1600" height="900"
+                   alt="Jason e Lucia abraçados à beira d’água ao entardecer, com um helicóptero no céu">
+              <div class="carrossel-legenda">
+                <h3>Jason e Lucia</h3>
+                <p>A dupla de protagonistas. Um golpe fácil dá errado e os dois entram numa conspiração.</p>
+              </div>
+            </div>
+            <div class="carrossel-slide" role="group" aria-roledescription="slide" aria-label="4 de 5">
+              <img src="assets/img/jogo/regiao-grassrivers-1600.webp" srcset="assets/img/jogo/regiao-grassrivers-800.webp 800w, assets/img/jogo/regiao-grassrivers-1600.webp 1600w" sizes="(min-width: 992px) 60vw, 100vw" width="1600" height="900"
+                   alt="Pântano de Grassrivers com casas sobre palafitas e os prédios de Vice City no horizonte">
+              <div class="carrossel-legenda">
+                <h3>Grassrivers</h3>
+                <p>Pântanos inspirados nos Everglades, com canais, capim alto e jacarés.</p>
+              </div>
+            </div>
+            <div class="carrossel-slide" role="group" aria-roledescription="slide" aria-label="5 de 5">
+              <img src="assets/img/jogo/regiao-mount-kalaga-1600.webp" srcset="assets/img/jogo/regiao-mount-kalaga-800.webp 800w, assets/img/jogo/regiao-mount-kalaga-1600.webp 1600w" sizes="(min-width: 992px) 60vw, 100vw" width="1600" height="900"
+                   alt="Estrada passando por um cânion de terra vermelha e mata no Mount Kalaga National Park">
+              <div class="carrossel-legenda">
+                <h3>Mount Kalaga</h3>
+                <p>O parque nacional no norte do estado, com trilhas, caça e pesca.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="carrossel-controles">
+            <button type="button" class="btn btn-outline-secondary" data-carrossel-pausar aria-controls="carrossel-slides">
+              <i class="bi bi-pause-fill" aria-hidden="true"></i><span>Pausar</span>
             </button>
-            <a class="hero-descer" href="#jason-e-lucia">Role para ver mais <i class="bi bi-arrow-down" aria-hidden="true"></i></a>
+            <ul class="carrossel-indicadores" data-carrossel-indicadores aria-label="Escolher slide"></ul>
+            <div class="carrossel-botoes">
+              <button type="button" class="btn btn-outline-secondary" data-carrossel-anterior aria-controls="carrossel-slides" aria-label="Slide anterior">
+                <i class="bi bi-chevron-left" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-carrossel-proximo aria-controls="carrossel-slides" aria-label="Próximo slide">
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ================= JASON E LUCIA (colagem que anda com a rolagem) ================= -->
-    <section class="secao" id="jason-e-lucia" aria-labelledby="titulo-jason-lucia">
-      <div class="wrap colagem">
-        <div class="colagem-texto">
-          <h2 class="titulo-secao" id="titulo-jason-lucia">Jason e Lucia</h2>
-          <p class="texto-secao">Ele quer uma vida tranquila nas Keys. Ela acabou de sair da prisão. Um golpe fácil dá errado e os dois vão parar no meio de algo bem maior.</p>
-          <a class="link-seta" href="guia.html?cat=personagens">Conhecer os personagens</a>
-        </div>
-
-        <div class="colagem-fotos">
-          <div class="colagem-coluna" data-velocidade="0.85">
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-jason-grade-600.webp"
-                   srcset="assets/img/jogo/colagem-jason-grade-600.webp 600w, assets/img/jogo/colagem-jason-grade-1200.webp 1200w"
-                   sizes="(min-width: 768px) 24vw, 45vw" width="600" height="750" loading="lazy"
-                   alt="Jason com o rosto machucado atrás de uma grade, iluminado pelas luzes vermelhas e azuis da polícia">
-            </figure>
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-jason-lucia-fuga-800.webp"
-                   srcset="assets/img/jogo/colagem-jason-lucia-fuga-800.webp 800w, assets/img/jogo/colagem-jason-lucia-fuga-1600.webp 1600w"
-                   sizes="(min-width: 768px) 24vw, 45vw" width="800" height="450" loading="lazy"
-                   alt="Jason pilota uma moto com Lucia na garupa, fugindo de uma viatura e de um helicóptero">
-            </figure>
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-lucia-academia-600.webp"
-                   srcset="assets/img/jogo/colagem-lucia-academia-600.webp 600w, assets/img/jogo/colagem-lucia-academia-1200.webp 1200w"
-                   sizes="(min-width: 768px) 24vw, 45vw" width="600" height="750" loading="lazy"
-                   alt="Lucia de fones e luvas sentada num banco de academia, com luz forte do sol atrás">
-            </figure>
-          </div>
-          <div class="colagem-coluna" data-velocidade="1.25">
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-jason-lucia-orla-800.webp"
-                   srcset="assets/img/jogo/colagem-jason-lucia-orla-800.webp 800w, assets/img/jogo/colagem-jason-lucia-orla-1600.webp 1600w"
-                   sizes="(min-width: 768px) 30vw, 50vw" width="800" height="450" loading="lazy"
-                   alt="Lucia e Jason lado a lado na orla, com os prédios de Vice City e um helicóptero ao fundo">
-            </figure>
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-lucia-bar-600.webp"
-                   srcset="assets/img/jogo/colagem-lucia-bar-600.webp 600w, assets/img/jogo/colagem-lucia-bar-1200.webp 1200w"
-                   sizes="(min-width: 768px) 30vw, 50vw" width="600" height="750" loading="lazy"
-                   alt="Lucia de jaqueta de couro sentada numa moto amarela em frente a um letreiro de neon de bar">
-            </figure>
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-jason-lucia-carro-800.webp"
-                   srcset="assets/img/jogo/colagem-jason-lucia-carro-800.webp 800w, assets/img/jogo/colagem-jason-lucia-carro-1600.webp 1600w"
-                   sizes="(min-width: 768px) 30vw, 50vw" width="800" height="450" loading="lazy"
-                   alt="Lucia apoiada na janela de um carro conversível e Jason ao volante, com a cidade atrás">
-            </figure>
-            <figure class="foto-quadro">
-              <img src="assets/img/jogo/colagem-jason-keys-800.webp"
-                   srcset="assets/img/jogo/colagem-jason-keys-800.webp 800w, assets/img/jogo/colagem-jason-keys-1600.webp 1600w"
-                   sizes="(min-width: 768px) 30vw, 50vw" width="800" height="450" loading="lazy"
-                   alt="Jason de costas, de boné, encarando três homens ao lado de uma picape ao entardecer">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= Seções seguintes: ainda no formato antigo, serão refeitas na próxima etapa ================= -->
-    <section class="secao" aria-labelledby="titulo-busca-provisoria">
-      <div class="wrap">
-        <h2 class="titulo-secao" id="titulo-busca-provisoria">O guia</h2>
-        <form class="busca-guia" role="search" action="guia.html" method="get">
-          <label for="busca-rapida" class="form-label">O que você procura?</label>
-          <div class="d-flex flex-column flex-sm-row gap-2">
-            <input type="search" class="form-control" id="busca-rapida" name="q" placeholder="Lucia, lancha, Vice City…" autocomplete="off">
-            <button type="submit" class="btn btn-acao">Buscar</button>
-          </div>
-        </form>
       </div>
     </section>
 
@@ -301,7 +317,10 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-12 col-lg-4">
-          <a class="marca d-inline-block mb-3" href="index.html">Guia Leonida</a>
+          <a class="marca mb-3" href="index.html">
+            <img src="assets/img/logo-guia-leonida.svg" alt="" width="36" height="36">
+            <span>Guia <strong>Leonida</strong></span>
+          </a>
           <p class="texto-suave">Guia de fã não oficial de GTA VI, feito para ajudar quem vai explorar Leonida pela primeira vez.</p>
           <p class="texto-suave mb-0" data-status-rodape>Lançamento: 19/11/2026 (PS5 e Xbox Series X|S).</p>
         </div>
@@ -355,10 +374,7 @@
         Desenvolvido por <span data-autor>[NOME]</span> para a disciplina Desenvolvimento de Interfaces (2/2026).
         Feito com HTML, CSS, JavaScript e <a href="https://getbootstrap.com/" rel="noopener" target="_blank">Bootstrap 5.3<span class="visually-hidden"> (abre em nova aba)</span></a>.
         Ícones: <a href="https://icons.getbootstrap.com/" rel="noopener" target="_blank">Bootstrap Icons<span class="visually-hidden"> (abre em nova aba)</span></a>.
-        Fontes: Archivo e Atkinson Hyperlegible (Google Fonts).
-        Imagens do jogo: © Rockstar Games, do <a href="https://www.rockstargames.com/VI/media" rel="noopener" target="_blank">kit de mídia oficial<span class="visually-hidden"> (abre em nova aba)</span></a>
-        (lista completa em <a href="assets/img/IMAGENS.md">IMAGENS.md</a>).
-        Algumas ilustrações provisórias do catálogo foram criadas pelo autor.
+        Fontes: Inter, Sora e Atkinson Hyperlegible (Google Fonts). Imagens do jogo: © Rockstar Games, do kit de mídia oficial (rockstargames.com/VI/media). Mapa: map.stateofleonida.net.
       </p>
     </div>
   </footer>
@@ -368,17 +384,12 @@
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="area-toasts"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <!-- GSAP 3.15.0 (ScrollTrigger e SplitText) e Lenis 1.3.27: só ligam se o movimento for permitido (js/movimento.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" integrity="sha384-SWJ0lLVRoipvHh59xj0pL7uC7Ih51F+5smaFtrG+2nr+TlDZU5SYJHmxfolbeNTr" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
   <script src="js/a11y.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/carousel.js"></script>
   <script src="js/search.js"></script>
   <script src="js/checklist.js"></script>
-  <script src="js/movimento.js"></script>
 </body>
 </html>

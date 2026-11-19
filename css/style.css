@@ -909,3 +909,46 @@ main:focus { outline: none; }
   .cabecalho, .rodape, .pular-conteudo, .carrossel-controles, .offcanvas { display: none !important; }
   body { background: #fff; color: #000; }
 }
+
+/* ==========================================================================
+   Redesign: fotos reais e fundo em degradê noturno (inspirado no mapa de Leonida)
+   ========================================================================== */
+[data-bs-theme="dark"] body {
+  background: linear-gradient(180deg, #1B1446 0%, #0E0A1F 38%, #0B1A36 100%) fixed;
+}
+[data-bs-theme="light"] body {
+  background: linear-gradient(180deg, #FFF8F2 0%, #F6EEFF 100%) fixed;
+}
+/* Hero com a captura real em tela cheia e um véu roxo para o texto */
+.hero-foto-real {
+  min-height: min(92vh, 900px);
+  display: flex;
+  align-items: center;
+  background: #0E0A1F;
+}
+.hero-foto-real .hero-fundo {
+  inset: 0;
+  height: 100%;
+  opacity: 1;
+  object-position: 30% 60%;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.hero-foto-real::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(14 10 31 / .92) 0%, rgb(14 10 31 / .75) 45%, rgb(14 10 31 / .25) 75%),
+    linear-gradient(0deg, rgb(14 10 31 / .9) 0%, rgb(14 10 31 / 0) 40%);
+}
+.hero-foto-real h1 { font-size: clamp(2.4rem, 1.4rem + 4vw, 4.75rem); line-height: 1.05; }
+@media (max-width: 991.98px) {
+  .hero-foto-real::before { background: rgb(14 10 31 / .82); }
+}
+.carrossel-slide img { object-position: center 40%; }
+.mapa-real img { width: 100%; height: auto; border: 1px solid var(--cor-borda); }
+.card-guia .card-imagem { aspect-ratio: 16 / 9; object-fit: cover; }
+.hero-foto-real::before { z-index: 0; }
+.hero-foto-real > .container { position: relative; z-index: 1; }
