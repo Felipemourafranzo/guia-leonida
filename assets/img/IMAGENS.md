@@ -1,95 +1,103 @@
 # Imagens do Guia Leonida
 
-Todas as imagens desta pasta são **ilustrações provisórias** (SVG no estilo pôr do sol neon), geradas por
-`tools/gerar_placeholders.py`. Nenhuma foi baixada da internet. Esta lista diz o que colocar em cada arquivo
-quando você for trocar pelas imagens reais.
+Todas as imagens de `assets/img/jogo/` são **capturas reais de Grand Theft Auto VI** tiradas do
+**kit de mídia oficial da Rockstar Games** (<https://www.rockstargames.com/VI/media>), baixadas direto
+do CDN da Rockstar. Nenhuma é fan art, montagem ou imagem gerada por IA, e nenhuma tem o logo, a marca
+"VI" ou textos da Rockstar por cima.
 
-## Regras para trocar uma imagem
+**Crédito:** © Rockstar Games. Uso não comercial em trabalho acadêmico, com o aviso legal do rodapé.
 
-1. **Use só fontes oficiais.** O melhor lugar é o site oficial, que tem trailers, capturas e artes:
-   <https://www.rockstargames.com/VI>. Também servem a Rockstar Newswire
-   (<https://www.rockstargames.com/newswire>) e o kit de imprensa oficial, se você tiver acesso.
-   Não use imagens de sites de fãs, wikis nem de buscas no Google.
-2. **Dê o crédito.** Embaixo de cada imagem real, ou na seção de créditos do rodapé, escreva:
-   *"Imagem: Rockstar Games (rockstargames.com/VI). Uso não comercial em trabalho acadêmico."*
-3. **Mantenha o nome do arquivo** ou atualize o caminho em `js/data.js` (catálogo) ou no HTML (carrossel,
-   hero e ilustrações). Se trocar SVG por JPG ou WebP, mude a extensão nos dois lugares.
-4. **Reescreva o texto alternativo (`alt`).** Hoje o `alt` descreve a ilustração provisória
-   ("Ilustração provisória: …"). Depois da troca, ele precisa descrever a imagem nova. A coluna "Alt sugerido"
-   abaixo traz uma base que você deve ajustar ao que aparece de fato na imagem.
-5. **Otimize.** Prefira WebP ou JPG com qualidade em torno de 80%. Use até 200 KB nos cards e até
-   400 KB no carrossel e no hero.
-6. **Contraste.** Se a imagem nova ficar atrás de texto (hero), confira se o texto continua legível. No
-   carrossel e nos cards o texto já fica sobre um fundo sólido.
+## Formato
 
-## Lista de arquivos
+- Cada imagem existe em dois tamanhos WebP (qualidade 78): `nome-1600.webp` e `nome-800.webp`, 16:9.
+- No HTML: `srcset` com os dois tamanhos, `width`/`height` e `loading="lazy"` (menos no hero, que usa
+  `fetchpriority="high"`).
+- O texto alternativo sugerido de cada uma está na tabela e em `assets/img/jogo/manifesto.json`.
+- A folha de contato fica em `docs/folha-de-contato.html` e `docs/prints/redesign/etapa1-folha-de-contato.jpg`.
 
-### Página inicial
+## Origem
 
-| Arquivo | Onde aparece | Tamanho recomendado | O que colocar | Alt sugerido |
-|---|---|---|---|---|
-| `hero-leonida.svg` | Fundo decorativo do topo da home (`alt=""`) | 1600 × 900 | Panorama de Vice City ao pôr do sol (captura oficial) | Fica `alt=""`, porque é decorativa |
-| `carrossel-01-vice-city-noite.svg` | Carrossel, slide 1 | 1600 × 800 (2:1) | Vice City à noite, com neon e orla | "Orla de Vice City à noite, com prédios iluminados em neon e palmeiras" |
-| `carrossel-02-leonida-keys.svg` | Carrossel, slide 2 | 1600 × 800 | Ilhas e pontes das Leonida Keys | "Ponte ligando ilhas das Leonida Keys sobre mar azul-turquesa" |
-| `carrossel-03-jason-e-lucia.svg` | Carrossel, slide 3 | 1600 × 800 | Arte oficial de Jason e Lucia juntos | "Jason e Lucia lado a lado em arte oficial de GTA VI" |
-| `carrossel-04-grassrivers.svg` | Carrossel, slide 4 | 1600 × 800 | Pântano de Grassrivers (captura oficial) | "Canal do pântano de Grassrivers com vegetação alta ao entardecer" |
-| `carrossel-05-mount-kalaga.svg` | Carrossel, slide 5 | 1600 × 800 | Montanhas e floresta do Mount Kalaga | "Floresta e montanhas do Mount Kalaga National Park" |
+| Pacote oficial | URL |
+|---|---|
+| Capturas de tela (138 imagens, 3840×2160) | <https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip> |
+| Benefícios da Ultimate Edition (51 imagens) | <https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip> |
 
-### Personagens (`js/data.js`)
+Página de onde os pacotes são baixados: <https://www.rockstargames.com/VI/media/screenshots>.
 
-Fonte ideal: página de personagens do site oficial (rockstargames.com/VI), com as artes de cada um.
 
-| Arquivo | Tamanho | O que colocar |
-|---|---|---|
-| `personagem-jason-duval.svg` | 800 × 500 (16:10) | Arte oficial de Jason Duval |
-| `personagem-lucia-caminos.svg` | 800 × 500 | Arte oficial de Lucia Caminos |
-| `personagem-cal-hampton.svg` | 800 × 500 | Arte oficial de Cal Hampton |
-| `personagem-boobie-ike.svg` | 800 × 500 | Arte oficial de Boobie Ike |
-| `personagem-dre-quan-priest.svg` | 800 × 500 | Arte oficial de Dre'Quan Priest |
-| `personagem-real-dimez.svg` | 800 × 500 | Arte oficial da dupla Real Dimez (Bae-Luxe e Roxy) |
-| `personagem-raul-bautista.svg` | 800 × 500 | Arte oficial de Raul Bautista |
-| `personagem-brian-heder.svg` | 800 × 500 | Arte oficial de Brian Heder |
+## Hero da página inicial
 
-Alt sugerido: "Arte oficial de [Nome], [descrição curta do que aparece: roupa, cenário]".
-
-### Regiões (`js/data.js`, também usadas em `mapa.html`)
-
-Fonte ideal: páginas de lugares (Places) do site oficial.
-
-| Arquivo | Tamanho | O que colocar |
-|---|---|---|
-| `regiao-vice-city.svg` | 800 × 500 | Captura oficial de Vice City |
-| `regiao-leonida-keys.svg` | 800 × 500 | Captura oficial das Leonida Keys |
-| `regiao-grassrivers.svg` | 800 × 500 | Captura oficial de Grassrivers |
-| `regiao-port-gellhorn.svg` | 800 × 500 | Captura oficial de Port Gellhorn |
-| `regiao-ambrosia.svg` | 800 × 500 | Captura oficial de Ambrosia |
-| `regiao-mount-kalaga.svg` | 800 × 500 | Captura oficial do Mount Kalaga National Park |
-
-### Veículos (`js/data.js`)
-
-Os nomes e modelos oficiais ainda estão **a confirmar**. Use capturas oficiais onde o tipo de veículo
-aparece com clareza (trailers ou galeria de screenshots). Se não houver imagem oficial de um tipo, mantenha
-o placeholder.
-
-| Arquivo | Tamanho | O que colocar |
-|---|---|---|
-| `veiculo-conversivel.svg` | 800 × 500 | Conversível em Vice City |
-| `veiculo-muscle-car.svg` | 800 × 500 | Muscle car |
-| `veiculo-esportivo.svg` | 800 × 500 | Superesportivo |
-| `veiculo-moto.svg` | 800 × 500 | Moto esportiva |
-| `veiculo-lancha.svg` | 800 × 500 | Lancha nas Keys |
-| `veiculo-aerobarco.svg` | 800 × 500 | Aerobarco no pântano (se houver imagem oficial) |
-| `veiculo-picape.svg` | 800 × 500 | Picape em estrada de terra |
-| `veiculo-jet-ski.svg` | 800 × 500 | Jet ski na praia (se houver imagem oficial) |
-
-### Outras
-
-| Arquivo | Onde aparece | Tamanho | O que colocar |
+| Arquivo | Original no kit | Pacote | Alt |
 |---|---|---|---|
-| `ilustracao-contato.svg` | Lateral da página de contato | 800 × 500 | Praia de Vice City ao entardecer |
-| `ilustracao-login.svg` | Lateral da página de login | 800 × 500 | Skyline de Vice City em tons de roxo |
-| `logo-guia-leonida.svg` | Logo do site (cabeçalho e rodapé) | 64 × 64 (SVG) | **Mantenha**: é a marca do guia, criada para o projeto |
-| `favicon.svg` | Ícone da aba do navegador | 64 × 64 (SVG) | **Mantenha** |
+| `hero-jason-lucia-por-do-sol` | `Jason_and_Lucia_16.jpg` | Capturas de tela | Pôr do sol alaranjado sobre uma colina de capim, com uma árvore grande em silhueta e um carro parado ao longe |
 
-> Lembrete legal: o logotipo oficial de GTA VI e as marcas da Rockstar **não** devem ser usados como logo
-> do guia. O site é não oficial e o aviso legal do rodapé precisa continuar visível.
+## Galeria horizontal (página inicial)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `galeria-vice-city-noite` | `Vice_City_27.jpg` | Capturas de tela | Prédios de Vice City iluminados à noite, vistos do alto, com um helicóptero sobre o centro |
+| `galeria-keys-mergulho` | `Leonida_Keys_04.jpg` | Capturas de tela | Mergulhadores sob a água azul das Leonida Keys, ao lado de uma tartaruga marinha e de um navio afundado |
+| `galeria-jason-lucia-abraco` | `Jason_and_Lucia_13.jpg` | Capturas de tela | Jason e Lucia abraçados à beira d’água ao entardecer, com um helicóptero no céu |
+| `galeria-grassrivers-noite` | `Grassrivers_08.jpg` | Capturas de tela | Lanterna iluminando um jacaré no pântano de Grassrivers à noite, sob a lua crescente |
+| `galeria-kalaga-helicoptero` | `Mount_Kalaga_National_Park_02.jpg` | Capturas de tela | Helicóptero vermelho e branco sobrevoando a mata do Mount Kalaga com o sol baixo atrás |
+| `galeria-vice-city-piscina-aerea` | `Vice_City_26.jpg` | Capturas de tela | Vista aérea de um hotel de Vice City com piscina azul cercada de palmeiras |
+
+## Regiões (catálogo e mapa)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `regiao-vice-city` | `Vice_City_10.jpg` | Capturas de tela | Duas torres residenciais curvas na beira da baía de Vice City, com lanchas e jet skis na água |
+| `regiao-leonida-keys` | `Leonida_Keys_01.jpg` | Capturas de tela | Vista aérea das Leonida Keys: ilhas verdes, mar turquesa, uma ponte longa e um hidroavião |
+| `regiao-grassrivers` | `Grassrivers_05.jpg` | Capturas de tela | Pântano de Grassrivers com casas sobre palafitas e os prédios de Vice City no horizonte |
+| `regiao-port-gellhorn` | `Port_Gellhorn_06.jpg` | Capturas de tela | Cidade de Port Gellhorn vista do alto ao pôr do sol, com casas baixas e postos de gasolina |
+| `regiao-ambrosia` | `Ambrosia_04.jpg` | Capturas de tela | Torres de energia e fábricas de Ambrosia ao pôr do sol, com fumaça no horizonte |
+| `regiao-mount-kalaga` | `Mount_Kalaga_National_Park_04.jpg` | Capturas de tela | Estrada passando por um cânion de terra vermelha e mata no Mount Kalaga National Park |
+
+## Personagens (catálogo)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `personagem-jason-duval` | `Jason_Duval_02.jpg` | Capturas de tela | Jason Duval de boné e regata, com o braço apoiado na janela de um carro, sob luz de fim de tarde |
+| `personagem-lucia-caminos` | `Lucia_Caminos_10.jpg` | Capturas de tela | Lucia Caminos dentro de um carro à noite, com luzes de neon roxas refletidas no vidro |
+| `personagem-cal-hampton` | `Cal_Hampton_01.jpg` | Capturas de tela | Cal Hampton de chapéu e camisa havaiana verde, em pé num minigolfe com um taco na mão |
+| `personagem-boobie-ike` | `Boobie_Ike_01.jpg` | Capturas de tela | Boobie Ike sentado numa poltrona do escritório, de óculos escuros e camisa estampada |
+| `personagem-dre-quan-priest` | `DreQuan_Priest_04.jpg` | Capturas de tela | Dre’Quan Priest num estúdio de gravação, ao lado da mesa de som |
+| `personagem-real-dimez` | `Real_Dimez_04.jpg` | Capturas de tela | Bae-Luxe e Roxy, da dupla Real Dimez, gravando ao microfone num estúdio iluminado em rosa |
+| `personagem-raul-bautista` | `Raul_Bautista_03.jpg` | Capturas de tela | Raul Bautista de braços cruzados no convés de um barco, com prédios ao pôr do sol atrás |
+| `personagem-brian-heder` | `Brian_Heder_03.jpg` | Capturas de tela | Brian Heder de camisa florida e óculos no rosto, apontando para alguém enquanto segura um papel |
+
+## Veículos (catálogo)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `veiculo-conversivel` | `Jason_and_Lucia_11.jpg` | Capturas de tela | Jason dirigindo um conversível vermelho com Lucia no banco do passageiro, à beira-mar |
+| `veiculo-muscle-car` | `Vice_City_24.jpg` | Capturas de tela | Muscle car rosa com pintura personalizada estacionado numa rua de Vice City, com um rapaz sentado no capô |
+| `veiculo-superesportivo` | `ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg` | Ultimate Edition | Superesportivo Grotti Cheetah branco com faixas vermelhas na frente de um estacionamento circular |
+| `veiculo-moto` | `Jason_Duval_01.jpg` | Capturas de tela | Jason ao lado de uma moto esportiva verde estacionada sob palmeiras |
+| `veiculo-lancha` | `ULTIMATE_EDITION_SQUALO_01.jpg` | Ultimate Edition | Lancha Squalo branca cortando a baía ao entardecer, com os prédios de Vice City ao fundo |
+| `veiculo-aerobarco` | `Grassrivers_03.jpg` | Capturas de tela | Aerobarco visto de cima atravessando a água escura de Grassrivers entre plantas aquáticas |
+| `veiculo-picape` | `Grassrivers_04.jpg` | Capturas de tela | Picape atravessando o pântano de Grassrivers perseguida por uma viatura e um helicóptero |
+| `veiculo-jet-ski` | `Leonida_Keys_05.jpg` | Capturas de tela | Jet skis e lanchas reunidos num canal das Leonida Keys, com gente tomando sol nos barcos |
+
+## Páginas internas
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `pagina-contato-rusty-anchor` | `Leonida_Keys_03.jpg` | Capturas de tela | Bar de praia The Rusty Anchor nas Leonida Keys, com mesas ao ar livre e palmeiras |
+| `pagina-login-vice-city-noite` | `Vice_City_08.jpg` | Capturas de tela | Vice City à noite com uma roda-gigante iluminada perto da baía |
+| `pagina-guia-murais` | `Vice_City_09.jpg` | Capturas de tela | Rua de Vice City sob um viaduto coberto de murais coloridos, com um carro azul e motos |
+| `pagina-checklist-caiaque` | `Mount_Kalaga_National_Park_06.jpg` | Capturas de tela | Pessoa remando um caiaque laranja num rio do Mount Kalaga, perto de uma ponte de ferro |
+
+## Mapa de Leonida
+
+**Pendente.** A Rockstar anunciou (Newswire, 03/11/2026) um mapa oficial para impressão como download
+gratuito no site oficial no dia do lançamento, 19/11/2026, mas ele ainda não estava publicado quando
+estas imagens foram baixadas. O mapa "vazado" da Collector's Edition e os mapas de fãs feitos antes do
+lançamento **não** são usados. Quando o mapa oficial sair, ele entra aqui com a URL de origem.
+
+## Ilustrações provisórias (SVG) que ainda existem
+
+Os SVGs em `assets/img/*.svg` (menos `favicon.svg`) são as ilustrações provisórias antigas, geradas por
+`tools/gerar_placeholders.py`. Eles serão apagados à medida que cada página passar a usar as imagens
+reais acima.
+

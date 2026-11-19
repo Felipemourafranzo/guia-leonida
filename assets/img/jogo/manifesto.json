@@ -1,0 +1,662 @@
+[
+ {
+  "arquivo": "hero-jason-lucia-por-do-sol",
+  "grupo": "hero",
+  "alt": "Pôr do sol alaranjado sobre uma colina de capim, com uma árvore grande em silhueta e um carro parado ao longe",
+  "original": "Jason_and_Lucia_16.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    175418
+   ],
+   "800": [
+    450,
+    53626
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-vice-city-noite",
+  "grupo": "galeria",
+  "alt": "Prédios de Vice City iluminados à noite, vistos do alto, com um helicóptero sobre o centro",
+  "original": "Vice_City_27.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    187724
+   ],
+   "800": [
+    450,
+    66552
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-keys-mergulho",
+  "grupo": "galeria",
+  "alt": "Mergulhadores sob a água azul das Leonida Keys, ao lado de uma tartaruga marinha e de um navio afundado",
+  "original": "Leonida_Keys_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    97502
+   ],
+   "800": [
+    450,
+    31906
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-jason-lucia-abraco",
+  "grupo": "galeria",
+  "alt": "Jason e Lucia abraçados à beira d’água ao entardecer, com um helicóptero no céu",
+  "original": "Jason_and_Lucia_13.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    49248
+   ],
+   "800": [
+    450,
+    20670
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-grassrivers-noite",
+  "grupo": "galeria",
+  "alt": "Lanterna iluminando um jacaré no pântano de Grassrivers à noite, sob a lua crescente",
+  "original": "Grassrivers_08.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    29946
+   ],
+   "800": [
+    450,
+    12332
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-kalaga-helicoptero",
+  "grupo": "galeria",
+  "alt": "Helicóptero vermelho e branco sobrevoando a mata do Mount Kalaga com o sol baixo atrás",
+  "original": "Mount_Kalaga_National_Park_02.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    57312
+   ],
+   "800": [
+    450,
+    22780
+   ]
+  }
+ },
+ {
+  "arquivo": "galeria-vice-city-piscina-aerea",
+  "grupo": "galeria",
+  "alt": "Vista aérea de um hotel de Vice City com piscina azul cercada de palmeiras",
+  "original": "Vice_City_26.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    328426
+   ],
+   "800": [
+    450,
+    108404
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-vice-city",
+  "grupo": "regiao",
+  "alt": "Duas torres residenciais curvas na beira da baía de Vice City, com lanchas e jet skis na água",
+  "original": "Vice_City_10.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    151370
+   ],
+   "800": [
+    450,
+    53644
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-leonida-keys",
+  "grupo": "regiao",
+  "alt": "Vista aérea das Leonida Keys: ilhas verdes, mar turquesa, uma ponte longa e um hidroavião",
+  "original": "Leonida_Keys_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    144704
+   ],
+   "800": [
+    450,
+    44306
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-grassrivers",
+  "grupo": "regiao",
+  "alt": "Pântano de Grassrivers com casas sobre palafitas e os prédios de Vice City no horizonte",
+  "original": "Grassrivers_05.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    206864
+   ],
+   "800": [
+    450,
+    59234
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-port-gellhorn",
+  "grupo": "regiao",
+  "alt": "Cidade de Port Gellhorn vista do alto ao pôr do sol, com casas baixas e postos de gasolina",
+  "original": "Port_Gellhorn_06.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    137334
+   ],
+   "800": [
+    450,
+    43740
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-ambrosia",
+  "grupo": "regiao",
+  "alt": "Torres de energia e fábricas de Ambrosia ao pôr do sol, com fumaça no horizonte",
+  "original": "Ambrosia_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    56664
+   ],
+   "800": [
+    450,
+    20486
+   ]
+  }
+ },
+ {
+  "arquivo": "regiao-mount-kalaga",
+  "grupo": "regiao",
+  "alt": "Estrada passando por um cânion de terra vermelha e mata no Mount Kalaga National Park",
+  "original": "Mount_Kalaga_National_Park_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    249200
+   ],
+   "800": [
+    450,
+    66984
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-jason-duval",
+  "grupo": "personagem",
+  "alt": "Jason Duval de boné e regata, com o braço apoiado na janela de um carro, sob luz de fim de tarde",
+  "original": "Jason_Duval_02.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    59854
+   ],
+   "800": [
+    450,
+    22490
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-lucia-caminos",
+  "grupo": "personagem",
+  "alt": "Lucia Caminos dentro de um carro à noite, com luzes de neon roxas refletidas no vidro",
+  "original": "Lucia_Caminos_10.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    66744
+   ],
+   "800": [
+    450,
+    27858
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-cal-hampton",
+  "grupo": "personagem",
+  "alt": "Cal Hampton de chapéu e camisa havaiana verde, em pé num minigolfe com um taco na mão",
+  "original": "Cal_Hampton_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    94254
+   ],
+   "800": [
+    450,
+    42194
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-boobie-ike",
+  "grupo": "personagem",
+  "alt": "Boobie Ike sentado numa poltrona do escritório, de óculos escuros e camisa estampada",
+  "original": "Boobie_Ike_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    131356
+   ],
+   "800": [
+    450,
+    45168
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-dre-quan-priest",
+  "grupo": "personagem",
+  "alt": "Dre’Quan Priest num estúdio de gravação, ao lado da mesa de som",
+  "original": "DreQuan_Priest_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    102014
+   ],
+   "800": [
+    450,
+    33572
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-real-dimez",
+  "grupo": "personagem",
+  "alt": "Bae-Luxe e Roxy, da dupla Real Dimez, gravando ao microfone num estúdio iluminado em rosa",
+  "original": "Real_Dimez_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    123644
+   ],
+   "800": [
+    450,
+    45750
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-raul-bautista",
+  "grupo": "personagem",
+  "alt": "Raul Bautista de braços cruzados no convés de um barco, com prédios ao pôr do sol atrás",
+  "original": "Raul_Bautista_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    75850
+   ],
+   "800": [
+    450,
+    28144
+   ]
+  }
+ },
+ {
+  "arquivo": "personagem-brian-heder",
+  "grupo": "personagem",
+  "alt": "Brian Heder de camisa florida e óculos no rosto, apontando para alguém enquanto segura um papel",
+  "original": "Brian_Heder_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    70994
+   ],
+   "800": [
+    450,
+    27568
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-conversivel",
+  "grupo": "veiculo",
+  "alt": "Jason dirigindo um conversível vermelho com Lucia no banco do passageiro, à beira-mar",
+  "original": "Jason_and_Lucia_11.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    80670
+   ],
+   "800": [
+    450,
+    32554
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-muscle-car",
+  "grupo": "veiculo",
+  "alt": "Muscle car rosa com pintura personalizada estacionado numa rua de Vice City, com um rapaz sentado no capô",
+  "original": "Vice_City_24.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    254382
+   ],
+   "800": [
+    450,
+    81650
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-superesportivo",
+  "grupo": "veiculo",
+  "alt": "Superesportivo Grotti Cheetah branco com faixas vermelhas na frente de um estacionamento circular",
+  "original": "ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    125690
+   ],
+   "800": [
+    450,
+    48012
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-moto",
+  "grupo": "veiculo",
+  "alt": "Jason ao lado de uma moto esportiva verde estacionada sob palmeiras",
+  "original": "Jason_Duval_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    78596
+   ],
+   "800": [
+    450,
+    35182
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-lancha",
+  "grupo": "veiculo",
+  "alt": "Lancha Squalo branca cortando a baía ao entardecer, com os prédios de Vice City ao fundo",
+  "original": "ULTIMATE_EDITION_SQUALO_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    139556
+   ],
+   "800": [
+    450,
+    51436
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-aerobarco",
+  "grupo": "veiculo",
+  "alt": "Aerobarco visto de cima atravessando a água escura de Grassrivers entre plantas aquáticas",
+  "original": "Grassrivers_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    196220
+   ],
+   "800": [
+    450,
+    62006
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-picape",
+  "grupo": "veiculo",
+  "alt": "Picape atravessando o pântano de Grassrivers perseguida por uma viatura e um helicóptero",
+  "original": "Grassrivers_04.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    248198
+   ],
+   "800": [
+    450,
+    72502
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-jet-ski",
+  "grupo": "veiculo",
+  "alt": "Jet skis e lanchas reunidos num canal das Leonida Keys, com gente tomando sol nos barcos",
+  "original": "Leonida_Keys_05.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    175254
+   ],
+   "800": [
+    450,
+    64488
+   ]
+  }
+ },
+ {
+  "arquivo": "pagina-contato-rusty-anchor",
+  "grupo": "pagina",
+  "alt": "Bar de praia The Rusty Anchor nas Leonida Keys, com mesas ao ar livre e palmeiras",
+  "original": "Leonida_Keys_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    243350
+   ],
+   "800": [
+    450,
+    86166
+   ]
+  }
+ },
+ {
+  "arquivo": "pagina-login-vice-city-noite",
+  "grupo": "pagina",
+  "alt": "Vice City à noite com uma roda-gigante iluminada perto da baía",
+  "original": "Vice_City_08.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    141682
+   ],
+   "800": [
+    450,
+    50348
+   ]
+  }
+ },
+ {
+  "arquivo": "pagina-guia-murais",
+  "grupo": "pagina",
+  "alt": "Rua de Vice City sob um viaduto coberto de murais coloridos, com um carro azul e motos",
+  "original": "Vice_City_09.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    177580
+   ],
+   "800": [
+    450,
+    62114
+   ]
+  }
+ },
+ {
+  "arquivo": "pagina-checklist-caiaque",
+  "grupo": "pagina",
+  "alt": "Pessoa remando um caiaque laranja num rio do Mount Kalaga, perto de uma ponte de ferro",
+  "original": "Mount_Kalaga_National_Park_06.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    256264
+   ],
+   "800": [
+    450,
+    70986
+   ]
+  }
+ }
+]
