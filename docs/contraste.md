@@ -114,7 +114,7 @@ O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão fo
 
 - **Rosa neon do botão principal no modo claro:** O rosa neon original (#FF2D95) é a cor mais 'Vice City' da paleta, mas sobre o fundo areia ele não chega nem a 4,5:1. Escurecemos o rosa mantendo o matiz (framboesa) até passar no AA com folga.
 - **Ciano dos links no modo claro:** O ciano neon é ótimo no modo escuro, mas no branco quase desaparece (cerca de 1,8:1). No modo claro usamos um azul-petróleo do mesmo matiz.
-- **Roxo dos rótulos de categoria no modo escuro:** O roxo saturado (#7C3AED) combina com a noite de Vice City, mas sobre o card escuro fica abaixo de 3:1. Clareamos para um lilás que mantém o tom e passa até no AAA.
+- **Roxo dos rótulos de categoria no modo escuro:** O roxo saturado (#7C3AED) combina com a noite de Vice City, mas sobre o card escuro fica em 3,09:1, abaixo dos 4,5:1 exigidos para texto. Clareamos para um lilás que mantém o tom e passa até no AAA.
 - **Título em degradê neon no modo claro:** O título 'Leonida' usava o degradê neon puro (rosa, laranja e roxo). O ponto laranja (#FF8A3D) sobre o degradê areia do topo ficava abaixo de 3:1, reprovando até como texto grande. O degradê do texto passou a usar as cores de texto do tema.
 
 ## Resultado

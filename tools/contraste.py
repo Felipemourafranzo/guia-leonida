@@ -134,8 +134,8 @@ ANTES_DEPOIS = [
         "fundo": "#1A1433",
         "explicacao": (
             "O roxo saturado (#7C3AED) combina com a noite de Vice City, mas sobre "
-            "o card escuro fica abaixo de 3:1. Clareamos para um lilás que mantém "
-            "o tom e passa até no AAA."
+            "o card escuro fica em 3,09:1, abaixo dos 4,5:1 exigidos para texto. "
+            "Clareamos para um lilás que mantém o tom e passa até no AAA."
         ),
     },
     {
