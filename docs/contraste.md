@@ -21,19 +21,19 @@ Todos os textos foram avaliados com o limite de **texto normal** (4,5:1), mesmo 
 
 | Uso | Cor da frente | Cor de fundo | Razão | AA | AAA |
 |---|---|---|---|---|---|
-| Títulos das seções | `#F4E6CF` `titulo` | `#0B1630` `fundo` | **14,57:1** | ✅ Passa | ✅ Passa |
-| Texto do corpo sobre o fundo da página | `#E9EEF7` `texto` | `#0B1630` `fundo` | **15,39:1** | ✅ Passa | ✅ Passa |
-| Texto dentro dos cards e painéis | `#E9EEF7` `texto` | `#13224A` `superficie` | **13,31:1** | ✅ Passa | ✅ Passa |
-| Texto secundário (datas, rodapé) | `#A9B6D3` `texto-suave` | `#0B1630` `fundo` | **8,81:1** | ✅ Passa | ✅ Passa |
-| Descrição dos cards | `#A9B6D3` `texto-suave` | `#13224A` `superficie` | **7,61:1** | ✅ Passa | ✅ Passa |
-| Links em rosa | `#FF7A93` `acento` | `#0B1630` `fundo` | **7,22:1** | ✅ Passa | ✅ Passa |
-| Links dentro dos cards | `#FF7A93` `acento` | `#13224A` `superficie` | **6,24:1** | ✅ Passa | ❌ Falha |
-| Texto do botão principal | `#0B1630` `sobre-acento` | `#FF7A93` `acento` | **7,22:1** | ✅ Passa | ✅ Passa |
-| Mensagens de erro do formulário | `#FF9B8F` `erro` | `#13224A` `superficie` | **7,63:1** | ✅ Passa | ✅ Passa |
-| Mensagens de sucesso | `#7FE0B0` `sucesso` | `#13224A` `superficie` | **9,73:1** | ✅ Passa | ✅ Passa |
-| Borda dos campos de formulário *(UI, 3:1)* | `#7186B3` `borda-campo` | `#13224A` `superficie` | **4,25:1** | ✅ Passa | — |
-| Contorno de foco sobre o fundo *(UI, 3:1)* | `#FFD23F` `foco` | `#0B1630` `fundo` | **12,41:1** | ✅ Passa | — |
-| Contorno de foco sobre os cards *(UI, 3:1)* | `#FFD23F` `foco` | `#13224A` `superficie` | **10,73:1** | ✅ Passa | — |
+| Títulos das seções | `#F4E6CF` `titulo` | `#0E0E11` `fundo` | **15,66:1** | ✅ Passa | ✅ Passa |
+| Texto do corpo sobre o fundo da página | `#ECECEF` `texto` | `#0E0E11` `fundo` | **16,35:1** | ✅ Passa | ✅ Passa |
+| Texto dentro dos cards e painéis | `#ECECEF` `texto` | `#18181D` `superficie` | **15,00:1** | ✅ Passa | ✅ Passa |
+| Texto secundário (datas, rodapé) | `#A3A3AE` `texto-suave` | `#0E0E11` `fundo` | **7,72:1** | ✅ Passa | ✅ Passa |
+| Descrição dos cards | `#A3A3AE` `texto-suave` | `#18181D` `superficie` | **7,08:1** | ✅ Passa | ✅ Passa |
+| Links em rosa | `#FF7A93` `acento` | `#0E0E11` `fundo` | **7,76:1** | ✅ Passa | ✅ Passa |
+| Links dentro dos cards | `#FF7A93` `acento` | `#18181D` `superficie` | **7,12:1** | ✅ Passa | ✅ Passa |
+| Texto do botão principal | `#0E0E11` `sobre-acento` | `#FF7A93` `acento` | **7,76:1** | ✅ Passa | ✅ Passa |
+| Mensagens de erro do formulário | `#FF9B8F` `erro` | `#18181D` `superficie` | **8,71:1** | ✅ Passa | ✅ Passa |
+| Mensagens de sucesso | `#7FE0B0` `sucesso` | `#18181D` `superficie` | **11,11:1** | ✅ Passa | ✅ Passa |
+| Borda dos campos de formulário *(UI, 3:1)* | `#7A7A8C` `borda-campo` | `#18181D` `superficie` | **4,20:1** | ✅ Passa | — |
+| Contorno de foco sobre o fundo *(UI, 3:1)* | `#FFD23F` `foco` | `#0E0E11` `fundo` | **13,35:1** | ✅ Passa | — |
+| Contorno de foco sobre os cards *(UI, 3:1)* | `#FFD23F` `foco` | `#18181D` `superficie` | **12,25:1** | ✅ Passa | — |
 
 ## Modo claro
 
@@ -77,9 +77,9 @@ As capturas mudam de uma tela para outra, então o texto sobre foto é medido co
 
 | Onde | Opacidade do véu | Fundo no pior caso | Texto | Razão | Limite | AA |
 |---|---|---|---|---|---|---|
-| Menu do cabeçalho sobre o topo do hero (véu ~0,70) | 0,7 | `#545C6E` | `#E9EEF7` | **5,76:1** | 4,5:1 | ✅ Passa |
-| Nome "Leonida" no hero, parte mais alta da letra (véu ~0,60) | 0,6 | `#6D7383` | `#F4E6CF` | **3,85:1** | 3:1 (texto grande) | ✅ Passa |
-| Linha e status embaixo do hero (véu ~0,90) | 0,9 | `#232D45` | `#E9EEF7` | **11,77:1** | 4,5:1 | ✅ Passa |
+| Menu do cabeçalho sobre o topo do hero (véu ~0,70) | 0,7 | `#565658` | `#E9EEF7` | **6,29:1** | 4,5:1 | ✅ Passa |
+| Nome "Leonida" no hero, parte mais alta da letra (véu ~0,60) | 0,6 | `#6E6E70` | `#F4E6CF` | **4,13:1** | 3:1 (texto grande) | ✅ Passa |
+| Linha e status embaixo do hero (véu ~0,90) | 0,9 | `#262629` | `#E9EEF7` | **12,96:1** | 4,5:1 | ✅ Passa |
 
 ## Antes e depois: cores que falharam e foram corrigidas
 

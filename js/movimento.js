@@ -119,14 +119,6 @@
      --------------------------------------------------------------------- */
   function animarColagem() {
     document.querySelectorAll('.colagem-fotos').forEach(function (bloco) {
-      bloco.querySelectorAll('[data-velocidade]').forEach(function (coluna) {
-        var v = parseFloat(coluna.getAttribute('data-velocidade')) || 1;
-        gsap.fromTo(coluna, { y: (v - 1) * 260 }, {
-          y: (1 - v) * 260,
-          ease: 'none',
-          scrollTrigger: { trigger: bloco, start: 'top bottom', end: 'bottom top', scrub: true }
-        });
-      });
       bloco.querySelectorAll('.foto-quadro img').forEach(function (img) {
         gsap.fromTo(img, { scale: 1.18 }, {
           scale: 1,

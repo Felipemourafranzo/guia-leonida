@@ -40,21 +40,21 @@
 /* Modo escuro (padrão visual do site): "noite de Vice City" */
 :root,
 [data-bs-theme="dark"] {
-  --cor-fundo: #0B1630;          /* azul-noite */
-  --cor-superficie: #13224A;
+  --cor-fundo: #0E0E11;          /* quase preto neutro: a foto dá a cor */
+  --cor-superficie: #18181D;
   --cor-titulo: #F4E6CF;         /* creme */
-  --cor-texto: #E9EEF7;
-  --cor-texto-suave: #A9B6D3;
+  --cor-texto: #ECECEF;
+  --cor-texto-suave: #A3A3AE;
   --cor-acento: #FF7A93;         /* rosa do pôr do sol */
   --cor-acento-hover: #FF9AAD;
-  --cor-sobre-acento: #0B1630;
-  --cor-borda: #24365F;          /* divisões decorativas */
-  --cor-borda-campo: #7186B3;    /* bordas de campo (3:1) */
+  --cor-sobre-acento: #0E0E11;
+  --cor-borda: #2A2A31;          /* divisões decorativas */
+  --cor-borda-campo: #7A7A8C;    /* bordas de campo (3:1) */
   --cor-foco: #FFD23F;           /* luz de poste */
   --cor-erro: #FF9B8F;
   --cor-sucesso: #7FE0B0;
   /* Véu sobre fotos: garante o contraste do texto em qualquer captura */
-  --veu-foto: 11 22 48;
+  --veu-foto: 14 14 17;
   color-scheme: dark;
 }
 
@@ -562,3 +562,57 @@ main:focus { outline: none; }
 .rodape .aviso-legal, .rodape .creditos { font-size: .9375rem; max-width: 90ch; }
 .rodape p a { color: var(--cor-texto); text-decoration: underline; }
 .texto-suave { color: var(--cor-texto-suave); }
+
+/* 13. Colagem em grade alinhada (substitui as colunas desencontradas) ------- */
+.colagem-fotos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.colagem-coluna { display: contents; }
+.colagem-coluna + .colagem-coluna { margin-top: 0; }
+.colagem-fotos .foto-quadro { aspect-ratio: 4 / 5; }
+.colagem-fotos .foto-quadro img { width: 100%; height: 100%; object-fit: cover; }
+.colagem-coluna:last-child .foto-quadro:first-child { grid-column: 1 / -1; order: -1; aspect-ratio: 16 / 9; }
+
+/* 14. Seções do guia na home: cards de catálogo, linha do tempo, progresso --- */
+.secao .container { max-width: var(--largura-max); padding-inline: var(--gutter); }
+.secao-alternada { background: var(--cor-superficie); }
+.secao-cabecalho { margin-bottom: 2.5rem; }
+.secao-cabecalho h2, .secao h2:not(.titulo-secao) {
+  font-variation-settings: "wdth" var(--largura-condensada);
+  font-weight: 860; font-size: clamp(2.5rem, 1.6rem + 3vw, 4.5rem); line-height: .9; letter-spacing: -.02em;
+}
+.sobretitulo { display: none; } /* rótulos repetiam o título */
+.card-explicativo { height: 100%; padding: 1.75rem; border-top: 2px solid var(--cor-acento); }
+.card-explicativo h3 { font-size: 1.5rem; margin-bottom: .75rem; }
+.card-explicativo .icone-card { display: none; }
+.card-explicativo li { margin-bottom: .35rem; }
+
+.card-guia { position: relative; height: 100%; display: flex; flex-direction: column; color: var(--cor-texto); }
+.card-guia .card-imagem { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--raio); transition: transform .5s var(--ease-saida); }
+.card-guia:hover .card-imagem { transform: scale(1.03); }
+.card-guia > *:first-child { overflow: hidden; border-radius: var(--raio); }
+.card-guia .card-imagem-icone { aspect-ratio: 16 / 9; display: grid; place-items: center; background: var(--cor-superficie); border-radius: var(--raio); font-size: 3rem; color: var(--cor-acento); }
+.card-guia h3 { font-size: 1.5rem; margin: 1rem 0 .4rem; font-variation-settings: "wdth" var(--largura-titulo); }
+.card-guia h3 a { color: var(--cor-titulo); text-decoration: none; }
+.card-guia h3 a::after { content: ""; position: absolute; inset: 0; }
+.card-guia p { color: var(--cor-texto-suave); }
+.selo-categoria, .selo-status { display: inline-flex; align-items: center; gap: .35rem; font-size: .875rem; color: var(--cor-texto-suave); margin-right: .75rem; }
+.selo-status.a-confirmar { color: var(--cor-acento); }
+.btn-favorito { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: .4rem; min-height: var(--alvo-minimo); padding: 0 .9rem; background: transparent; color: var(--cor-texto); border: var(--borda-fina) solid var(--cor-borda-campo); border-radius: var(--raio); }
+.btn-favorito[aria-pressed="true"] { background: var(--cor-acento); color: var(--cor-sobre-acento); border-color: var(--cor-acento); }
+.card-guia .btn, .card-guia a.btn { position: relative; z-index: 2; }
+
+.linha-tempo { list-style: none; padding: 0 0 0 1.75rem; margin: 0; position: relative; }
+.linha-tempo::before { content: ""; position: absolute; left: .35rem; top: .4rem; bottom: .4rem; width: 2px; background: var(--cor-borda); }
+.linha-tempo li { position: relative; padding-bottom: 2rem; }
+.linha-tempo li::before { content: ""; position: absolute; left: -1.75rem; top: .45rem; width: .8rem; height: .8rem; border-radius: 50%; background: var(--cor-acento); }
+.linha-tempo time { color: var(--cor-acento); font-weight: 700; }
+.linha-tempo h3 { font-size: 1.5rem; margin: .25rem 0 .4rem; }
+.linha-tempo p { color: var(--cor-texto-suave); margin-bottom: .4rem; }
+
+.barra-progresso { height: .6rem; background: var(--cor-borda); border-radius: 99px; overflow: hidden; }
+.barra-progresso-preenchida { height: 100%; background: var(--cor-acento); border-radius: 99px; transition: width .6s var(--ease-saida); }
+.btn-primary { --bs-btn-color: var(--cor-sobre-acento); --bs-btn-bg: var(--cor-acento); --bs-btn-border-color: var(--cor-acento); --bs-btn-hover-color: var(--cor-sobre-acento); --bs-btn-hover-bg: var(--cor-acento-hover); --bs-btn-hover-border-color: var(--cor-acento-hover); --bs-btn-font-weight: 650; display: inline-flex; align-items: center; gap: .4rem; }
+.btn-outline-primary { display: inline-flex; align-items: center; gap: .4rem; }
+.card-guia .card-acoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; padding-top: .75rem; }
+.card-guia .card-acoes .btn, .card-guia .btn-favorito { min-height: var(--alvo-minimo); font-size: .9375rem; padding: 0 1rem; }
+.card-guia .card-acoes .btn { display: inline-flex; align-items: center; }
+.card-guia > div:last-child { display: flex; flex-direction: column; flex: 1; }

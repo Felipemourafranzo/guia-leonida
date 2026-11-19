@@ -32,14 +32,14 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 PALETAS = {
     "Escuro": {
-        "fundo": "#0B1630",          # azul-noite
-        "superficie": "#13224A",
+        "fundo": "#0E0E11",          # quase preto neutro
+        "superficie": "#18181D",
         "titulo": "#F4E6CF",         # creme
-        "texto": "#E9EEF7",
-        "texto-suave": "#A9B6D3",
+        "texto": "#ECECEF",
+        "texto-suave": "#A3A3AE",
         "acento": "#FF7A93",         # rosa do pôr do sol
-        "sobre-acento": "#0B1630",
-        "borda-campo": "#7186B3",
+        "sobre-acento": "#0E0E11",
+        "borda-campo": "#7A7A8C",
         "foco": "#FFD23F",
         "erro": "#FF9B8F",
         "sucesso": "#7FE0B0",
@@ -93,7 +93,7 @@ PARES = [
 # Texto sobre as fotos do jogo. A foto muda, então o cálculo usa o PIOR caso
 # possível: um pixel branco puro atrás do véu (rgb 11 22 48 em css/leonida.css).
 # (onde, opacidade do véu naquele ponto, cor do texto, tipo)
-VEU = "#0B1630"
+VEU = "#0E0E11"
 TEXTO_SOBRE_FOTO = [
     ("Menu do cabeçalho sobre o topo do hero (véu ~0,70)", 0.70, "#E9EEF7", "texto"),
     ("Nome \"Leonida\" no hero, parte mais alta da letra (véu ~0,60)", 0.60, "#F4E6CF", "grande"),

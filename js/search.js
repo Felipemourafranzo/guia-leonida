@@ -33,7 +33,7 @@ window.GLCatalogo = (function () {
     var idTitulo = 'titulo-' + item.id;
 
     var midia = item.imagem
-      ? '<img class="card-imagem" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="500" loading="lazy">'
+      ? '<img class="card-imagem" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="450" loading="lazy">'
       : '<div class="card-imagem-icone" aria-hidden="true"><i class="bi ' + esc(item.icone || cat.icone) + '"></i></div>';
 
     var status = item.status === 'a-confirmar'
@@ -143,7 +143,7 @@ window.GLCatalogo = (function () {
     document.getElementById('modal-detalhes-titulo').textContent = item.nome;
     document.getElementById('modal-detalhes-corpo').innerHTML =
       (item.imagem
-        ? '<img class="img-fluid rounded mb-3" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="500">'
+        ? '<img class="img-fluid rounded mb-3" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="450">'
         : '') +
       '<p><span class="selo-categoria cat-' + item.categoria + '"><i class="bi ' + cat.icone + '" aria-hidden="true"></i>' + cat.singular + '</span></p>' +
       '<p>' + esc(item.descricao) + '</p>' +
