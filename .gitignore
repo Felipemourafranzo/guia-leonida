@@ -1,0 +1,16 @@
+# Sistema operacional
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Enunciado e relatório final em Word/PDF (entregues fora do repositório)
+ProjetoFinal_DI*.docx
+~$*.docx
