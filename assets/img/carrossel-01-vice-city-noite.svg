@@ -209,9 +209,7 @@
     <path d="M1416.0,416.0 Q1372.1,376.0 1328.3,433.4 Q1372.1,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1389.2,376.0 1362.5,411.1 Q1389.2,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1416.0,376.0 1416.0,402.7 Q1416.0,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1442.8,376.0 1469.5,411.1 Q1442.8,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1459.9,376.0 1503.7,433.4 Q1459.9,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1462.0,376.0 1507.9,457.4 Q1462.0,409.3 1416.0,416.0Z"/><path d="M1416.0,416.0 Q1372.1,376.0 1328.3,433.4 Q1372.1,409.3 1416.0,416.0Z"/>
   </g>
   <g font-family="'Segoe UI', Arial, sans-serif">
-    <rect x="64" y="611" width="723"
-          height="159" rx="14" fill="#0E0A1F" fill-opacity=".72"/>
-    <text x="92" y="693" font-size="61" font-weight="700" fill="#FFFFFF">Vice City à noite</text>
-    <text x="92" y="748" font-size="29" fill="#FFD6EA">Carrossel · imagem provisória</text>
+    <rect x="1300" y="650" width="276" height="48" rx="24" fill="#0E0A1F" fill-opacity=".72"/>
+    <text x="1438" y="682" font-size="22" fill="#FFD6EA" text-anchor="middle">Imagem provisória</text>
   </g>
 </svg>

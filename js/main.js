@@ -135,10 +135,10 @@ window.GL = (function () {
         if (botaoPausar) { botaoPausar.hidden = true; }
         caixa.querySelector('[data-contagem-titulo]').textContent = 'GTA VI já está disponível!';
         texto.innerHTML =
-          '<span class="selo-disponivel"><i class="bi bi-check-circle-fill" aria-hidden="true"></i>Lançado em ' +
-          escaparHTML(lancamento.dataTexto) + '</span>' +
-          (dias > 0 ? ' · há ' + dias + (dias === 1 ? ' dia' : ' dias') : ' · hoje') +
-          '<br>Disponível para ' + escaparHTML(lancamento.plataformas) + '. PC: ' + escaparHTML(lancamento.pc) + '.';
+          '<span class="selo-disponivel mb-2"><i class="bi bi-check-circle-fill" aria-hidden="true"></i>' +
+          (dias > 0 ? 'Lançado há ' + dias + (dias === 1 ? ' dia' : ' dias') : 'Lançado hoje!') + '</span><br>' +
+          'Disponível para ' + escaparHTML(lancamento.plataformas) + ' desde ' + escaparHTML(lancamento.dataTexto) +
+          '. PC: ' + escaparHTML(lancamento.pc) + '.';
         pausar();
         return;
       }

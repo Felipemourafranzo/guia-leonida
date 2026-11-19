@@ -161,6 +161,7 @@ main:focus { outline: none; }
   padding-inline: .8rem !important;
   border-radius: var(--raio-pequeno);
   position: relative;
+  white-space: nowrap;
 }
 .cabecalho .nav-link:hover { color: var(--cor-primaria); background: var(--cor-superficie-2); }
 /* Página atual: cor + sublinhado grosso (não depende só da cor) */
@@ -175,6 +176,14 @@ main:focus { outline: none; }
 }
 
 .barra-ferramentas { display: flex; align-items: center; gap: .4rem; }
+
+/* Reflow (WCAG 1.4.10): com fonte aumentada, o menu pode quebrar para uma
+   segunda linha em vez de sobrepor a marca */
+.cabecalho .navbar-expand-xl > .container { flex-wrap: wrap; row-gap: .25rem; }
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .cabecalho .nav-link .bi { display: none; }
+  .cabecalho .nav-link { padding-inline: .6rem !important; }
+}
 
 .btn-icone {
   display: inline-flex;
@@ -423,6 +432,7 @@ main:focus { outline: none; }
   box-shadow: var(--sombra);
 }
 .carrossel-trilho { position: relative; aspect-ratio: 2 / 1; }
+@media (min-width: 992px) { .carrossel-trilho { aspect-ratio: 21 / 9; } }
 @media (max-width: 575.98px) { .carrossel-trilho { aspect-ratio: 4 / 3; } }
 .carrossel-slide {
   position: absolute;
@@ -555,6 +565,7 @@ main:focus { outline: none; }
 /* Modal de detalhes */
 .modal-content { background: var(--cor-superficie); color: var(--cor-texto); border: 1px solid var(--cor-borda); }
 .modal-header, .modal-footer { border-color: var(--cor-borda); }
+.modal-body > img { width: 100%; max-height: 38vh; object-fit: cover; }
 
 /* 9. Mapa ----------------------------------------------------------------- */
 .mapa-esquematico {

@@ -233,6 +233,16 @@ def rotulo(largura, altura, titulo, subtitulo, uid):
   </g>"""
 
 
+def etiqueta(largura, altura):
+    """Etiqueta pequena 'Imagem provisória' no canto inferior direito
+    (a legenda HTML do carrossel fica à esquerda)."""
+    return f"""
+  <g font-family="'Segoe UI', Arial, sans-serif">
+    <rect x="{largura - 300}" y="{altura - 150}" width="276" height="48" rx="24" fill="#0E0A1F" fill-opacity=".72"/>
+    <text x="{largura - 162}" y="{altura - 118}" font-size="22" fill="#FFD6EA" text-anchor="middle">Imagem provisória</text>
+  </g>"""
+
+
 def svg(largura, altura, conteudo, titulo):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {largura} {altura}" '
             f'width="{largura}" height="{altura}" role="img" aria-label="{titulo} (imagem provisória)">\n'
@@ -349,7 +359,9 @@ def gerar():
         ("carrossel-05-mount-kalaga", "Mount Kalaga", "montanha", "dia", None),
     ]
     for arq, titulo, tipo, c, extra in slides:
-        imagens[arq] = svg(CW, CH, cena(tipo, CW, CH, c, arq, extra) + rotulo(CW, CH, titulo, "Carrossel · imagem provisória", arq), titulo)
+        # No carrossel a legenda é HTML (acessível), então a imagem leva só
+        # uma etiqueta discreta no canto inferior direito.
+        imagens[arq] = svg(CW, CH, cena(tipo, CW, CH, c, arq, extra) + etiqueta(CW, CH), titulo)
 
     # Hero e ilustrações de página
     imagens["hero-leonida"] = svg(1600, 900, cena("cidade", 1600, 900, "noite", "hero"), "Horizonte neon de Vice City ao pôr do sol")

@@ -32,9 +32,7 @@
     <path d="M496,692.0 q60,-18 120,0 t120,0 t120,0 t120,0 t120,0" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="3" fill="none"/>
   </g>
   <g font-family="'Segoe UI', Arial, sans-serif">
-    <rect x="64" y="611" width="496"
-          height="159" rx="14" fill="#0E0A1F" fill-opacity=".72"/>
-    <text x="92" y="693" font-size="61" font-weight="700" fill="#FFFFFF">Grassrivers</text>
-    <text x="92" y="748" font-size="29" fill="#FFD6EA">Carrossel · imagem provisória</text>
+    <rect x="1300" y="650" width="276" height="48" rx="24" fill="#0E0A1F" fill-opacity=".72"/>
+    <text x="1438" y="682" font-size="22" fill="#FFD6EA" text-anchor="middle">Imagem provisória</text>
   </g>
 </svg>
