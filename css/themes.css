@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Guia Leonida: temas e tokens de cor
+   --------------------------------------------------------------------------
+   Este arquivo define a PALETA do site como "tokens" (custom properties) e
+   liga esses tokens às variáveis do Bootstrap 5.3 (--bs-*).
+
+   Três modos:
+     [data-bs-theme="light"]  modo claro  (praia ao entardecer)
+     [data-bs-theme="dark"]   modo escuro (noite neon de Vice City)
+     [data-contraste="alto"]  alto contraste (preto, branco, amarelo, ciano)
+
+   Todas as combinações de texto/fundo foram conferidas com
+   tools/contraste.py (fórmula da WCAG). O resultado está em docs/contraste.md.
+   Se mudar alguma cor aqui, atualize o script e rode de novo.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens que não mudam com o tema
+   -------------------------------------------------------------------------- */
+:root {
+  /* Tipografia */
+  --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --fonte-titulo: "Sora", "Inter", system-ui, sans-serif;
+  --fonte-dislexia: "Atkinson Hyperlegible", "Verdana", sans-serif;
+
+  /* Escala de tamanho da fonte (alterada pelo painel de acessibilidade) */
+  --escala-fonte: 1;
+
+  /* Formas e espaços */
+  --raio: 1rem;
+  --raio-pequeno: .5rem;
+  --sombra: 0 .5rem 1.5rem rgb(0 0 0 / .12);
+  --largura-foco: 3px;
+  --alvo-minimo: 44px; /* WCAG 2.5.8 pede 24px; usamos 44px por conforto */
+
+  /* Duração das animações (zerada quando o usuário pede menos movimento) */
+  --duracao: .25s;
+
+  /* Cores da marca em estado "puro" (só para elementos decorativos,
+     NUNCA para texto: os pares de texto usam os tokens de cada tema) */
+  --neon-rosa: #FF2D95;
+  --neon-laranja: #FF8A3D;
+  --neon-roxo: #7C3AED;
+  --neon-ciano: #22D3EE;
+}
+
+/* --------------------------------------------------------------------------
+   2. Modo claro: "praia ao entardecer"
+   -------------------------------------------------------------------------- */
+:root,
+[data-bs-theme="light"] {
+  --cor-fundo: #FFF8F2;
+  --cor-superficie: #FFFFFF;
+  --cor-superficie-2: #F5EDFF;
+  --cor-texto: #1C1230;
+  --cor-texto-suave: #4F4566;
+  --cor-primaria: #B8175E;          /* rosa framboesa: ação, links */
+  --cor-primaria-hover: #9A0F4D;
+  --cor-sobre-primaria: #FFFFFF;
+  --cor-secundaria: #A3410B;        /* laranja queimado: destaques */
+  --cor-acento: #0B6577;            /* azul-petróleo: ícones, informação */
+  --cor-roxo: #5B2BC4;              /* roxo: categorias */
+  --cor-borda: #E4DAF2;             /* bordas decorativas de cards */
+  --cor-borda-campo: #7E7398;       /* bordas de campos (3:1) */
+  --cor-foco: #5B2BC4;
+  --cor-erro: #B42318;
+  --cor-sucesso: #146C43;
+  --gradiente-marca: linear-gradient(120deg, #FFE1EE 0%, #FFE9D6 45%, #ECE3FF 100%);
+  --gradiente-neon: linear-gradient(120deg, var(--neon-rosa), var(--neon-laranja) 50%, var(--neon-roxo));
+  --sombra: 0 .5rem 1.5rem rgb(60 20 90 / .10);
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   3. Modo escuro: "noite neon de Vice City"
+   -------------------------------------------------------------------------- */
+[data-bs-theme="dark"] {
+  --cor-fundo: #0E0A1F;
+  --cor-superficie: #1A1433;
+  --cor-superficie-2: #251C47;
+  --cor-texto: #F5F0FF;
+  --cor-texto-suave: #C9BEE8;
+  --cor-primaria: #FF6BB0;
+  --cor-primaria-hover: #FF8CC2;
+  --cor-sobre-primaria: #1A0612;
+  --cor-secundaria: #FF9F5A;
+  --cor-acento: #3FD8F0;
+  --cor-roxo: #B9A2FF;
+  --cor-borda: #33295C;
+  --cor-borda-campo: #8B7BC4;
+  --cor-foco: #3FD8F0;
+  --cor-erro: #FF8F8F;
+  --cor-sucesso: #5BE3A0;
+  --gradiente-marca: linear-gradient(120deg, #2A0F33 0%, #1A1433 50%, #0F2240 100%);
+  --sombra: 0 .75rem 2rem rgb(0 0 0 / .45);
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   4. Alto contraste (vale por cima do claro e do escuro)
+   -------------------------------------------------------------------------- */
+[data-contraste="alto"],
+[data-contraste="alto"] [data-bs-theme] {
+  --cor-fundo: #000000;
+  --cor-superficie: #000000;
+  --cor-superficie-2: #000000;
+  --cor-texto: #FFFFFF;
+  --cor-texto-suave: #FFFFFF;
+  --cor-primaria: #FFFF00;
+  --cor-primaria-hover: #FFFFFF;
+  --cor-sobre-primaria: #000000;
+  --cor-secundaria: #FFFF00;
+  --cor-acento: #00FFFF;
+  --cor-roxo: #FFFFFF;
+  --cor-borda: #FFFFFF;
+  --cor-borda-campo: #FFFFFF;
+  --cor-foco: #FFFF00;
+  --cor-erro: #FF8080;
+  --cor-sucesso: #7CFF7C;
+  --gradiente-marca: none;
+  --gradiente-neon: none;
+  --sombra: none;
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   5. Ligação dos tokens com o Bootstrap 5.3
+   (assim os componentes do Bootstrap herdam a nossa paleta)
+   -------------------------------------------------------------------------- */
+:root,
+[data-bs-theme],
+[data-contraste="alto"] {
+  --bs-body-bg: var(--cor-fundo);
+  --bs-body-color: var(--cor-texto);
+  --bs-emphasis-color: var(--cor-texto);
+  --bs-heading-color: var(--cor-texto);
+  --bs-secondary-color: var(--cor-texto-suave);
+  --bs-secondary-bg: var(--cor-superficie-2);
+  --bs-tertiary-bg: var(--cor-superficie-2);
+  --bs-tertiary-color: var(--cor-texto-suave);
+  --bs-border-color: var(--cor-borda);
+  --bs-border-color-translucent: var(--cor-borda);
+  --bs-link-color: var(--cor-primaria);
+  --bs-link-hover-color: var(--cor-primaria-hover);
+  --bs-primary: var(--cor-primaria);
+  --bs-focus-ring-color: var(--cor-foco);
+  --bs-form-invalid-color: var(--cor-erro);
+  --bs-form-invalid-border-color: var(--cor-erro);
+  --bs-form-valid-color: var(--cor-sucesso);
+  --bs-form-valid-border-color: var(--cor-sucesso);
+  --bs-font-sans-serif: var(--fonte-texto);
+  --bs-body-font-family: var(--fonte-texto);
+  --bs-border-radius: var(--raio-pequeno);
+  --bs-border-radius-lg: var(--raio);
+}
+
+/* Botões do Bootstrap usando a paleta */
+.btn-primary {
+  --bs-btn-color: var(--cor-sobre-primaria);
+  --bs-btn-bg: var(--cor-primaria);
+  --bs-btn-border-color: var(--cor-primaria);
+  --bs-btn-hover-color: var(--cor-sobre-primaria);
+  --bs-btn-hover-bg: var(--cor-primaria-hover);
+  --bs-btn-hover-border-color: var(--cor-primaria-hover);
+  --bs-btn-active-color: var(--cor-sobre-primaria);
+  --bs-btn-active-bg: var(--cor-primaria-hover);
+  --bs-btn-active-border-color: var(--cor-primaria-hover);
+  --bs-btn-disabled-color: var(--cor-sobre-primaria);
+  --bs-btn-disabled-bg: var(--cor-primaria);
+  --bs-btn-disabled-border-color: var(--cor-primaria);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--cor-primaria);
+  --bs-btn-border-color: var(--cor-primaria);
+  --bs-btn-hover-color: var(--cor-sobre-primaria);
+  --bs-btn-hover-bg: var(--cor-primaria);
+  --bs-btn-hover-border-color: var(--cor-primaria);
+  --bs-btn-active-color: var(--cor-sobre-primaria);
+  --bs-btn-active-bg: var(--cor-primaria);
+  --bs-btn-active-border-color: var(--cor-primaria);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--cor-texto);
+  --bs-btn-border-color: var(--cor-borda-campo);
+  --bs-btn-hover-color: var(--cor-fundo);
+  --bs-btn-hover-bg: var(--cor-texto);
+  --bs-btn-hover-border-color: var(--cor-texto);
+  --bs-btn-active-color: var(--cor-fundo);
+  --bs-btn-active-bg: var(--cor-texto);
+  --bs-btn-active-border-color: var(--cor-texto);
+}
+
+/* Campos de formulário com borda de 3:1 (WCAG 1.4.11) */
+.form-control,
+.form-select,
+.form-check-input {
+  --bs-border-color: var(--cor-borda-campo);
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  border-color: var(--cor-borda-campo);
+}
+
+.form-check-input:checked {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+/* No alto contraste o "check" precisa ser preto sobre amarelo */
+[data-contraste="alto"] .form-check-input:checked[type="checkbox"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+[data-contraste="alto"] .form-switch .form-check-input:checked {
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23000'/%3e%3c/svg%3e");
+}
