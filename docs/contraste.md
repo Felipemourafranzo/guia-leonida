@@ -21,65 +21,87 @@ Todos os textos foram avaliados com o limite de **texto normal** (4,5:1), mesmo 
 
 | Uso | Cor da frente | Cor de fundo | Razão | AA | AAA |
 |---|---|---|---|---|---|
-| Títulos das seções | `#F4E6CF` `titulo` | `#0E0E11` `fundo` | **15,66:1** | ✅ Passa | ✅ Passa |
-| Texto do corpo sobre o fundo da página | `#ECECEF` `texto` | `#0E0E11` `fundo` | **16,35:1** | ✅ Passa | ✅ Passa |
-| Texto dentro dos cards e painéis | `#ECECEF` `texto` | `#18181D` `superficie` | **15,00:1** | ✅ Passa | ✅ Passa |
-| Texto secundário (datas, rodapé) | `#A3A3AE` `texto-suave` | `#0E0E11` `fundo` | **7,72:1** | ✅ Passa | ✅ Passa |
-| Descrição dos cards | `#A3A3AE` `texto-suave` | `#18181D` `superficie` | **7,08:1** | ✅ Passa | ✅ Passa |
-| Links em rosa | `#FF7A93` `acento` | `#0E0E11` `fundo` | **7,76:1** | ✅ Passa | ✅ Passa |
-| Links dentro dos cards | `#FF7A93` `acento` | `#18181D` `superficie` | **7,12:1** | ✅ Passa | ✅ Passa |
-| Texto do botão principal | `#0E0E11` `sobre-acento` | `#FF7A93` `acento` | **7,76:1** | ✅ Passa | ✅ Passa |
-| Mensagens de erro do formulário | `#FF9B8F` `erro` | `#18181D` `superficie` | **8,71:1** | ✅ Passa | ✅ Passa |
-| Mensagens de sucesso | `#7FE0B0` `sucesso` | `#18181D` `superficie` | **11,11:1** | ✅ Passa | ✅ Passa |
-| Borda dos campos de formulário *(UI, 3:1)* | `#7A7A8C` `borda-campo` | `#18181D` `superficie` | **4,20:1** | ✅ Passa | — |
-| Contorno de foco sobre o fundo *(UI, 3:1)* | `#FFD23F` `foco` | `#0E0E11` `fundo` | **13,35:1** | ✅ Passa | — |
-| Contorno de foco sobre os cards *(UI, 3:1)* | `#FFD23F` `foco` | `#18181D` `superficie` | **12,25:1** | ✅ Passa | — |
+| Texto do corpo sobre o fundo da página | `#F5F0FF` `texto` | `#0E0A1F` `fundo` | **17,37:1** | ✅ Passa | ✅ Passa |
+| Texto dentro dos cards | `#F5F0FF` `texto` | `#1A1433` `superficie` | **15,77:1** | ✅ Passa | ✅ Passa |
+| Texto em painéis destacados | `#F5F0FF` `texto` | `#251C47` `superficie-2` | **14,07:1** | ✅ Passa | ✅ Passa |
+| Texto secundário (legendas, datas) | `#C9BEE8` `texto-suave` | `#0E0A1F` `fundo` | **11,10:1** | ✅ Passa | ✅ Passa |
+| Descrição dos cards | `#C9BEE8` `texto-suave` | `#1A1433` `superficie` | **10,08:1** | ✅ Passa | ✅ Passa |
+| Links e títulos em rosa | `#FF6BB0` `primaria` | `#0E0A1F` `fundo` | **7,38:1** | ✅ Passa | ✅ Passa |
+| Links dentro dos cards | `#FF6BB0` `primaria` | `#1A1433` `superficie` | **6,70:1** | ✅ Passa | ❌ Falha |
+| Texto do botão principal | `#1A0612` `sobre-primaria` | `#FF6BB0` `primaria` | **7,40:1** | ✅ Passa | ✅ Passa |
+| Destaques em laranja (selos, números) | `#FF9F5A` `secundaria` | `#0E0A1F` `fundo` | **9,57:1** | ✅ Passa | ✅ Passa |
+| Selos laranja nos cards | `#FF9F5A` `secundaria` | `#1A1433` `superficie` | **8,69:1** | ✅ Passa | ✅ Passa |
+| Links em ciano / ícones | `#3FD8F0` `acento` | `#0E0A1F` `fundo` | **11,36:1** | ✅ Passa | ✅ Passa |
+| Ícones ciano nos cards | `#3FD8F0` `acento` | `#1A1433` `superficie` | **10,31:1** | ✅ Passa | ✅ Passa |
+| Rótulos de categoria em roxo | `#B9A2FF` `roxo` | `#1A1433` `superficie` | **8,12:1** | ✅ Passa | ✅ Passa |
+| Mensagens de erro do formulário | `#FF8F8F` `erro` | `#1A1433` `superficie` | **8,04:1** | ✅ Passa | ✅ Passa |
+| Mensagens de sucesso | `#5BE3A0` `sucesso` | `#1A1433` `superficie` | **10,86:1** | ✅ Passa | ✅ Passa |
+| Borda dos campos de formulário *(UI, 3:1)* | `#8B7BC4` `borda-campo` | `#1A1433` `superficie` | **4,81:1** | ✅ Passa | — |
+| Contorno de foco sobre o fundo *(UI, 3:1)* | `#3FD8F0` `foco` | `#0E0A1F` `fundo` | **11,36:1** | ✅ Passa | — |
+| Contorno de foco sobre os cards *(UI, 3:1)* | `#3FD8F0` `foco` | `#1A1433` `superficie` | **10,31:1** | ✅ Passa | — |
 
 ## Modo claro
 
 | Uso | Cor da frente | Cor de fundo | Razão | AA | AAA |
 |---|---|---|---|---|---|
-| Títulos das seções | `#0B1630` `titulo` | `#F3EEE6` `fundo` | **15,52:1** | ✅ Passa | ✅ Passa |
-| Texto do corpo sobre o fundo da página | `#0B1630` `texto` | `#F3EEE6` `fundo` | **15,52:1** | ✅ Passa | ✅ Passa |
-| Texto dentro dos cards e painéis | `#0B1630` `texto` | `#FFFFFF` `superficie` | **17,92:1** | ✅ Passa | ✅ Passa |
-| Texto secundário (datas, rodapé) | `#3E4A66` `texto-suave` | `#F3EEE6` `fundo` | **7,65:1** | ✅ Passa | ✅ Passa |
-| Descrição dos cards | `#3E4A66` `texto-suave` | `#FFFFFF` `superficie` | **8,84:1** | ✅ Passa | ✅ Passa |
-| Links em rosa | `#B01E4E` `acento` | `#F3EEE6` `fundo` | **5,79:1** | ✅ Passa | ❌ Falha |
-| Links dentro dos cards | `#B01E4E` `acento` | `#FFFFFF` `superficie` | **6,68:1** | ✅ Passa | ❌ Falha |
-| Texto do botão principal | `#FFFFFF` `sobre-acento` | `#B01E4E` `acento` | **6,68:1** | ✅ Passa | ❌ Falha |
+| Texto do corpo sobre o fundo da página | `#1C1230` `texto` | `#FFF8F2` `fundo` | **16,94:1** | ✅ Passa | ✅ Passa |
+| Texto dentro dos cards | `#1C1230` `texto` | `#FFFFFF` `superficie` | **17,82:1** | ✅ Passa | ✅ Passa |
+| Texto em painéis destacados | `#1C1230` `texto` | `#F5EDFF` `superficie-2` | **15,65:1** | ✅ Passa | ✅ Passa |
+| Texto secundário (legendas, datas) | `#4F4566` `texto-suave` | `#FFF8F2` `fundo` | **8,40:1** | ✅ Passa | ✅ Passa |
+| Descrição dos cards | `#4F4566` `texto-suave` | `#FFFFFF` `superficie` | **8,84:1** | ✅ Passa | ✅ Passa |
+| Links e títulos em rosa | `#B8175E` `primaria` | `#FFF8F2` `fundo` | **6,01:1** | ✅ Passa | ❌ Falha |
+| Links dentro dos cards | `#B8175E` `primaria` | `#FFFFFF` `superficie` | **6,32:1** | ✅ Passa | ❌ Falha |
+| Texto do botão principal | `#FFFFFF` `sobre-primaria` | `#B8175E` `primaria` | **6,32:1** | ✅ Passa | ❌ Falha |
+| Destaques em laranja (selos, números) | `#A3410B` `secundaria` | `#FFF8F2` `fundo` | **6,02:1** | ✅ Passa | ❌ Falha |
+| Selos laranja nos cards | `#A3410B` `secundaria` | `#FFFFFF` `superficie` | **6,33:1** | ✅ Passa | ❌ Falha |
+| Links em ciano / ícones | `#0B6577` `acento` | `#FFF8F2` `fundo` | **6,35:1** | ✅ Passa | ❌ Falha |
+| Ícones ciano nos cards | `#0B6577` `acento` | `#FFFFFF` `superficie` | **6,68:1** | ✅ Passa | ❌ Falha |
+| Rótulos de categoria em roxo | `#5B2BC4` `roxo` | `#FFFFFF` `superficie` | **8,12:1** | ✅ Passa | ✅ Passa |
 | Mensagens de erro do formulário | `#B42318` `erro` | `#FFFFFF` `superficie` | **6,57:1** | ✅ Passa | ❌ Falha |
 | Mensagens de sucesso | `#146C43` `sucesso` | `#FFFFFF` `superficie` | **6,45:1** | ✅ Passa | ❌ Falha |
-| Borda dos campos de formulário *(UI, 3:1)* | `#6A7590` `borda-campo` | `#FFFFFF` `superficie` | **4,61:1** | ✅ Passa | — |
-| Contorno de foco sobre o fundo *(UI, 3:1)* | `#0B1630` `foco` | `#F3EEE6` `fundo` | **15,52:1** | ✅ Passa | — |
-| Contorno de foco sobre os cards *(UI, 3:1)* | `#0B1630` `foco` | `#FFFFFF` `superficie` | **17,92:1** | ✅ Passa | — |
+| Borda dos campos de formulário *(UI, 3:1)* | `#7E7398` `borda-campo` | `#FFFFFF` `superficie` | **4,38:1** | ✅ Passa | — |
+| Contorno de foco sobre o fundo *(UI, 3:1)* | `#5B2BC4` `foco` | `#FFF8F2` `fundo` | **7,71:1** | ✅ Passa | — |
+| Contorno de foco sobre os cards *(UI, 3:1)* | `#5B2BC4` `foco` | `#FFFFFF` `superficie` | **8,12:1** | ✅ Passa | — |
 
 ## Modo alto contraste
 
 | Uso | Cor da frente | Cor de fundo | Razão | AA | AAA |
 |---|---|---|---|---|---|
-| Títulos das seções | `#FFFFFF` `titulo` | `#000000` `fundo` | **21,00:1** | ✅ Passa | ✅ Passa |
 | Texto do corpo sobre o fundo da página | `#FFFFFF` `texto` | `#000000` `fundo` | **21,00:1** | ✅ Passa | ✅ Passa |
-| Texto dentro dos cards e painéis | `#FFFFFF` `texto` | `#000000` `superficie` | **21,00:1** | ✅ Passa | ✅ Passa |
-| Texto secundário (datas, rodapé) | `#FFFFFF` `texto-suave` | `#000000` `fundo` | **21,00:1** | ✅ Passa | ✅ Passa |
+| Texto dentro dos cards | `#FFFFFF` `texto` | `#000000` `superficie` | **21,00:1** | ✅ Passa | ✅ Passa |
+| Texto em painéis destacados | `#FFFFFF` `texto` | `#000000` `superficie-2` | **21,00:1** | ✅ Passa | ✅ Passa |
+| Texto secundário (legendas, datas) | `#FFFFFF` `texto-suave` | `#000000` `fundo` | **21,00:1** | ✅ Passa | ✅ Passa |
 | Descrição dos cards | `#FFFFFF` `texto-suave` | `#000000` `superficie` | **21,00:1** | ✅ Passa | ✅ Passa |
-| Links em rosa | `#FFFF00` `acento` | `#000000` `fundo` | **19,56:1** | ✅ Passa | ✅ Passa |
-| Links dentro dos cards | `#FFFF00` `acento` | `#000000` `superficie` | **19,56:1** | ✅ Passa | ✅ Passa |
-| Texto do botão principal | `#000000` `sobre-acento` | `#FFFF00` `acento` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Links e títulos em rosa | `#FFFF00` `primaria` | `#000000` `fundo` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Links dentro dos cards | `#FFFF00` `primaria` | `#000000` `superficie` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Texto do botão principal | `#000000` `sobre-primaria` | `#FFFF00` `primaria` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Destaques em laranja (selos, números) | `#FFFF00` `secundaria` | `#000000` `fundo` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Selos laranja nos cards | `#FFFF00` `secundaria` | `#000000` `superficie` | **19,56:1** | ✅ Passa | ✅ Passa |
+| Links em ciano / ícones | `#00FFFF` `acento` | `#000000` `fundo` | **16,75:1** | ✅ Passa | ✅ Passa |
+| Ícones ciano nos cards | `#00FFFF` `acento` | `#000000` `superficie` | **16,75:1** | ✅ Passa | ✅ Passa |
+| Rótulos de categoria em roxo | `#FFFFFF` `roxo` | `#000000` `superficie` | **21,00:1** | ✅ Passa | ✅ Passa |
 | Mensagens de erro do formulário | `#FF8080` `erro` | `#000000` `superficie` | **8,65:1** | ✅ Passa | ✅ Passa |
 | Mensagens de sucesso | `#7CFF7C` `sucesso` | `#000000` `superficie` | **16,45:1** | ✅ Passa | ✅ Passa |
 | Borda dos campos de formulário *(UI, 3:1)* | `#FFFFFF` `borda-campo` | `#000000` `superficie` | **21,00:1** | ✅ Passa | — |
 | Contorno de foco sobre o fundo *(UI, 3:1)* | `#FFFF00` `foco` | `#000000` `fundo` | **19,56:1** | ✅ Passa | — |
 | Contorno de foco sobre os cards *(UI, 3:1)* | `#FFFF00` `foco` | `#000000` `superficie` | **19,56:1** | ✅ Passa | — |
 
-## Texto sobre as fotos do jogo (pior caso)
+## Textos sobre o degradê do topo (hero)
 
-As capturas mudam de uma tela para outra, então o texto sobre foto é medido contra o pior caso possível: um pixel **branco puro** atrás do véu escuro do hero. A cor de fundo da tabela é a mistura do véu (`#0B1630`) com o branco na opacidade daquele ponto.
+O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão foi medida contra cada ponto do degradê e a tabela mostra o **pior caso**. O título em degradê (`.texto-neon`) usa só as cores primária, secundária e roxo do tema.
 
-| Onde | Opacidade do véu | Fundo no pior caso | Texto | Razão | Limite | AA |
-|---|---|---|---|---|---|---|
-| Menu do cabeçalho sobre o topo do hero (véu ~0,70) | 0,7 | `#565658` | `#E9EEF7` | **6,29:1** | 4,5:1 | ✅ Passa |
-| Nome "Leonida" no hero, parte mais alta da letra (véu ~0,60) | 0,6 | `#6E6E70` | `#F4E6CF` | **4,13:1** | 3:1 (texto grande) | ✅ Passa |
-| Linha e status embaixo do hero (véu ~0,90) | 0,9 | `#262629` | `#E9EEF7` | **12,96:1** | 4,5:1 | ✅ Passa |
+| Modo | Texto | Pior ponto do degradê | Pior razão | AA |
+|---|---|---|---|---|
+| Claro | `#1C1230` `texto` | `#ECE3FF` | **14,42:1** | ✅ Passa |
+| Claro | `#4F4566` `texto-suave` | `#ECE3FF` | **7,16:1** | ✅ Passa |
+| Claro | `#B8175E` `primaria` | `#ECE3FF` | **5,12:1** | ✅ Passa |
+| Claro | `#A3410B` `secundaria` | `#ECE3FF` | **5,12:1** | ✅ Passa |
+| Claro | `#5B2BC4` `roxo` | `#ECE3FF` | **6,57:1** | ✅ Passa |
+| Escuro | `#F5F0FF` `texto` | `#0F2240` | **14,20:1** | ✅ Passa |
+| Escuro | `#C9BEE8` `texto-suave` | `#0F2240` | **9,08:1** | ✅ Passa |
+| Escuro | `#FF6BB0` `primaria` | `#0F2240` | **6,03:1** | ✅ Passa |
+| Escuro | `#FF9F5A` `secundaria` | `#0F2240` | **7,83:1** | ✅ Passa |
+| Escuro | `#B9A2FF` `roxo` | `#0F2240` | **7,31:1** | ✅ Passa |
 
 ## Antes e depois: cores que falharam e foram corrigidas
 
