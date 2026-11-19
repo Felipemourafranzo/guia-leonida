@@ -1,0 +1,530 @@
+/* ==========================================================================
+   Guia Leonida: leonida.css (sistema visual novo)
+   --------------------------------------------------------------------------
+   Direção de arte "Mangue e flamingo":
+   - A fotografia do jogo carrega o design. A interface fica quieta.
+   - Uma família só (Archivo), usada em larguras diferentes: condensada e
+     pesada nos títulos, normal no texto.
+   - Um acento só (flamingo). O resto é mangue (verde-escuro) e sal.
+   - Um "uau" por tela. Tudo alinhado à esquerda, numa grade de 12 colunas.
+
+   Bootstrap 5.3.3 continua como base de grid e componentes: as variáveis
+   --bs-* são ligadas aos nossos tokens na seção 2.
+   Contraste de todos os pares conferido com tools/contraste.py.
+   ========================================================================== */
+
+/* 1. Tokens ----------------------------------------------------------------- */
+:root {
+  --fonte: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --fonte-dislexia: "Atkinson Hyperlegible", Verdana, sans-serif;
+  --escala-fonte: 1;
+
+  /* Larguras da Archivo (eixo wdth 62 a 125) */
+  --largura-condensada: 62;
+  --largura-titulo: 75;
+  --largura-texto: 100;
+
+  --borda-fina: 1px;
+  --raio: 4px;          /* um raio só, pequeno */
+  --largura-foco: 3px;
+  --alvo-minimo: 44px;
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --largura-max: 90rem;
+  --altura-cabecalho: 4.5rem;
+
+  --ease-saida: cubic-bezier(.16, 1, .3, 1);
+  --duracao: .35s;
+}
+
+/* Modo escuro (padrão visual do site): "mangue à noite" */
+:root,
+[data-bs-theme="dark"] {
+  --cor-fundo: #0E2120;          /* mangue */
+  --cor-superficie: #163230;     /* mangue claro */
+  --cor-texto: #ECF2EE;          /* sal */
+  --cor-texto-suave: #A8BFBA;    /* névoa */
+  --cor-acento: #FF7A99;         /* flamingo */
+  --cor-acento-hover: #FF99B1;
+  --cor-sobre-acento: #0E2120;
+  --cor-borda: #2C4946;          /* divisões decorativas */
+  --cor-borda-campo: #6F8F8A;    /* bordas de campo (3:1) */
+  --cor-foco: #FFD23F;           /* luz de sódio */
+  --cor-erro: #FF9B8F;
+  --cor-sucesso: #7FE0B0;
+  /* Véu sobre fotos: garante o contraste do texto em qualquer captura */
+  --veu-foto: 14 33 32;
+  color-scheme: dark;
+}
+
+/* Modo claro: "sal ao meio-dia" */
+[data-bs-theme="light"] {
+  --cor-fundo: #EEF3EF;
+  --cor-superficie: #FFFFFF;
+  --cor-texto: #0E2120;
+  --cor-texto-suave: #3D5552;
+  --cor-acento: #B4234F;
+  --cor-acento-hover: #93183F;
+  --cor-sobre-acento: #FFFFFF;
+  --cor-borda: #CBD8D3;
+  --cor-borda-campo: #6B8480;
+  --cor-foco: #0E2120;
+  --cor-erro: #B42318;
+  --cor-sucesso: #146C43;
+  --veu-foto: 14 33 32;
+  color-scheme: light;
+}
+
+/* Alto contraste (vale por cima dos dois temas) */
+[data-contraste="alto"],
+[data-contraste="alto"] [data-bs-theme] {
+  --cor-fundo: #000000;
+  --cor-superficie: #000000;
+  --cor-texto: #FFFFFF;
+  --cor-texto-suave: #FFFFFF;
+  --cor-acento: #FFFF00;
+  --cor-acento-hover: #FFFFFF;
+  --cor-sobre-acento: #000000;
+  --cor-borda: #FFFFFF;
+  --cor-borda-campo: #FFFFFF;
+  --cor-foco: #FFFF00;
+  --cor-erro: #FF8080;
+  --cor-sucesso: #7CFF7C;
+  --veu-foto: 0 0 0;
+  color-scheme: dark;
+}
+
+/* 2. Ligação com o Bootstrap 5.3 -------------------------------------------- */
+:root,
+[data-bs-theme],
+[data-contraste="alto"] {
+  --bs-body-bg: var(--cor-fundo);
+  --bs-body-color: var(--cor-texto);
+  --bs-emphasis-color: var(--cor-texto);
+  --bs-heading-color: var(--cor-texto);
+  --bs-secondary-color: var(--cor-texto-suave);
+  --bs-secondary-bg: var(--cor-superficie);
+  --bs-tertiary-bg: var(--cor-superficie);
+  --bs-border-color: var(--cor-borda);
+  --bs-border-color-translucent: var(--cor-borda);
+  --bs-link-color: var(--cor-acento);
+  --bs-link-hover-color: var(--cor-acento-hover);
+  --bs-primary: var(--cor-acento);
+  --bs-focus-ring-color: var(--cor-foco);
+  --bs-font-sans-serif: var(--fonte);
+  --bs-body-font-family: var(--fonte);
+  --bs-border-radius: var(--raio);
+  --bs-border-radius-lg: var(--raio);
+  --bs-border-radius-sm: var(--raio);
+  --bs-offcanvas-bg: var(--cor-fundo);
+}
+
+/* 3. Base --------------------------------------------------------------------- */
+html {
+  font-size: calc(100% * var(--escala-fonte));
+  scroll-padding-top: calc(var(--altura-cabecalho) + 1rem);
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte);
+  font-variation-settings: "wdth" var(--largura-texto);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: var(--fonte);
+  font-variation-settings: "wdth" var(--largura-titulo);
+  font-weight: 760;
+  letter-spacing: -.015em;
+  line-height: 1.02;
+  color: var(--cor-texto);
+  text-wrap: balance;
+}
+
+p { max-width: 62ch; text-wrap: pretty; }
+
+a { color: var(--cor-acento); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--cor-acento-hover); }
+
+.wrap {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 4. Acessibilidade: pular, foco, alvos ----------------------------------- */
+.pular-conteudo {
+  position: absolute;
+  left: var(--gutter);
+  top: -10rem;
+  z-index: 2000;
+  padding: .75rem 1.25rem;
+  background: var(--cor-acento);
+  color: var(--cor-sobre-acento);
+  font-weight: 700;
+  border-radius: var(--raio);
+  text-decoration: none;
+}
+.pular-conteudo:focus { top: .75rem; color: var(--cor-sobre-acento); }
+
+/* Foco visível em qualquer fundo, inclusive sobre fotografia:
+   anel na cor de foco + contorno escuro por fora (WCAG 2.4.7 e 2.4.13) */
+:focus-visible {
+  outline: var(--largura-foco) solid var(--cor-foco) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 calc(var(--largura-foco) + 2px) rgb(var(--veu-foto)) !important;
+}
+main:focus { outline: none; }
+
+.btn, .nav-link, .btn-close { min-height: var(--alvo-minimo); }
+
+/* 5. Cabeçalho ---------------------------------------------------------------- */
+.cabecalho {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1030;
+  height: var(--altura-cabecalho);
+  color: #ECF2EE;
+  transition: background-color var(--duracao) ease, color var(--duracao) ease;
+}
+/* Sobre a foto do hero o cabeçalho é transparente; o véu superior do hero
+   garante o contraste. Ao rolar, ganha fundo sólido (classe via JS). */
+.cabecalho.com-fundo,
+.sem-hero .cabecalho {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  border-bottom: var(--borda-fina) solid var(--cor-borda);
+}
+.cabecalho .navbar { height: 100%; padding: 0; }
+.cabecalho .wrap { display: flex; align-items: center; height: 100%; gap: 1.5rem; }
+
+.marca {
+  color: inherit;
+  text-decoration: none;
+  font-variation-settings: "wdth" var(--largura-condensada);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.marca:hover { color: inherit; }
+
+.cabecalho .navbar-nav { gap: .25rem; }
+.cabecalho .nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  font-weight: 500;
+  padding-inline: .75rem !important;
+}
+.cabecalho .nav-link:hover,
+.cabecalho .nav-link:focus { color: inherit; }
+/* Sublinhado que se desenha no hover e marca a página atual */
+.cabecalho .nav-link::after {
+  content: "";
+  position: absolute;
+  left: .75rem; right: .75rem; bottom: .55rem;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duracao) var(--ease-saida);
+}
+.cabecalho .nav-link:hover::after,
+.cabecalho .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+
+.barra-ferramentas { display: flex; align-items: center; gap: .25rem; }
+.btn-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-width: var(--alvo-minimo);
+  min-height: var(--alvo-minimo);
+  padding: 0 .75rem;
+  background: transparent;
+  border: var(--borda-fina) solid transparent;
+  border-radius: var(--raio);
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+}
+.btn-icone:hover { border-color: currentColor; }
+
+@media (max-width: 1199.98px) {
+  .cabecalho .navbar-collapse {
+    position: absolute;
+    top: var(--altura-cabecalho);
+    left: 0; right: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    border-bottom: var(--borda-fina) solid var(--cor-borda);
+    padding: .5rem var(--gutter) 1.25rem;
+  }
+  .cabecalho .nav-link { font-size: 1.25rem; }
+  .cabecalho .nav-link::after { bottom: .4rem; right: auto; width: 2rem; }
+}
+@media (max-width: 575.98px) {
+  .esconder-xs { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* 6. Botões (um estilo sólido e um de texto) ----------------------------- */
+.btn-acao {
+  --bs-btn-color: var(--cor-sobre-acento);
+  --bs-btn-bg: var(--cor-acento);
+  --bs-btn-border-color: var(--cor-acento);
+  --bs-btn-hover-color: var(--cor-sobre-acento);
+  --bs-btn-hover-bg: var(--cor-acento-hover);
+  --bs-btn-hover-border-color: var(--cor-acento-hover);
+  --bs-btn-active-color: var(--cor-sobre-acento);
+  --bs-btn-active-bg: var(--cor-acento-hover);
+  --bs-btn-active-border-color: var(--cor-acento-hover);
+  --bs-btn-padding-x: 1.5rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-weight: 650;
+  --bs-btn-border-radius: var(--raio);
+  transition: transform .2s var(--ease-saida), background-color .2s ease;
+}
+.btn-acao:active { transform: scale(.97); }
+
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-minimo);
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) left calc(100% - .55rem) / 100% 1px no-repeat;
+  transition: background-size var(--duracao) var(--ease-saida);
+}
+.link-seta:hover { color: inherit; background-size: 0 1px; background-position: right calc(100% - .55rem); }
+
+/* 7. Hero ------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  row-gap: 2.5rem;
+  color: #ECF2EE;            /* sempre claro: fica sobre a fotografia + véu */
+  isolation: isolate;
+  overflow: clip;
+}
+
+.hero-midia {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero-foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 60%;
+  transform-origin: 50% 70%;
+}
+
+/* Véu: escurece o topo (cabeçalho), a coluna do título e a base (status).
+   A parte do meio deixa o pôr do sol aparecer. */
+.hero-veu {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgb(var(--veu-foto) / .78) 0%, rgb(var(--veu-foto) / 0) 22%),
+    linear-gradient(90deg, rgb(var(--veu-foto) / .8) 0%, rgb(var(--veu-foto) / .62) 38%, rgb(var(--veu-foto) / 0) 62%),
+    linear-gradient(0deg, rgb(var(--veu-foto) / .92) 0%, rgb(var(--veu-foto) / .55) 30%, rgb(var(--veu-foto) / 0) 55%);
+}
+/* Escurecimento extra controlado pelo scroll (opacity animada pelo GSAP) */
+.hero-sombra {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(var(--veu-foto));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-conteudo {
+  padding-top: calc(var(--altura-cabecalho) + clamp(2rem, 7vh, 5rem));
+  align-self: start;
+}
+
+.hero h1 {
+  color: inherit;
+  font-size: clamp(2.25rem, 1.3rem + 3vw, 4rem);
+  font-variation-settings: "wdth" var(--largura-titulo);
+  font-weight: 780;
+  max-width: 14ch;
+  margin: 0 0 1.25rem;
+}
+.hero-lead {
+  font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  max-width: 40ch;
+  margin-bottom: 2rem;
+  color: #DCE6E1;
+}
+
+/* Busca do hero: campo largo, borda clara, botão sólido */
+.busca-hero { max-width: 34rem; }
+.busca-hero label { display: block; font-weight: 600; margin-bottom: .5rem; }
+.busca-hero .linha { display: flex; gap: .5rem; }
+.busca-hero .btn { white-space: nowrap; }
+.busca-hero .form-control {
+  min-height: 3.25rem;
+  background: rgb(var(--veu-foto) / .55);
+  color: #ECF2EE;
+  border: var(--borda-fina) solid rgb(236 242 238 / .7);
+  border-radius: var(--raio);
+  font-size: 1.0625rem;
+}
+.busca-hero .form-control::placeholder { color: #C5D3CE; opacity: 1; }
+.busca-hero .form-control:focus { background: rgb(var(--veu-foto) / .75); color: #ECF2EE; }
+.hero-links { display: flex; flex-wrap: wrap; gap: .25rem 1.75rem; margin-top: 1.25rem; }
+
+/* Status do lançamento como tipografia gigante */
+.hero-status {
+  padding-bottom: clamp(2.5rem, 7vh, 4.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: .5rem 2rem;
+}
+.hero-status h2 { margin: 0; }
+.status-palavra {
+  display: block;
+  margin: 0;
+  max-width: none;
+  color: var(--cor-acento);
+  font-variation-settings: "wdth" var(--largura-condensada);
+  font-weight: 860;
+  /* cresce com a largura, mas nunca passa de ~30% da altura da tela */
+  font-size: clamp(5rem, min(19vw, 34svh), 19rem);
+  line-height: .8;
+  letter-spacing: -.035em;
+}
+/* A máscara da animação (SplitText) recorta por linha: a folga embaixo
+   evita cortar o "ç" e o "g" */
+.status-palavra .linha-palavra-mask { padding-bottom: .16em; margin-bottom: -.16em; }
+[data-bs-theme="light"] .status-palavra { color: #FF7A99; } /* sobre foto + véu escuro, não sobre o fundo claro */
+[data-contraste="alto"] .status-palavra { color: #FFFF00; }
+.status-detalhe {
+  margin: 0 0 .9rem;
+  max-width: 24ch;
+  font-size: 1.0625rem;
+  color: #DCE6E1;
+}
+.status-detalhe strong { color: #ECF2EE; display: block; font-size: 1.25rem; font-weight: 650; }
+.status-contagem { display: flex; gap: 1.25rem; margin: 0 0 .9rem; padding: 0; list-style: none; }
+.status-contagem li { display: grid; }
+.status-contagem .numero { font-size: 2rem; font-weight: 800; font-variation-settings: "wdth" var(--largura-condensada); line-height: 1; }
+.status-contagem .unidade { font-size: .875rem; color: #C5D3CE; }
+
+@media (max-width: 767.98px) {
+  /* No celular o texto ocupa a largura toda: o véu passa a ser vertical */
+  .hero-veu {
+    background: linear-gradient(180deg,
+      rgb(var(--veu-foto) / .82) 0%, rgb(var(--veu-foto) / .66) 50%,
+      rgb(var(--veu-foto) / .4) 64%, rgb(var(--veu-foto) / .9) 100%);
+  }
+  .status-palavra { font-size: clamp(4.5rem, 29vw, 9rem); }
+  .hero-status { grid-template-columns: 1fr; }
+  .status-detalhe { margin: .5rem 0 0; max-width: 32ch; }
+  .busca-hero .linha { flex-direction: column; }
+  .hero-foto { object-position: 34% 50%; }
+}
+
+/* Entrada do hero: o conteúdo começa escondido só quando há animação
+   (classe colocada por theme.js). Se o GSAP não carregar, esta animação de
+   CSS mostra tudo depois de 2,5 s: nada fica escondido para sempre. */
+.gl-entrada .hero h1,
+.gl-entrada .hero [data-entrada],
+.gl-entrada .hero [data-status-palavra] {
+  opacity: 0;
+  animation: gl-mostrar 0s 2.5s forwards;
+}
+@keyframes gl-mostrar { to { opacity: 1; } }
+@media (scripting: none) {
+  .gl-entrada .hero h1, .gl-entrada .hero [data-entrada], .gl-entrada .hero [data-status-palavra] { opacity: 1; animation: none; }
+}
+
+/* 8. Seção de demonstração (só na página de proposta) ----------------------- */
+.secao { padding-block: clamp(4rem, 10vh, 8rem); }
+
+/* 9. Painel de acessibilidade (offcanvas) ------------------------------------ */
+.offcanvas { color: var(--cor-texto); }
+.painel-a11y fieldset, .painel-a11y .grupo-a11y { margin-bottom: 1.5rem; }
+.painel-a11y legend, .painel-a11y .grupo-a11y-titulo { font-size: 1rem; font-weight: 700; margin-bottom: .75rem; }
+.painel-a11y .opcoes-tema { display: flex; gap: .5rem; flex-wrap: wrap; }
+.painel-a11y .opcoes-tema .btn-check + label {
+  border: var(--borda-fina) solid var(--cor-borda-campo);
+  color: var(--cor-texto);
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.painel-a11y .opcoes-tema .btn-check:checked + label { background: var(--cor-acento); color: var(--cor-sobre-acento); border-color: var(--cor-acento); }
+.painel-a11y .controle-fonte { display: flex; align-items: center; gap: .5rem; }
+.painel-a11y .controle-fonte output { min-width: 3.5rem; text-align: center; font-weight: 700; }
+.painel-a11y .descricao-opcao { display: block; color: var(--cor-texto-suave); font-size: .9rem; }
+.form-check { min-height: 2rem; display: flex; align-items: flex-start; gap: .6rem; padding-left: 0; margin-bottom: .75rem; }
+.form-check .form-check-input { float: none; margin-left: 0; flex-shrink: 0; width: 2.75rem; height: 1.5rem; }
+.form-switch { padding-left: 0; }
+.form-control, .form-check-input { border-color: var(--cor-borda-campo); }
+.form-check-input:checked { background-color: var(--cor-acento); border-color: var(--cor-acento); }
+.btn-outline-secondary {
+  --bs-btn-color: var(--cor-texto); --bs-btn-border-color: var(--cor-borda-campo);
+  --bs-btn-hover-color: var(--cor-fundo); --bs-btn-hover-bg: var(--cor-texto); --bs-btn-hover-border-color: var(--cor-texto);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--cor-acento); --bs-btn-border-color: var(--cor-acento);
+  --bs-btn-hover-color: var(--cor-sobre-acento); --bs-btn-hover-bg: var(--cor-acento); --bs-btn-hover-border-color: var(--cor-acento);
+}
+.btn-close { filter: none; }
+[data-bs-theme="dark"] .btn-close, [data-contraste="alto"] .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+
+/* 10. Preferências do painel (classes no <html>) ---------------------------- */
+.a11y-dislexia body,
+.a11y-dislexia h1, .a11y-dislexia h2, .a11y-dislexia h3, .a11y-dislexia h4,
+.a11y-dislexia .marca, .a11y-dislexia .status-palavra {
+  font-family: var(--fonte-dislexia);
+  font-variation-settings: normal;
+  letter-spacing: 0;
+}
+.a11y-espacamento p, .a11y-espacamento li, .a11y-espacamento label {
+  line-height: 1.9 !important;
+  letter-spacing: .12em !important;
+  word-spacing: .16em !important;
+}
+.a11y-sublinhar a { text-decoration: underline !important; }
+
+/* 11. Movimento reduzido: tudo parado e visível --------------------------- */
+.a11y-reduzir-movimento *, .a11y-reduzir-movimento *::before, .a11y-reduzir-movimento *::after {
+  transition-duration: .01ms !important;
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .hero-veu, .hero-sombra { display: none; }
+  .status-palavra { color: CanvasText; }
+}

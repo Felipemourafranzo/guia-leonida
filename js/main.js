@@ -128,6 +128,23 @@ window.GL = (function () {
       var restante = alvo - agora;
       var texto = caixa.querySelector('[data-contagem-texto]');
 
+      var palavra = caixa.querySelector('[data-status-palavra]');
+
+      if (restante <= 0 && palavra) {
+        // Layout novo: o status vira a palavra gigante "Lançado"
+        var diasPassados = Math.floor((agora - alvo) / 86400000);
+        palavra.textContent = 'Lançado';
+        caixa.querySelector('[data-contagem-titulo]').textContent = 'GTA VI já foi lançado';
+        caixa.querySelector('[data-contagem-bloco]').hidden = true;
+        if (botaoPausar) { botaoPausar.hidden = true; }
+        texto.innerHTML = '<strong>' +
+          (diasPassados > 0 ? 'há ' + diasPassados + (diasPassados === 1 ? ' dia' : ' dias') : 'hoje') +
+          ', em ' + escaparHTML(lancamento.dataTexto) + '</strong>' +
+          'Para ' + escaparHTML(lancamento.plataformas) + '. PC: a confirmar.';
+        pausar();
+        return;
+      }
+
       if (restante <= 0) {
         // Já lançado: troca a contagem pelo selo "Já disponível"
         var dias = Math.floor((agora - alvo) / 86400000);
@@ -149,6 +166,7 @@ window.GL = (function () {
       preencher('dias', d);
       preencher('horas', h);
       preencher('minutos', m);
+      if (palavra) { palavra.textContent = d + (d === 1 ? ' dia' : ' dias'); }
       texto.textContent = 'Faltam ' + d + (d === 1 ? ' dia, ' : ' dias, ') + h + (h === 1 ? ' hora e ' : ' horas e ') +
         m + (m === 1 ? ' minuto' : ' minutos') + ' para ' + lancamento.dataTexto + ' (horário de Brasília).';
     }

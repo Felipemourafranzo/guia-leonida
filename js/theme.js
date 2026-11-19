@@ -102,6 +102,13 @@
     raiz.classList.toggle('a11y-dislexia', !!prefs.dislexia);
     raiz.classList.toggle('a11y-espacamento', !!prefs.espacamento);
     raiz.classList.toggle('a11y-sublinhar', !!prefs.sublinhar);
+
+    /* Com animações permitidas, o hero começa escondido para a entrada do
+       GSAP (js/movimento.js). Se o script não carregar, o CSS mostra tudo
+       sozinho depois de 2,5 s (ver .gl-entrada em leonida.css). */
+    var reduzido = !!prefs.reduzirMovimento ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    raiz.classList.toggle('gl-entrada', !reduzido);
   }
 
   aplicar(lerPreferencia());
