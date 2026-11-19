@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" width="1600" height="800" role="img" aria-label="Jason e Lucia (imagem provisória)">
+  <title>Jason e Lucia (imagem provisória)</title>
+  <defs>
+    <linearGradient id="ceu-carrossel-03-jason-e-lucia" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#120A2E"/>
+      <stop offset=".55" stop-color="#5B1A73"/>
+      <stop offset="1" stop-color="#FF4F8B"/>
+    </linearGradient>
+    <linearGradient id="sol-carrossel-03-jason-e-lucia" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE066"/>
+      <stop offset="1" stop-color="#FF2D95"/>
+    </linearGradient>
+    <linearGradient id="chao-carrossel-03-jason-e-lucia" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A0F4C"/>
+      <stop offset="1" stop-color="#0E0A1F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="800" fill="url(#ceu-carrossel-03-jason-e-lucia)"/>
+  <mask id="mask-sol-carrossel-03-jason-e-lucia">
+    <rect x="784.0" y="176.0" width="416.0" height="416.0" fill="#fff"/>
+    <rect x="784.0" y="415.2" width="416.0" height="8.3" fill="#000" /><rect x="784.0" y="450.6" width="416.0" height="13.5" fill="#000" /><rect x="784.0" y="485.9" width="416.0" height="18.7" fill="#000" /><rect x="784.0" y="521.3" width="416.0" height="23.9" fill="#000" /><rect x="784.0" y="556.6" width="416.0" height="29.1" fill="#000" />
+  </mask>
+  <circle cx="992.0" cy="384.0" r="208.0" fill="url(#sol-carrossel-03-jason-e-lucia)" mask="url(#mask-sol-carrossel-03-jason-e-lucia)" opacity=".95"/><rect x="0" y="544" width="1600" height="256" fill="url(#chao-carrossel-03-jason-e-lucia)"/><path d="M800,544 L0,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L80,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L160,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L240,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L320,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L400,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L480,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L560,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L640,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L720,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L800,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L880,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L960,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1040,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1120,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1200,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1280,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1360,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1440,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1520,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M800,544 L1600,800" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M0,564 L1600,564" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M0,594 L1600,594" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M0,639 L1600,639" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/><path d="M0,704 L1600,704" stroke="#FF6BB0" stroke-opacity=".35" stroke-width="2"/>
+  <g>
+    <path d="M406,800 Q420,520 672,499
+             Q924,520 938,800 Z" fill="#140826"/>
+    <rect x="627" y="436" width="90" height="84" fill="#140826"/>
+    <circle cx="672.0" cy="352" r="98" fill="#140826"/>
+    <path d="M406,800 Q420,520 672,499
+             Q924,520 938,800" fill="none" stroke="#3FD8F0" stroke-width="4" opacity=".9"/>
+    <circle cx="672.0" cy="352" r="98" fill="none" stroke="#3FD8F0" stroke-width="4" opacity=".9"/>
+  </g>
+  <g>
+    <path d="M704,800 Q717,530 960,510
+             Q1203,530 1216,800 Z" fill="#140826"/>
+    <rect x="917" y="449" width="86" height="81" fill="#140826"/>
+    <circle cx="960.0" cy="368" r="94" fill="#140826"/>
+    <path d="M704,800 Q717,530 960,510
+             Q1203,530 1216,800" fill="none" stroke="#FF6BB0" stroke-width="4" opacity=".9"/>
+    <circle cx="960.0" cy="368" r="94" fill="none" stroke="#FF6BB0" stroke-width="4" opacity=".9"/>
+  </g>
+  <g font-family="'Segoe UI', Arial, sans-serif">
+    <rect x="64" y="611" width="572"
+          height="159" rx="14" fill="#0E0A1F" fill-opacity=".72"/>
+    <text x="92" y="693" font-size="61" font-weight="700" fill="#FFFFFF">Jason e Lucia</text>
+    <text x="92" y="748" font-size="29" fill="#FFD6EA">Carrossel · imagem provisória</text>
+  </g>
+</svg>

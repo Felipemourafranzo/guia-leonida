@@ -14,3 +14,6 @@ __pycache__/
 # Enunciado e relatório final em Word/PDF (entregues fora do repositório)
 ProjetoFinal_DI*.docx
 ~$*.docx
+
+# Configuração local do Claude Code (servidor de prévia)
+.claude/

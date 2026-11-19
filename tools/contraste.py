@@ -262,7 +262,7 @@ def gerar() -> tuple[str, int]:
 if __name__ == "__main__":
     texto, falhas = gerar()
     destino = Path(__file__).resolve().parent.parent / "docs" / "contraste.md"
-    destino.write_text(texto, encoding="utf-8")
+    destino.write_text(texto, encoding="utf-8", newline="\n")
     # Resumo no terminal
     for nome, paleta in PALETAS.items():
         for frente, fundo, uso, tipo in PARES:
