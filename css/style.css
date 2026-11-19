@@ -236,6 +236,11 @@ main:focus { outline: none; }
 
 .hero .lead { font-size: 1.2rem; color: var(--cor-texto); }
 
+/* Hero menor, usado nas páginas internas */
+.hero-compacto { padding-block: clamp(2rem, 5vw, 3.25rem); }
+.breadcrumb { --bs-breadcrumb-divider-color: var(--cor-texto-suave); --bs-breadcrumb-item-active-color: var(--cor-texto-suave); }
+.breadcrumb a { color: var(--cor-texto); text-decoration: underline; }
+
 /* Cartão com status/contagem: sempre sobre superfície sólida (contraste) */
 .status-lancamento {
   background: var(--cor-superficie);
@@ -557,6 +562,22 @@ main:focus { outline: none; }
 .mapa-esquematico a:focus-visible .regiao-forma { stroke: var(--cor-foco); stroke-width: 6; }
 .mapa-esquematico .mapa-rotulo { fill: var(--cor-texto); font-family: var(--fonte-titulo); font-weight: 700; font-size: 22px; paint-order: stroke; stroke: var(--cor-superficie); stroke-width: 5px; }
 .mapa-esquematico .mapa-agua { fill: var(--cor-superficie-2); }
+/* Cores das regiões: misturadas com a superfície para o rótulo continuar legível */
+.regiao-kalaga { fill: color-mix(in srgb, var(--cor-sucesso) 40%, var(--cor-superficie)); }
+.regiao-gellhorn { fill: color-mix(in srgb, var(--cor-acento) 35%, var(--cor-superficie)); }
+.regiao-ambrosia { fill: color-mix(in srgb, var(--cor-secundaria) 35%, var(--cor-superficie)); }
+.regiao-grassrivers { fill: color-mix(in srgb, var(--cor-sucesso) 22%, var(--cor-superficie-2)); }
+.regiao-vice { fill: color-mix(in srgb, var(--cor-primaria) 40%, var(--cor-superficie)); }
+.regiao-keys { fill: color-mix(in srgb, var(--cor-acento) 50%, var(--cor-superficie)); }
+[data-contraste="alto"] .regiao-forma { fill: #000; stroke: #fff; }
+
+/* Tabelas com a paleta do site */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--cor-texto);
+  --bs-table-border-color: var(--cor-borda);
+}
+.table caption { caption-side: top; }
 
 .lista-fatos { list-style: none; padding: 0; margin: 0; display: grid; gap: .4rem; }
 .lista-fatos li { display: flex; gap: .5rem; align-items: flex-start; color: var(--cor-texto-suave); font-size: .95rem; }
