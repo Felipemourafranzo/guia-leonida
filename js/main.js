@@ -128,19 +128,13 @@ window.GL = (function () {
       var restante = alvo - agora;
       var texto = caixa.querySelector('[data-contagem-texto]');
 
-      var palavra = caixa.querySelector('[data-status-palavra]');
+      // Layout novo (home redesenhada): status numa frase curta
+      var curto = caixa.hasAttribute('data-status-curto');
 
-      if (restante <= 0 && palavra) {
-        // Layout novo: o status vira a palavra gigante "Lançado"
-        var diasPassados = Math.floor((agora - alvo) / 86400000);
-        palavra.textContent = 'Lançado';
-        caixa.querySelector('[data-contagem-titulo]').textContent = 'GTA VI já foi lançado';
+      if (restante <= 0 && curto) {
         caixa.querySelector('[data-contagem-bloco]').hidden = true;
         if (botaoPausar) { botaoPausar.hidden = true; }
-        texto.innerHTML = '<strong>' +
-          (diasPassados > 0 ? 'há ' + diasPassados + (diasPassados === 1 ? ' dia' : ' dias') : 'hoje') +
-          ', em ' + escaparHTML(lancamento.dataTexto) + '</strong>' +
-          'Para ' + escaparHTML(lancamento.plataformas) + '. PC: a confirmar.';
+        texto.textContent = 'Já disponível no PS5 e no Xbox Series X|S.';
         pausar();
         return;
       }
@@ -166,7 +160,12 @@ window.GL = (function () {
       preencher('dias', d);
       preencher('horas', h);
       preencher('minutos', m);
-      if (palavra) { palavra.textContent = d + (d === 1 ? ' dia' : ' dias'); }
+      if (curto) {
+        texto.textContent = 'Chega em ' + (d > 0 ? d + (d === 1 ? ' dia' : ' dias') : h + (h === 1 ? ' hora' : ' horas')) +
+          ' ao PS5 e ao Xbox Series X|S.';
+        if (botaoPausar) { botaoPausar.hidden = false; }
+        return;
+      }
       texto.textContent = 'Faltam ' + d + (d === 1 ? ' dia, ' : ' dias, ') + h + (h === 1 ? ' hora e ' : ' horas e ') +
         m + (m === 1 ? ' minuto' : ' minutos') + ' para ' + lancamento.dataTexto + ' (horário de Brasília).';
     }

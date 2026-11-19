@@ -79,6 +79,18 @@ Página de onde os pacotes são baixados: <https://www.rockstargames.com/VI/medi
 | `veiculo-picape` | `Grassrivers_04.jpg` | Capturas de tela | Picape atravessando o pântano de Grassrivers perseguida por uma viatura e um helicóptero |
 | `veiculo-jet-ski` | `Leonida_Keys_05.jpg` | Capturas de tela | Jet skis e lanchas reunidos num canal das Leonida Keys, com gente tomando sol nos barcos |
 
+## Colagem "Jason e Lucia" (página inicial; as verticais são recortes 4:5 em 1200 e 600 px)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `colagem-jason-grade` | `Jason_Duval_07.jpg` | Capturas de tela | Jason com o rosto machucado atrás de uma grade, iluminado pelas luzes vermelhas e azuis da polícia |
+| `colagem-lucia-bar` | `Lucia_Caminos_03.jpg` | Capturas de tela | Lucia de jaqueta de couro sentada numa moto amarela em frente a um letreiro de neon de bar |
+| `colagem-lucia-academia` | `Lucia_Caminos_09.jpg` | Capturas de tela | Lucia de fones e luvas sentada num banco de academia, com luz forte do sol atrás |
+| `colagem-jason-lucia-orla` | `Jason_and_Lucia_01.jpg` | Capturas de tela | Lucia e Jason lado a lado na orla, com os prédios de Vice City e um helicóptero ao fundo |
+| `colagem-jason-lucia-carro` | `Jason_and_Lucia_03.jpg` | Capturas de tela | Lucia apoiada na janela de um carro conversível e Jason ao volante, com a cidade atrás |
+| `colagem-jason-lucia-fuga` | `Jason_and_Lucia_09.jpg` | Capturas de tela | Jason pilota uma moto com Lucia na garupa, fugindo de uma viatura e de um helicóptero |
+| `colagem-jason-keys` | `Jason_Duval_14.jpg` | Capturas de tela | Jason de costas, de boné, encarando três homens ao lado de uma picape ao entardecer |
+
 ## Páginas internas
 
 | Arquivo | Original no kit | Pacote | Alt |

@@ -658,5 +658,152 @@
     70986
    ]
   }
+ },
+ {
+  "arquivo": "colagem-jason-grade",
+  "grupo": "colagem",
+  "alt": "Jason com o rosto machucado atrás de uma grade, iluminado pelas luzes vermelhas e azuis da polícia",
+  "original": "Jason_Duval_07.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": "4:5 vertical",
+  "tamanhos": {
+   "1200": [
+    1500,
+    56050
+   ],
+   "600": [
+    750,
+    23114
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-lucia-bar",
+  "grupo": "colagem",
+  "alt": "Lucia de jaqueta de couro sentada numa moto amarela em frente a um letreiro de neon de bar",
+  "original": "Lucia_Caminos_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": "4:5 vertical",
+  "tamanhos": {
+   "1200": [
+    1500,
+    86624
+   ],
+   "600": [
+    750,
+    30496
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-lucia-academia",
+  "grupo": "colagem",
+  "alt": "Lucia de fones e luvas sentada num banco de academia, com luz forte do sol atrás",
+  "original": "Lucia_Caminos_09.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": "4:5 vertical",
+  "tamanhos": {
+   "1200": [
+    1500,
+    54610
+   ],
+   "600": [
+    750,
+    22790
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-jason-lucia-orla",
+  "grupo": "colagem",
+  "alt": "Lucia e Jason lado a lado na orla, com os prédios de Vice City e um helicóptero ao fundo",
+  "original": "Jason_and_Lucia_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": null,
+  "tamanhos": {
+   "1600": [
+    900,
+    76744
+   ],
+   "800": [
+    450,
+    29512
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-jason-lucia-carro",
+  "grupo": "colagem",
+  "alt": "Lucia apoiada na janela de um carro conversível e Jason ao volante, com a cidade atrás",
+  "original": "Jason_and_Lucia_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": null,
+  "tamanhos": {
+   "1600": [
+    900,
+    99864
+   ],
+   "800": [
+    450,
+    40354
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-jason-lucia-fuga",
+  "grupo": "colagem",
+  "alt": "Jason pilota uma moto com Lucia na garupa, fugindo de uma viatura e de um helicóptero",
+  "original": "Jason_and_Lucia_09.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": null,
+  "tamanhos": {
+   "1600": [
+    900,
+    98918
+   ],
+   "800": [
+    450,
+    43006
+   ]
+  }
+ },
+ {
+  "arquivo": "colagem-jason-keys",
+  "grupo": "colagem",
+  "alt": "Jason de costas, de boné, encarando três homens ao lado de uma picape ao entardecer",
+  "original": "Jason_Duval_14.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "recorte": null,
+  "tamanhos": {
+   "1600": [
+    900,
+    111324
+   ],
+   "800": [
+    450,
+    40730
+   ]
+  }
  }
 ]

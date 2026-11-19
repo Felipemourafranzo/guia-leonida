@@ -21,59 +21,50 @@ Limites:
     componentes de UI e
     indicador de foco     AA 3:1 (critério 1.4.11, não há AAA)
 
-IMPORTANTE: as cores abaixo precisam ser as mesmas de css/themes.css.
+IMPORTANTE: as cores abaixo precisam ser as mesmas de css/leonida.css.
 Se mudar uma cor lá, mude aqui e rode o script de novo.
 """
 
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# Paletas (espelho dos tokens de css/themes.css)
+# Paletas (espelho dos tokens de css/leonida.css)
 # ---------------------------------------------------------------------------
 PALETAS = {
     "Escuro": {
-        "fundo": "#0E0A1F",
-        "superficie": "#1A1433",
-        "superficie-2": "#251C47",
-        "texto": "#F5F0FF",
-        "texto-suave": "#C9BEE8",
-        "primaria": "#FF6BB0",
-        "sobre-primaria": "#1A0612",
-        "secundaria": "#FF9F5A",
-        "acento": "#3FD8F0",
-        "roxo": "#B9A2FF",
-        "borda-campo": "#8B7BC4",
-        "foco": "#3FD8F0",
-        "erro": "#FF8F8F",
-        "sucesso": "#5BE3A0",
+        "fundo": "#0B1630",          # azul-noite
+        "superficie": "#13224A",
+        "titulo": "#F4E6CF",         # creme
+        "texto": "#E9EEF7",
+        "texto-suave": "#A9B6D3",
+        "acento": "#FF7A93",         # rosa do pôr do sol
+        "sobre-acento": "#0B1630",
+        "borda-campo": "#7186B3",
+        "foco": "#FFD23F",
+        "erro": "#FF9B8F",
+        "sucesso": "#7FE0B0",
     },
     "Claro": {
-        "fundo": "#FFF8F2",
+        "fundo": "#F3EEE6",
         "superficie": "#FFFFFF",
-        "superficie-2": "#F5EDFF",
-        "texto": "#1C1230",
-        "texto-suave": "#4F4566",
-        "primaria": "#B8175E",
-        "sobre-primaria": "#FFFFFF",
-        "secundaria": "#A3410B",
-        "acento": "#0B6577",
-        "roxo": "#5B2BC4",
-        "borda-campo": "#7E7398",
-        "foco": "#5B2BC4",
+        "titulo": "#0B1630",
+        "texto": "#0B1630",
+        "texto-suave": "#3E4A66",
+        "acento": "#B01E4E",
+        "sobre-acento": "#FFFFFF",
+        "borda-campo": "#6A7590",
+        "foco": "#0B1630",
         "erro": "#B42318",
         "sucesso": "#146C43",
     },
     "Alto contraste": {
         "fundo": "#000000",
         "superficie": "#000000",
-        "superficie-2": "#000000",
+        "titulo": "#FFFFFF",
         "texto": "#FFFFFF",
         "texto-suave": "#FFFFFF",
-        "primaria": "#FFFF00",
-        "sobre-primaria": "#000000",
-        "secundaria": "#FFFF00",
-        "acento": "#00FFFF",
-        "roxo": "#FFFFFF",
+        "acento": "#FFFF00",
+        "sobre-acento": "#000000",
         "borda-campo": "#FFFFFF",
         "foco": "#FFFF00",
         "erro": "#FF8080",
@@ -84,24 +75,29 @@ PALETAS = {
 # Pares usados de verdade no site: (frente, fundo, onde é usado, tipo)
 # tipo: "texto" (4.5:1), "grande" (3:1) ou "ui" (3:1)
 PARES = [
+    ("titulo", "fundo", "Títulos das seções", "texto"),
     ("texto", "fundo", "Texto do corpo sobre o fundo da página", "texto"),
-    ("texto", "superficie", "Texto dentro dos cards", "texto"),
-    ("texto", "superficie-2", "Texto em painéis destacados", "texto"),
-    ("texto-suave", "fundo", "Texto secundário (legendas, datas)", "texto"),
+    ("texto", "superficie", "Texto dentro dos cards e painéis", "texto"),
+    ("texto-suave", "fundo", "Texto secundário (datas, rodapé)", "texto"),
     ("texto-suave", "superficie", "Descrição dos cards", "texto"),
-    ("primaria", "fundo", "Links e títulos em rosa", "texto"),
-    ("primaria", "superficie", "Links dentro dos cards", "texto"),
-    ("sobre-primaria", "primaria", "Texto do botão principal", "texto"),
-    ("secundaria", "fundo", "Destaques em laranja (selos, números)", "texto"),
-    ("secundaria", "superficie", "Selos laranja nos cards", "texto"),
-    ("acento", "fundo", "Links em ciano / ícones", "texto"),
-    ("acento", "superficie", "Ícones ciano nos cards", "texto"),
-    ("roxo", "superficie", "Rótulos de categoria em roxo", "texto"),
+    ("acento", "fundo", "Links em rosa", "texto"),
+    ("acento", "superficie", "Links dentro dos cards", "texto"),
+    ("sobre-acento", "acento", "Texto do botão principal", "texto"),
     ("erro", "superficie", "Mensagens de erro do formulário", "texto"),
     ("sucesso", "superficie", "Mensagens de sucesso", "texto"),
     ("borda-campo", "superficie", "Borda dos campos de formulário", "ui"),
     ("foco", "fundo", "Contorno de foco sobre o fundo", "ui"),
     ("foco", "superficie", "Contorno de foco sobre os cards", "ui"),
+]
+
+# Texto sobre as fotos do jogo. A foto muda, então o cálculo usa o PIOR caso
+# possível: um pixel branco puro atrás do véu (rgb 11 22 48 em css/leonida.css).
+# (onde, opacidade do véu naquele ponto, cor do texto, tipo)
+VEU = "#0B1630"
+TEXTO_SOBRE_FOTO = [
+    ("Menu do cabeçalho sobre o topo do hero (véu ~0,70)", 0.70, "#E9EEF7", "texto"),
+    ("Nome \"Leonida\" no hero, parte mais alta da letra (véu ~0,60)", 0.60, "#F4E6CF", "grande"),
+    ("Linha e status embaixo do hero (véu ~0,90)", 0.90, "#E9EEF7", "texto"),
 ]
 
 # Exemplo "antes e depois" para o relatório
@@ -152,12 +148,6 @@ ANTES_DEPOIS = [
     },
 ]
 
-# Pontos do degradê de fundo do hero (--gradiente-marca em css/themes.css)
-DEGRADE_HERO = {
-    "Claro": ["#FFE1EE", "#FFE9D6", "#ECE3FF"],
-    "Escuro": ["#2A0F33", "#1A1433", "#0F2240"],
-}
-
 LIMITES = {"texto": (4.5, 7.0), "grande": (3.0, 4.5), "ui": (3.0, None)}
 
 
@@ -193,6 +183,12 @@ def avaliar(valor: float, tipo: str) -> tuple[str, str]:
     else:
         r_aaa = "✅ Passa" if valor >= aaa else "❌ Falha"
     return r_aa, r_aaa
+
+
+def misturar(cor: str, fundo: str, alfa: float) -> str:
+    """Cor resultante de 'cor' com opacidade 'alfa' por cima de 'fundo'."""
+    c, f = hex_para_rgb(cor), hex_para_rgb(fundo)
+    return "#" + "".join(f"{round(alfa * a + (1 - alfa) * b):02X}" for a, b in zip(c, f))
 
 
 def fmt(valor: float) -> str:
@@ -250,27 +246,25 @@ def gerar() -> tuple[str, int]:
             )
         linhas.append("")
 
-    # Textos sobre o degradê do hero: mede contra CADA ponto do degradê
-    # e mostra o pior caso (o ponto de menor contraste).
+    # Texto sobre as fotos: mistura o véu com branco puro (pior caso)
     linhas += [
-        "## Textos sobre o degradê do topo (hero)",
+        "## Texto sobre as fotos do jogo (pior caso)",
         "",
-        "O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão foi medida "
-        "contra cada ponto do degradê e a tabela mostra o **pior caso**. O título em degradê "
-        "(`.texto-neon`) usa só as cores primária, secundária e roxo do tema.",
+        "As capturas mudam de uma tela para outra, então o texto sobre foto é medido contra o pior "
+        "caso possível: um pixel **branco puro** atrás do véu escuro do hero. A cor de fundo da tabela "
+        "é a mistura do véu (`#0B1630`) com o branco na opacidade daquele ponto.",
         "",
-        "| Modo | Texto | Pior ponto do degradê | Pior razão | AA |",
-        "|---|---|---|---|---|",
+        "| Onde | Opacidade do véu | Fundo no pior caso | Texto | Razão | Limite | AA |",
+        "|---|---|---|---|---|---|---|",
     ]
-    for nome, pontos in DEGRADE_HERO.items():
-        paleta = PALETAS[nome]
-        for frente in ("texto", "texto-suave", "primaria", "secundaria", "roxo"):
-            pior = min(pontos, key=lambda p: razao(paleta[frente], p))
-            r = razao(paleta[frente], pior)
-            aa, _ = avaliar(r, "texto")
-            if "Falha" in aa:
-                falhas += 1
-            linhas.append(f"| {nome} | {amostra(paleta[frente])} `{frente}` | {amostra(pior)} | **{fmt(r)}** | {aa} |")
+    for onde, alfa, cor, tipo in TEXTO_SOBRE_FOTO:
+        fundo = misturar(VEU, "#FFFFFF", alfa)
+        r = razao(cor, fundo)
+        aa, _ = avaliar(r, tipo)
+        if "Falha" in aa:
+            falhas += 1
+        limite = "3:1 (texto grande)" if tipo == "grande" else "4,5:1"
+        linhas.append(f"| {onde} | {str(alfa).replace('.', ',')} | {amostra(fundo)} | {amostra(cor)} | **{fmt(r)}** | {limite} | {aa} |")
     linhas.append("")
 
     linhas += [

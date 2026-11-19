@@ -36,17 +36,25 @@
     if (!cabecalho) { return; }
     if (!hero) { document.body.classList.add('sem-hero'); return; }
     var menuAberto = false;
+    var sobreHero = true;
     function atualizar() {
-      var limite = hero.offsetHeight - cabecalho.offsetHeight - 8;
-      cabecalho.classList.toggle('com-fundo', menuAberto || window.scrollY > limite);
+      cabecalho.classList.toggle('com-fundo', menuAberto || !sobreHero);
     }
     var menu = document.getElementById('menu-principal');
     if (menu) {
       menu.addEventListener('show.bs.collapse', function () { menuAberto = true; atualizar(); });
       menu.addEventListener('hidden.bs.collapse', function () { menuAberto = false; atualizar(); });
     }
-    window.addEventListener('scroll', atualizar, { passive: true });
-    window.addEventListener('resize', atualizar);
+    /* O observador avisa quando a base do hero passa por baixo do cabeçalho,
+       inclusive quando a página já abre rolada (link com #âncora). */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        sobreHero = entradas[0].isIntersecting;
+        atualizar();
+      }, { rootMargin: '-' + (cabecalho.offsetHeight + 8) + 'px 0px 0px 0px' }).observe(hero);
+    } else {
+      sobreHero = false;
+    }
     atualizar();
   }
 
@@ -77,43 +85,56 @@
      --------------------------------------------------------------------- */
   function animarHero() {
     var hero = document.querySelector('.hero');
-    if (!hero) { return; }
+    if (!hero) { return null; }
     var foto = hero.querySelector('.hero-foto');
     var sombra = hero.querySelector('.hero-sombra');
-    var titulo = hero.querySelector('h1');
-    var palavra = hero.querySelector('[data-status-palavra]');
+    var nome = hero.querySelector('.hero-nome');
     var conteudo = hero.querySelector('.hero-conteudo');
     var resto = hero.querySelectorAll('[data-entrada]');
 
-    var linhas = SplitText.create(titulo, { type: 'lines', mask: 'lines', linesClass: 'linha-split' });
-    var letras = palavra ? SplitText.create(palavra, { type: 'chars,lines', mask: 'lines', linesClass: 'linha-palavra' }) : null;
+    // Só o nome visível (aria-hidden) é dividido em letras; o leitor de tela lê o texto escondido do h1
+    var letras = SplitText.create(nome, { type: 'chars,lines', mask: 'lines', linesClass: 'linha-titulo', aria: 'none' });
 
     liberarEntrada();
-    var entrada = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    entrada
-      .from(foto, { scale: 1.14, duration: 2.2, ease: 'power3.out' }, 0)
-      .from(linhas.lines, { yPercent: 110, duration: 1.2, stagger: 0.09 }, 0.25)
-      .from(resto, { autoAlpha: 0, y: 18, duration: 1, stagger: 0.08 }, 0.6);
-    if (letras) {
-      entrada.from(letras.chars, { yPercent: 105, duration: 1.3, stagger: 0.045 }, 0.45);
-    }
+    gsap.timeline({ defaults: { ease: 'expo.out' } })
+      .from(foto, { scale: 1.15, duration: 2.4, ease: 'power3.out' }, 0)
+      .from(letras.chars, { yPercent: 108, duration: 1.4, stagger: 0.05 }, 0.3)
+      .from(resto, { autoAlpha: 0, y: 16, duration: 1, stagger: 0.1 }, 0.9);
 
-    /* Camadas: a foto anda devagar, o status anda menos que o conteúdo,
+    /* Camadas: a foto anda devagar, o texto sobe um pouco mais rápido
        e um véu escurece a cena até a próxima seção. */
-    var rolagem = gsap.timeline({
+    gsap.timeline({
       scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
-    });
-    rolagem
-      .to(foto, { yPercent: 16, scale: 1.08, ease: 'none' }, 0)
-      .to(sombra, { opacity: 0.75, ease: 'none' }, 0)
-      .to(conteudo, { y: -90, ease: 'none' }, 0);
-    if (palavra) { rolagem.to(palavra, { yPercent: -18, ease: 'none' }, 0); }
+    })
+      .to(foto, { yPercent: 18, scale: 1.08, ease: 'none' }, 0)
+      .to(sombra, { opacity: 0.8, ease: 'none' }, 0)
+      .to(conteudo, { yPercent: -12, ease: 'none' }, 0);
 
-    /* Ao desfazer (movimento reduzido ligado), devolve o texto original */
-    return function () {
-      linhas.revert();
-      if (letras) { letras.revert(); }
-    };
+    return function () { letras.revert(); };
+  }
+
+  /* ---------------------------------------------------------------------
+     Colagem: cada coluna de fotos anda numa velocidade diferente
+     (data-velocidade) e cada foto dá um leve zoom de dentro do quadro.
+     --------------------------------------------------------------------- */
+  function animarColagem() {
+    document.querySelectorAll('.colagem-fotos').forEach(function (bloco) {
+      bloco.querySelectorAll('[data-velocidade]').forEach(function (coluna) {
+        var v = parseFloat(coluna.getAttribute('data-velocidade')) || 1;
+        gsap.fromTo(coluna, { y: (v - 1) * 260 }, {
+          y: (1 - v) * 260,
+          ease: 'none',
+          scrollTrigger: { trigger: bloco, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+      bloco.querySelectorAll('.foto-quadro img').forEach(function (img) {
+        gsap.fromTo(img, { scale: 1.18 }, {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom 40%', scrub: true }
+        });
+      });
+    });
   }
 
   /* ---------------------------------------------------------------------
@@ -137,6 +158,7 @@
     mm.add('(prefers-reduced-motion: no-preference)', function () {
       ligarLenis();
       var desfazerHero = animarHero();
+      animarColagem();
       return function () {
         if (desfazerHero) { desfazerHero(); }
         desligarLenis();
