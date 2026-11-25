@@ -1,19 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
   <title>Guia Leonida</title>
   <defs>
-    <linearGradient id="l-fundo" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2B0F4C"/><stop offset="1" stop-color="#0E0A1F"/>
+    <linearGradient id="sol" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe8a3"/><stop offset=".5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff4fa3"/>
     </linearGradient>
-    <linearGradient id="l-sol" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFE066"/><stop offset="1" stop-color="#FF2D95"/>
-    </linearGradient>
-    <mask id="l-mask"><rect width="64" height="64" fill="#fff"/>
-      <rect x="0" y="34" width="64" height="2" fill="#000"/><rect x="0" y="39" width="64" height="3" fill="#000"/><rect x="0" y="45" width="64" height="4" fill="#000"/>
-    </mask>
   </defs>
-  <rect width="64" height="64" rx="14" fill="url(#l-fundo)"/>
-  <circle cx="34" cy="36" r="20" fill="url(#l-sol)" mask="url(#l-mask)"/>
-  <path d="M12 56 Q18 38 22 24 l2 1 Q22 40 16 56Z" fill="#0E0A1F"/>
-  <g fill="#0E0A1F"><path d="M23 24 q-10 -6 -16 2 q8 -3 16 -2Z"/><path d="M23 24 q2 -11 12 -12 q-8 5 -12 12Z"/><path d="M23 24 q12 -3 16 6 q-7 -6 -16 -6Z"/><path d="M23 24 q-4 -10 -14 -9 q9 2 14 9Z"/></g>
-  <rect x="3" y="3" width="58" height="58" rx="12" fill="none" stroke="#3FD8F0" stroke-width="2"/>
+  <path fill="url(#sol)" d="M20 2a18 18 0 0 1 18 18H2A18 18 0 0 1 20 2zM2.4 23h35.2a18 18 0 0 1-.7 3H3.1a18 18 0 0 1-.7-3zm2.2 6h30.8a18 18 0 0 1-1.6 2.6H6.2A18 18 0 0 1 4.6 29zm4.4 5.4h22a18 18 0 0 1-22 0z"/>
 </svg>

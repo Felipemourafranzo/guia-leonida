@@ -21,7 +21,8 @@ Limites:
     componentes de UI e
     indicador de foco     AA 3:1 (critério 1.4.11, não há AAA)
 
-IMPORTANTE: as cores abaixo precisam ser as mesmas de css/themes.css.
+IMPORTANTE: as cores abaixo precisam ser as mesmas de css/themes.css
+(e as fixas das cenas, de css/style.css e css/cenas.css).
 Se mudar uma cor lá, mude aqui e rode o script de novo.
 """
 
@@ -32,48 +33,51 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 PALETAS = {
     "Escuro": {
-        "fundo": "#0E0A1F",
-        "superficie": "#1A1433",
-        "superficie-2": "#251C47",
-        "texto": "#F5F0FF",
-        "texto-suave": "#C9BEE8",
-        "primaria": "#FF6BB0",
-        "sobre-primaria": "#1A0612",
-        "secundaria": "#FF9F5A",
-        "acento": "#3FD8F0",
-        "roxo": "#B9A2FF",
-        "borda-campo": "#8B7BC4",
-        "foco": "#3FD8F0",
-        "erro": "#FF8F8F",
-        "sucesso": "#5BE3A0",
+        "fundo": "#120B22",
+        "fundo-2": "#1B1030",
+        "superficie": "#1B1030",
+        "superficie-2": "#2A1A47",
+        "texto": "#F4EEFC",
+        "texto-suave": "#C9BDDF",
+        "destaque": "#FFE8A3",
+        "primaria": "#FF4FA3",
+        "sobre-primaria": "#0C0818",
+        "secundaria": "#FF8A3D",
+        "acento": "#5EE7FF",
+        "borda-campo": "#8F7CC0",
+        "foco": "#FFE8A3",
+        "erro": "#FF9B9B",
+        "sucesso": "#6EE7B0",
     },
     "Claro": {
-        "fundo": "#FFF8F2",
+        "fundo": "#FBF4EA",
+        "fundo-2": "#F3E8DA",
         "superficie": "#FFFFFF",
-        "superficie-2": "#F5EDFF",
-        "texto": "#1C1230",
-        "texto-suave": "#4F4566",
-        "primaria": "#B8175E",
+        "superficie-2": "#F3E8DA",
+        "texto": "#1B1030",
+        "texto-suave": "#4A3D63",
+        "destaque": "#A3410B",
+        "primaria": "#B3135F",
         "sobre-primaria": "#FFFFFF",
         "secundaria": "#A3410B",
         "acento": "#0B6577",
-        "roxo": "#5B2BC4",
-        "borda-campo": "#7E7398",
+        "borda-campo": "#7D6F8F",
         "foco": "#5B2BC4",
         "erro": "#B42318",
         "sucesso": "#146C43",
     },
     "Alto contraste": {
         "fundo": "#000000",
+        "fundo-2": "#000000",
         "superficie": "#000000",
         "superficie-2": "#000000",
         "texto": "#FFFFFF",
         "texto-suave": "#FFFFFF",
+        "destaque": "#FFFF00",
         "primaria": "#FFFF00",
         "sobre-primaria": "#000000",
         "secundaria": "#FFFF00",
         "acento": "#00FFFF",
-        "roxo": "#FFFFFF",
         "borda-campo": "#FFFFFF",
         "foco": "#FFFF00",
         "erro": "#FF8080",
@@ -85,78 +89,79 @@ PALETAS = {
 # tipo: "texto" (4.5:1), "grande" (3:1) ou "ui" (3:1)
 PARES = [
     ("texto", "fundo", "Texto do corpo sobre o fundo da página", "texto"),
-    ("texto", "superficie", "Texto dentro dos cards", "texto"),
+    ("texto", "fundo-2", "Texto nas faixas alternadas", "texto"),
+    ("texto", "superficie", "Texto em painéis, campos e modais", "texto"),
     ("texto", "superficie-2", "Texto em painéis destacados", "texto"),
     ("texto-suave", "fundo", "Texto secundário (legendas, datas)", "texto"),
-    ("texto-suave", "superficie", "Descrição dos cards", "texto"),
-    ("primaria", "fundo", "Links e títulos em rosa", "texto"),
-    ("primaria", "superficie", "Links dentro dos cards", "texto"),
+    ("texto-suave", "superficie", "Texto secundário em painéis", "texto"),
+    ("destaque", "fundo", "Sobretítulos e datas da linha do tempo", "texto"),
+    ("destaque", "superficie", "Rótulos do painel de acessibilidade", "texto"),
+    ("primaria", "fundo", "Links e títulos de seção em rosa", "texto"),
+    ("primaria", "superficie", "Links dentro de painéis", "texto"),
     ("sobre-primaria", "primaria", "Texto do botão principal", "texto"),
-    ("secundaria", "fundo", "Destaques em laranja (selos, números)", "texto"),
-    ("secundaria", "superficie", "Selos laranja nos cards", "texto"),
-    ("acento", "fundo", "Links em ciano / ícones", "texto"),
-    ("acento", "superficie", "Ícones ciano nos cards", "texto"),
-    ("roxo", "superficie", "Rótulos de categoria em roxo", "texto"),
+    ("secundaria", "fundo", "Destaques em laranja", "texto"),
+    ("acento", "fundo", "Detalhes em ciano", "texto"),
     ("erro", "superficie", "Mensagens de erro do formulário", "texto"),
     ("sucesso", "superficie", "Mensagens de sucesso", "texto"),
     ("borda-campo", "superficie", "Borda dos campos de formulário", "ui"),
+    ("borda-campo", "fundo", "Borda dos botões de contorno", "ui"),
     ("foco", "fundo", "Contorno de foco sobre o fundo", "ui"),
-    ("foco", "superficie", "Contorno de foco sobre os cards", "ui"),
+    ("foco", "superficie", "Contorno de foco sobre painéis", "ui"),
+]
+
+# Cores FIXAS das cenas com foto (página inicial, topo das páginas, cards e
+# rodapé): ficam iguais em qualquer tema. O fundo é o ponto mais claro do
+# véu escuro que fica sob o texto (cor do véu com a opacidade mínima usada
+# atrás do texto). (frente, fundo, uso)
+CENAS = [
+    ("#F4EEFC", "#0C0818", "Texto claro nas cenas, nos cards do catálogo e no rodapé"),
+    ("#C9BDDF", "#0C0818", "Resumo dos cards e textos secundários das cenas"),
+    ("#FF4FA3", "#0C0818", "Título rosa da cena de vídeo"),
+    ("#FFE8A3", "#0C0818", "Citação gigante, rótulos e item ativo do menu"),
+    ("#FF8CC4", "#0C0818", "Rótulo 'Personagem' nos cards"),
+    ("#FFB27D", "#0C0818", "Rótulo 'Veículo' nos cards"),
+    ("#8EEEFF", "#0C0818", "Rótulo 'Região' nos cards"),
+    ("#0C0818", "#FF4FA3", "Texto do botão em degradê (ponto rosa, o pior caso)"),
+    ("#0C0818", "#FF8A3D", "Faixa do topo (ponto laranja)"),
+    ("#0C0818", "#FFE8A3", "Botão 'pular para o conteúdo'"),
+    ("#FFFFFF", "#120B22", "Marcadores das regiões no mapa"),
+    ("#F4EEFC", "#2D2440", "Texto sobre o véu mais claro das cenas (véu de 85% sobre foto clara)"),
 ]
 
 # Exemplo "antes e depois" para o relatório
 ANTES_DEPOIS = [
     {
-        "nome": "Rosa neon do botão principal no modo claro",
-        "antes": "#FF2D95",
-        "depois": "#B8175E",
-        "fundo": "#FFF8F2",
+        "nome": "Rosa da paleta nova no modo claro",
+        "antes": "#FF4FA3",
+        "depois": "#B3135F",
+        "fundo": "#FBF4EA",
         "explicacao": (
-            "O rosa neon original (#FF2D95) é a cor mais 'Vice City' da paleta, "
-            "mas sobre o fundo areia ele não chega nem a 4,5:1. Escurecemos o "
-            "rosa mantendo o matiz (framboesa) até passar no AA com folga."
+            "O rosa #FF4FA3 é a cor principal do redesign e passa com folga no escuro (6,29:1), "
+            "mas sobre a areia do modo claro fica perto de 2,8:1. No claro, links e botões usam "
+            "um rosa framboesa do mesmo matiz."
         ),
     },
     {
-        "nome": "Ciano dos links no modo claro",
-        "antes": "#22D3EE",
+        "nome": "Laranja do pôr do sol como texto no modo claro",
+        "antes": "#FF8A3D",
+        "depois": "#A3410B",
+        "fundo": "#FBF4EA",
+        "explicacao": (
+            "O laranja #FF8A3D só aparece em degradês e brilhos. Quando vira texto no modo claro "
+            "(sobretítulos), usa o laranja queimado #A3410B."
+        ),
+    },
+    {
+        "nome": "Ciano de detalhe no modo claro",
+        "antes": "#5EE7FF",
         "depois": "#0B6577",
         "fundo": "#FFFFFF",
         "explicacao": (
-            "O ciano neon é ótimo no modo escuro, mas no branco quase desaparece "
-            "(cerca de 1,8:1). No modo claro usamos um azul-petróleo do mesmo matiz."
-        ),
-    },
-    {
-        "nome": "Roxo dos rótulos de categoria no modo escuro",
-        "antes": "#7C3AED",
-        "depois": "#B9A2FF",
-        "fundo": "#1A1433",
-        "explicacao": (
-            "O roxo saturado (#7C3AED) combina com a noite de Vice City, mas sobre "
-            "o card escuro fica em 3,09:1, abaixo dos 4,5:1 exigidos para texto. "
-            "Clareamos para um lilás que mantém o tom e passa até no AAA."
-        ),
-    },
-    {
-        "nome": "Título em degradê neon no modo claro",
-        "antes": "#FF8A3D",
-        "depois": "#A3410B",
-        "fundo": "#FFE9D6",
-        "explicacao": (
-            "O título 'Leonida' usava o degradê neon puro (rosa, laranja e roxo). "
-            "O ponto laranja (#FF8A3D) sobre o degradê areia do topo ficava abaixo "
-            "de 3:1, reprovando até como texto grande. O degradê do texto passou a "
-            "usar as cores de texto do tema."
+            "O ciano é só detalhe no escuro. No branco ele quase desaparece, então o modo claro "
+            "usa um azul-petróleo do mesmo matiz."
         ),
     },
 ]
-
-# Pontos do degradê de fundo do hero (--gradiente-marca em css/themes.css)
-DEGRADE_HERO = {
-    "Claro": ["#FFE1EE", "#FFE9D6", "#ECE3FF"],
-    "Escuro": ["#2A0F33", "#1A1433", "#0F2240"],
-}
 
 LIMITES = {"texto": (4.5, 7.0), "grande": (3.0, 4.5), "ui": (3.0, None)}
 
@@ -250,27 +255,22 @@ def gerar() -> tuple[str, int]:
             )
         linhas.append("")
 
-    # Textos sobre o degradê do hero: mede contra CADA ponto do degradê
-    # e mostra o pior caso (o ponto de menor contraste).
     linhas += [
-        "## Textos sobre o degradê do topo (hero)",
+        "## Cores fixas das cenas com foto",
         "",
-        "O fundo do topo das páginas é um degradê. Para cada cor de texto, a razão foi medida "
-        "contra cada ponto do degradê e a tabela mostra o **pior caso**. O título em degradê "
-        "(`.texto-neon`) usa só as cores primária, secundária e roxo do tema.",
+        "A página inicial, o topo das páginas internas, os cards do catálogo e o rodapé ficam escuros "
+        "em qualquer tema. O texto fica sempre sobre um véu escuro (degradê de #0C0818 com 55% a 96% de "
+        "opacidade) por cima da foto; a tabela mede contra o fundo do véu e contra o caso mais claro.",
         "",
-        "| Modo | Texto | Pior ponto do degradê | Pior razão | AA |",
+        "| Uso | Cor da frente | Cor de fundo | Razão | AA |",
         "|---|---|---|---|---|",
     ]
-    for nome, pontos in DEGRADE_HERO.items():
-        paleta = PALETAS[nome]
-        for frente in ("texto", "texto-suave", "primaria", "secundaria", "roxo"):
-            pior = min(pontos, key=lambda p: razao(paleta[frente], p))
-            r = razao(paleta[frente], pior)
-            aa, _ = avaliar(r, "texto")
-            if "Falha" in aa:
-                falhas += 1
-            linhas.append(f"| {nome} | {amostra(paleta[frente])} `{frente}` | {amostra(pior)} | **{fmt(r)}** | {aa} |")
+    for frente, fundo, uso in CENAS:
+        r = razao(frente, fundo)
+        aa, _ = avaliar(r, "texto")
+        if "Falha" in aa:
+            falhas += 1
+        linhas.append(f"| {uso} | {amostra(frente)} | {amostra(fundo)} | **{fmt(r)}** | {aa} |")
     linhas.append("")
 
     linhas += [

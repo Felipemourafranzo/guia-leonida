@@ -9,9 +9,9 @@
    tema errado (a página piscar branca antes de ficar escura).
 
    Preferência salva no localStorage (chave "gl-tema"):
-     "sistema"  segue o prefers-color-scheme do sistema operacional (padrão)
+     "escuro"   modo escuro (padrão do site: "noite em Leonida")
      "claro"    força o modo claro
-     "escuro"   força o modo escuro
+     "sistema"  segue o prefers-color-scheme do sistema operacional
    ========================================================================== */
 (function () {
   'use strict';
@@ -26,9 +26,10 @@
   function lerPreferencia() {
     try {
       var valor = localStorage.getItem(CHAVE_TEMA);
-      return valor === 'claro' || valor === 'escuro' ? valor : 'sistema';
+      // Sem escolha salva, o site abre no escuro (identidade "noite em Leonida")
+      return valor === 'claro' || valor === 'escuro' || valor === 'sistema' ? valor : 'escuro';
     } catch (erro) {
-      return 'sistema';
+      return 'escuro';
     }
   }
 
@@ -109,8 +110,10 @@
     var reduzido = !!prefs.reduzirMovimento ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     raiz.classList.toggle('gl-entrada', !reduzido);
-    // Páginas com cenas (css/cenas.css): sem movimento, as cenas viram imagens paradas
-    raiz.classList.toggle('sem-movimento', reduzido);
+    // Cenas da página inicial (css/cenas.css): só ficam animadas com a classe
+    // "movimento"; sem ela (ou sem JS) viram imagens paradas em sequência.
+    // js/cenas.js tira a classe se o GSAP não carregar.
+    raiz.classList.toggle('movimento', !reduzido);
   }
 
   aplicar(lerPreferencia());

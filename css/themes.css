@@ -1,16 +1,21 @@
 /* ==========================================================================
-   Guia Leonida: temas e tokens de cor
+   Guia Leonida: temas e tokens de cor (redesign "trailer de rolagem")
    --------------------------------------------------------------------------
-   Este arquivo define a PALETA do site como "tokens" (custom properties) e
-   liga esses tokens às variáveis do Bootstrap 5.3 (--bs-*).
+   Este arquivo define a PALETA e a TIPOGRAFIA do site como tokens (custom
+   properties) e liga esses tokens às variáveis do Bootstrap 5.3 (--bs-*).
 
    Três modos:
-     [data-bs-theme="light"]  modo claro  (praia ao entardecer)
-     [data-bs-theme="dark"]   modo escuro (noite neon de Vice City)
+     [data-bs-theme="dark"]   noite em Leonida (PADRÃO do site)
+     [data-bs-theme="light"]  areia ao meio-dia (opção do painel)
      [data-contraste="alto"]  alto contraste (preto, branco, amarelo, ciano)
 
-   Todas as combinações de texto/fundo foram conferidas com
-   tools/contraste.py (fórmula da WCAG). O resultado está em docs/contraste.md.
+   As cenas com foto (página inicial e topo das páginas internas) usam
+   data-bs-theme="dark" no próprio elemento: ficam escuras em qualquer tema.
+
+   Paleta base: roxo-noite #120b22 → #1b1030, rosa #ff4fa3, laranja #ff8a3d,
+   creme #ffe8a3 (citações) e ciano só como detalhe.
+   Todos os pares texto/fundo foram conferidos com tools/contraste.py
+   (fórmula da WCAG). O resultado está em docs/contraste.md.
    Se mudar alguma cor aqui, atualize o script e rode de novo.
    ========================================================================== */
 
@@ -18,82 +23,102 @@
    1. Tokens que não mudam com o tema
    -------------------------------------------------------------------------- */
 :root {
-  /* Tipografia */
+  /* Tipografia: títulos condensados em caixa alta (Big Shoulders Display,
+     de desenho art déco) e texto em Inter. Atkinson Hyperlegible é a opção
+     para dislexia do painel. */
   --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --fonte-titulo: "Sora", "Inter", system-ui, sans-serif;
+  --fonte-titulo: "Big Shoulders Display", "Arial Narrow", "Inter", sans-serif;
   --fonte-dislexia: "Atkinson Hyperlegible", "Verdana", sans-serif;
 
   /* Escala de tamanho da fonte (alterada pelo painel de acessibilidade) */
   --escala-fonte: 1;
 
-  /* Formas e espaços */
-  --raio: 1rem;
-  --raio-pequeno: .5rem;
-  --sombra: 0 .5rem 1.5rem rgb(0 0 0 / .12);
+  /* Formas e espaços: cantos quase retos, muito respiro */
+  --raio: 4px;
+  --raio-pequeno: 2px;
+  --raio-pilula: 999px;
   --largura-foco: 3px;
   --alvo-minimo: 44px; /* WCAG 2.5.8 pede 24px; usamos 44px por conforto */
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --largura-max: 84rem;
+  --altura-faixa: 2rem;
+  --altura-cabecalho: 4.25rem;
 
-  /* Duração das animações (zerada quando o usuário pede menos movimento) */
+  /* Movimento (zerado quando o usuário pede menos movimento) */
   --duracao: .25s;
+  --ease: cubic-bezier(.16, 1, .3, 1);
 
-  /* Cores da marca em estado "puro" (só para elementos decorativos,
-     NUNCA para texto: os pares de texto usam os tokens de cada tema) */
-  --neon-rosa: #FF2D95;
-  --neon-laranja: #FF8A3D;
-  --neon-roxo: #7C3AED;
-  --neon-ciano: #22D3EE;
+  /* Cores puras da marca: só decoração (degradês, brilhos, faixas),
+     NUNCA texto pequeno sobre fundo claro */
+  --rosa: #ff4fa3;
+  --laranja: #ff8a3d;
+  --creme: #ffe8a3;
+  --ciano: #5ee7ff;
+  --noite-0: #0c0818;
+  --noite-1: #120b22;
+  --noite-2: #1b1030;
+  --noite-3: #2a1a47;
+  --degrade-sol: linear-gradient(90deg, var(--rosa) 0%, var(--laranja) 55%, var(--creme) 100%);
+  --degrade-ceu: linear-gradient(180deg, var(--noite-2) 0%, var(--noite-1) 100%);
+
+  /* Neon com moderação: só títulos de seção, item ativo do menu, botão
+     principal e letreiros pontuais */
+  --brilho-rosa: 0 0 .35em rgb(255 79 163 / .55), 0 0 1.2em rgb(255 79 163 / .25);
+  --brilho-creme: 0 0 .6em rgb(255 232 163 / .45);
+  --brilho-botao: 0 0 1.4rem rgb(255 79 163 / .35);
 }
 
 /* --------------------------------------------------------------------------
-   2. Modo claro: "praia ao entardecer"
+   2. Escuro: "noite em Leonida" (padrão)
    -------------------------------------------------------------------------- */
 :root,
-[data-bs-theme="light"] {
-  --cor-fundo: #FFF8F2;
-  --cor-superficie: #FFFFFF;
-  --cor-superficie-2: #F5EDFF;
-  --cor-texto: #1C1230;
-  --cor-texto-suave: #4F4566;
-  --cor-primaria: #B8175E;          /* rosa framboesa: ação, links */
-  --cor-primaria-hover: #9A0F4D;
-  --cor-sobre-primaria: #FFFFFF;
-  --cor-secundaria: #A3410B;        /* laranja queimado: destaques */
-  --cor-acento: #0B6577;            /* azul-petróleo: ícones, informação */
-  --cor-roxo: #5B2BC4;              /* roxo: categorias */
-  --cor-borda: #E4DAF2;             /* bordas decorativas de cards */
-  --cor-borda-campo: #7E7398;       /* bordas de campos (3:1) */
-  --cor-foco: #5B2BC4;
-  --cor-erro: #B42318;
-  --cor-sucesso: #146C43;
-  --gradiente-marca: linear-gradient(120deg, #FFE1EE 0%, #FFE9D6 45%, #ECE3FF 100%);
-  --gradiente-neon: linear-gradient(120deg, var(--neon-rosa), var(--neon-laranja) 50%, var(--neon-roxo));
-  --sombra: 0 .5rem 1.5rem rgb(60 20 90 / .10);
-  color-scheme: light;
+[data-bs-theme="dark"] {
+  --cor-fundo: #120b22;
+  --cor-fundo-2: #1b1030;          /* faixas alternadas */
+  --cor-superficie: #1b1030;       /* painéis, campos, modais */
+  --cor-superficie-2: #2a1a47;
+  --cor-texto: #f4eefc;
+  --cor-texto-suave: #c9bddf;
+  --cor-titulo: #f4eefc;
+  --cor-destaque: #ffe8a3;          /* sobretítulos, citações */
+  --cor-primaria: #ff4fa3;          /* links, ação */
+  --cor-primaria-hover: #ff7dbb;
+  --cor-sobre-primaria: #0c0818;
+  --cor-secundaria: #ff8a3d;
+  --cor-acento: #5ee7ff;
+  --cor-borda: #33245a;             /* divisões decorativas */
+  --cor-borda-campo: #8f7cc0;       /* bordas de campo (3:1) */
+  --cor-foco: #ffe8a3;
+  --cor-erro: #ff9b9b;
+  --cor-sucesso: #6ee7b0;
+  --veu: 12 8 24;                   /* rgb do véu sobre fotos */
+  color-scheme: dark;
 }
 
 /* --------------------------------------------------------------------------
-   3. Modo escuro: "noite neon de Vice City"
+   3. Claro: "areia ao meio-dia"
    -------------------------------------------------------------------------- */
-[data-bs-theme="dark"] {
-  --cor-fundo: #0E0A1F;
-  --cor-superficie: #1A1433;
-  --cor-superficie-2: #251C47;
-  --cor-texto: #F5F0FF;
-  --cor-texto-suave: #C9BEE8;
-  --cor-primaria: #FF6BB0;
-  --cor-primaria-hover: #FF8CC2;
-  --cor-sobre-primaria: #1A0612;
-  --cor-secundaria: #FF9F5A;
-  --cor-acento: #3FD8F0;
-  --cor-roxo: #B9A2FF;
-  --cor-borda: #33295C;
-  --cor-borda-campo: #8B7BC4;
-  --cor-foco: #3FD8F0;
-  --cor-erro: #FF8F8F;
-  --cor-sucesso: #5BE3A0;
-  --gradiente-marca: linear-gradient(120deg, #2A0F33 0%, #1A1433 50%, #0F2240 100%);
-  --sombra: 0 .75rem 2rem rgb(0 0 0 / .45);
-  color-scheme: dark;
+[data-bs-theme="light"] {
+  --cor-fundo: #fbf4ea;
+  --cor-fundo-2: #f3e8da;
+  --cor-superficie: #ffffff;
+  --cor-superficie-2: #f3e8da;
+  --cor-texto: #1b1030;
+  --cor-texto-suave: #4a3d63;
+  --cor-titulo: #1b1030;
+  --cor-destaque: #a3410b;
+  --cor-primaria: #b3135f;
+  --cor-primaria-hover: #8c0c49;
+  --cor-sobre-primaria: #ffffff;
+  --cor-secundaria: #a3410b;
+  --cor-acento: #0b6577;
+  --cor-borda: #e2d3c0;
+  --cor-borda-campo: #7d6f8f;
+  --cor-foco: #5b2bc4;
+  --cor-erro: #b42318;
+  --cor-sucesso: #146c43;
+  --veu: 12 8 24;
+  color-scheme: light;
 }
 
 /* --------------------------------------------------------------------------
@@ -102,30 +127,33 @@
 [data-contraste="alto"],
 [data-contraste="alto"] [data-bs-theme] {
   --cor-fundo: #000000;
+  --cor-fundo-2: #000000;
   --cor-superficie: #000000;
   --cor-superficie-2: #000000;
-  --cor-texto: #FFFFFF;
-  --cor-texto-suave: #FFFFFF;
-  --cor-primaria: #FFFF00;
-  --cor-primaria-hover: #FFFFFF;
+  --cor-texto: #ffffff;
+  --cor-texto-suave: #ffffff;
+  --cor-titulo: #ffffff;
+  --cor-destaque: #ffff00;
+  --cor-primaria: #ffff00;
+  --cor-primaria-hover: #ffffff;
   --cor-sobre-primaria: #000000;
-  --cor-secundaria: #FFFF00;
-  --cor-acento: #00FFFF;
-  --cor-roxo: #FFFFFF;
-  --cor-borda: #FFFFFF;
-  --cor-borda-campo: #FFFFFF;
-  --cor-foco: #FFFF00;
-  --cor-erro: #FF8080;
-  --cor-sucesso: #7CFF7C;
-  --gradiente-marca: none;
-  --gradiente-neon: none;
-  --sombra: none;
+  --cor-secundaria: #ffff00;
+  --cor-acento: #00ffff;
+  --cor-borda: #ffffff;
+  --cor-borda-campo: #ffffff;
+  --cor-foco: #ffff00;
+  --cor-erro: #ff8080;
+  --cor-sucesso: #7cff7c;
+  --degrade-sol: linear-gradient(#ffff00, #ffff00);
+  --brilho-rosa: none;
+  --brilho-creme: none;
+  --brilho-botao: none;
+  --veu: 0 0 0;
   color-scheme: dark;
 }
 
 /* --------------------------------------------------------------------------
    5. Ligação dos tokens com o Bootstrap 5.3
-   (assim os componentes do Bootstrap herdam a nossa paleta)
    -------------------------------------------------------------------------- */
 :root,
 [data-bs-theme],
@@ -133,7 +161,7 @@
   --bs-body-bg: var(--cor-fundo);
   --bs-body-color: var(--cor-texto);
   --bs-emphasis-color: var(--cor-texto);
-  --bs-heading-color: var(--cor-texto);
+  --bs-heading-color: var(--cor-titulo);
   --bs-secondary-color: var(--cor-texto-suave);
   --bs-secondary-bg: var(--cor-superficie-2);
   --bs-tertiary-bg: var(--cor-superficie-2);
@@ -141,6 +169,7 @@
   --bs-border-color: var(--cor-borda);
   --bs-border-color-translucent: var(--cor-borda);
   --bs-link-color: var(--cor-primaria);
+  --bs-link-color-rgb: 255, 79, 163;
   --bs-link-hover-color: var(--cor-primaria-hover);
   --bs-primary: var(--cor-primaria);
   --bs-focus-ring-color: var(--cor-foco);
@@ -150,8 +179,9 @@
   --bs-form-valid-border-color: var(--cor-sucesso);
   --bs-font-sans-serif: var(--fonte-texto);
   --bs-body-font-family: var(--fonte-texto);
-  --bs-code-color: var(--cor-roxo);
-  --bs-border-radius: var(--raio-pequeno);
+  --bs-code-color: var(--cor-acento);
+  --bs-border-radius: var(--raio);
+  --bs-border-radius-sm: var(--raio-pequeno);
   --bs-border-radius-lg: var(--raio);
 }
 
@@ -172,8 +202,8 @@
 }
 
 .btn-outline-primary {
-  --bs-btn-color: var(--cor-primaria);
-  --bs-btn-border-color: var(--cor-primaria);
+  --bs-btn-color: var(--cor-texto);
+  --bs-btn-border-color: var(--cor-borda-campo);
   --bs-btn-hover-color: var(--cor-sobre-primaria);
   --bs-btn-hover-bg: var(--cor-primaria);
   --bs-btn-hover-border-color: var(--cor-primaria);
@@ -202,17 +232,19 @@
   color: var(--cor-texto);
   border-color: var(--cor-borda-campo);
 }
+.form-control::placeholder { color: var(--cor-texto-suave); opacity: 1; }
 
 .form-check-input:checked {
   background-color: var(--cor-primaria);
   border-color: var(--cor-primaria);
 }
 
-/* No alto contraste o "check" precisa ser preto sobre amarelo */
+/* O "check" fica escuro sobre o rosa (e preto sobre o amarelo do alto contraste) */
+[data-bs-theme="dark"] .form-check-input:checked[type="checkbox"],
 [data-contraste="alto"] .form-check-input:checked[type="checkbox"] {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%230c0818' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 }
-
+[data-bs-theme="dark"] .form-switch .form-check-input:checked,
 [data-contraste="alto"] .form-switch .form-check-input:checked {
-  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23000'/%3e%3c/svg%3e");
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%230c0818'/%3e%3c/svg%3e");
 }

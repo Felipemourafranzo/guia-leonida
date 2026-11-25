@@ -160,7 +160,7 @@
       if (evento.target.closest('[data-a11y-redefinir]')) {
         salvar(PADRAO);
         aplicar(PADRAO);
-        if (window.GLTema) { GLTema.definir('sistema'); }
+        if (window.GLTema) { GLTema.definir('escuro'); }
         sincronizar();
         anunciar('Preferências de acessibilidade restauradas para o padrão.');
       }
