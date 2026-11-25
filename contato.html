@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="light">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contato | Guia Leonida</title>
   <meta name="description" content="Envie sugestões, correções ou dúvidas para o Guia Leonida.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#0E0A1F">
+  <meta name="theme-color" content="#120b22">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
   <!-- Tema e preferências de acessibilidade aplicados antes de desenhar a página (evita "flash") -->
   <script src="js/theme.js"></script>
 
-  <!-- Fontes: Inter (texto), Sora (títulos) e Atkinson Hyperlegible (opção para dislexia) -->
+  <!-- Fontes: Big Shoulders Display (títulos condensados), Inter (texto) e
+       Atkinson Hyperlegible (opção para dislexia do painel) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap">
 
   <!-- Bootstrap 5.3.3 e Bootstrap Icons 1.11.3 (versões fixas, com verificação de integridade SRI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -28,55 +29,86 @@
 <body>
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-  <header class="cabecalho sticky-top">
-    <nav class="navbar navbar-expand" aria-label="Navegação principal">
-      <div class="container">
-        <a class="marca" href="index.html">
-          <img src="assets/img/logo-guia-leonida.svg" alt="" width="36" height="36">
-          <span>Guia <strong>Leonida</strong></span>
-        </a>
+  <!-- Símbolos decorativos reutilizados (palmeira e o sol da marca) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="grad-sol" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffe8a3"/>
+        <stop offset=".5" stop-color="#ff8a3d"/>
+        <stop offset="1" stop-color="#ff4fa3"/>
+      </linearGradient>
+    </defs>
+    <symbol id="palmeira" viewBox="0 0 64 64">
+      <path d="M33 62c-1-14 0-27 4-38l2 .6c-3.6 11-4.5 24-3.5 37.4z"/>
+      <path d="M38 22c-6-6-15-7-23-3 7-1 14 1 19 6z"/>
+      <path d="M38 22c-3-8-10-13-19-14 6 3 11 8 14 15z"/>
+      <path d="M38 22c2-8 9-13 18-13-6 2-11 7-13 14z"/>
+      <path d="M38 22c7-4 16-3 23 2-7-1-14 0-20 4z"/>
+      <path d="M38 22c5 1 10 6 11 13-3-5-7-8-12-10z"/>
+      <path d="M38 22c-5 1-10 5-12 12 3-4 8-7 13-9z"/>
+    </symbol>
+    <symbol id="sol-gl" viewBox="0 0 40 40">
+      <path fill="url(#grad-sol)" d="M20 2a18 18 0 0 1 18 18H2A18 18 0 0 1 20 2zM2.4 23h35.2a18 18 0 0 1-.7 3H3.1a18 18 0 0 1-.7-3zm2.2 6h30.8a18 18 0 0 1-1.6 2.6H6.2A18 18 0 0 1 4.6 29zm4.4 5.4h22a18 18 0 0 1-22 0z"/>
+    </symbol>
+  </svg>
 
-        <div class="barra-ferramentas order-xl-last ms-auto ms-xl-3">
-          <button type="button" class="btn-icone" data-alternar-tema aria-label="Mudar para o modo escuro" title="Mudar para o modo escuro">
-            <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="btn-icone" data-bs-toggle="offcanvas" data-bs-target="#painel-a11y"
-                  aria-controls="painel-a11y" aria-label="Acessibilidade" title="Abrir o painel de acessibilidade">
-            <i class="bi bi-universal-access-circle" aria-hidden="true"></i><span class="esconder-xs">Acessibilidade</span>
-          </button>
-        </div>
+  <!-- Faixa fina do topo -->
+  <div class="faixa-topo" role="region" aria-label="Lançamento">
+    <svg class="palmeiras esq" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#palmeira"/></svg>
+    GTA VI já disponível · PS5 e Xbox Series X|S
+    <svg class="palmeiras dir" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#palmeira"/></svg>
+  </div>
 
-        <div class="collapse navbar-collapse" id="menu-principal">
-          <ul class="navbar-nav ms-xl-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i>Início</a></li>
-            <li class="nav-item"><a class="nav-link" href="guia.html"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>Guia</a></li>
-            <li class="nav-item"><a class="nav-link" href="mapa.html"><i class="bi bi-map" aria-hidden="true"></i>Mapa</a></li>
-            <li class="nav-item"><a class="nav-link" href="checklist.html"><i class="bi bi-check2-square" aria-hidden="true"></i>Checklist</a></li>
-            <li class="nav-item"><a class="nav-link" href="contato.html" aria-current="page"><i class="bi bi-envelope" aria-hidden="true"></i>Contato</a></li>
-            <li class="nav-item"><a class="nav-link" href="login.html" data-link-conta><i class="bi bi-person-circle" aria-hidden="true"></i><span data-link-conta-texto>Entrar</span></a></li>
-          </ul>
-        </div>
-      </div>
+  <header class="cabecalho">
+    <a class="marca" href="index.html">
+      <svg aria-hidden="true" focusable="false"><use href="#sol-gl"/></svg>
+      <span>Guia Leonida <small>Guia de fã</small></span>
+    </a>
+    <nav class="menu-principal" aria-label="Navegação principal">
+      <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="guia.html">Guia</a></li>
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="checklist.html">Checklist</a></li>
+          <li><a href="contato.html" aria-current="page">Contato</a></li>
+          <li><a href="login.html" data-link-conta><span data-link-conta-texto>Entrar</span></a></li>
+      </ul>
     </nav>
+    <div class="barra-ferramentas">
+      <button type="button" class="btn-icone so-icone" data-alternar-tema aria-label="Mudar para o modo claro" title="Mudar para o modo claro">
+        <i class="bi bi-sun-fill" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn-icone" data-bs-toggle="offcanvas" data-bs-target="#painel-a11y"
+              aria-controls="painel-a11y" title="Abrir o painel de acessibilidade">
+        <i class="bi bi-universal-access" aria-hidden="true"></i><span class="esconder-xs">Acessibilidade</span>
+      </button>
+      <button type="button" class="btn-icone so-celular" data-bs-toggle="offcanvas" data-bs-target="#menu-celular" aria-controls="menu-celular">
+        <i class="bi bi-list" aria-hidden="true"></i><span class="esconder-xs">Menu</span>
+      </button>
+    </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
 
-    <section class="hero hero-compacto" aria-labelledby="titulo-contato">
-      <div class="container">
-        <nav aria-label="Trilha de navegação">
+    <section class="hero-pagina" data-bs-theme="dark" aria-labelledby="titulo-contato" style="--foco-foto: center 50%">
+      <img class="hero-pagina-foto" src="assets/img/jogo/pagina-contato-rusty-anchor-1600.webp"
+           srcset="assets/img/jogo/pagina-contato-rusty-anchor-800.webp 800w, assets/img/jogo/pagina-contato-rusty-anchor-1600.webp 1600w"
+           sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" data-parallax>
+      <div class="hero-pagina-conteudo">
+          <nav aria-label="Trilha de navegação">
           <ol class="breadcrumb mb-2">
             <li class="breadcrumb-item"><a href="index.html">Início</a></li>
             <li class="breadcrumb-item active" aria-current="page">Contato</li>
           </ol>
         </nav>
-        <h1 id="titulo-contato">Fale com o <span class="texto-neon">guia</span></h1>
-        <p class="lead mb-0">Achou uma informação desatualizada, tem uma sugestão ou encontrou uma barreira de acessibilidade? Conte pra gente.</p>
+        <h1 id="titulo-contato" style="--letras: 7">Contato</h1>
+        <p class="lead">Achou uma informação desatualizada, tem uma sugestão ou encontrou uma barreira de acessibilidade? Conte pra gente.</p>
       </div>
+      <p class="credito-foto">Foto: © Rockstar Games</p>
     </section>
 
     <section class="secao pt-4" aria-label="Formulário de contato">
-      <div class="container">
+      <div class="container-largo">
         <div class="row g-4">
           <div class="col-lg-7">
             <div class="cartao-formulario">
@@ -166,7 +198,7 @@
               <h2 class="h4" id="titulo-antes">Antes de escrever</h2>
               <ul class="lista-fatos">
                 <li><i class="bi bi-search" aria-hidden="true"></i><span>Procure no <a href="guia.html">guia</a>: talvez a resposta já esteja lá.</span></li>
-                <li><i class="bi bi-hourglass-split" aria-hidden="true"></i><span>Itens "a confirmar" ainda não têm informação oficial. Não conseguimos responder sobre eles.</span></li>
+                <li><span>Itens marcados como "ainda não divulgado" esperam um anúncio da Rockstar. Não conseguimos responder sobre eles antes disso.</span></li>
                 <li><i class="bi bi-universal-access" aria-hidden="true"></i><span>Barreiras de acessibilidade têm prioridade. Escolha o assunto "Barreira de acessibilidade".</span></li>
                 <li><i class="bi bi-shield-lock" aria-hidden="true"></i><span>Nunca pedimos senha nem dados de pagamento.</span></li>
               </ul>
@@ -178,13 +210,32 @@
 
   </main>
 
+  <!-- Menu em tela cheia (celular) -->
+  <div class="offcanvas offcanvas-top menu-tela-cheia" tabindex="-1" id="menu-celular" aria-labelledby="menu-celular-titulo" data-bs-theme="dark">
+    <div class="offcanvas-header">
+      <h2 class="visually-hidden" id="menu-celular-titulo">Menu</h2>
+      <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Fechar o menu"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav aria-label="Navegação principal (celular)">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="guia.html">Guia</a></li>
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="checklist.html">Checklist</a></li>
+          <li><a href="contato.html" aria-current="page">Contato</a></li>
+          <li><a href="login.html" data-link-conta><span data-link-conta-texto>Entrar</span></a></li>
+        </ul>
+      </nav>
+      <p class="menu-rodape">Guia de fã não oficial de GTA VI.</p>
+    </div>
+  </div>
+
   <!-- Painel de acessibilidade (offcanvas): aberto pelo botão do cabeçalho em qualquer página.
        O conteúdo dos controles é criado por js/a11y.js. -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="painel-a11y" aria-labelledby="painel-a11y-titulo">
     <div class="offcanvas-header">
-      <h2 class="offcanvas-title h4 d-flex align-items-center gap-2" id="painel-a11y-titulo">
-        <i class="bi bi-universal-access-circle" aria-hidden="true"></i> Acessibilidade
-      </h2>
+      <h2 class="offcanvas-title" id="painel-a11y-titulo">Acessibilidade</h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar painel de acessibilidade"></button>
     </div>
     <div class="offcanvas-body">
@@ -195,68 +246,68 @@
     </div>
   </div>
 
-  <footer class="rodape">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-12 col-lg-4">
-          <a class="marca mb-3" href="index.html">
-            <img src="assets/img/logo-guia-leonida.svg" alt="" width="36" height="36">
-            <span>Guia <strong>Leonida</strong></span>
-          </a>
-          <p class="texto-suave">Guia de fã não oficial de GTA VI, feito para ajudar quem vai explorar Leonida pela primeira vez.</p>
-          <p class="texto-suave mb-0" data-status-rodape>Lançamento: 19/11/2026 (PS5 e Xbox Series X|S).</p>
-        </div>
-
-        <nav class="col-6 col-lg-2" aria-labelledby="rodape-navegacao">
-          <h2 id="rodape-navegacao">Navegação</h2>
-          <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="guia.html">Guia</a></li>
-            <li><a href="mapa.html">Mapa</a></li>
-            <li><a href="checklist.html">Checklist</a></li>
-            <li><a href="contato.html">Contato</a></li>
-            <li><a href="login.html">Entrar / Cadastrar</a></li>
-          </ul>
-        </nav>
-
-        <div class="col-6 col-lg-3">
-          <h2 id="rodape-oficiais">Canais oficiais</h2>
-          <ul aria-labelledby="rodape-oficiais">
-            <li><a href="https://www.rockstargames.com/VI" rel="noopener" target="_blank"><i class="bi bi-globe2" aria-hidden="true"></i>Site oficial de GTA VI<span class="visually-hidden"> (abre em nova aba)</span></a></li>
-            <li><a href="https://www.rockstargames.com/newswire" rel="noopener" target="_blank"><i class="bi bi-newspaper" aria-hidden="true"></i>Rockstar Newswire<span class="visually-hidden"> (abre em nova aba)</span></a></li>
-            <li><a href="https://www.youtube.com/@RockstarGames" rel="noopener" target="_blank"><i class="bi bi-youtube" aria-hidden="true"></i>YouTube<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
-            <li><a href="https://x.com/RockstarGames" rel="noopener" target="_blank"><i class="bi bi-twitter-x" aria-hidden="true"></i>X (Twitter)<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
-            <li><a href="https://www.instagram.com/rockstargames/" rel="noopener" target="_blank"><i class="bi bi-instagram" aria-hidden="true"></i>Instagram<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
-          </ul>
-        </div>
-
-        <div class="col-12 col-lg-3">
-          <h2 id="rodape-a11y">Acessibilidade</h2>
-          <ul aria-labelledby="rodape-a11y">
-            <li><a href="acessibilidade.html"><i class="bi bi-universal-access" aria-hidden="true"></i>Declaração de acessibilidade</a></li>
-            <li><a href="acessibilidade.html#painel"><i class="bi bi-sliders" aria-hidden="true"></i>Ajustar fonte, contraste e tema</a></li>
-            <li><a href="contato.html?assunto=acessibilidade"><i class="bi bi-chat-dots" aria-hidden="true"></i>Relatar uma barreira</a></li>
-            <li><a href="https://github.com/" rel="noopener" target="_blank" data-link-repositorio><i class="bi bi-github" aria-hidden="true"></i>Código no GitHub<span class="visually-hidden"> (abre em nova aba)</span></a></li>
-          </ul>
-          <p class="texto-suave small mb-0">Meta de conformidade: WCAG 2.2, nível AA.</p>
-        </div>
+  <footer class="rodape" data-bs-theme="dark">
+    <svg class="palmeiras-rodape" viewBox="0 0 1200 100" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false"><use href="#palmeira" x="10" y="30" width="70" height="70"/><use href="#palmeira" x="70" y="5" width="95" height="95"/><use href="#palmeira" x="150" y="40" width="60" height="60"/><use href="#palmeira" x="420" y="20" width="80" height="80"/><use href="#palmeira" x="500" y="45" width="55" height="55"/><use href="#palmeira" x="760" y="10" width="90" height="90"/><use href="#palmeira" x="850" y="35" width="65" height="65"/><use href="#palmeira" x="1060" y="15" width="85" height="85"/><use href="#palmeira" x="1130" y="40" width="60" height="60"/></svg>
+    <div class="rodape-grade">
+      <div>
+        <a class="marca" href="index.html">
+          <svg aria-hidden="true" focusable="false"><use href="#sol-gl"/></svg>
+          <span>Guia Leonida <small>Guia de fã</small></span>
+        </a>
+        <p class="texto-suave">Guia de fã não oficial de GTA VI: veículos, personagens, as seis regiões e um checklist, tudo com fonte.</p>
+        <p class="texto-suave mb-0" data-status-rodape>Lançado em 19/11/2026 (PS5 e Xbox Series X|S).</p>
       </div>
 
-      <hr class="my-4">
+      <nav aria-labelledby="rodape-navegacao">
+        <h2 id="rodape-navegacao">Navegação</h2>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="guia.html">Guia</a></li>
+          <li><a href="mapa.html">Mapa</a></li>
+          <li><a href="checklist.html">Checklist</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html">Entrar / Cadastrar</a></li>
+        </ul>
+      </nav>
 
+      <div>
+        <h2 id="rodape-oficiais">Canais oficiais</h2>
+        <ul aria-labelledby="rodape-oficiais">
+          <li><a href="https://www.rockstargames.com/VI" rel="noopener" target="_blank"><i class="bi bi-globe2" aria-hidden="true"></i>Site oficial de GTA VI<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+          <li><a href="https://www.rockstargames.com/br/newswire" rel="noopener" target="_blank"><i class="bi bi-newspaper" aria-hidden="true"></i>Rockstar Newswire<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+          <li><a href="https://www.youtube.com/@RockstarGames" rel="noopener" target="_blank"><i class="bi bi-youtube" aria-hidden="true"></i>YouTube<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
+          <li><a href="https://x.com/RockstarGames" rel="noopener" target="_blank"><i class="bi bi-twitter-x" aria-hidden="true"></i>X (Twitter)<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
+          <li><a href="https://www.instagram.com/rockstargames/" rel="noopener" target="_blank"><i class="bi bi-instagram" aria-hidden="true"></i>Instagram<span class="visually-hidden"> da Rockstar Games (abre em nova aba)</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 id="rodape-a11y">Acessibilidade</h2>
+        <ul aria-labelledby="rodape-a11y">
+          <li><a href="acessibilidade.html"><i class="bi bi-universal-access" aria-hidden="true"></i>Declaração de acessibilidade</a></li>
+          <li><a href="acessibilidade.html#painel"><i class="bi bi-sliders" aria-hidden="true"></i>Ajustar fonte, contraste e tema</a></li>
+          <li><a href="contato.html?assunto=acessibilidade"><i class="bi bi-chat-dots" aria-hidden="true"></i>Relatar uma barreira</a></li>
+          <li><a href="https://github.com/" rel="noopener" target="_blank" data-link-repositorio><i class="bi bi-github" aria-hidden="true"></i>Código no GitHub<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+        </ul>
+        <p class="texto-suave small mb-0">Meta de conformidade: WCAG 2.2, nível AA.</p>
+      </div>
+    </div>
+
+    <div class="rodape-base">
       <p class="aviso-legal">
         <strong>Aviso legal:</strong> o Guia Leonida é um site de fã, <strong>não oficial</strong> e sem fins
         lucrativos, criado como trabalho acadêmico. Não tem afiliação, patrocínio ou aprovação da
         Rockstar Games nem da Take-Two Interactive. Grand Theft Auto, GTA, Rockstar Games e as marcas
         relacionadas pertencem aos seus respectivos donos. As informações sobre o jogo vêm de fontes
-        oficiais e de veículos confiáveis (veja as referências); o que não está confirmado aparece como
-        <em>"a confirmar"</em>.
+        oficiais e de veículos confiáveis (veja as referências); o que a Rockstar ainda não anunciou aparece
+        com a data da última checagem.
       </p>
       <p class="creditos mb-0">
         Desenvolvido por <span data-autor>Felipe Moura Franzo</span> para a disciplina Desenvolvimento de Interfaces (2/2026).
         Feito com HTML, CSS, JavaScript e <a href="https://getbootstrap.com/" rel="noopener" target="_blank">Bootstrap 5.3<span class="visually-hidden"> (abre em nova aba)</span></a>.
         Ícones: <a href="https://icons.getbootstrap.com/" rel="noopener" target="_blank">Bootstrap Icons<span class="visually-hidden"> (abre em nova aba)</span></a>.
-        Fontes: Inter, Sora e Atkinson Hyperlegible (Google Fonts). Imagens do jogo: © Rockstar Games, do kit de mídia oficial (rockstargames.com/VI/media). Mapa: map.stateofleonida.net.
+        Fontes: Big Shoulders Display, Inter e Atkinson Hyperlegible (Google Fonts). Imagens, mapa e quadros de vídeo do jogo:
+        © Rockstar Games, do kit de mídia oficial (rockstargames.com/VI/media).
       </p>
     </div>
   </footer>
@@ -266,9 +317,15 @@
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="area-toasts"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- Movimento: GSAP 3 + ScrollTrigger e Lenis (versões fixas, com SRI). Só ligam sem
+       "Reduzir animações" e sem prefers-reduced-motion (ver js/cenas.js). -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
   <script src="js/a11y.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/form.js"></script>
+  <script src="js/cenas.js"></script>
 </body>
 </html>
