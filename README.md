@@ -30,34 +30,39 @@ usabilidade.
 ## 1. O que é o site
 
 O Guia Leonida ajuda quem vai jogar GTA VI (lançado em 19/11/2026 para PS5 e Xbox Series X|S) a conhecer
-o mundo do jogo antes e durante as primeiras horas. Tudo que está no site tem fonte, e o que ainda não foi
-confirmado oficialmente aparece como **"a confirmar"**.
+o mundo do jogo nas primeiras horas. Tudo que está no site tem fonte; o que a Rockstar ainda não divulgou
+(como o nome de alguns veículos, a versão para PC e o modo online) aparece com a **data da última checagem**.
+
+O visual segue a linguagem do site oficial de GTA VI sem copiá-lo: escuro, pôr do sol, fotos oficiais em tela
+cheia, títulos condensados e uma página inicial que funciona como um **"trailer de rolagem"**.
 
 | Página | O que tem |
 |---|---|
-| `index.html` | Hero com busca rápida e status do lançamento (contagem que vira "Já disponível"), carrossel, cards explicativos, destaques do catálogo, linha do tempo de novidades e resumo do progresso |
+| `index.html` | "Trailer de rolagem": abertura com o logo de GTA VI e frase em degradê, hero em camadas com busca rápida, bloco "Já disponível" (dias desde o lançamento), **cena de vídeo controlada pela rolagem**, tour pelas 6 regiões, bloco editorial de Jason e Lucia com lightbox, faixa horizontal de destaques, galeria (carrossel acessível), linha do tempo e resumo do progresso |
 | `guia.html` | Catálogo com **busca em tempo real**, **abas por categoria** (Veículos, Personagens, Regiões e Dicas), filtro "só favoritos", estado "nenhum resultado" e janela de detalhes com a fonte |
-| `mapa.html` | Mapa esquemático clicável de Leonida, tabela das regiões e cards das seis regiões |
+| `mapa.html` | **Pôster oficial do mapa** com zoom (roda, pinça, botões e teclado), marcadores das 6 regiões que abrem o cartão-postal oficial, tabela das regiões e fichas |
 | `checklist.html` | Checklist de progresso com **barra de porcentagem salva por usuário** e lista "Meus favoritos" |
 | `contato.html` | **Formulário** com validação acessível e envio simulado |
 | `login.html` | **Login e cadastro** simulados (localStorage) |
 | `acessibilidade.html` | **Painel de acessibilidade** completo e declaração de acessibilidade |
 
 Em todas as páginas há um botão **Acessibilidade** no cabeçalho, que abre um painel lateral (offcanvas)
-com tema claro/escuro, tamanho do texto, alto contraste, reduzir animações, fonte para dislexia, mais
-espaçamento e sublinhar links.
+com tema escuro/claro, tamanho do texto, alto contraste, **reduzir animações** (as cenas viram imagens
+paradas em sequência), fonte para dislexia, mais espaçamento e sublinhar links.
 
 ## 2. Tecnologias e por que foram escolhidas
 
 | Tecnologia | Uso | Por quê |
 |---|---|---|
 | **HTML5 semântico** | Estrutura das 7 páginas | `header`, `nav`, `main`, `footer`, `section`, `article` e títulos em ordem dão estrutura para leitores de tela e buscadores |
-| **CSS3 com custom properties** | `css/themes.css` e `css/style.css` | A paleta vira "tokens" (`--cor-primaria` etc.) e cada tema só redefine os tokens |
+| **CSS3 com custom properties** | `css/themes.css`, `css/style.css` e `css/cenas.css` | A paleta vira "tokens" (`--cor-primaria` etc.) e cada tema só redefine os tokens; as cenas da página inicial ficam num arquivo próprio |
 | **Bootstrap 5.3.3** (CDN jsDelivr, versão fixa e SRI) | Grid, navbar, offcanvas, modal, abas do login e toasts | Framework CSS pedido no enunciado. A versão 5.3 tem modo escuro nativo por `data-bs-theme` e componentes com bom suporte a acessibilidade. A versão é fixa (`@5.3.3`) e tem hash de integridade (SRI) para o site não quebrar nem carregar código alterado |
 | **Bootstrap Icons 1.11.3** | Ícones | Combina com o Bootstrap; os ícones são decorativos (`aria-hidden="true"`) e sempre vêm com texto |
-| **JavaScript puro** (sem framework) | Busca, carrossel, formulário, login, tema e painel | Sem etapa de build: funciona abrindo o arquivo, num servidor simples ou no GitHub Pages |
-| **Google Fonts** | Inter (texto), Sora (títulos) e Atkinson Hyperlegible (opção para dislexia) | Fontes legíveis e gratuitas |
-| **Python** (só nas ferramentas) | `tools/contraste.py` e `tools/gerar_placeholders.py` | Cálculo de contraste pela fórmula da WCAG e geração das imagens provisórias |
+| **JavaScript puro** (sem framework) | Busca, carrossel, formulário, login, tema, painel e mapa com zoom | Sem etapa de build: funciona abrindo o arquivo, num servidor simples ou no GitHub Pages |
+| **GSAP 3.15.0 + ScrollTrigger** e **Lenis 1.3.27** (jsDelivr, versões fixas e SRI) | Cenas ligadas à rolagem e rolagem suave (`js/cenas.js`) | É o par de bibliotecas mais usado para esse tipo de narrativa por rolagem. Só ligam sem "Reduzir animações" e sem `prefers-reduced-motion`; o conteúdo nunca depende delas |
+| **Google Fonts** | Big Shoulders Display (títulos), Inter (texto) e Atkinson Hyperlegible (opção para dislexia) | Big Shoulders é uma condensada livre de desenho art déco, parecida com a tipografia da Rockstar sem ser a dela; Anton também foi testada (protótipo) e ficou de fora por ter um peso só |
+| **Python + Pillow + ffmpeg** (só nas ferramentas) | `tools/processar_kit.py`, `tools/folha_de_contato.py`, `tools/contraste.py` | Converte o kit de mídia oficial para WebP, recorta o logo, extrai os quadros da cena de vídeo e calcula o contraste pela fórmula da WCAG |
+| **Node + Google Chrome headless** (só nas ferramentas) | `tools/prints.mjs` | Prints do relatório, axe-core, rolagem horizontal e medidas de carregamento sem instalar nada |
 
 **Por que não há build:** o enunciado pede um site simples de publicar e avaliar. Sem npm, bundler nem
 framework, qualquer pessoa abre o `index.html` e vê o site funcionando.
@@ -74,11 +79,14 @@ guiaGta6/
 ├── login.html              Login e cadastro (simulados)
 ├── acessibilidade.html     Painel e declaração de acessibilidade
 ├── css/
-│   ├── themes.css          Paleta (tokens) dos modos claro, escuro e alto contraste + ligação com o Bootstrap
-│   └── style.css           Componentes, layout e classes de acessibilidade
+│   ├── themes.css          Paleta (tokens) dos modos escuro, claro e alto contraste + ligação com o Bootstrap
+│   ├── style.css           Componentes, layout e classes de acessibilidade
+│   └── cenas.css           Cenas da página inicial (com e sem movimento)
 ├── js/
 │   ├── theme.js            Tema claro/escuro (carregado no <head> para evitar "flash")
-│   ├── main.js             Utilidades comuns, anúncios aria-live, toasts, contagem e novidades
+│   ├── main.js             Utilidades comuns, anúncios aria-live, toasts, "Já disponível" e novidades
+│   ├── cenas.js            Cabeçalho, rolagem suave, abertura, cena de vídeo, tour, paralaxe e faixa de destaques
+│   ├── mapa.js             Pôster do mapa com zoom, arraste, teclado e cartões-postais
 │   ├── a11y.js             Painel de acessibilidade
 │   ├── auth.js             Login/cadastro simulados, favoritos e checklist por usuário
 │   ├── data.js             Dados do catálogo, novidades e checklist (com fontes)
@@ -86,16 +94,22 @@ guiaGta6/
 │   ├── carousel.js         Carrossel acessível
 │   ├── form.js             Validação acessível dos formulários
 │   └── checklist.js        Checklist e barra de progresso
-├── assets/img/             Imagens provisórias em SVG + IMAGENS.md (o que colocar em cada uma)
+├── assets/
+│   ├── img/jogo/           Imagens oficiais em WebP + manifesto.json (origem e alt de cada uma)
+│   ├── img/IMAGENS.md      De onde veio cada imagem, com o texto alternativo
+│   └── cenas/lucia/        Quadros da cena de vídeo (1280 e 720 px)
 ├── data/README.md          Explica por que os dados estão em js/data.js
 ├── docs/
 │   ├── contraste.md        Tabela de contraste gerada pelo script
 │   ├── auditoria-acessibilidade.md   Resultado do axe-core e dos testes manuais
 │   ├── relatorio-rascunho.md         Rascunho do relatório (Partes A a E e apêndice)
+│   ├── folha-de-contato-kit.html     Folha de contato do kit oficial (para escolher as imagens)
 │   └── prints/             Capturas de tela para o relatório
 └── tools/
     ├── contraste.py        Calcula a razão de contraste (WCAG) e gera docs/contraste.md
-    └── gerar_placeholders.py   Gera as imagens provisórias
+    ├── processar_kit.py    Converte o kit de mídia oficial (WebP, logo, quadros da cena)
+    ├── folha_de_contato.py Gera a folha de contato
+    └── prints.mjs          Prints, axe-core e medidas com o Chrome headless
 ```
 
 ## 4. Como rodar localmente
@@ -117,6 +131,18 @@ Depois abra <http://localhost:8000>. Outra opção é usar a extensão **Live Se
 
 ```bash
 python tools/contraste.py
+```
+
+**Tirar um print e rodar o axe-core** (com o site servido na porta 8000):
+
+```bash
+node tools/prints.mjs http://localhost:8000/index.html 1440x900 print.jpg ".tour@0.3" --axe --medir
+```
+
+**Reprocessar o kit oficial** (baixe os ZIPs de <https://www.rockstargames.com/VI/media> e descompacte numa pasta):
+
+```bash
+python3 tools/processar_kit.py ~/caminho/do/kit
 ```
 
 ## 5. Como publicar no GitHub e ativar o GitHub Pages
@@ -219,7 +245,7 @@ Cada etapa virou um ou mais commits. O histórico completo está em `git log --o
   intermediários são interpolados (`minterpolate`).
 - `docs/folha-de-contato-kit.html` (gerada por `tools/folha_de_contato.py`) mostra o material novo e as
   112 capturas ainda não usadas, com caixas para escolher as que entram no site.
-- Protótipo em `prototipo/abertura.html` (`css/cenas.css` + `js/cenas.js`): abertura com a marca, o logo de
+- Protótipo em `prototipo/abertura.html` (aprovado; foi apagado ao virar a página inicial e continua no histórico, commit `d1aa69e`), com `css/cenas.css` + `js/cenas.js`: abertura com a marca, o logo de
   GTA VI e a frase em degradê acendendo palavra por palavra, e a cena da Lucia desenhada num `<canvas>`
   conforme a rolagem (87 quadros em 1280 px; 44 em 720 px no celular). GSAP 3.15.0 + ScrollTrigger e
   Lenis 1.3.27 pelo jsDelivr, com SRI. Com "Reduzir animações" ou `prefers-reduced-motion`, a página fica
@@ -229,20 +255,63 @@ Cada etapa virou um ou mais commits. O histórico completo está em `git log --o
   apagado reaparece ao receber foco.
 - Prints em `docs/prints/redesign/prototipo-*.jpg`.
 
+### Etapa 13: redesign "trailer de rolagem", parte 2 (site inteiro)
+Um commit por etapa do pedido de redesign:
+- **Material escolhido:** fotos para o tour das regiões e o bloco de Jason e Lucia, e os veículos com nome
+  oficial (Grotti Cheetah 1995, Shitzu Squalo, Vapid Dominator Buggy 1967, Vapid Ganado, Dinka Enduro, Crest
+  Kayak e Vapid Stanier 1955), tirados das legendas oficiais das capturas. Imagens sem uso e a arte de capa
+  (que tem o logo da Rockstar no canto) saíram.
+- **Identidade visual:** tokens novos em `css/themes.css`, `css/style.css` reescrito, Big Shoulders Display no
+  lugar da Sora, marca própria (sol cortado por faixas), cabeçalho transparente sobre a foto, menu em tela
+  cheia no celular e rodapé escuro com palmeiras. Tema escuro como padrão. `tools/contraste.py` refeito para
+  a paleta nova, com as cores fixas das cenas: **0 pares abaixo do AA**.
+- **Página inicial:** abertura, hero em camadas, "Já disponível", cena da Lucia, tour das 6 regiões
+  (crossfade + Ken Burns), bloco editorial com paralaxe e lightbox, citação sobre foto, faixa horizontal de
+  destaques que anda de lado com a rolagem (com botões para teclado), galeria e linha do tempo.
+- **Mapa:** pôster oficial com zoom (roda, pinça, botões, teclado), marcadores das 6 regiões e cartão-postal
+  oficial de cada uma; os links "Ver no mapa" do tour abrem a região já aproximada.
+- **Conteúdo:** pesquisa pós-lançamento no Newswire; `js/data.js` sem nenhum "a confirmar"; contagem
+  regressiva trocada pelo bloco "Já disponível"; linha do tempo até 23/11/2026; ilustrações SVG provisórias e
+  `tools/gerar_placeholders.py` apagados.
+- **Páginas internas:** foto oficial em tela cheia com título condensado gigante em todas, cards com foto e
+  texto por cima, fichas dos coadjuvantes com a ilustração oficial na janela de detalhes.
+- **Verificação** (Chrome headless pelo `tools/prints.mjs`, servidor local):
+  - axe-core 4.10.2 (WCAG 2.0/2.1/2.2 A e AA + boas práticas): **0 violações** nas 7 páginas, também com
+    "Reduzir animações" e com alto contraste + fonte em 150%.
+  - Sem rolagem horizontal em 320 px nas 7 páginas; conferido também em 375, 768 e 1440 px.
+  - Maior elemento visível (LCP) da página inicial: ~0,4 s no computador e ~0,5 s em 375 px (servidor local;
+    a meta era 2,5 s). Peso até a primeira tela: ~560 KB.
+  - Rolagem: 60 fps no topo e nas páginas internas; dentro da cena de vídeo e do tour, 48–56 fps no Chrome
+    **headless sem GPU**. Falta conferir no DevTools > Performance de um navegador com GPU.
+  - Prints novos em `docs/prints/` (os 19 do relatório, refeitos; o 04 virou a cena de vídeo e o 19 o
+    modo sem animação no celular).
+
 ## 7. Decisões de design
 
-- **Identidade "pôr do sol neon":** rosa, laranja, roxo e ciano lembram a Vice City dos anos 80 e o
-  pôr do sol de Miami. No modo escuro a base é um roxo-noite (`#0E0A1F`); no claro, um tom areia de praia
-  (`#FFF8F2`).
-- **Neon só como decoração:** as cores neon puras (`#FF2D95`, `#FF8A3D`) reprovam no contraste, por isso
-  ficam apenas em faixas e ilustrações. O texto usa versões ajustadas (veja `docs/contraste.md`).
-- **Cards como unidade de conteúdo:** todo item do catálogo tem o mesmo card (imagem, selo de categoria
-  com ícone e texto, resumo, status e ações). Isso deixa a interface previsível (heurística de
-  consistência).
-- **"A confirmar" visível:** os itens sem confirmação oficial têm selo com ícone de ampulheta. Assim a
-  interface é honesta sobre o status de cada informação.
-- **Engajamento:** favoritos, checklist com porcentagem, status do lançamento que muda sozinho e
-  selo "Novo desde sua última visita" na linha do tempo.
+Redesign de novembro de 2026, depois do lançamento, inspirado no site oficial de GTA VI
+(rockstargames.com/VI e "Só em Leonida"), **sem copiar** a marca, as fontes nem os textos da Rockstar.
+
+- **A foto carrega o design.** Toda imagem do site é oficial (kit de mídia da Rockstar): fotos sangrando até
+  a borda, cantos quase retos (4px), muito espaço vazio e texto curto. As ilustrações SVG provisórias foram
+  apagadas.
+- **Página inicial como trailer de rolagem.** Cada bloco é uma "cena": a abertura revela o logo de GTA VI e
+  uma frase palavra por palavra; a cena da Lucia avança quadro a quadro conforme a rolagem (quadros do
+  videoclipe oficial num `<canvas>`); as seis regiões trocam em crossfade com zoom lento (Ken Burns).
+- **Paleta roxo-noite** (`#120B22` → `#1B1030`) com rosa `#FF4FA3`, laranja `#FF8A3D`, creme `#FFE8A3`
+  (citações e rótulos) e ciano só como detalhe. O tema escuro é o padrão; o claro e o alto contraste
+  continuam no painel.
+- **Neon com moderação.** Brilho só nos títulos de seção, no item ativo do menu, no botão principal e na
+  citação. Nada de borda neon em todos os cards.
+- **Tipografia condensada em caixa alta** (Big Shoulders Display) nos títulos, com rótulos em espaçamento
+  largo; Inter no texto.
+- **Marca própria.** O cabeçalho usa o "Guia Leonida" com um sol de fim de tarde cortado por faixas (sem
+  imitar o "VI" nem o logo da Rockstar). O logo de GTA VI aparece só na abertura, recortado da arte oficial.
+- **Cards com foto grande e texto por cima**, sem ícones em círculo; o mesmo card em todo o site
+  (heurística de consistência).
+- **Honestidade sobre o status.** O que a Rockstar ainda não divulgou leva a data da última checagem
+  (25/11/2026), e o que vale só para os GTAs anteriores é marcado como tal.
+- **Engajamento:** favoritos, checklist com porcentagem, dias desde o lançamento e selo "Novo desde sua
+  última visita" na linha do tempo.
 
 ## 8. Acessibilidade
 
@@ -256,7 +325,13 @@ Meta: **WCAG 2.2 nível AA**. Resumo do que foi aplicado (detalhes em `acessibil
 - Formulários com rótulos, erros em texto ligados por `aria-describedby` e anunciados por `aria-live`.
 - Alvos de toque de pelo menos 44px (a WCAG 2.5.8 pede 24px).
 - Nenhuma informação só por cor: categorias, abas, erros e favoritos também têm ícone ou texto.
-- `prefers-reduced-motion` e `prefers-color-scheme` respeitados.
+- **Animação sempre opcional:** com `prefers-reduced-motion` ou "Reduzir animações" do painel, as cenas
+  viram imagens paradas em sequência e a rolagem suave é desligada, na hora, sem recarregar. Sem
+  JavaScript, a página também fica na versão parada.
+- A animação só muda `opacity` e `transform`: o texto apagado continua para o leitor de tela, e um link
+  apagado reaparece quando recebe foco. A frase em degradê é lida inteira (as palavras separadas ficam
+  com `aria-hidden`).
+- O mapa com zoom funciona pelo teclado (setas, + e −, 0) e tem a tabela das regiões como alternativa.
 - Layout de 320px até desktop, sem rolagem horizontal, e funcional com fonte em 150%.
 
 ## 9. Login simulado: NÃO é autenticação real
@@ -275,7 +350,10 @@ site real, a autenticação precisaria de um backend com HTTPS, senhas com hash 
 ## 10. Dados e fontes
 
 Todo o conteúdo está em `js/data.js`, e cada item tem o campo `fonte` com título e URL. A pesquisa foi
-feita em **18/11/2026**. As referências completas, em formato ABNT, estão em
+atualizada em **25/11/2026**, seis dias depois do lançamento, com o Newswire da Rockstar (lançamento,
+pré-carga de até 212 GB, rádios, álbum), o pôster oficial do mapa e as legendas oficiais das capturas da
+Ultimate Edition e do Pacote Vintage Vice City (nomes dos veículos). Nenhum item ficou "a confirmar": o
+que não foi divulgado tem `status: "sem-confirmacao"` e a data da checagem. As referências completas, em formato ABNT, estão em
 `docs/relatorio-rascunho.md` (Parte D).
 
 ## 11. Créditos
@@ -284,7 +362,11 @@ feita em **18/11/2026**. As referências completas, em formato ABNT, estão em
 - Assistência de IA: Claude Opus 5.5 (Anthropic), via Claude Code. O uso está descrito na Parte D do
   relatório.
 - [Bootstrap](https://getbootstrap.com/) e [Bootstrap Icons](https://icons.getbootstrap.com/) (licença MIT).
-- Fontes: [Inter](https://fonts.google.com/specimen/Inter), [Sora](https://fonts.google.com/specimen/Sora)
-  e [Atkinson Hyperlegible](https://fonts.google.com/specimen/Atkinson+Hyperlegible) (SIL Open Font License).
-- Ilustrações provisórias: criadas pelo script `tools/gerar_placeholders.py`.
+- [GSAP](https://gsap.com/) (licença padrão da GreenSock, gratuita) e [Lenis](https://lenis.darkroom.engineering/) (MIT).
+- Fontes: [Big Shoulders Display](https://fonts.google.com/specimen/Big+Shoulders+Display),
+  [Inter](https://fonts.google.com/specimen/Inter) e
+  [Atkinson Hyperlegible](https://fonts.google.com/specimen/Atkinson+Hyperlegible) (SIL Open Font License).
+- Imagens, pôster do mapa, logo de GTA VI e quadros de vídeo: © Rockstar Games, do kit de mídia oficial
+  (<https://www.rockstargames.com/VI/media>), em uso não comercial e acadêmico. Origem de cada arquivo em
+  `assets/img/IMAGENS.md`.
 - Grand Theft Auto VI, personagens e lugares: © Rockstar Games / Take-Two Interactive. Site sem afiliação.
