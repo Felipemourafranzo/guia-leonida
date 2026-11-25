@@ -21,6 +21,9 @@ GRUPOS = OrderedDict([
     ('arte', 'Ilustrações oficiais'),
     ('postal', 'Cartões-postais das 6 regiões'),
     ('mapa', 'Pôster do mapa de Leonida'),
+    ('tour', 'Escolhidas: tour pelas 6 regiões'),
+    ('editorial', 'Escolhidas: bloco Jason e Lucia'),
+    ('veiculo', 'Escolhidas: veículos com nome oficial'),
 ])
 
 
@@ -63,7 +66,7 @@ def main():
         total += len(figs)
         secoes.append(f'<section><h2>{titulo} <small>{len(figs)}</small></h2>'
                       f'<p class="nota">Já convertidas em WebP e no manifesto. Fonte: © Rockstar Games, '
-                      f'<a href="https://www.rockstargames.com/VI/media/artwork-wallpapers">Ilustrações e fundos de tela</a>.</p>'
+                      f'<a href="https://www.rockstargames.com/VI/media">kit de mídia oficial</a>.</p>'
                       f'<div class="grade">{"".join(figs)}</div></section>')
 
     # Cenas de vídeo

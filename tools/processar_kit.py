@@ -2,12 +2,14 @@
 """Processa o kit de mídia oficial de GTA VI para o Guia Leonida.
 
 Uso:
-    python3 tools/processar_kit.py <pasta-do-kit-descompactado>
+    python3 tools/processar_kit.py <pasta-do-kit-descompactado> [etapas]
+    etapas (opcional, separadas por vírgula): artes,logo,capturas,miniaturas,quadros
 
 A pasta do kit deve ter os quatro ZIPs oficiais descompactados lado a lado
 (https://www.rockstargames.com/VI/media):
     GTAVI_Artwork_Wallpapers/   GTAVI_Screenshots/
     GTAVI_Videos/               GTAVI_Vintage_Vice_City_Pack/
+    GTAVI_Ultimate_Edition_Benefits/
 
 O que o script gera:
 1. Ilustrações oficiais, cartões-postais e pôster do mapa em WebP
@@ -51,9 +53,6 @@ ZIP_VIDEOS = ('https://media-rockstargames-com.akamaized.net/VI/downloads/'
 
 # (arquivo de saída, caminho no ZIP de ilustrações, grupo, alt)
 ARTES = [
-    ('arte-capa-oficial', 'Official_Cover_Art/Official_Cover_Art_landscape.jpg', 'arte',
-     'Arte de capa oficial de GTA VI: mosaico de quadros com Jason, Lucia, Boobie Ike, Cal Hampton, '
-     'Raul Bautista, um jacaré, um carro esportivo, uma lancha e um helicóptero em volta do logo do jogo'),
     ('arte-jason-lucia-praia', 'Jason_and_Lucia_Beach/Jason_and_Lucia_Beach_landscape.jpg', 'arte',
      'Ilustração oficial: Lucia abraçada a Jason na beira da baía ao pôr do sol, com palmeiras e os '
      'prédios de Vice City atrás'),
@@ -64,17 +63,8 @@ ARTES = [
      'Jason_and_Lucia_Lock_and_Load/Jason_Lucia_Lock_And_Load_landscape.jpg', 'arte',
      'Ilustração oficial: Jason de regata em pé e Lucia sentada no capô de um carro vermelho, '
      'conferindo as armas ao entardecer'),
-    ('arte-jason-lucia-assalto', 'Jason_and_Lucia_Robbery/Jason_and_Lucia_Robbery_landscape.jpg', 'arte',
-     'Ilustração oficial: Lucia e Jason puxando bandanas sobre o rosto em frente a um posto de '
-     'gasolina cercado de palmeiras'),
     ('arte-jason-lucia-motel', 'Jason_Lucia_Motel/Jason_and_Lucia_Motel_landscape.jpg', 'arte',
      'Ilustração oficial: Jason e Lucia descansando numa cama de motel, com uma bolsa de viagem ao lado'),
-    ('arte-jason-lucia-cais', 'Jason_and_Lucia_02/Jason_and_Lucia_02_landscape.jpg', 'arte',
-     'Ilustração oficial: Jason apontando uma pistola e Lucia ao lado num cais, com lanchas e os '
-     'prédios de Vice City ao fundo'),
-    ('arte-jason-lucia-carro', 'Jason_and_Lucia_01/Jason_and_Lucia_01_landscape.jpg', 'arte',
-     'Ilustração oficial: Lucia sentada no capô de um carro antigo e Jason encostado nela, numa rua de '
-     'Vice City com palmeiras e prédios art déco'),
     ('arte-boobie-ike', 'Boobie_Ike/Boobie_Ike_landscape.jpg', 'arte',
      'Ilustração oficial: Boobie Ike de jaqueta estampada e corrente de ouro, com uma taça na mão numa boate'),
     ('arte-brian-heder', 'Brian_Heder/Brian_Heder_landscape.jpg', 'arte',
@@ -116,8 +106,6 @@ ARTES = [
 RETRATOS = [
     ('arte-jason-lucia-praia-retrato', 'Jason_and_Lucia_Beach/Jason_and_Lucia_Beach_phone.jpg',
      'arte-jason-lucia-praia'),
-    ('arte-jason-lucia-terraco-retrato', 'Jason_and_Lucia_Rooftop/Jason_Lucia_Rooftop_phone.jpg',
-     'arte-jason-lucia-terraco'),
 ]
 
 MAPA = ('mapa-leonida-poster', 'Leonida_Map_and_Cover_Art_Poster/Leonida_Map_Poster.jpg',
@@ -130,6 +118,51 @@ LOGO = ('logo-gta-vi',
         'Jason_and_Lucia_Robbery/Jason_and_Lucia_Robbery_landscape.jpg',
         'Jason_and_Lucia_Robbery_With_Logo/Jason_and_Lucia_Robbery_With_Logo_landscape.jpg',
         (200, 160, 1440, 1080))  # área onde o logo está na arte 3840×2160
+
+ZIP_ULTIMATE = ('https://media-rockstargames-com.akamaized.net/VI/downloads/'
+                'screenshots/GTAVI_Ultimate_Edition_Benefits.zip')
+
+# Capturas escolhidas na folha de contato: (saída, arquivo original, pacote, grupo, alt)
+# pacote: 'capturas' | 'ultimate' | 'vintage'
+CAPTURAS = [
+    # Tour pelas 6 regiões (página inicial)
+    ('tour-vice-city', 'Vice_City_11.jpg', 'capturas', 'tour',
+     'Prédio alto de Vice City ao pôr do sol, com a baía, as ilhas e um helicóptero ao fundo'),
+    ('tour-leonida-keys', 'Leonida_Keys_06.jpg', 'capturas', 'tour',
+     'Iguana verde tomando sol numa pedra, com o mar azul e uma ilhota das Leonida Keys atrás'),
+    ('tour-grassrivers', 'Grassrivers_02.jpg', 'capturas', 'tour',
+     'Casas e um restaurante sobre palafitas na água verde de Grassrivers, com um barco passando'),
+    ('tour-port-gellhorn', 'Port_Gellhorn_01.jpg', 'capturas', 'tour',
+     'Letreiro de neon do Starlit Motel aceso no começo da noite em Port Gellhorn, entre palmeiras'),
+    ('tour-ambrosia', 'Ambrosia_01.jpg', 'capturas', 'tour',
+     'Grupo de motociclistas numa estrada de Ambrosia, com postes, lojas e um letreiro antigo ao fundo'),
+    ('tour-mount-kalaga', 'Mount_Kalaga_National_Park_05.jpg', 'capturas', 'tour',
+     'Veados bebendo água num riacho no meio da mata do Mount Kalaga National Park'),
+    # Bloco editorial de Jason e Lucia
+    ('editorial-lucia-noite', 'Jason_and_Lucia_10.jpg', 'capturas', 'editorial',
+     'Lucia de vestido sentada na beira de uma cama, com a janela aberta para os prédios iluminados de Vice City'),
+    ('editorial-jason-lucia-carro', 'Jason_and_Lucia_17.jpg', 'capturas', 'editorial',
+     'Lucia e Jason de pistola na mão, vistos de dentro de um carro, sob um céu de fim de tarde'),
+    ('editorial-jason-moto', 'Jason_Duval_11.jpg', 'capturas', 'editorial',
+     'Jason pilotando uma moto azul à noite, iluminado pelas luzes de uma viatura'),
+    ('citacao-vice-city-posto', 'Vice_City_22.jpg', 'capturas', 'editorial',
+     'Avenida de Vice City ao anoitecer, com o letreiro de um posto de gasolina e os prédios do centro atrás'),
+    # Veículos com nome oficial
+    ('veiculo-grotti-cheetah', 'ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg', 'ultimate', 'veiculo',
+     'Grotti Cheetah (1995) branco com faixas vermelhas na frente de um estacionamento circular'),
+    ('veiculo-shitzu-squalo', 'ULTIMATE_EDITION_SQUALO_01.jpg', 'ultimate', 'veiculo',
+     'Lancha Shitzu Squalo branca cortando a baía ao entardecer, com os prédios de Vice City ao fundo'),
+    ('veiculo-dinka-enduro', 'ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_02.jpg', 'ultimate', 'veiculo',
+     'Moto Dinka Enduro verde-oliva estacionada na frente de uma porta de garagem verde-água'),
+    ('veiculo-crest-kayak', 'ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_03.jpg', 'ultimate', 'veiculo',
+     'Jason remando um caiaque Crest laranja num canal das Keys ao pôr do sol'),
+    ('veiculo-vapid-dominator-buggy', 'ULTIMATE_EDITION_VAPID_BUGGY_01.jpg', 'ultimate', 'veiculo',
+     'Vapid Dominator Buggy (1967) preto e amarelo com faróis no teto, espirrando lama numa trilha'),
+    ('veiculo-vapid-ganado', 'ULTIMATE_EDITION_VAPID_GANADO_RETRO_BUILD_01.jpg', 'ultimate', 'veiculo',
+     'Picape Vapid Ganado amarela com faixas vermelhas e laranja derrapando numa estrada à beira-mar'),
+    ('veiculo-vapid-stanier', 'VINTAGE_VICE_CITY_PACK_VAPID_STANIER_01.jpg', 'vintage', 'veiculo',
+     'Vapid Stanier (1955) amarelo e branco estacionado numa rua de Vice City à noite, sob luzes de neon'),
+]
 
 # Cenas de vídeo: (nome, arquivo no ZIP de vídeos, alt do primeiro quadro)
 CENAS_VIDEO = [
@@ -208,6 +241,20 @@ def recortar_logo(kit, novos):
     print('ok', nome, logo.size)
 
 
+def processar_capturas(kit, novos):
+    """Converte as capturas escolhidas na folha de contato (1600 e 800 px)."""
+    pastas = {'capturas': ('GTAVI_Screenshots', PAGINA_CAPTURAS, ZIP_CAPTURAS),
+              'ultimate': ('GTAVI_Ultimate_Edition_Benefits', PAGINA_CAPTURAS, ZIP_ULTIMATE),
+              'vintage': ('GTAVI_Vintage_Vice_City_Pack', PAGINA_CAPTURAS, ZIP_VINTAGE)}
+    for nome, original, pacote, grupo, alt in CAPTURAS:
+        pasta, pagina, zip_ = pastas[pacote]
+        caminho = next((kit / pasta).rglob(original))
+        img, tam = abrir(caminho)
+        tamanhos = {str(l): webp(img, DESTINO / f'{nome}-{l}.webp', l) for l in (1600, 800)}
+        novos.append(registro(nome, grupo, alt, original, pagina, zip_, tam, tamanhos))
+        print('ok', nome)
+
+
 def miniaturas(kit, usados):
     """Miniaturas das capturas que ainda não usamos, para a folha de contato."""
     FOLHA.mkdir(parents=True, exist_ok=True)
@@ -257,16 +304,23 @@ def quadros(kit):
 
 
 def main():
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
     kit = Path(sys.argv[1]).resolve()
     manifesto = json.loads(MANIFESTO.read_text(encoding='utf-8'))
     usados = {item['original'] for item in manifesto}
     novos = []
-    processar_artes(kit, novos)
-    recortar_logo(kit, novos)
-    miniaturas(kit, usados)
-    quadros(kit)
+    etapas = set(sys.argv[2].split(',')) if len(sys.argv) > 2 else {'artes', 'logo', 'capturas', 'miniaturas', 'quadros'}
+    if 'artes' in etapas:
+        processar_artes(kit, novos)
+    if 'logo' in etapas:
+        recortar_logo(kit, novos)
+    if 'capturas' in etapas:
+        processar_capturas(kit, novos)
+    if 'miniaturas' in etapas:
+        miniaturas(kit, usados | {c[1] for c in CAPTURAS})
+    if 'quadros' in etapas:
+        quadros(kit)
     nomes = {n['arquivo'] for n in novos}
     manifesto = [m for m in manifesto if m['arquivo'] not in nomes] + novos
     MANIFESTO.write_text(json.dumps(manifesto, ensure_ascii=False, indent=1), encoding='utf-8')

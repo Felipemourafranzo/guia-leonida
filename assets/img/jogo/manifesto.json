@@ -1,25 +1,5 @@
 [
  {
-  "arquivo": "hero-jason-lucia-por-do-sol",
-  "grupo": "hero",
-  "alt": "Pôr do sol alaranjado sobre uma colina de capim, com uma árvore grande em silhueta e um carro parado ao longe",
-  "original": "Jason_and_Lucia_16.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    175418
-   ],
-   "800": [
-    450,
-    53626
-   ]
-  }
- },
- {
   "arquivo": "galeria-vice-city-noite",
   "grupo": "galeria",
   "alt": "Prédios de Vice City iluminados à noite, vistos do alto, com um helicóptero sobre o centro",
@@ -116,26 +96,6 @@
    "800": [
     450,
     22780
-   ]
-  }
- },
- {
-  "arquivo": "galeria-vice-city-piscina-aerea",
-  "grupo": "galeria",
-  "alt": "Vista aérea de um hotel de Vice City com piscina azul cercada de palmeiras",
-  "original": "Vice_City_26.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    328426
-   ],
-   "800": [
-    450,
-    108404
    ]
   }
  },
@@ -460,66 +420,6 @@
   }
  },
  {
-  "arquivo": "veiculo-superesportivo",
-  "grupo": "veiculo",
-  "alt": "Superesportivo Grotti Cheetah branco com faixas vermelhas na frente de um estacionamento circular",
-  "original": "ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    125690
-   ],
-   "800": [
-    450,
-    48012
-   ]
-  }
- },
- {
-  "arquivo": "veiculo-moto",
-  "grupo": "veiculo",
-  "alt": "Jason ao lado de uma moto esportiva verde estacionada sob palmeiras",
-  "original": "Jason_Duval_01.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    78596
-   ],
-   "800": [
-    450,
-    35182
-   ]
-  }
- },
- {
-  "arquivo": "veiculo-lancha",
-  "grupo": "veiculo",
-  "alt": "Lancha Squalo branca cortando a baía ao entardecer, com os prédios de Vice City ao fundo",
-  "original": "ULTIMATE_EDITION_SQUALO_01.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    139556
-   ],
-   "800": [
-    450,
-    51436
-   ]
-  }
- },
- {
   "arquivo": "veiculo-aerobarco",
   "grupo": "veiculo",
   "alt": "Aerobarco visto de cima atravessando a água escura de Grassrivers entre plantas aquáticas",
@@ -660,27 +560,6 @@
   }
  },
  {
-  "arquivo": "colagem-jason-grade",
-  "grupo": "colagem",
-  "alt": "Jason com o rosto machucado atrás de uma grade, iluminado pelas luzes vermelhas e azuis da polícia",
-  "original": "Jason_Duval_07.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": "4:5 vertical",
-  "tamanhos": {
-   "1200": [
-    1500,
-    56050
-   ],
-   "600": [
-    750,
-    23114
-   ]
-  }
- },
- {
   "arquivo": "colagem-lucia-bar",
   "grupo": "colagem",
   "alt": "Lucia de jaqueta de couro sentada numa moto amarela em frente a um letreiro de neon de bar",
@@ -698,131 +577,6 @@
    "600": [
     750,
     30496
-   ]
-  }
- },
- {
-  "arquivo": "colagem-lucia-academia",
-  "grupo": "colagem",
-  "alt": "Lucia de fones e luvas sentada num banco de academia, com luz forte do sol atrás",
-  "original": "Lucia_Caminos_09.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": "4:5 vertical",
-  "tamanhos": {
-   "1200": [
-    1500,
-    54610
-   ],
-   "600": [
-    750,
-    22790
-   ]
-  }
- },
- {
-  "arquivo": "colagem-jason-lucia-orla",
-  "grupo": "colagem",
-  "alt": "Lucia e Jason lado a lado na orla, com os prédios de Vice City e um helicóptero ao fundo",
-  "original": "Jason_and_Lucia_01.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": null,
-  "tamanhos": {
-   "1600": [
-    900,
-    76744
-   ],
-   "800": [
-    450,
-    29512
-   ]
-  }
- },
- {
-  "arquivo": "colagem-jason-lucia-carro",
-  "grupo": "colagem",
-  "alt": "Lucia apoiada na janela de um carro conversível e Jason ao volante, com a cidade atrás",
-  "original": "Jason_and_Lucia_03.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": null,
-  "tamanhos": {
-   "1600": [
-    900,
-    99864
-   ],
-   "800": [
-    450,
-    40354
-   ]
-  }
- },
- {
-  "arquivo": "colagem-jason-lucia-fuga",
-  "grupo": "colagem",
-  "alt": "Jason pilota uma moto com Lucia na garupa, fugindo de uma viatura e de um helicóptero",
-  "original": "Jason_and_Lucia_09.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": null,
-  "tamanhos": {
-   "1600": [
-    900,
-    98918
-   ],
-   "800": [
-    450,
-    43006
-   ]
-  }
- },
- {
-  "arquivo": "colagem-jason-keys",
-  "grupo": "colagem",
-  "alt": "Jason de costas, de boné, encarando três homens ao lado de uma picape ao entardecer",
-  "original": "Jason_Duval_14.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "recorte": null,
-  "tamanhos": {
-   "1600": [
-    900,
-    111324
-   ],
-   "800": [
-    450,
-    40730
-   ]
-  }
- },
- {
-  "arquivo": "arte-capa-oficial",
-  "grupo": "arte",
-  "alt": "Arte de capa oficial de GTA VI: mosaico de quadros com Jason, Lucia, Boobie Ike, Cal Hampton, Raul Bautista, um jacaré, um carro esportivo, uma lancha e um helicóptero em volta do logo do jogo",
-  "original": "Official_Cover_Art_landscape.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    224650
-   ],
-   "800": [
-    450,
-    77196
    ]
   }
  },
@@ -887,26 +641,6 @@
   }
  },
  {
-  "arquivo": "arte-jason-lucia-assalto",
-  "grupo": "arte",
-  "alt": "Ilustração oficial: Lucia e Jason puxando bandanas sobre o rosto em frente a um posto de gasolina cercado de palmeiras",
-  "original": "Jason_and_Lucia_Robbery_landscape.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    119482
-   ],
-   "800": [
-    450,
-    40602
-   ]
-  }
- },
- {
   "arquivo": "arte-jason-lucia-motel",
   "grupo": "arte",
   "alt": "Ilustração oficial: Jason e Lucia descansando numa cama de motel, com uma bolsa de viagem ao lado",
@@ -923,46 +657,6 @@
    "800": [
     450,
     36494
-   ]
-  }
- },
- {
-  "arquivo": "arte-jason-lucia-cais",
-  "grupo": "arte",
-  "alt": "Ilustração oficial: Jason apontando uma pistola e Lucia ao lado num cais, com lanchas e os prédios de Vice City ao fundo",
-  "original": "Jason_and_Lucia_02_landscape.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    166488
-   ],
-   "800": [
-    450,
-    55698
-   ]
-  }
- },
- {
-  "arquivo": "arte-jason-lucia-carro",
-  "grupo": "arte",
-  "alt": "Ilustração oficial: Lucia sentada no capô de um carro antigo e Jason encostado nela, numa rua de Vice City com palmeiras e prédios art déco",
-  "original": "Jason_and_Lucia_01_landscape.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
-  "largura_original": 3840,
-  "altura_original": 2160,
-  "tamanhos": {
-   "1600": [
-    900,
-    139220
-   ],
-   "800": [
-    450,
-    51240
    ]
   }
  },
@@ -1223,22 +917,6 @@
   }
  },
  {
-  "arquivo": "arte-jason-lucia-terraco-retrato",
-  "grupo": "arte",
-  "alt": "Ilustração oficial: Jason com uma pistola e Lucia com uma espingarda num terraço, com a baía de Vice City iluminada atrás",
-  "original": "Jason_Lucia_Rooftop_phone.jpg",
-  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
-  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
-  "largura_original": 2160,
-  "altura_original": 4800,
-  "tamanhos": {
-   "900": [
-    2000,
-    108764
-   ]
-  }
- },
- {
   "arquivo": "mapa-leonida-poster",
   "grupo": "mapa",
   "alt": "Pôster oficial do mapa do estado de Leonida: a ilha principal com Vice City, Vice Beach, Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida Keys ao sul",
@@ -1275,6 +953,346 @@
    "550": [
     414,
     27630
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-vice-city",
+  "grupo": "tour",
+  "alt": "Prédio alto de Vice City ao pôr do sol, com a baía, as ilhas e um helicóptero ao fundo",
+  "original": "Vice_City_11.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    105984
+   ],
+   "800": [
+    450,
+    42304
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-leonida-keys",
+  "grupo": "tour",
+  "alt": "Iguana verde tomando sol numa pedra, com o mar azul e uma ilhota das Leonida Keys atrás",
+  "original": "Leonida_Keys_06.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    133796
+   ],
+   "800": [
+    450,
+    49198
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-grassrivers",
+  "grupo": "tour",
+  "alt": "Casas e um restaurante sobre palafitas na água verde de Grassrivers, com um barco passando",
+  "original": "Grassrivers_02.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    151698
+   ],
+   "800": [
+    450,
+    49404
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-port-gellhorn",
+  "grupo": "tour",
+  "alt": "Letreiro de neon do Starlit Motel aceso no começo da noite em Port Gellhorn, entre palmeiras",
+  "original": "Port_Gellhorn_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    145162
+   ],
+   "800": [
+    450,
+    41776
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-ambrosia",
+  "grupo": "tour",
+  "alt": "Grupo de motociclistas numa estrada de Ambrosia, com postes, lojas e um letreiro antigo ao fundo",
+  "original": "Ambrosia_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    129836
+   ],
+   "800": [
+    450,
+    45928
+   ]
+  }
+ },
+ {
+  "arquivo": "tour-mount-kalaga",
+  "grupo": "tour",
+  "alt": "Veados bebendo água num riacho no meio da mata do Mount Kalaga National Park",
+  "original": "Mount_Kalaga_National_Park_05.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    183452
+   ],
+   "800": [
+    450,
+    73250
+   ]
+  }
+ },
+ {
+  "arquivo": "editorial-lucia-noite",
+  "grupo": "editorial",
+  "alt": "Lucia de vestido sentada na beira de uma cama, com a janela aberta para os prédios iluminados de Vice City",
+  "original": "Jason_and_Lucia_10.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    77818
+   ],
+   "800": [
+    450,
+    33684
+   ]
+  }
+ },
+ {
+  "arquivo": "editorial-jason-lucia-carro",
+  "grupo": "editorial",
+  "alt": "Lucia e Jason de pistola na mão, vistos de dentro de um carro, sob um céu de fim de tarde",
+  "original": "Jason_and_Lucia_17.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    67304
+   ],
+   "800": [
+    450,
+    28442
+   ]
+  }
+ },
+ {
+  "arquivo": "editorial-jason-moto",
+  "grupo": "editorial",
+  "alt": "Jason pilotando uma moto azul à noite, iluminado pelas luzes de uma viatura",
+  "original": "Jason_Duval_11.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    111770
+   ],
+   "800": [
+    450,
+    43520
+   ]
+  }
+ },
+ {
+  "arquivo": "citacao-vice-city-posto",
+  "grupo": "editorial",
+  "alt": "Avenida de Vice City ao anoitecer, com o letreiro de um posto de gasolina e os prédios do centro atrás",
+  "original": "Vice_City_22.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    143030
+   ],
+   "800": [
+    450,
+    52138
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-grotti-cheetah",
+  "grupo": "veiculo",
+  "alt": "Grotti Cheetah (1995) branco com faixas vermelhas na frente de um estacionamento circular",
+  "original": "ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    125690
+   ],
+   "800": [
+    450,
+    48012
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-shitzu-squalo",
+  "grupo": "veiculo",
+  "alt": "Lancha Shitzu Squalo branca cortando a baía ao entardecer, com os prédios de Vice City ao fundo",
+  "original": "ULTIMATE_EDITION_SQUALO_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    139556
+   ],
+   "800": [
+    450,
+    51436
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-dinka-enduro",
+  "grupo": "veiculo",
+  "alt": "Moto Dinka Enduro verde-oliva estacionada na frente de uma porta de garagem verde-água",
+  "original": "ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_02.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    145950
+   ],
+   "800": [
+    450,
+    45610
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-crest-kayak",
+  "grupo": "veiculo",
+  "alt": "Jason remando um caiaque Crest laranja num canal das Keys ao pôr do sol",
+  "original": "ULTIMATE_EDITION_SAFEHOUSE_VEHICLES_03.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    95598
+   ],
+   "800": [
+    450,
+    35708
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-vapid-dominator-buggy",
+  "grupo": "veiculo",
+  "alt": "Vapid Dominator Buggy (1967) preto e amarelo com faróis no teto, espirrando lama numa trilha",
+  "original": "ULTIMATE_EDITION_VAPID_BUGGY_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    245288
+   ],
+   "800": [
+    450,
+    80576
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-vapid-ganado",
+  "grupo": "veiculo",
+  "alt": "Picape Vapid Ganado amarela com faixas vermelhas e laranja derrapando numa estrada à beira-mar",
+  "original": "ULTIMATE_EDITION_VAPID_GANADO_RETRO_BUILD_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    197336
+   ],
+   "800": [
+    450,
+    63782
+   ]
+  }
+ },
+ {
+  "arquivo": "veiculo-vapid-stanier",
+  "grupo": "veiculo",
+  "alt": "Vapid Stanier (1955) amarelo e branco estacionado numa rua de Vice City à noite, sob luzes de neon",
+  "original": "VINTAGE_VICE_CITY_PACK_VAPID_STANIER_01.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/screenshots",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Vintage_Vice_City_Pack.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    134768
+   ],
+   "800": [
+    450,
+    47726
    ]
   }
  }
