@@ -1,73 +1,85 @@
 # Auditoria de acessibilidade do Guia Leonida
 
-Data: 18/11/2026. Meta: **WCAG 2.2, nível AA**.
+Data: 25/11/2026 (redesign "trailer de rolagem"). Meta: **WCAG 2.2, nível AA**.
+A auditoria anterior (18/11/2026, visual antigo) está no histórico do git.
 
 ## 1. Verificação automática com axe-core
 
 - **Ferramenta:** axe-core 4.10.2 (Deque Systems), a mesma engine do Lighthouse e do axe DevTools.
-- **Regras:** tags `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa` e `best-practice`.
-- **Como foi rodado:** o script do axe foi injetado em cada página no navegador, com a janela em
-  1280 × 900, em três configurações: modo claro, modo escuro e alto contraste.
-- **Lighthouse:** não estava disponível no ambiente de desenvolvimento (sem Node.js). Para rodar, abra o
-  site no Chrome → F12 → aba **Lighthouse** → marque **Accessibility** → *Analyze page load*. Vale
-  incluir o print do resultado no relatório.
+- **Regras:** tags `wcag2a`, `wcag2aa`, `wcag21aa`, `wcag22aa` e `best-practice`.
+- **Como foi rodado:** pelo script `tools/prints.mjs --axe`, que abre cada página no Google Chrome em modo
+  headless, prepara o estado (tema, preferências, rolagem) e injeta o axe:
 
-### Primeira rodada (antes das correções)
+  ```bash
+  node tools/prints.mjs http://localhost:8000/mapa.html 1440x900 print.jpg ".mapa-cena@0.1" --axe
+  ```
 
-| Problema | Regra do axe | Páginas | Correção |
+- **Lighthouse:** não foi rodado aqui. Para rodar: Chrome → F12 → **Lighthouse** → Accessibility (e
+  Performance) → *Analyze page load*, e incluir o print no relatório.
+
+### Problemas encontrados e corrigidos durante o redesign
+
+| Problema | Regra do axe | Onde | Correção |
 |---|---|---|---|
-| `<code>` com contraste de 3,95:1 (cor padrão `#D63384` do Bootstrap sobre `#F5EDFF`) | `color-contrast` (1.4.3) | acessibilidade (modo claro) | `--bs-code-color` passou a usar o token roxo do tema (7,2:1) |
-| `<aside>` dentro do `<main>` | `landmark-complementary-is-top-level` | início, contato, login | Trocado por `<section aria-labelledby>` |
+| `aria-label` num `<p>` (frase da abertura) | `aria-prohibited-attr` | início | A frase inteira vai num `span` escondido; as palavras animadas ficam com `aria-hidden` |
+| Conteúdo fora de landmarks (faixa do topo) | `region` | todas | Faixa com `role="region"` e rótulo |
+| `<h1>` sumia do leitor de tela depois da abertura | `page-has-heading-one` | início | A animação usava `visibility: hidden` (`autoAlpha`); agora só muda `opacity` |
+| `<aside>` dentro do `<main>` (painel do mapa) | `landmark-complementary-is-top-level` | mapa | Trocado por `<section aria-label>` |
+| Tabela com rolagem lateral sem foco do teclado | `scrollable-region-focusable` | mapa, acessibilidade (celular) | `.table-responsive` com `tabindex="0"`, `role="region"` e rótulo |
+| Lista da cena do mapa apagada demais no início | `color-contrast` | mapa (tema claro) | O item começa em 75% de opacidade e desliza ao acender, em vez de começar em 40% |
 
-Além disso, o axe marcou como **"precisa de revisão"** os textos sobre degradê, porque ele não consegue
-calcular contraste em fundo degradê. Fizemos essa verificação manualmente (seção 2) e ela revelou uma
-falha real: o laranja neon do título em degradê ficava abaixo de 3:1 no modo claro. A correção foi
-montar o degradê do título só com as cores de texto do tema.
+### Rodada final
 
-### Rodada final (depois das correções)
-
-| Modo | index | guia | mapa | checklist | contato | login | acessibilidade |
+| Configuração | index | guia | mapa | checklist | contato | login | acessibilidade |
 |---|---|---|---|---|---|---|---|
-| Claro | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Escuro | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Alto contraste | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Tema escuro, 1440 px | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Tema claro, 1440 px | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| "Reduzir animações", 375 px | 0 | — | 0 | — | — | — | 0 |
+| Alto contraste + fonte 150% | — | 0 | — | — | — | — | — |
 
-**0 violações em 21 execuções** (7 páginas × 3 modos). Entre 43 e 52 regras passaram em cada página. O
-único item "precisa de revisão" que restou é o contraste sobre degradê, coberto pela seção 2.
+Na página inicial e no mapa, o axe também rodou **no meio das cenas** (abertura, cenas de Jason e Lucia,
+tour, faixa de destaques, cena do mapa), nos dois temas: **0 violações**.
 
 ## 2. Contraste calculado
 
-Script `tools/contraste.py`, com a fórmula de luminância relativa da WCAG. Resultado completo em
+Script `tools/contraste.py`, com a fórmula de luminância relativa da WCAG. Resultado em
 [`contraste.md`](contraste.md):
 
-- 18 pares de cores × 3 modos = 54 combinações: **todas passam no AA**.
-- Textos sobre o degradê do hero, medidos contra cada ponto do degradê (pior caso): **todos passam**.
+- 19 pares × 3 temas = 57 combinações: **todas passam no AA**.
+- 12 pares das cenas com foto (texto sobre o véu escuro, botão em degradê, faixa do topo, marcadores do
+  mapa): **todos passam**.
+- 6 títulos grandes do tema claro sobre o céu e o sol da abertura (limite de 3:1): **todos passam**.
 - 4 exemplos de "antes e depois" de cores que falharam e foram corrigidas.
 
-## 3. Testes manuais
+## 3. Testes manuais e com o navegador
 
 | Teste | Como | Resultado |
 |---|---|---|
-| Pular para o conteúdo | Tab ao abrir a página | ✅ É o primeiro item focado e leva o foco ao `<main>` |
-| Navegação por teclado | Tab/Shift+Tab em todas as páginas | ✅ Ordem lógica, foco sempre visível (3px) |
-| Painel de acessibilidade | Abrir pelo cabeçalho, Esc para fechar | ✅ O foco entra no painel e volta ao botão ao fechar |
-| Abas do guia | Setas ← →, Home, End | ✅ Trocam a categoria e o foco acompanha |
-| Carrossel | Setas, pausar, indicadores | ✅ Pausa com o foco dentro e não gira com "reduzir animações" ligado |
-| Busca | "barco" e um termo inexistente | ✅ 3 resultados; estado "nenhum resultado" com botão de limpar |
-| Formulário de contato | Enviar vazio e depois preenchido | ✅ Resumo com 5 erros focado, `aria-invalid` nos campos e sucesso anunciado |
-| Cadastro e login | Senhas diferentes, senha errada | ✅ Mensagens específicas ligadas ao campo certo |
-| Favoritos e checklist | Marcar com dois usuários | ✅ Dados separados por conta; barra com `aria-valuenow` |
-| Largura de 320px | Todas as páginas | ✅ Sem rolagem horizontal (`scrollWidth` = 320) |
-| Fonte em 150% | Painel → A+ | ✅ O menu quebra de linha sem sobrepor a marca |
-| Alto contraste | Painel → Alto contraste | ✅ Preto, branco, amarelo e ciano; bordas em todos os cards |
-| Modo escuro do sistema | `prefers-color-scheme` | ✅ Seguido quando o tema está em "Sistema" |
-| Status do lançamento | Relógio adiantado em teste | ✅ Troca para "GTA VI já está disponível!" |
+| Pular para o conteúdo | Tab ao abrir a página | ✅ Primeiro item focado; leva ao `<main>` |
+| Navegação por teclado | Tab/Shift+Tab | ✅ Ordem lógica, foco sempre visível (3px, creme no escuro e roxo no claro) |
+| Links dentro das cenas | Tab até o botão de uma cena que já se apagou | ✅ O texto reaparece ao receber foco (`:focus-within`) |
+| Faixa de destaques | Tab pelos cards e botões ← → | ✅ A faixa anda até o card focado |
+| Mapa pelo teclado | Foco no mapa: setas, + e −, 0 | ✅ Move, aproxima e centraliza; botões +, − e centralizar também |
+| Mapa com o mouse | Roda sobre o mapa | ✅ Só o zoom muda; a página não rola junto (`data-lenis-prevent`) |
+| Tour das regiões | Descer até o fim e voltar | ✅ Um texto de região por vez (cada slide isola o próprio texto) |
+| "Reduzir animações" | Ligar no painel com a página aberta | ✅ Na hora: cenas viram imagens paradas, rolagem suave desliga, carrossel para |
+| `prefers-reduced-motion` | Emulado no Chrome | ✅ Mesmo resultado, já ao abrir |
+| Sem JavaScript | Classe `movimento` ausente | ✅ Versão parada, todo o conteúdo visível |
+| Painel de acessibilidade | Abrir pelo cabeçalho, Esc para fechar | ✅ Foco entra e volta ao botão; rolagem da página pausa |
+| Abas do guia | Setas ← →, Home, End | ✅ |
+| Carrossel | Setas, pausar, indicadores | ✅ |
+| Formulário de contato | Enviar vazio e depois preenchido | ✅ Resumo com 5 erros, `aria-invalid` e sucesso anunciado |
+| Larguras | 320, 375, 768 e 1440 px, nos dois temas | ✅ Sem rolagem horizontal em nenhuma página |
+| Fonte em 150% e alto contraste | Painel | ✅ O menu quebra de linha sem sobrepor; fotos continuam visíveis acima do véu preto |
+| Carregamento da página inicial | `tools/prints.mjs --medir`, servidor local | ✅ Maior elemento (LCP) em ~0,4 s (computador) e ~0,5 s (375 px) |
 
 ## 4. Limitações conhecidas
 
-- As imagens são provisórias. Ao trocar pelas reais, o texto alternativo precisa ser revisto
-  (veja `assets/img/IMAGENS.md`).
-- Os rótulos do mapa esquemático ficam pequenos em telas estreitas. A mesma informação está em texto
-  nos cards e na tabela da página.
-- Não foi possível testar com leitores de tela reais (NVDA ou VoiceOver) neste ambiente. Recomendação: fazer
-  um teste rápido com o NVDA (gratuito) no Windows antes da entrega.
+- **Quadros por segundo:** no Chrome headless **sem GPU**, a rolagem fica em 60 fps no topo e nas
+  páginas internas e em 48 a 56 fps dentro das cenas de vídeo e do tour. Falta medir no DevTools →
+  Performance de um navegador com GPU.
+- **Leitores de tela reais** (NVDA, VoiceOver) não foram testados neste ambiente. Recomendação: um teste
+  rápido com o NVDA antes da entrega, passando pela página inicial e pelo mapa.
+- O pôster oficial do mapa tem letras pequenas; a mesma informação está na tabela e nas fichas da página.
+- As cenas usam imagens grandes (cerca de 3 MB por cena no computador; metade no celular). Elas só
+  começam a baixar quando a cena está perto da tela.

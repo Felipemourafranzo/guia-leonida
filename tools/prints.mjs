@@ -18,6 +18,7 @@
                             (tema, painel de acessibilidade, usuário logado…)
               --antes='js'  roda este JavaScript (pode usar await) antes de rolar
               --tab=N       aperta Tab N vezes (para mostrar o foco do teclado)
+              --depois='js' roda este JavaScript depois das teclas e mostra o retorno
               --medir       mostra o LCP, o peso baixado até o print e os quadros
                             por segundo enquanto rola até o alvo
               --axe         roda o axe-core 4.10.2 (WCAG 2.0/2.1/2.2 A e AA +
@@ -44,6 +45,7 @@ const opcao = (nome) => { const o = resto.find((x) => x.startsWith(`--${nome}=`)
 const armazenar = opcao('armazenar');
 const antes = opcao('antes');
 const tabs = Number(opcao('tab') || 0);
+const depois = opcao('depois');
 const medir = resto.includes('--medir');
 const espera = Number((resto.find((o) => o.startsWith('--espera=')) || '--espera=1800').split('=')[1]);
 const dormir = (ms) => new Promise((ok) => setTimeout(ok, ms));
@@ -126,6 +128,7 @@ try {
     await dormir(120);
   }
   if (tabs) { await dormir(500); }
+  if (depois) { console.log('depois:', JSON.stringify(await avaliar(`(async () => { ${depois} })()`))); }
 
   const opcoes = { format: 'jpeg', quality: 82 };
   if (paginaInteira) {

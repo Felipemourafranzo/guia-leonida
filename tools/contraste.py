@@ -51,7 +51,7 @@ PALETAS = {
     },
     "Claro": {
         "fundo": "#FBF4EA",
-        "fundo-2": "#F3E8DA",
+        "fundo-2": "#F8E6D8",
         "superficie": "#FFFFFF",
         "superficie-2": "#F3E8DA",
         "texto": "#1B1030",
@@ -133,11 +133,11 @@ CENAS = [
 # contra o ponto mais claro e o mais escuro do fundo. (frente, fundo, uso)
 GRANDES_CLARO = [
     ("#B3135F", "#FFF6E6", "Degradê dos títulos (rosa) sobre o céu claro do topo"),
-    ("#B3135F", "#FFAED0", "Degradê dos títulos (rosa) sobre a parte rosa do sol"),
-    ("#9A3412", "#FFAED0", "Degradê dos títulos (laranja) sobre a parte rosa do sol"),
-    ("#9A3412", "#FFC09A", "Degradê dos títulos (laranja) sobre a parte laranja do sol"),
+    ("#B3135F", "#FF9EC4", "Degradê dos títulos (rosa) sobre a parte rosa do sol"),
+    ("#9A3412", "#FF9EC4", "Degradê dos títulos (laranja) sobre a parte rosa do sol"),
+    ("#9A3412", "#FFC39A", "Degradê dos títulos (laranja) sobre a parte laranja do sol"),
     ("#8C3A0A", "#FFC9D6", "Degradê dos títulos (marrom) sobre o rosa do horizonte"),
-    ("#1B1030", "#FFAED0", "Título \"Guia Leonida\" sobre o sol"),
+    ("#1B1030", "#FF9EC4", "Título \"Guia Leonida\" sobre o sol"),
 ]
 
 # Exemplo "antes e depois" para o relatório
@@ -167,11 +167,12 @@ ANTES_DEPOIS = [
         "nome": "Laranja do degradê dos títulos no tema claro",
         "antes": "#C2410C",
         "depois": "#9A3412",
-        "fundo": "#FFAED0",
+        "fundo": "#FF9EC4",
+        "tipo": "grande",
         "explicacao": (
             "No tema claro, os títulos em degradê passam por cima do sol listrado da abertura. "
-            "O laranja #C2410C ficava em 2,7:1 sobre a parte rosa do sol, abaixo até do limite de "
-            "texto grande (3:1); o ponto do meio do degradê virou #9A3412."
+            "O laranja #C2410C ficava abaixo de 3:1 sobre a parte rosa do sol (limite de texto "
+            "grande); o ponto do meio do degradê virou #9A3412. Aqui o limite é o de texto grande."
         ),
     },
     {
@@ -321,9 +322,10 @@ def gerar() -> tuple[str, int]:
     for caso in ANTES_DEPOIS:
         ra = razao(caso["antes"], caso["fundo"])
         rd = razao(caso["depois"], caso["fundo"])
+        tipo = caso.get("tipo", "texto")
         linhas.append(
-            f"| {caso['nome']} | {amostra(caso['antes'])} | {fmt(ra)} {avaliar(ra, 'texto')[0]} "
-            f"| {amostra(caso['depois'])} | {fmt(rd)} {avaliar(rd, 'texto')[0]} | {amostra(caso['fundo'])} |"
+            f"| {caso['nome']} | {amostra(caso['antes'])} | {fmt(ra)} {avaliar(ra, tipo)[0]} "
+            f"| {amostra(caso['depois'])} | {fmt(rd)} {avaliar(rd, tipo)[0]} | {amostra(caso['fundo'])} |"
         )
     linhas.append("")
     for caso in ANTES_DEPOIS:

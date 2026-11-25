@@ -38,9 +38,9 @@ cheia, títulos condensados e uma página inicial que funciona como um **"traile
 
 | Página | O que tem |
 |---|---|
-| `index.html` | "Trailer de rolagem": abertura com o logo de GTA VI e frase em degradê, hero em camadas com busca rápida, bloco "Já disponível" (dias desde o lançamento), **cena de vídeo controlada pela rolagem**, tour pelas 6 regiões, bloco editorial de Jason e Lucia com lightbox, faixa horizontal de destaques, galeria (carrossel acessível), linha do tempo e resumo do progresso |
+| `index.html` | "Trailer de rolagem": abertura com o logo de GTA VI e frase em degradê, hero em camadas com busca rápida, bloco "Já disponível" (dias desde o lançamento), **cenas de vídeo de Lucia e de Jason controladas pela rolagem**, tour pelas 6 regiões, bloco editorial de Jason e Lucia com lightbox, faixa horizontal de destaques, galeria (carrossel acessível), linha do tempo e resumo do progresso |
 | `guia.html` | Catálogo com **busca em tempo real**, **abas por categoria** (Veículos, Personagens, Regiões e Dicas), filtro "só favoritos", estado "nenhum resultado" e janela de detalhes com a fonte |
-| `mapa.html` | **Pôster oficial do mapa** com zoom (roda, pinça, botões e teclado), marcadores das 6 regiões que abrem o cartão-postal oficial, tabela das regiões e fichas |
+| `mapa.html` | Cena de rolagem em que o **pôster oficial do mapa** se afasta de Vice City e as 6 regiões acendem; mapa com zoom (roda, pinça, botões e teclado), marcadores numerados e lista das regiões com o cartão-postal oficial; tabela das regiões e fichas |
 | `checklist.html` | Checklist de progresso com **barra de porcentagem salva por usuário** e lista "Meus favoritos" |
 | `contato.html` | **Formulário** com validação acessível e envio simulado |
 | `login.html` | **Login e cadastro** simulados (localStorage) |
@@ -286,6 +286,27 @@ Um commit por etapa do pedido de redesign:
   - Prints novos em `docs/prints/` (os 19 do relatório, refeitos; o 04 virou a cena de vídeo e o 19 o
     modo sem animação no celular).
 
+### Etapa 14: ajustes pedidos depois da aprovação
+- **Bug do tour:** depois de descer até o fim e voltar, os textos das 6 regiões apareciam sobrepostos.
+  Causa: com todos os slides em `opacity: 1`, o `article` deixava de isolar o texto (`z-index: 1`), que
+  subia por cima das fotos seguintes. Correção: `isolation: isolate` em cada slide e o texto da região
+  anterior saindo antes da próxima entrar.
+- **Mapa rolando junto com o zoom:** o Lenis também escutava a roda do mouse; o mapa ganhou
+  `data-lenis-prevent`.
+- **Frase da abertura** trocada por "Seis regiões, dois fugitivos e um estado inteiro para explorar."
+- **Cena do Jason** depois da da Lucia (57 quadros do videoclipe oficial), com o texto do lado direito;
+  o canvas ganhou um ponto de foco horizontal (`data-foco-x`) para o recorte do celular.
+- **Mapa:** cena de rolagem nova (o pôster se afasta de Vice City e as regiões acendem no mapa e na
+  lista), lista das regiões com miniatura ao lado do mapa, marcadores numerados com anel pulsando e fundo
+  de mar com grade.
+- **Tema claro completo** ("Vice City de dia"), por tokens, para as seções com foto continuarem escuras
+  sozinhas. O degradê dos títulos no claro precisou de um laranja mais escuro (`#9A3412`) para passar de
+  3:1 sobre o sol da abertura.
+- **Teclado na faixa de destaques:** com Tab, o navegador rolava o palco da faixa por conta própria e o
+  card focado saía da tela; o palco passou a usar `overflow: clip`.
+- Rascunho do relatório e auditoria atualizados; 26 prints em `docs/prints/`. axe-core: 0 violações nas 7
+  páginas nos dois temas, também no meio das cenas; contraste: nenhum par abaixo do AA.
+
 ## 7. Decisões de design
 
 Redesign de novembro de 2026, depois do lançamento, inspirado no site oficial de GTA VI
@@ -298,8 +319,9 @@ Redesign de novembro de 2026, depois do lançamento, inspirado no site oficial d
   uma frase palavra por palavra; a cena da Lucia avança quadro a quadro conforme a rolagem (quadros do
   videoclipe oficial num `<canvas>`); as seis regiões trocam em crossfade com zoom lento (Ken Burns).
 - **Paleta roxo-noite** (`#120B22` → `#1B1030`) com rosa `#FF4FA3`, laranja `#FF8A3D`, creme `#FFE8A3`
-  (citações e rótulos) e ciano só como detalhe. O tema escuro é o padrão; o claro e o alto contraste
-  continuam no painel.
+  (citações e rótulos) e ciano só como detalhe. O tema escuro é o padrão. O claro é "Vice City de dia":
+  abertura com céu de amanhecer e sol listrado, cabeçalho creme, faixas pêssego, cards claros e o pôr do
+  sol no alto do rodapé; as cenas com foto continuam escuras. O alto contraste continua no painel.
 - **Neon com moderação.** Brilho só nos títulos de seção, no item ativo do menu, no botão principal e na
   citação. Nada de borda neon em todos os cards.
 - **Tipografia condensada em caixa alta** (Big Shoulders Display) nos títulos, com rótulos em espaçamento

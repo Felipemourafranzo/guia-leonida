@@ -46,7 +46,7 @@ Todos os textos foram avaliados com o limite de **texto normal** (4,5:1), mesmo 
 | Uso | Cor da frente | Cor de fundo | Razão | AA | AAA |
 |---|---|---|---|---|---|
 | Texto do corpo sobre o fundo da página | `#1B1030` `texto` | `#FBF4EA` `fundo` | **16,53:1** | ✅ Passa | ✅ Passa |
-| Texto nas faixas alternadas | `#1B1030` `texto` | `#F3E8DA` `fundo-2` | **14,93:1** | ✅ Passa | ✅ Passa |
+| Texto nas faixas alternadas | `#1B1030` `texto` | `#F8E6D8` `fundo-2` | **14,87:1** | ✅ Passa | ✅ Passa |
 | Texto em painéis, campos e modais | `#1B1030` `texto` | `#FFFFFF` `superficie` | **18,05:1** | ✅ Passa | ✅ Passa |
 | Texto em painéis destacados | `#1B1030` `texto` | `#F3E8DA` `superficie-2` | **14,93:1** | ✅ Passa | ✅ Passa |
 | Texto secundário (legendas, datas) | `#4A3D63` `texto-suave` | `#FBF4EA` `fundo` | **8,99:1** | ✅ Passa | ✅ Passa |
@@ -115,11 +115,11 @@ Títulos com mais de 24px; o limite é o de texto grande (3:1).
 | Uso | Cor da frente | Cor de fundo | Razão | AA (texto grande) |
 |---|---|---|---|---|
 | Degradê dos títulos (rosa) sobre o céu claro do topo | `#B3135F` | `#FFF6E6` | **6,17:1** | ✅ Passa |
-| Degradê dos títulos (rosa) sobre a parte rosa do sol | `#B3135F` | `#FFAED0` | **3,85:1** | ✅ Passa |
-| Degradê dos títulos (laranja) sobre a parte rosa do sol | `#9A3412` | `#FFAED0` | **4,25:1** | ✅ Passa |
-| Degradê dos títulos (laranja) sobre a parte laranja do sol | `#9A3412` | `#FFC09A` | **4,61:1** | ✅ Passa |
+| Degradê dos títulos (rosa) sobre a parte rosa do sol | `#B3135F` | `#FF9EC4` | **3,45:1** | ✅ Passa |
+| Degradê dos títulos (laranja) sobre a parte rosa do sol | `#9A3412` | `#FF9EC4` | **3,81:1** | ✅ Passa |
+| Degradê dos títulos (laranja) sobre a parte laranja do sol | `#9A3412` | `#FFC39A` | **4,71:1** | ✅ Passa |
 | Degradê dos títulos (marrom) sobre o rosa do horizonte | `#8C3A0A` | `#FFC9D6` | **5,35:1** | ✅ Passa |
-| Título "Guia Leonida" sobre o sol | `#1B1030` | `#FFAED0` | **10,50:1** | ✅ Passa |
+| Título "Guia Leonida" sobre o sol | `#1B1030` | `#FF9EC4` | **9,40:1** | ✅ Passa |
 
 ## Antes e depois: cores que falharam e foram corrigidas
 
@@ -127,12 +127,12 @@ Títulos com mais de 24px; o limite é o de texto grande (3:1).
 |---|---|---|---|---|---|
 | Rosa da paleta nova no modo claro | `#FF4FA3` | 2,79:1 ❌ Falha | `#B3135F` | 6,06:1 ✅ Passa | `#FBF4EA` |
 | Laranja do pôr do sol como texto no modo claro | `#FF8A3D` | 2,15:1 ❌ Falha | `#A3410B` | 5,80:1 ✅ Passa | `#FBF4EA` |
-| Laranja do degradê dos títulos no tema claro | `#C2410C` | 3,01:1 ❌ Falha | `#9A3412` | 4,25:1 ❌ Falha | `#FFAED0` |
+| Laranja do degradê dos títulos no tema claro | `#C2410C` | 2,70:1 ❌ Falha | `#9A3412` | 3,81:1 ✅ Passa | `#FF9EC4` |
 | Ciano de detalhe no modo claro | `#5EE7FF` | 1,46:1 ❌ Falha | `#0B6577` | 6,68:1 ✅ Passa | `#FFFFFF` |
 
 - **Rosa da paleta nova no modo claro:** O rosa #FF4FA3 é a cor principal do redesign e passa com folga no escuro (6,29:1), mas sobre a areia do modo claro fica perto de 2,8:1. No claro, links e botões usam um rosa framboesa do mesmo matiz.
 - **Laranja do pôr do sol como texto no modo claro:** O laranja #FF8A3D só aparece em degradês e brilhos. Quando vira texto no modo claro (sobretítulos), usa o laranja queimado #A3410B.
-- **Laranja do degradê dos títulos no tema claro:** No tema claro, os títulos em degradê passam por cima do sol listrado da abertura. O laranja #C2410C ficava em 2,7:1 sobre a parte rosa do sol, abaixo até do limite de texto grande (3:1); o ponto do meio do degradê virou #9A3412.
+- **Laranja do degradê dos títulos no tema claro:** No tema claro, os títulos em degradê passam por cima do sol listrado da abertura. O laranja #C2410C ficava abaixo de 3:1 sobre a parte rosa do sol (limite de texto grande); o ponto do meio do degradê virou #9A3412. Aqui o limite é o de texto grande.
 - **Ciano de detalhe no modo claro:** O ciano é só detalhe no escuro. No branco ele quase desaparece, então o modo claro usa um azul-petróleo do mesmo matiz.
 
 ## Resultado

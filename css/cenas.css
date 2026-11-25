@@ -414,6 +414,7 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  overflow: clip; /* "clip" não deixa o foco do teclado rolar o palco por conta própria */
 }
 .com-faixa-animada .destaques-janela { overflow: visible; scroll-snap-type: none; }
 .com-faixa-animada .destaques-palco { padding-block: calc(var(--altura-cabecalho) + 1rem) 2rem; }
