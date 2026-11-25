@@ -32,21 +32,17 @@ window.GLCatalogo = (function () {
     var favorito = window.GLAuth && GLAuth.ehFavorito(item.id);
     var idTitulo = 'titulo-' + item.id;
 
-    var midia = item.imagem
-      ? '<img class="card-imagem" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="450" loading="lazy">'
-      : '<div class="card-imagem-icone" aria-hidden="true"><i class="bi ' + esc(item.icone || cat.icone) + '"></i></div>';
-
-    var status = item.status === 'a-confirmar'
-      ? '<span class="selo-status a-confirmar"><i class="bi bi-hourglass-split" aria-hidden="true"></i>Detalhes a confirmar</span>'
-      : '<span class="selo-status"><i class="bi bi-patch-check" aria-hidden="true"></i>Com fonte oficial ou confiável</span>';
-
     return '<article class="card-guia" aria-labelledby="' + idTitulo + '">' +
-      midia +
+      '<div class="card-foto">' +
+        '<img class="card-imagem" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="450" loading="lazy" decoding="async">' +
+        '<div class="card-titulo">' +
+          '<span class="selo-categoria cat-' + item.categoria + '">' + cat.singular + '</span>' +
+          '<h' + nivel + ' id="' + idTitulo + '">' + esc(item.nome) + '</h' + nivel + '>' +
+        '</div>' +
+      '</div>' +
       '<div class="card-corpo">' +
-        '<span class="selo-categoria cat-' + item.categoria + '"><i class="bi ' + cat.icone + '" aria-hidden="true"></i>' + cat.singular + '</span>' +
-        '<h' + nivel + ' id="' + idTitulo + '">' + esc(item.nome) + '</h' + nivel + '>' +
         '<p class="resumo">' + esc(item.resumo) + '</p>' +
-        status +
+        seloStatus(item) +
         '<div class="card-acoes">' +
           '<button type="button" class="btn btn-sm btn-outline-primary" data-detalhes="' + esc(item.id) + '">' +
             'Ver detalhes<span class="visually-hidden"> de ' + esc(item.nome) + '</span></button>' +
@@ -55,6 +51,19 @@ window.GLCatalogo = (function () {
         '</div>' +
       '</div>' +
     '</article>';
+  }
+
+  /* Selo de status: confirmado, sem confirmação (com a data da checagem) ou
+     dica que vale para a série */
+  function textoStatus(item) {
+    if (item.status === 'sem-confirmacao') { return 'Ainda não divulgado · checado em ' + item.checado; }
+    if (item.status === 'serie') { return 'Vale nos GTAs anteriores · checado em ' + item.checado; }
+    return 'Com fonte oficial ou confiável';
+  }
+  function seloStatus(item) {
+    var classe = item.status === 'confirmado' ? '' : ' sem-confirmacao';
+    var icone = item.status === 'confirmado' ? 'bi-patch-check' : 'bi-clock-history';
+    return '<span class="selo-status' + classe + '"><i class="bi ' + icone + '" aria-hidden="true"></i>' + esc(textoStatus(item)) + '</span>';
   }
 
   /* Quando um card some enquanto tinha o foco, o foco não pode se perder
@@ -134,18 +143,21 @@ window.GLCatalogo = (function () {
 
     var extras = '';
     if (item.inspiracao) {
-      extras += '<li><i class="bi bi-pin-map" aria-hidden="true"></i><span><strong>Inspiração no mundo real:</strong> ' + esc(item.inspiracao) + '</span></li>';
+      extras += '<li><span><strong>Inspiração no mundo real:</strong> ' + esc(item.inspiracao) + '</span></li>';
     }
-    extras += '<li><i class="bi bi-tags" aria-hidden="true"></i><span><strong>Etiquetas:</strong> ' + esc(item.tags.join(', ')) + '</span></li>';
-    extras += '<li><i class="bi ' + (item.status === 'a-confirmar' ? 'bi-hourglass-split' : 'bi-patch-check') + '" aria-hidden="true"></i><span><strong>Status:</strong> ' +
-      (item.status === 'a-confirmar' ? 'detalhes a confirmar' : 'confirmado em fonte oficial ou confiável') + '</span></li>';
+    extras += '<li><span><strong>Etiquetas:</strong> ' + esc(item.tags.join(', ')) + '</span></li>';
+    if (item.condado) {
+      extras += '<li><span><strong>Condado no mapa oficial:</strong> ' + esc(item.condado) + '</span></li>';
+    }
+    extras += '<li><span><strong>Status:</strong> ' + esc(textoStatus(item)) + '</span></li>';
 
     document.getElementById('modal-detalhes-titulo').textContent = item.nome;
     document.getElementById('modal-detalhes-corpo').innerHTML =
-      (item.imagem
-        ? '<img class="img-fluid rounded mb-3" src="' + esc(item.imagem) + '" alt="' + esc(item.alt) + '" width="800" height="450">'
-        : '') +
-      '<p><span class="selo-categoria cat-' + item.categoria + '"><i class="bi ' + cat.icone + '" aria-hidden="true"></i>' + cat.singular + '</span></p>' +
+      (item.arte
+        ? '<figure class="mb-3"><img class="img-fluid" src="' + esc(item.arte) + '" alt="' + esc(item.arteAlt) + '" width="1600" height="900">' +
+          '<figcaption class="small texto-suave mt-1">Ilustração oficial: © Rockstar Games</figcaption></figure>'
+        : '<img class="img-fluid mb-3" src="' + esc(item.imagem.replace('-800.webp', '-1600.webp').replace('-600.webp', '-1200.webp')) + '" alt="' + esc(item.alt) + '" width="1600" height="900">') +
+      '<p class="sobretitulo mb-2">' + cat.singular + '</p>' +
       '<p>' + esc(item.descricao) + '</p>' +
       '<ul class="lista-fatos mb-3">' + extras + '</ul>' +
       '<p class="small mb-0">Fonte: <a href="' + esc(item.fonte.url) + '" target="_blank" rel="noopener">' + esc(item.fonte.titulo) +
@@ -306,7 +318,7 @@ window.GLCatalogo = (function () {
     var lista = document.querySelector('[data-destaques]');
     if (!lista) { return; }
     var itens = lista.getAttribute('data-destaques').split(',').map(buscarItem).filter(Boolean);
-    lista.innerHTML = listaDeCards(itens, 3, 'col-sm-6 col-xl-3');
+    lista.innerHTML = listaDeCards(itens, 3, lista.getAttribute('data-classe') || 'col-sm-6 col-xl-3');
   }
 
   /* Regiões em mapa.html: <ul data-lista-regioes> */
@@ -315,7 +327,7 @@ window.GLCatalogo = (function () {
     if (!lista) { return; }
     var regioes = GLDados.itens.filter(function (i) { return i.categoria === 'regioes'; });
     lista.innerHTML = regioes.map(function (item) {
-      return '<li class="col-md-6 col-xl-4" id="regiao-' + item.id + '">' + criarCard(item, 3) + '</li>';
+      return '<li class="col-md-6 col-xl-4" id="ficha-' + item.id + '">' + criarCard(item, 3) + '</li>';
     }).join('');
   }
 
