@@ -8,6 +8,7 @@
          img
          button.mapa-marcador[data-regiao][style="left: x%; top: y%"]
        .mapa-controles button[data-zoom="+1|-1|0"]
+     .regiao-item[data-regiao]       lista das regiões no painel lateral
      [data-painel-regiao]            onde aparece o cartão-postal da região
 
    Como usar:
@@ -15,7 +16,8 @@
      - arrastar com o mouse ou o dedo para mover;
      - teclado (com o mapa focado): setas movem, + e − dão zoom, 0 centraliza;
      - botões + / − / centralizar para quem não usa mouse;
-     - cada marcador abre o cartão-postal oficial da região logo abaixo.
+     - cada marcador (ou item da lista ao lado) leva o mapa até a região e
+       mostra o cartão-postal oficial no painel lateral.
    A tabela das regiões, na mesma página, é a alternativa em texto.
    Só transform na camada; sem animação quando o usuário pede menos movimento.
    ========================================================================== */
@@ -171,37 +173,41 @@
     return { focarPonto: focarPonto };
   }
 
-  /* Cartão-postal da região escolhida */
+  /* Região escolhida: marcadores do mapa e lista do painel lateral abrem a
+     mesma região; o mapa "voa" até ela e o painel mostra o cartão-postal. */
   function iniciarMarcadores(mapa) {
     var painel = document.querySelector('[data-painel-regiao]');
     var marcadores = Array.prototype.slice.call(document.querySelectorAll('.mapa-marcador'));
+    var itens = Array.prototype.slice.call(document.querySelectorAll('.regiao-item'));
+    var atual = document.querySelector('[data-regiao-atual]');
     if (!painel || !window.GLDados) { return; }
     var esc = GL.escaparHTML;
 
-    function abrir(id, focarNoMapa) {
+    function abrir(id, voar) {
       var item = GLDados.itens.filter(function (i) { return i.id === id; })[0];
-      var botao = marcadores.filter(function (m) { return m.getAttribute('data-regiao') === id; })[0];
-      if (!item || !botao) { return; }
-      marcadores.forEach(function (m) { m.setAttribute('aria-expanded', String(m === botao)); });
-      painel.hidden = false;
+      var marcador = marcadores.filter(function (m) { return m.getAttribute('data-regiao') === id; })[0];
+      if (!item || !marcador) { return; }
+      marcadores.forEach(function (m) {
+        m.setAttribute('aria-expanded', String(m === marcador));
+        m.classList.toggle('ativo', m === marcador);
+      });
+      itens.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-regiao') === id)); });
+      if (atual) { atual.textContent = item.nome; }
       painel.innerHTML =
         '<img src="' + esc(item.postal) + '" srcset="' + esc(item.postal) + ' 800w, ' + esc(item.postal.replace('-800.webp', '-1600.webp')) + ' 1600w"' +
-          ' sizes="(min-width: 992px) 55vw, 100vw" width="800" height="450" alt="Cartão-postal oficial ‘Visit Leonida’ de ' + esc(item.nome) + '">' +
-        '<div>' +
-          '<p class="sobretitulo">Região' + (item.condado ? ' · condado de ' + esc(item.condado) : '') + '</p>' +
-          '<h3 id="painel-regiao-titulo" tabindex="-1">' + esc(item.nome) + '</h3>' +
-          '<p>' + esc(item.descricao) + '</p>' +
-          '<p class="small texto-suave">Cartão-postal e mapa: © Rockstar Games, kit de mídia oficial.</p>' +
-          '<button type="button" class="btn btn-outline-primary" data-detalhes="' + esc(item.id) + '">Ver a ficha completa<span class="visually-hidden"> de ' + esc(item.nome) + '</span></button>' +
-        '</div>';
-      if (focarNoMapa) {
-        mapa.focarPonto(parseFloat(botao.style.left), parseFloat(botao.style.top), 2.4);
-      }
-      GL.anunciar('Cartão-postal de ' + item.nome + ' aberto abaixo do mapa.');
+          ' sizes="(min-width: 992px) 28vw, 100vw" width="800" height="450" alt="Cartão-postal oficial ‘Visit Leonida’ de ' + esc(item.nome) + '">' +
+        '<p class="sobretitulo">Região' + (item.condado ? ' · condado de ' + esc(item.condado) : '') + '</p>' +
+        '<h3 id="painel-regiao-titulo">' + esc(item.nome) + '</h3>' +
+        '<p>' + esc(item.descricao) + '</p>' +
+        '<button type="button" class="btn btn-outline-primary" data-detalhes="' + esc(item.id) + '">Ver a ficha completa<span class="visually-hidden"> de ' + esc(item.nome) + '</span></button>';
+      if (voar) { mapa.focarPonto(parseFloat(marcador.style.left), parseFloat(marcador.style.top), 2.4); }
     }
 
     marcadores.forEach(function (m) {
-      m.addEventListener('click', function () { abrir(m.getAttribute('data-regiao'), false); });
+      m.addEventListener('click', function () { abrir(m.getAttribute('data-regiao'), true); });
+    });
+    itens.forEach(function (b) {
+      b.addEventListener('click', function () { abrir(b.getAttribute('data-regiao'), true); });
     });
 
     /* Links da página inicial ("Ver no mapa") chegam com #regiao-<id> */
@@ -209,7 +215,7 @@
     if (alvo && alvo !== location.hash) {
       abrir(alvo, true);
       var secao = document.getElementById('mapa-oficial');
-      if (secao) { secao.scrollIntoView(); }
+      if (secao) { setTimeout(function () { secao.scrollIntoView(); }, 50); }
     }
   }
 

@@ -107,39 +107,107 @@
       <p class="credito-foto">Foto: © Rockstar Games</p>
     </section>
 
-    <section class="secao pt-5" id="mapa-oficial" aria-labelledby="titulo-mapa-oficial">
-      <div class="container-largo">
-        <div class="secao-cabecalho">
+    <!-- ============ CENA DE ROLAGEM: o pôster se afasta e as regiões acendem ============
+         Com movimento: presa na tela; o pôster começa aproximado em Vice City e mostra o estado
+         inteiro conforme a rolagem (js/cenas.js). Sem movimento: o pôster inteiro e a lista, parados. -->
+    <section class="mapa-cena" data-bs-theme="dark" aria-labelledby="titulo-mapa-cena">
+      <div class="mapa-cena-palco">
+        <div class="mapa-cena-texto">
           <p class="sobretitulo">Pôster oficial</p>
-          <h2 id="titulo-mapa-oficial" class="titulo-neon">O mapa de Leonida</h2>
-          <p>O pôster que a Rockstar liberou no dia do lançamento, com as seis regiões marcadas. Use a roda do mouse,
-             a pinça no celular ou os botões para aproximar; arraste para mover. Com o mapa focado, as setas movem,
-             <kbd>+</kbd> e <kbd>−</kbd> mudam o zoom e <kbd>0</kbd> centraliza. Clique numa região para ver o cartão-postal oficial.</p>
+          <h2 id="titulo-mapa-cena" class="titulo-neon">Seis regiões,<br>um estado</h2>
+          <ol class="mapa-cena-lista">
+          <li><span class="mapa-cena-num" aria-hidden="true">01</span><span><strong>Vice City</strong> Costa leste, condado de Vice-Dale</span></li>
+          <li><span class="mapa-cena-num" aria-hidden="true">02</span><span><strong>Leonida Keys</strong> Ilhas ao sul, pela estrada 1A</span></li>
+          <li><span class="mapa-cena-num" aria-hidden="true">03</span><span><strong>Grassrivers</strong> Pântanos do sudoeste, condado de Mariana</span></li>
+          <li><span class="mapa-cena-num" aria-hidden="true">04</span><span><strong>Port Gellhorn</strong> Costa oeste, condado de Kelly</span></li>
+          <li><span class="mapa-cena-num" aria-hidden="true">05</span><span><strong>Ambrosia</strong> Interior, ao sul do lago Leonida</span></li>
+          <li><span class="mapa-cena-num" aria-hidden="true">06</span><span><strong>Mount Kalaga</strong> Parque nacional no norte, condado de Lummox</span></li>
+          </ol>
         </div>
-
-        <div class="mapa-zoom" data-mapa data-lenis-prevent tabindex="0" role="region" aria-roledescription="mapa com zoom"
-             aria-label="Pôster oficial do mapa de Leonida. Setas movem, mais e menos mudam o zoom, zero centraliza.">
-          <div class="mapa-camada">
+        <div class="mapa-cena-janela">
+          <div class="mapa-cena-poster">
             <img src="assets/img/jogo/mapa-leonida-poster-1200.webp"
                  srcset="assets/img/jogo/mapa-leonida-poster-1200.webp 1200w, assets/img/jogo/mapa-leonida-poster-2400.webp 2400w"
-                 sizes="(min-width: 992px) 60vw, 100vw" width="2805" height="3840" decoding="async" draggable="false"
-                 alt="Pôster oficial do mapa do estado de Leonida: a ilha principal com Vice City, Vice Beach, Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida Keys ao sul">
-            <button type="button" class="mapa-marcador" data-regiao="vice-city" aria-expanded="false" aria-controls="painel-regiao" style="left: 67.3%; top: 52.1%">Vice City</button>
-            <button type="button" class="mapa-marcador" data-regiao="leonida-keys" aria-expanded="false" aria-controls="painel-regiao" style="left: 52.0%; top: 84.0%">Leonida Keys</button>
-            <button type="button" class="mapa-marcador" data-regiao="grassrivers" aria-expanded="false" aria-controls="painel-regiao" style="left: 42.0%; top: 66.0%">Grassrivers</button>
-            <button type="button" class="mapa-marcador" data-regiao="port-gellhorn" aria-expanded="false" aria-controls="painel-regiao" style="left: 30.0%; top: 35.5%">Port Gellhorn</button>
-            <button type="button" class="mapa-marcador" data-regiao="ambrosia" aria-expanded="false" aria-controls="painel-regiao" style="left: 55.6%; top: 35.8%">Ambrosia</button>
-            <button type="button" class="mapa-marcador" data-regiao="mount-kalaga" aria-expanded="false" aria-controls="painel-regiao" style="left: 52.5%; top: 22.3%">Mount Kalaga</button>
+                 sizes="(min-width: 992px) 45vw, 90vw" width="2805" height="3840" loading="lazy" decoding="async"
+                 alt="Pôster oficial do mapa de Leonida com as seis regiões numeradas: 1 Vice City, 2 Leonida Keys, 3 Grassrivers, 4 Port Gellhorn, 5 Ambrosia e 6 Mount Kalaga">
+            <span class="mapa-pino" style="left: 67.3%; top: 52.1%" aria-hidden="true"><b>01</b></span>
+            <span class="mapa-pino" style="left: 52.0%; top: 84.0%" aria-hidden="true"><b>02</b></span>
+            <span class="mapa-pino" style="left: 42.0%; top: 66.0%" aria-hidden="true"><b>03</b></span>
+            <span class="mapa-pino" style="left: 30.0%; top: 35.5%" aria-hidden="true"><b>04</b></span>
+            <span class="mapa-pino" style="left: 55.6%; top: 35.8%" aria-hidden="true"><b>05</b></span>
+            <span class="mapa-pino" style="left: 52.5%; top: 22.3%" aria-hidden="true"><b>06</b></span>
           </div>
-          <div class="mapa-controles" role="group" aria-label="Zoom do mapa">
-            <button type="button" data-zoom="1" aria-label="Aproximar"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
-            <button type="button" data-zoom="-1" aria-label="Afastar"><i class="bi bi-dash-lg" aria-hidden="true"></i></button>
-            <button type="button" data-zoom="0" aria-label="Centralizar e mostrar o mapa inteiro"><i class="bi bi-arrows-fullscreen" aria-hidden="true"></i></button>
-          </div>
-          <p class="mapa-dica" aria-hidden="true"><span data-nivel-zoom>Zoom: 100%</span> · Mapa: © Rockstar Games</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAPA INTERATIVO ============ -->
+    <section class="secao" id="mapa-oficial" aria-labelledby="titulo-mapa-oficial">
+      <div class="container-largo">
+        <div class="secao-cabecalho">
+          <p class="sobretitulo">Explore</p>
+          <h2 id="titulo-mapa-oficial">O mapa de Leonida</h2>
+          <p>Use a roda do mouse, a pinça no celular ou os botões para aproximar; arraste para mover. Com o mapa
+             focado, as setas movem, <kbd>+</kbd> e <kbd>−</kbd> mudam o zoom e <kbd>0</kbd> centraliza. Escolha uma
+             região no mapa ou na lista para ver o cartão-postal oficial.</p>
         </div>
 
-        <div class="postal-regiao mt-5" id="painel-regiao" data-painel-regiao hidden></div>
+        <div class="mapa-explorar">
+          <div class="mapa-zoom" data-mapa data-lenis-prevent tabindex="0" role="region" aria-roledescription="mapa com zoom"
+               aria-label="Pôster oficial do mapa de Leonida. Setas movem, mais e menos mudam o zoom, zero centraliza.">
+            <div class="mapa-camada">
+              <img src="assets/img/jogo/mapa-leonida-poster-1200.webp"
+                   srcset="assets/img/jogo/mapa-leonida-poster-1200.webp 1200w, assets/img/jogo/mapa-leonida-poster-2400.webp 2400w"
+                   sizes="(min-width: 992px) 60vw, 100vw" width="2805" height="3840" decoding="async" draggable="false"
+                   alt="Pôster oficial do mapa do estado de Leonida: a ilha principal com Vice City, Vice Beach, Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida Keys ao sul">
+            <button type="button" class="mapa-marcador" data-regiao="vice-city" aria-expanded="false" aria-controls="painel-regiao" style="left: 67.3%; top: 52.1%"><b aria-hidden="true">01</b>Vice City</button>
+            <button type="button" class="mapa-marcador" data-regiao="leonida-keys" aria-expanded="false" aria-controls="painel-regiao" style="left: 52.0%; top: 84.0%"><b aria-hidden="true">02</b>Leonida Keys</button>
+            <button type="button" class="mapa-marcador" data-regiao="grassrivers" aria-expanded="false" aria-controls="painel-regiao" style="left: 42.0%; top: 66.0%"><b aria-hidden="true">03</b>Grassrivers</button>
+            <button type="button" class="mapa-marcador" data-regiao="port-gellhorn" aria-expanded="false" aria-controls="painel-regiao" style="left: 30.0%; top: 35.5%"><b aria-hidden="true">04</b>Port Gellhorn</button>
+            <button type="button" class="mapa-marcador" data-regiao="ambrosia" aria-expanded="false" aria-controls="painel-regiao" style="left: 55.6%; top: 35.8%"><b aria-hidden="true">05</b>Ambrosia</button>
+            <button type="button" class="mapa-marcador" data-regiao="mount-kalaga" aria-expanded="false" aria-controls="painel-regiao" style="left: 52.5%; top: 22.3%"><b aria-hidden="true">06</b>Mount Kalaga</button>
+            </div>
+            <div class="mapa-controles" role="group" aria-label="Zoom do mapa">
+              <button type="button" data-zoom="1" aria-label="Aproximar"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+              <button type="button" data-zoom="-1" aria-label="Afastar"><i class="bi bi-dash-lg" aria-hidden="true"></i></button>
+              <button type="button" data-zoom="0" aria-label="Centralizar e mostrar o mapa inteiro"><i class="bi bi-arrows-fullscreen" aria-hidden="true"></i></button>
+            </div>
+            <p class="mapa-dica" aria-hidden="true"><span data-nivel-zoom>Zoom: 100%</span> · <span data-regiao-atual>Leonida inteira</span></p>
+          </div>
+
+          <section class="mapa-painel" aria-label="Regiões do mapa" data-lenis-prevent>
+            <ul class="lista-regioes">
+            <li><button type="button" class="regiao-item" data-regiao="vice-city" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-vice-city-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">01</b> <strong>Vice City</strong><small>Costa leste, condado de Vice-Dale</small></span>
+            </button></li>
+            <li><button type="button" class="regiao-item" data-regiao="leonida-keys" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-leonida-keys-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">02</b> <strong>Leonida Keys</strong><small>Ilhas ao sul, pela estrada 1A</small></span>
+            </button></li>
+            <li><button type="button" class="regiao-item" data-regiao="grassrivers" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-grassrivers-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">03</b> <strong>Grassrivers</strong><small>Pântanos do sudoeste, condado de Mariana</small></span>
+            </button></li>
+            <li><button type="button" class="regiao-item" data-regiao="port-gellhorn" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-port-gellhorn-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">04</b> <strong>Port Gellhorn</strong><small>Costa oeste, condado de Kelly</small></span>
+            </button></li>
+            <li><button type="button" class="regiao-item" data-regiao="ambrosia" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-ambrosia-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">05</b> <strong>Ambrosia</strong><small>Interior, ao sul do lago Leonida</small></span>
+            </button></li>
+            <li><button type="button" class="regiao-item" data-regiao="mount-kalaga" aria-pressed="false" aria-controls="painel-regiao">
+              <img src="assets/img/jogo/postal-mount-kalaga-800.webp" width="800" height="450" alt="" loading="lazy" decoding="async">
+              <span><b aria-hidden="true">06</b> <strong>Mount Kalaga</strong><small>Parque nacional no norte, condado de Lummox</small></span>
+            </button></li>
+            </ul>
+            <div class="postal-regiao" id="painel-regiao" data-painel-regiao aria-live="polite">
+              <p class="texto-suave mb-0">Escolha uma região para ver o cartão-postal oficial e o que tem por lá.</p>
+            </div>
+          </section>
+        </div>
+        <p class="small texto-suave mt-3 mb-0">Mapa e cartões-postais: © Rockstar Games, kit de mídia oficial.</p>
       </div>
     </section>
 
@@ -151,7 +219,7 @@
           <p>As mesmas seis regiões do mapa, com o condado do pôster oficial, a inspiração no mundo real e um veículo
              que combina com o terreno.</p>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" tabindex="0" role="region" aria-label="Tabela (role para o lado se precisar)">
           <table class="table align-middle">
             <caption>Regiões de Leonida: condado, inspiração real e veículo sugerido pelo guia</caption>
             <thead>

@@ -9,6 +9,7 @@
        hero em camadas, cena de vídeo em <canvas> controlada pela rolagem,
        tour pelas 6 regiões (Ken Burns + crossfade), fotos em paralaxe,
        faixa horizontal de destaques e lightbox das fotos.
+   - Mapa: o pôster se afasta de Vice City e as 6 regiões acendem.
    - Páginas internas: leve paralaxe na foto do topo ([data-parallax]).
 
    Cena de vídeo: quadros WebP extraídos de um videoclipe oficial com ffmpeg
@@ -319,6 +320,31 @@
   }
 
   /* ---------------------------------------------------------------------
+     Cena do mapa (mapa.html): o pôster começa aproximado em Vice City e se
+     afasta até mostrar o estado inteiro; depois as 6 regiões acendem uma a
+     uma, no mapa e na lista ao lado.
+     --------------------------------------------------------------------- */
+  function animarMapaCena() {
+    var secao = document.querySelector('.mapa-cena');
+    if (!secao) { return; }
+    var poster = secao.querySelector('.mapa-cena-poster');
+    var pinos = secao.querySelectorAll('.mapa-pino');
+    var itens = secao.querySelectorAll('.mapa-cena-lista li');
+    poster.style.transformOrigin = '67.3% 52.1%'; // Vice City no pôster
+    gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: secao, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+        onToggle: function (st) { poster.style.willChange = st.isActive ? 'transform' : ''; }
+      }
+    })
+      .fromTo(poster, { scale: 3.2 }, { scale: 1, duration: 0.45, ease: 'power1.inOut' }, 0)
+      .fromTo(itens, { opacity: 0.4 }, { opacity: 1, duration: 0.06, stagger: 0.07 }, 0.42)
+      .fromTo(pinos, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.06, stagger: 0.07, ease: 'back.out(2)' }, 0.42)
+      .to({}, { duration: 0.1 });
+  }
+
+  /* ---------------------------------------------------------------------
      Faixa horizontal de destaques: a página desce e a faixa anda de lado.
      --------------------------------------------------------------------- */
   var faixa = null;
@@ -454,6 +480,7 @@
       animarParalaxe();
       pararCenas = animarCenas();
       animarTour();
+      animarMapaCena();
       pararFaixa = animarFaixa();
     });
     ligarLenis();
