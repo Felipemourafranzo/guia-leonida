@@ -303,7 +303,11 @@
     slides.forEach(function (slide, i) {
       var foto = slide.querySelector('img');
       var texto = slide.querySelectorAll('.tour-texto > *');
-      if (i > 0) { tl.fromTo(slide, { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.15); }
+      if (i > 0) {
+        // O texto da região anterior sai antes de a próxima entrar: nunca dois textos na tela
+        tl.to(slides[i - 1].querySelectorAll('.tour-texto > *'), { opacity: 0, y: -30, duration: 0.15, stagger: 0.02 }, i - 0.3);
+        tl.fromTo(slide, { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.15);
+      }
       tl.fromTo(foto, { scale: 1.16 }, { scale: 1, duration: 1.3 }, Math.max(0, i - 0.15));
       tl.fromTo(texto, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.25, stagger: 0.05, ease: 'power2.out' }, i === 0 ? 0 : i + 0.05);
     });

@@ -267,7 +267,7 @@
 /* Com movimento: um palco preso na tela e os slides empilhados, trocando em crossfade */
 .tour-palco { position: relative; height: 600vh; }
 .tour-trilho { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.tour-slide { position: absolute; inset: 0; overflow: hidden; background: var(--noite-0); }
+.tour-slide { position: absolute; inset: 0; overflow: hidden; background: var(--noite-0); isolation: isolate; } /* cada slide empilha o próprio texto */
 .tour-slide + .tour-slide { opacity: 0; }
 .tour-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 60% 50%; }
 .tour-slide::after {
