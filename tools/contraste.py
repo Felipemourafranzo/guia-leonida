@@ -128,6 +128,18 @@ CENAS = [
     ("#F4EEFC", "#2D2440", "Texto sobre o véu mais claro das cenas (véu de 85% sobre foto clara)"),
 ]
 
+# Tema claro: títulos GRANDES em degradê escuro sobre o céu de amanhecer da
+# abertura e o sol listrado (35% de opacidade). Medidos como texto grande (3:1)
+# contra o ponto mais claro e o mais escuro do fundo. (frente, fundo, uso)
+GRANDES_CLARO = [
+    ("#B3135F", "#FFF6E6", "Degradê dos títulos (rosa) sobre o céu claro do topo"),
+    ("#B3135F", "#FFAED0", "Degradê dos títulos (rosa) sobre a parte rosa do sol"),
+    ("#9A3412", "#FFAED0", "Degradê dos títulos (laranja) sobre a parte rosa do sol"),
+    ("#9A3412", "#FFC09A", "Degradê dos títulos (laranja) sobre a parte laranja do sol"),
+    ("#8C3A0A", "#FFC9D6", "Degradê dos títulos (marrom) sobre o rosa do horizonte"),
+    ("#1B1030", "#FFAED0", "Título \"Guia Leonida\" sobre o sol"),
+]
+
 # Exemplo "antes e depois" para o relatório
 ANTES_DEPOIS = [
     {
@@ -149,6 +161,17 @@ ANTES_DEPOIS = [
         "explicacao": (
             "O laranja #FF8A3D só aparece em degradês e brilhos. Quando vira texto no modo claro "
             "(sobretítulos), usa o laranja queimado #A3410B."
+        ),
+    },
+    {
+        "nome": "Laranja do degradê dos títulos no tema claro",
+        "antes": "#C2410C",
+        "depois": "#9A3412",
+        "fundo": "#FFAED0",
+        "explicacao": (
+            "No tema claro, os títulos em degradê passam por cima do sol listrado da abertura. "
+            "O laranja #C2410C ficava em 2,7:1 sobre a parte rosa do sol, abaixo até do limite de "
+            "texto grande (3:1); o ponto do meio do degradê virou #9A3412."
         ),
     },
     {
@@ -268,6 +291,22 @@ def gerar() -> tuple[str, int]:
     for frente, fundo, uso in CENAS:
         r = razao(frente, fundo)
         aa, _ = avaliar(r, "texto")
+        if "Falha" in aa:
+            falhas += 1
+        linhas.append(f"| {uso} | {amostra(frente)} | {amostra(fundo)} | **{fmt(r)}** | {aa} |")
+    linhas.append("")
+
+    linhas += [
+        "## Tema claro: títulos grandes sobre o céu da abertura",
+        "",
+        "Títulos com mais de 24px; o limite é o de texto grande (3:1).",
+        "",
+        "| Uso | Cor da frente | Cor de fundo | Razão | AA (texto grande) |",
+        "|---|---|---|---|---|",
+    ]
+    for frente, fundo, uso in GRANDES_CLARO:
+        r = razao(frente, fundo)
+        aa, _ = avaliar(r, "grande")
         if "Falha" in aa:
             falhas += 1
         linhas.append(f"| {uso} | {amostra(frente)} | {amostra(fundo)} | **{fmt(r)}** | {aa} |")

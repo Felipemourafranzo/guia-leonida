@@ -92,6 +92,9 @@
   --cor-erro: #ff9b9b;
   --cor-sucesso: #6ee7b0;
   --veu: 12 8 24;                   /* rgb do véu sobre fotos */
+  --cor-card: #0c0818;              /* corpo dos cards do catálogo */
+  --sombra-card: none;
+  --degrade-texto: var(--degrade-sol); /* degradê em títulos grandes */
   color-scheme: dark;
 }
 
@@ -100,7 +103,7 @@
    -------------------------------------------------------------------------- */
 [data-bs-theme="light"] {
   --cor-fundo: #fbf4ea;
-  --cor-fundo-2: #f3e8da;
+  --cor-fundo-2: #f8e6d8;           /* faixas pêssego */
   --cor-superficie: #ffffff;
   --cor-superficie-2: #f3e8da;
   --cor-texto: #1b1030;
@@ -118,6 +121,10 @@
   --cor-erro: #b42318;
   --cor-sucesso: #146c43;
   --veu: 12 8 24;
+  --cor-card: #ffffff;
+  --sombra-card: 0 .75rem 2rem rgb(120 60 40 / .12);
+  /* No claro, o degradê de títulos usa tons escuros do pôr do sol (contraste) */
+  --degrade-texto: linear-gradient(90deg, #b3135f 0%, #9a3412 60%, #8c3a0a 100%);
   color-scheme: light;
 }
 
@@ -149,6 +156,9 @@
   --brilho-creme: none;
   --brilho-botao: none;
   --veu: 0 0 0;
+  --cor-card: #000000;
+  --sombra-card: none;
+  --degrade-texto: linear-gradient(#ffff00, #ffff00);
   color-scheme: dark;
 }
 

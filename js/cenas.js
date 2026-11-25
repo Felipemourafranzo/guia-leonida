@@ -49,6 +49,8 @@
     if (!cabecalho) { return; }
     var temHero = !!document.querySelector('.hero-pagina, .abertura');
     document.body.classList.toggle('sem-hero', !temHero);
+    // A abertura da página inicial é clara no tema claro: o cabeçalho usa texto escuro sobre ela
+    document.body.classList.toggle('hero-claro', !!document.querySelector('.abertura'));
     var ticando = false;
     function atualizar() {
       var limite = document.querySelector('.abertura') ? window.innerHeight * 0.6 : 40;
@@ -339,7 +341,7 @@
       }
     })
       .fromTo(poster, { scale: 3.2 }, { scale: 1, duration: 0.45, ease: 'power1.inOut' }, 0)
-      .fromTo(itens, { opacity: 0.4 }, { opacity: 1, duration: 0.06, stagger: 0.07 }, 0.42)
+      .fromTo(itens, { opacity: 0.75, x: -14 }, { opacity: 1, x: 0, duration: 0.06, stagger: 0.07 }, 0.42)
       .fromTo(pinos, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.06, stagger: 0.07, ease: 'back.out(2)' }, 0.42)
       .to({}, { duration: 0.1 });
   }
