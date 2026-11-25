@@ -4,6 +4,7 @@
 Uso:
     python3 tools/processar_kit.py <pasta-do-kit-descompactado> [etapas]
     etapas (opcional, separadas por vírgula): artes,logo,capturas,miniaturas,quadros
+    (quadros:<nome> refaz só a cena com esse nome, ex.: quadros:jason)
 
 A pasta do kit deve ter os quatro ZIPs oficiais descompactados lado a lado
 (https://www.rockstargames.com/VI/media):
@@ -169,6 +170,9 @@ CENAS_VIDEO = [
     ('lucia', 'Lucia_Caminos_Video_Clip.mp4',
      'Lucia Caminos se debruça na janela de um carro parado numa avenida de Vice City à noite, '
      'com prédios de neon rosa ao fundo'),
+    ('jason', 'Jason_Duval_Video_Clip.mp4',
+     'Jason Duval, de bandana vermelha e óculos amarelos, entra numa loja de conveniência e aponta '
+     'uma pistola para a frente'),
 ]
 
 
@@ -278,11 +282,13 @@ def miniaturas(kit, usados):
     print('ok', len(itens), 'miniaturas')
 
 
-def quadros(kit):
+def quadros(kit, so=None):
     """Quadros da cena de vídeo. Os videoclipes têm só 30 a 45 quadros (1 a 1,5 s em 30 fps),
     então o ffmpeg cria os quadros intermediários (minterpolate) para a rolagem ficar macia.
     Desktop: 1280 px, ~87 quadros. Celular: 720 px, metade dos quadros."""
     for nome, video, _alt in CENAS_VIDEO:
+        if so and nome not in so:
+            continue
         origem = kit / 'GTAVI_Videos' / video
         for largura, fps in ((1280, 60), (720, 30)):
             pasta = CENAS / nome / str(largura)
@@ -321,6 +327,9 @@ def main():
         miniaturas(kit, usados | {c[1] for c in CAPTURAS})
     if 'quadros' in etapas:
         quadros(kit)
+    cenas = [e.split(':', 1)[1] for e in etapas if e.startswith('quadros:')]
+    if cenas:
+        quadros(kit, cenas)
     nomes = {n['arquivo'] for n in novos}
     manifesto = [m for m in manifesto if m['arquivo'] not in nomes] + novos
     MANIFESTO.write_text(json.dumps(manifesto, ensure_ascii=False, indent=1), encoding='utf-8')

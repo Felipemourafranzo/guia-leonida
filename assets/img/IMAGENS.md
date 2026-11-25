@@ -184,6 +184,7 @@ As ilustrações dos coadjuvantes aparecem na janela de detalhes de cada persona
 | Pasta | Original no kit | Pacote | Quadros |
 |---|---|---|---|
 | `assets/cenas/lucia/` | `Lucia_Caminos_Video_Clip.mp4` (3840×2160, 45 quadros, 1,5 s) | Videoclipes | 87 em 1280 px (computador) e 44 em 720 px (celular), WebP |
+| `assets/cenas/jason/` | `Jason_Duval_Video_Clip.mp4` (3840×2160, 30 quadros, 1 s) | Videoclipes | 57 em 1280 px (computador) e 29 em 720 px (celular), WebP |
 
 Os videoclipes oficiais são curtos (30 a 45 quadros). Para a cena andar macia com a rolagem, o ffmpeg cria
 os quadros intermediários (`minterpolate`, interpolação por movimento). O texto alternativo do primeiro

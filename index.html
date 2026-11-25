@@ -173,9 +173,9 @@
          Quadros do "Videoclipe da Lucia Caminos" (kit oficial, © Rockstar Games), desenhados num
          <canvas> preso na tela conforme a rolagem: 87 quadros em 1280 px; 44 em 720 px no celular. -->
     <section class="cena" data-bs-theme="dark" aria-labelledby="titulo-lucia"
-             data-pasta="assets/cenas/lucia/" data-quadros-1280="87" data-quadros-720="44">
+             data-pasta="assets/cenas/lucia/" data-quadros-1280="87" data-quadros-720="44" data-foco-x="0.6">
       <div class="cena-palco">
-        <img src="assets/cenas/lucia/1280/q001.webp" width="1280" height="720" alt="" decoding="async" loading="lazy">
+        <img src="assets/cenas/lucia/1280/q001.webp" width="1280" height="720" alt="" decoding="async" loading="lazy" style="object-position: 60% center">
         <canvas aria-hidden="true"></canvas>
         <div class="cena-veu"></div>
         <div class="cena-texto">
@@ -194,6 +194,34 @@
                  alt="Lucia se debruça para fora da janela do carro, com prédios de neon rosa ao fundo"></li>
         <li><img src="assets/cenas/lucia/1280/q087.webp" width="1280" height="720" loading="lazy" decoding="async"
                  alt="Lucia apoiada na janela do carro, de perto, com as luzes da cidade desfocadas atrás"></li>
+      </ol>
+    </section>
+
+    <!-- CENA DE VÍDEO: JASON (texto do lado direito, para variar o ritmo)
+         Quadros do "Videoclipe do Jason Duval" (kit oficial, © Rockstar Games):
+         57 quadros em 1280 px; 29 em 720 px no celular. -->
+    <section class="cena cena-direita" data-bs-theme="dark" aria-labelledby="titulo-jason"
+             data-pasta="assets/cenas/jason/" data-quadros-1280="57" data-quadros-720="29" data-foco-x="0.72">
+      <div class="cena-palco">
+        <img src="assets/cenas/jason/1280/q001.webp" width="1280" height="720" alt="" decoding="async" loading="lazy" style="object-position: 72% center">
+        <canvas aria-hidden="true"></canvas>
+        <div class="cena-veu"></div>
+        <div class="cena-texto">
+          <p class="rotulo-cena">Protagonista</p>
+          <h2 id="titulo-jason" class="titulo-cena">Jason Duval</h2>
+          <p class="linha">Cresceu entre golpistas, passou pelo Exército e hoje faz serviços para contrabandistas nas Keys.</p>
+          <a class="btn-sol" href="guia.html?q=Jason">Ver a ficha do Jason</a>
+        </div>
+        <div class="cena-progresso" aria-hidden="true"><span></span></div>
+      </div>
+      <!-- Sem animação: a cena vira três imagens paradas, em ordem -->
+      <ol class="cena-quadros">
+        <li><img src="assets/cenas/jason/1280/q001.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Jason, de bandana vermelha e óculos amarelos, entra numa loja de conveniência"></li>
+        <li><img src="assets/cenas/jason/1280/q029.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Jason caminha entre as prateleiras da loja, encarando quem está à frente"></li>
+        <li><img src="assets/cenas/jason/1280/q057.webp" width="1280" height="720" loading="lazy" decoding="async"
+                 alt="Jason aponta uma pistola para a frente, de perto"></li>
       </ol>
     </section>
 

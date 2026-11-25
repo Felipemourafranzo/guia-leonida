@@ -172,6 +172,10 @@
     var largura = leve ? '720' : '1280';
     this.total = parseInt(secao.getAttribute('data-quadros-' + largura), 10) || 1;
     this.pasta = secao.getAttribute('data-pasta') + largura + '/';
+    // Ponto de foco horizontal do recorte (0 = esquerda, .5 = centro, 1 = direita),
+    // útil no celular, onde a tela em pé corta as laterais do vídeo
+    this.focoX = parseFloat(secao.getAttribute('data-foco-x'));
+    if (isNaN(this.focoX)) { this.focoX = 0.5; }
     this.quadros = new Array(this.total);
     this.atual = 0;
     this.desenhado = null;
@@ -238,7 +242,7 @@
     var escala = Math.max(c.width / iw, c.height / ih);
     var w = iw * escala;
     var h = ih * escala;
-    this.ctx.drawImage(img, (c.width - w) / 2, (c.height - h) / 2, w, h);
+    this.ctx.drawImage(img, (c.width - w) * this.focoX, (c.height - h) / 2, w, h);
   };
   CenaVideo.prototype.redimensionar = function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
