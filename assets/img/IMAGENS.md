@@ -21,8 +21,12 @@ do CDN da Rockstar. Nenhuma é fan art, montagem ou imagem gerada por IA, e nenh
 |---|---|
 | Capturas de tela (138 imagens, 3840×2160) | <https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Screenshots.zip> |
 | Benefícios da Ultimate Edition (51 imagens) | <https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Ultimate_Edition_Benefits.zip> |
+| Ilustrações e fundos de tela (28 artes, inclui o pôster do mapa e os cartões-postais) | <https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip> |
+| Pacote Vintage Vice City (12 imagens) | <https://media-rockstargames-com.akamaized.net/VI/downloads/screenshots/GTAVI_Vintage_Vice_City_Pack.zip> |
+| Videoclipes (9 clipes) | <https://media-rockstargames-com.akamaized.net/VI/downloads/videos/GTAVI_Videos.zip> |
 
-Página de onde os pacotes são baixados: <https://www.rockstargames.com/VI/media/screenshots>.
+Páginas de onde os pacotes são baixados: <https://www.rockstargames.com/VI/media> (capturas, ilustrações e vídeos).
+O processamento (WebP, recorte do logo e quadros das cenas) é feito por `tools/processar_kit.py`.
 
 
 ## Hero da página inicial
@@ -102,10 +106,69 @@ Página de onde os pacotes são baixados: <https://www.rockstargames.com/VI/medi
 
 ## Mapa de Leonida
 
-**Pendente.** A Rockstar anunciou (Newswire, 03/11/2026) um mapa oficial para impressão como download
-gratuito no site oficial no dia do lançamento, 19/11/2026, mas ele ainda não estava publicado quando
-estas imagens foram baixadas. O mapa "vazado" da Collector's Edition e os mapas de fãs feitos antes do
-lançamento **não** são usados. Quando o mapa oficial sair, ele entra aqui com a URL de origem.
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `mapa-leonida-poster` (2400 e 1200 px, retrato) | `Leonida_Map_Poster.jpg` (2805×3840) | Ilustrações e fundos de tela | Pôster oficial do mapa do estado de Leonida: a ilha principal com Vice City, Vice Beach, Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida Keys ao sul |
+
+O pôster foi publicado pela Rockstar no dia do lançamento (19/11/2026) na página de ilustrações do kit de mídia.
+O arquivo antigo `mapa-leonida.webp` (467×624, sem origem registrada) sai quando o `mapa.html` passar a usar o pôster.
+
+## Logo de GTA VI (abertura da página inicial)
+
+| Arquivo | Original no kit | Pacote | Alt |
+|---|---|---|---|
+| `logo-gta-vi` (1100 e 550 px, fundo transparente) | `Jason_and_Lucia_Robbery_With_Logo_landscape.jpg` | Ilustrações e fundos de tela | Grand Theft Auto VI |
+
+O logo branco foi **recortado** da arte oficial "com logotipo": a mesma arte existe sem o logo, então a
+opacidade de cada pixel sai da diferença entre as duas (`tools/processar_kit.py`). O logo da Rockstar (R\*)
+**não** é usado em nenhum lugar do site.
+
+## Ilustrações oficiais
+
+| Arquivo | Original no kit | Alt |
+|---|---|---|
+| `arte-capa-oficial` | `Official_Cover_Art_landscape.jpg` | Arte de capa oficial de GTA VI: mosaico de quadros com Jason, Lucia, Boobie Ike, Cal Hampton, Raul Bautista, um jacaré, um carro esportivo, uma lancha e um helicóptero em volta do logo do jogo |
+| `arte-jason-lucia-praia` (+ `-retrato-900`) | `Jason_and_Lucia_Beach_landscape.jpg` / `_phone.jpg` | Ilustração oficial: Lucia abraçada a Jason na beira da baía ao pôr do sol, com palmeiras e os prédios de Vice City atrás |
+| `arte-jason-lucia-terraco` (+ `-retrato-900`) | `Jason_Lucia_Rooftop_landscape.jpg` / `_phone.jpg` | Ilustração oficial: Jason com uma pistola e Lucia com uma espingarda num terraço, com a baía de Vice City iluminada atrás |
+| `arte-jason-lucia-a-postos` | `Jason_Lucia_Lock_And_Load_landscape.jpg` | Ilustração oficial: Jason de regata em pé e Lucia sentada no capô de um carro vermelho, conferindo as armas ao entardecer |
+| `arte-jason-lucia-assalto` | `Jason_and_Lucia_Robbery_landscape.jpg` | Ilustração oficial: Lucia e Jason puxando bandanas sobre o rosto em frente a um posto de gasolina cercado de palmeiras |
+| `arte-jason-lucia-motel` | `Jason_and_Lucia_Motel_landscape.jpg` | Ilustração oficial: Jason e Lucia descansando numa cama de motel, com uma bolsa de viagem ao lado |
+| `arte-jason-lucia-cais` | `Jason_and_Lucia_02_landscape.jpg` | Ilustração oficial: Jason apontando uma pistola e Lucia ao lado num cais, com lanchas e os prédios de Vice City ao fundo |
+| `arte-jason-lucia-carro` | `Jason_and_Lucia_01_landscape.jpg` | Ilustração oficial: Lucia sentada no capô de um carro antigo e Jason encostado nela, numa rua de Vice City com palmeiras e prédios art déco |
+| `arte-boobie-ike` | `Boobie_Ike_landscape.jpg` | Ilustração oficial: Boobie Ike de jaqueta estampada e corrente de ouro, com uma taça na mão numa boate |
+| `arte-brian-heder` | `Brian_Heder_landscape.jpg` | Ilustração oficial: Brian Heder de camisa estampada debruçado sobre um mapa numa mesa com uma faca e garrafas de cerveja, num galpão de barcos |
+| `arte-cal-hampton` | `Cal_Hampton_landscape.jpg` | Ilustração oficial: Cal Hampton de boné e óculos escuros sentado na proa de um barco com uma garrafa na mão, perto de uma ponte |
+| `arte-dre-quan-priest` | `DreQuan_Priest_landscape.jpg` | Ilustração oficial: Dre’Quan Priest sentado no capô de um utilitário preto em frente à casa noturna Jack of Hearts |
+| `arte-raul-bautista` | `Raul_Bautista_landscape.jpg` | Ilustração oficial: Raul Bautista de terno branco com uma bolsa de couro no ombro, ajustando as luvas em frente a um muro grafitado |
+| `arte-real-dimez` | `Real_Dimez_landscape.jpg` | Ilustração oficial: Bae-Luxe e Roxy, da dupla Real Dimez, posando diante de um hotel art déco |
+
+A arte do álbum (`The_Album_Cover_Art`) e as versões "com logotipos" **não** são usadas: elas trazem o logo da Rockstar.
+
+## Cartões-postais das 6 regiões
+
+| Arquivo | Original no kit | Alt |
+|---|---|---|
+| `postal-vice-city` | `Vice_City_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” de Vice City: prédios da cidade à beira da baía turquesa, com jet skis na água |
+| `postal-leonida-keys` | `Leonida_Keys_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” das Leonida Keys: ilhas e mar turquesa vistos do alto, com um hidroavião |
+| `postal-grassrivers` | `Grassrivers_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” de Grassrivers: pântano visto do alto ao pôr do sol, com um barco deixando rastro na água |
+| `postal-port-gellhorn` | `Port_Gellhorn_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” de Port Gellhorn: a cidade vista do alto ao anoitecer, com as ruas iluminadas |
+| `postal-ambrosia` | `Ambrosia_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” de Ambrosia: fábricas e chaminés soltando fumaça ao pôr do sol |
+| `postal-mount-kalaga` | `Mount_Kalaga_National_Park_Postcard_landscape.jpg` | Cartão-postal oficial “Visit Leonida” do Mount Kalaga National Park: rio no meio da mata fechada, com o sol atravessando as árvores |
+
+## Cenas de vídeo (quadros em `assets/cenas/`)
+
+| Pasta | Original no kit | Pacote | Quadros |
+|---|---|---|---|
+| `assets/cenas/lucia/` | `Lucia_Caminos_Video_Clip.mp4` (3840×2160, 45 quadros, 1,5 s) | Videoclipes | 87 em 1280 px (computador) e 44 em 720 px (celular), WebP |
+
+Os videoclipes oficiais são curtos (30 a 45 quadros). Para a cena andar macia com a rolagem, o ffmpeg cria
+os quadros intermediários (`minterpolate`, interpolação por movimento). O texto alternativo do primeiro
+quadro e de cada imagem parada (modo "Reduzir animações") está no HTML da cena e em `cena.json`.
+
+## Folha de contato
+
+`docs/folha-de-contato-kit.html` mostra todo o material novo e, em miniatura (480 px, `docs/folha-de-contato/`),
+as capturas do kit que ainda não usamos e o pacote Vintage Vice City, para escolher as que entram no site.
 
 ## Ilustrações provisórias (SVG) que ainda existem
 

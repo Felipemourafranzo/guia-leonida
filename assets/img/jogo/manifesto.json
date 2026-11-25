@@ -805,5 +805,477 @@
     40730
    ]
   }
+ },
+ {
+  "arquivo": "arte-capa-oficial",
+  "grupo": "arte",
+  "alt": "Arte de capa oficial de GTA VI: mosaico de quadros com Jason, Lucia, Boobie Ike, Cal Hampton, Raul Bautista, um jacaré, um carro esportivo, uma lancha e um helicóptero em volta do logo do jogo",
+  "original": "Official_Cover_Art_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    224650
+   ],
+   "800": [
+    450,
+    77196
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-praia",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Lucia abraçada a Jason na beira da baía ao pôr do sol, com palmeiras e os prédios de Vice City atrás",
+  "original": "Jason_and_Lucia_Beach_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    112896
+   ],
+   "800": [
+    450,
+    41208
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-terraco",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Jason com uma pistola e Lucia com uma espingarda num terraço, com a baía de Vice City iluminada atrás",
+  "original": "Jason_Lucia_Rooftop_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    148490
+   ],
+   "800": [
+    450,
+    50736
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-a-postos",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Jason de regata em pé e Lucia sentada no capô de um carro vermelho, conferindo as armas ao entardecer",
+  "original": "Jason_Lucia_Lock_And_Load_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    135076
+   ],
+   "800": [
+    450,
+    46194
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-assalto",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Lucia e Jason puxando bandanas sobre o rosto em frente a um posto de gasolina cercado de palmeiras",
+  "original": "Jason_and_Lucia_Robbery_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    119482
+   ],
+   "800": [
+    450,
+    40602
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-motel",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Jason e Lucia descansando numa cama de motel, com uma bolsa de viagem ao lado",
+  "original": "Jason_and_Lucia_Motel_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    106074
+   ],
+   "800": [
+    450,
+    36494
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-cais",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Jason apontando uma pistola e Lucia ao lado num cais, com lanchas e os prédios de Vice City ao fundo",
+  "original": "Jason_and_Lucia_02_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    166488
+   ],
+   "800": [
+    450,
+    55698
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-carro",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Lucia sentada no capô de um carro antigo e Jason encostado nela, numa rua de Vice City com palmeiras e prédios art déco",
+  "original": "Jason_and_Lucia_01_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    139220
+   ],
+   "800": [
+    450,
+    51240
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-boobie-ike",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Boobie Ike de jaqueta estampada e corrente de ouro, com uma taça na mão numa boate",
+  "original": "Boobie_Ike_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    148958
+   ],
+   "800": [
+    450,
+    49976
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-brian-heder",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Brian Heder de camisa estampada debruçado sobre um mapa numa mesa com uma faca e garrafas de cerveja, num galpão de barcos",
+  "original": "Brian_Heder_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    170622
+   ],
+   "800": [
+    450,
+    60452
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-cal-hampton",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Cal Hampton de boné e óculos escuros sentado na proa de um barco com uma garrafa na mão, perto de uma ponte",
+  "original": "Cal_Hampton_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    124638
+   ],
+   "800": [
+    450,
+    42596
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-dre-quan-priest",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Dre’Quan Priest sentado no capô de um utilitário preto em frente à casa noturna Jack of Hearts",
+  "original": "DreQuan_Priest_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    114488
+   ],
+   "800": [
+    450,
+    42044
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-raul-bautista",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Raul Bautista de terno branco com uma bolsa de couro no ombro, ajustando as luvas em frente a um muro grafitado",
+  "original": "Raul_Bautista_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    134934
+   ],
+   "800": [
+    450,
+    48142
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-real-dimez",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Bae-Luxe e Roxy, da dupla Real Dimez, posando diante de um hotel art déco",
+  "original": "Real_Dimez_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    152172
+   ],
+   "800": [
+    450,
+    52818
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-vice-city",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” de Vice City: prédios da cidade à beira da baía turquesa, com jet skis na água",
+  "original": "Vice_City_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    98504
+   ],
+   "800": [
+    450,
+    32888
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-leonida-keys",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” das Leonida Keys: ilhas e mar turquesa vistos do alto, com um hidroavião",
+  "original": "Leonida_Keys_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    111112
+   ],
+   "800": [
+    450,
+    37192
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-grassrivers",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” de Grassrivers: pântano visto do alto ao pôr do sol, com um barco deixando rastro na água",
+  "original": "Grassrivers_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    86558
+   ],
+   "800": [
+    450,
+    28896
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-port-gellhorn",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” de Port Gellhorn: a cidade vista do alto ao anoitecer, com as ruas iluminadas",
+  "original": "Port_Gellhorn_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    66520
+   ],
+   "800": [
+    450,
+    25240
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-ambrosia",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” de Ambrosia: fábricas e chaminés soltando fumaça ao pôr do sol",
+  "original": "Ambrosia_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    70202
+   ],
+   "800": [
+    450,
+    26196
+   ]
+  }
+ },
+ {
+  "arquivo": "postal-mount-kalaga",
+  "grupo": "postal",
+  "alt": "Cartão-postal oficial “Visit Leonida” do Mount Kalaga National Park: rio no meio da mata fechada, com o sol atravessando as árvores",
+  "original": "Mount_Kalaga_National_Park_Postcard_landscape.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 3840,
+  "altura_original": 2160,
+  "tamanhos": {
+   "1600": [
+    900,
+    123890
+   ],
+   "800": [
+    450,
+    39270
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-praia-retrato",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Lucia abraçada a Jason na beira da baía ao pôr do sol, com palmeiras e os prédios de Vice City atrás",
+  "original": "Jason_and_Lucia_Beach_phone.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 2160,
+  "altura_original": 4800,
+  "tamanhos": {
+   "900": [
+    2000,
+    121116
+   ]
+  }
+ },
+ {
+  "arquivo": "arte-jason-lucia-terraco-retrato",
+  "grupo": "arte",
+  "alt": "Ilustração oficial: Jason com uma pistola e Lucia com uma espingarda num terraço, com a baía de Vice City iluminada atrás",
+  "original": "Jason_Lucia_Rooftop_phone.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 2160,
+  "altura_original": 4800,
+  "tamanhos": {
+   "900": [
+    2000,
+    108764
+   ]
+  }
+ },
+ {
+  "arquivo": "mapa-leonida-poster",
+  "grupo": "mapa",
+  "alt": "Pôster oficial do mapa do estado de Leonida: a ilha principal com Vice City, Vice Beach, Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida Keys ao sul",
+  "original": "Leonida_Map_Poster.jpg",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 2805,
+  "altura_original": 3840,
+  "tamanhos": {
+   "2400": [
+    3286,
+    849648
+   ],
+   "1200": [
+    1643,
+    265174
+   ]
+  }
+ },
+ {
+  "arquivo": "logo-gta-vi",
+  "grupo": "logo",
+  "alt": "Grand Theft Auto VI",
+  "original": "Jason_and_Lucia_Robbery_With_Logo_landscape.jpg (recorte)",
+  "pagina": "https://www.rockstargames.com/VI/media/artwork-wallpapers",
+  "zip": "https://media-rockstargames-com.akamaized.net/VI/downloads/artwork_wallpapers/GTAVI_Artwork_Wallpapers.zip",
+  "largura_original": 1130,
+  "altura_original": 850,
+  "tamanhos": {
+   "1100": [
+    827,
+    75658
+   ],
+   "550": [
+    414,
+    27630
+   ]
+  }
  }
 ]
