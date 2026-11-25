@@ -208,6 +208,27 @@ Cada etapa virou um ou mais commits. O histórico completo está em `git log --o
 ### Etapa 11: documentação
 - Este README, `docs/relatorio-rascunho.md`, `docs/auditoria-acessibilidade.md` e `assets/img/IMAGENS.md`.
 
+### Etapa 12: redesign "trailer de rolagem", parte 1 (material oficial e protótipo)
+- Estudo do site oficial (rockstargames.com/VI e /VI/only-in-leonida): fundo roxo-noite (#0c0d1b),
+  títulos condensados art déco em caixa alta, texto curto, fotos em tela cheia, rolagem suave (Lenis),
+  cenas presas na tela com o texto entrando aos poucos.
+- Kit de mídia oficial baixado após o lançamento: ilustrações (com o pôster do mapa e os cartões-postais
+  das 6 regiões), videoclipes e o pacote Vintage Vice City. `tools/processar_kit.py` converte tudo para
+  WebP, recorta o logo de GTA VI com transparência (diferença entre a arte com e sem logotipo) e extrai os
+  quadros da cena de vídeo com o ffmpeg. Os clipes oficiais têm só 1 a 1,5 s, então os quadros
+  intermediários são interpolados (`minterpolate`).
+- `docs/folha-de-contato-kit.html` (gerada por `tools/folha_de_contato.py`) mostra o material novo e as
+  112 capturas ainda não usadas, com caixas para escolher as que entram no site.
+- Protótipo em `prototipo/abertura.html` (`css/cenas.css` + `js/cenas.js`): abertura com a marca, o logo de
+  GTA VI e a frase em degradê acendendo palavra por palavra, e a cena da Lucia desenhada num `<canvas>`
+  conforme a rolagem (87 quadros em 1280 px; 44 em 720 px no celular). GSAP 3.15.0 + ScrollTrigger e
+  Lenis 1.3.27 pelo jsDelivr, com SRI. Com "Reduzir animações" ou `prefers-reduced-motion`, a página fica
+  parada e a cena vira três imagens em sequência; a troca no painel vale na hora, sem recarregar.
+- axe-core sem violações em quatro pontos da rolagem. O axe mostrou que `autoAlpha` (visibility: hidden)
+  tirava o `<h1>` do leitor de tela quando a abertura passava; a animação agora usa só `opacity`, e um link
+  apagado reaparece ao receber foco.
+- Prints em `docs/prints/redesign/prototipo-*.jpg`.
+
 ## 7. Decisões de design
 
 - **Identidade "pôr do sol neon":** rosa, laranja, roxo e ciano lembram a Vice City dos anos 80 e o

@@ -109,6 +109,8 @@
     var reduzido = !!prefs.reduzirMovimento ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     raiz.classList.toggle('gl-entrada', !reduzido);
+    // Páginas com cenas (css/cenas.css): sem movimento, as cenas viram imagens paradas
+    raiz.classList.toggle('sem-movimento', reduzido);
   }
 
   aplicar(lerPreferencia());

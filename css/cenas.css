@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Guia Leonida: cenas.css (visual "trailer de rolagem")
+   --------------------------------------------------------------------------
+   Linguagem visual inspirada no site oficial de GTA VI: escuro, pôr do sol,
+   fotos em tela cheia e neon só onde importa. Nada aqui é o visual oficial:
+   a marca, as fontes e os textos são do Guia Leonida.
+
+   - Títulos: Big Shoulders Display (condensada, art déco), caixa alta.
+     Alternativa em teste: Anton (classe .titulos-anton no <html>).
+   - Texto: Inter.
+   - Neon (text-shadow/box-shadow) só em títulos de seção, item ativo do
+     menu, botão principal e letreiros pontuais.
+   - Sem animação: com prefers-reduced-motion ou "Reduzir animações", as
+     cenas viram imagens paradas em sequência (classe .sem-movimento no
+     <html>, ligada por js/cenas.js e por theme.js).
+   ========================================================================== */
+
+/* 1. Tokens ----------------------------------------------------------------- */
+:root {
+  --noite-0: #0c0818;
+  --noite-1: #120b22;
+  --noite-2: #1b1030;
+  --noite-3: #2a1a47;
+  --rosa: #ff4fa3;
+  --laranja: #ff8a3d;
+  --creme: #ffe8a3;
+  --ciano: #5ee7ff;
+  --texto: #f4eefc;
+  --texto-suave: #c9bddf;
+  --foco: #ffe8a3;
+  --degrade-sol: linear-gradient(90deg, var(--rosa) 0%, var(--laranja) 55%, var(--creme) 100%);
+
+  --fonte-titulo: "Big Shoulders Display", "Anton", "Arial Narrow", sans-serif;
+  --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fonte-dislexia: "Atkinson Hyperlegible", Verdana, sans-serif;
+  --escala-fonte: 1;
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --altura-faixa: 2rem;
+  --altura-cabecalho: 4rem;
+  --brilho-rosa: 0 0 .35em rgb(255 79 163 / .55), 0 0 1.2em rgb(255 79 163 / .25);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  color-scheme: dark;
+}
+
+.titulos-anton { --fonte-titulo: "Anton", "Big Shoulders Display", "Arial Narrow", sans-serif; }
+.a11y-dislexia { --fonte-texto: var(--fonte-dislexia); --fonte-titulo: var(--fonte-dislexia); }
+
+/* 2. Base ------------------------------------------------------------------- */
+html { font-size: calc(100% * var(--escala-fonte)); background: var(--noite-1); }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--noite-2) 0, var(--noite-1) 60vh) no-repeat, var(--noite-1);
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+img, canvas { display: block; max-width: 100%; }
+a { color: var(--creme); text-underline-offset: .2em; }
+a:hover { color: #fff; }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; border-radius: 2px; }
+.a11y-sublinhar a { text-decoration: underline !important; }
+.a11y-espacamento body { line-height: 1.9; letter-spacing: .04em; word-spacing: .12em; }
+
+.titulo-cena {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  line-height: .92;
+  margin: 0;
+}
+.titulos-anton .titulo-cena { font-weight: 400; letter-spacing: .02em; }
+
+.pular-conteudo {
+  position: fixed; left: 1rem; top: -4rem; z-index: 2000;
+  background: var(--creme); color: var(--noite-0); padding: .6rem 1rem; font-weight: 700;
+}
+.pular-conteudo:focus { top: 1rem; }
+
+/* 3. Faixa do topo e cabeçalho ---------------------------------------------- */
+.faixa-topo {
+  position: relative; z-index: 1031;
+  height: var(--altura-faixa);
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, #ff4fa3, #ff8a3d);
+  color: var(--noite-0);
+  font: 700 .75rem/1 var(--fonte-texto);
+  letter-spacing: .18em; text-transform: uppercase;
+  overflow: hidden;
+}
+.faixa-topo .palmeiras { position: absolute; bottom: -2px; height: 2rem; width: auto; fill: rgb(12 8 24 / .35); }
+.faixa-topo .palmeiras.esq { left: 2%; }
+.faixa-topo .palmeiras.dir { right: 2%; transform: scaleX(-1); }
+@media (max-width: 575.98px) {
+  .faixa-topo { font-size: .625rem; letter-spacing: .1em; }
+  .faixa-topo .palmeiras { display: none; }
+}
+
+.cabecalho-cena {
+  position: sticky; top: 0; z-index: 1030;
+  height: var(--altura-cabecalho);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0 var(--gutter);
+  transition: background-color .3s, backdrop-filter .3s;
+}
+.cabecalho-cena.com-fundo { background: rgb(18 11 34 / .88); backdrop-filter: blur(10px); }
+.marca-gl {
+  display: inline-flex; align-items: center; gap: .55rem;
+  color: var(--texto); text-decoration: none;
+  font-family: var(--fonte-titulo); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .08em; font-size: 1.15rem; line-height: 1;
+}
+.marca-gl svg { width: 2.1rem; height: 2.1rem; flex: none; }
+.marca-gl span small { display: block; font-size: .62em; letter-spacing: .32em; color: var(--texto-suave); }
+.cabecalho-cena nav ul { display: flex; gap: .25rem; list-style: none; margin: 0; padding: 0; }
+.cabecalho-cena nav a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 .75rem;
+  color: var(--texto); text-decoration: none; font-weight: 600; font-size: .9rem;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.cabecalho-cena nav a:hover { color: var(--creme); }
+.cabecalho-cena nav a[aria-current="page"] { color: var(--creme); text-shadow: 0 0 .6em rgb(255 232 163 / .55); }
+.botoes-cabecalho { display: flex; gap: .5rem; align-items: center; }
+.btn-redondo {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  min-width: 44px; min-height: 44px; padding: 0 .9rem;
+  border: 1px solid rgb(244 238 252 / .35); border-radius: 999px;
+  background: rgb(12 8 24 / .35); color: var(--texto);
+  font: 600 .85rem/1 var(--fonte-texto);
+}
+.btn-redondo:hover { border-color: var(--creme); color: var(--creme); }
+.so-celular { display: none; }
+.btn-redondo svg { width: 1.25rem; height: 1.25rem; flex: none; }
+@media (max-width: 479.98px) {
+  .btn-redondo .rotulo-longo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .btn-redondo { padding: 0 .7rem; }
+}
+@media (max-width: 991.98px) {
+  .cabecalho-cena nav { display: none; }
+  .so-celular { display: inline-flex; }
+}
+
+/* Menu em tela cheia (offcanvas do Bootstrap) */
+.menu-tela-cheia.offcanvas-top { height: 100dvh; background: var(--noite-1); color: var(--texto); }
+.menu-tela-cheia ul { list-style: none; margin: 0; padding: 0; }
+.menu-tela-cheia a {
+  display: block; padding: .35rem 0; color: var(--texto); text-decoration: none;
+  font-family: var(--fonte-titulo); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.5rem, 12vw, 4rem); line-height: 1; letter-spacing: .03em;
+}
+.menu-tela-cheia a[aria-current="page"] { color: var(--rosa); text-shadow: var(--brilho-rosa); }
+
+/* 4. Botões ----------------------------------------------------------------- */
+.btn-sol {
+  display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 48px; padding: 0 1.5rem;
+  border: 0; border-radius: 999px;
+  background: var(--degrade-sol); color: var(--noite-0);
+  font: 700 .95rem/1 var(--fonte-texto); letter-spacing: .04em; text-decoration: none;
+  box-shadow: 0 0 1.4rem rgb(255 79 163 / .35);
+  transition: box-shadow .25s, transform .25s var(--ease);
+}
+.btn-sol:hover { color: var(--noite-0); box-shadow: 0 0 2rem rgb(255 138 61 / .55); transform: translateY(-1px); }
+
+/* 5. Abertura --------------------------------------------------------------- */
+.abertura { position: relative; height: 320vh; }
+.abertura-palco {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  margin-top: calc(-1 * var(--altura-cabecalho));
+  display: grid; place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 50% 115%, rgb(255 79 163 / .22), transparent 70%),
+    radial-gradient(40% 35% at 50% 100%, rgb(255 138 61 / .18), transparent 70%),
+    linear-gradient(180deg, var(--noite-2), var(--noite-1));
+}
+.abertura-camada { grid-area: 1 / 1; display: grid; place-items: center; text-align: center; padding: 0 var(--gutter); }
+.abertura-marca .titulo-cena { font-size: clamp(3.5rem, 14vw, 11rem); }
+@media (max-width: 575.98px) {
+  .abertura-marca .titulo-cena { font-size: 24vw; }
+  .abertura-marca .linha-sol { display: block; }
+  .abertura-marca .titulo-cena small { letter-spacing: .22em; }
+  .abertura-logo { width: 62vw; }
+}
+.abertura-marca .titulo-cena small {
+  display: block; margin-top: .9rem;
+  font: 600 clamp(.75rem, 1.6vw, 1rem)/1.2 var(--fonte-texto);
+  letter-spacing: .4em; color: var(--texto-suave);
+}
+.abertura-marca .linha-sol { background: var(--degrade-sol); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.abertura-final { align-content: center; gap: clamp(1.5rem, 5vh, 3rem); }
+.abertura-logo { width: min(46vw, 22rem, 34vh); height: auto; filter: drop-shadow(0 0 1.5rem rgb(255 79 163 / .35)); }
+.frase-sol {
+  max-width: 18ch; margin: 0 auto;
+  font-family: var(--fonte-titulo); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.2rem, 6.4vw, 5.5rem); line-height: .98; letter-spacing: .02em;
+}
+.titulos-anton .frase-sol { font-weight: 400; }
+/* Cada palavra recebe o mesmo degradê, posicionado pelo JS (--x/--w)
+   para parecer um degradê só atravessando a frase inteira */
+/* Sem JS ou sem movimento: um degradê só na frase inteira */
+.frase-sol { background: var(--degrade-sol); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.frase-sol[data-pronta] { background: none; }
+.frase-sol .palavra {
+  background-image: var(--degrade-sol);
+  background-size: var(--w, 100%) 100%;
+  background-position: calc(-1 * var(--x, 0px)) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.dica-rolar {
+  position: absolute; bottom: clamp(1rem, 4vh, 2.5rem); left: 50%; transform: translateX(-50%);
+  display: grid; justify-items: center; gap: .35rem;
+  font: 600 .75rem/1 var(--fonte-texto); letter-spacing: .25em; text-transform: uppercase; color: var(--texto-suave);
+}
+.dica-rolar svg { width: 1.25rem; height: 1.25rem; animation: quicar 1.8s var(--ease) infinite; }
+@keyframes quicar { 50% { transform: translateY(5px); } }
+
+/* 6. Cena de vídeo controlada pela rolagem --------------------------------- */
+.cena { position: relative; height: 420vh; background: var(--noite-0); }
+.cena-palco {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;
+}
+.cena-palco > img,
+.cena-palco > canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cena-palco > canvas { opacity: 0; transition: opacity .4s; }
+.cena-palco.pronta > canvas { opacity: 1; }
+.cena-veu {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgb(12 8 24 / .78) 0%, rgb(12 8 24 / .35) 45%, transparent 70%),
+    linear-gradient(0deg, rgb(12 8 24 / .85) 0%, transparent 40%);
+}
+.cena-texto {
+  position: absolute; left: var(--gutter); bottom: clamp(2rem, 10vh, 6rem);
+  max-width: min(34rem, calc(100% - 2 * var(--gutter)));
+}
+.cena-texto .rotulo {
+  margin: 0 0 .75rem; font: 700 .8rem/1 var(--fonte-texto);
+  letter-spacing: .3em; text-transform: uppercase; color: var(--creme);
+}
+.cena-texto .titulo-cena { font-size: clamp(3.4rem, 10vw, 8rem); color: var(--rosa); text-shadow: var(--brilho-rosa); }
+.cena-texto .linha { margin: 1.25rem 0 1.75rem; font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.5; max-width: 30ch; }
+/* Um link apagado pela animação reaparece ao receber foco pelo teclado */
+.cena-texto:focus-within > *,
+.abertura-camada:focus-within { opacity: 1 !important; transform: none !important; }
+.cena-progresso {
+  position: absolute; right: var(--gutter); bottom: clamp(2rem, 10vh, 6rem);
+  width: 2px; height: 30vh; background: rgb(244 238 252 / .2);
+}
+.cena-progresso span { display: block; width: 100%; height: 100%; background: var(--degrade-sol); transform-origin: top; transform: scaleY(0); }
+.cena-quadros { display: none; }
+
+/* 7. Seção seguinte (só no protótipo) -------------------------------------- */
+.depois { padding: clamp(4rem, 14vh, 9rem) var(--gutter); max-width: 60rem; }
+.depois .titulo-cena { font-size: clamp(2.5rem, 7vw, 5rem); color: var(--creme); }
+.depois p { color: var(--texto-suave); max-width: 52ch; }
+
+/* 8. Sem movimento: tudo parado, em sequência ------------------------------- */
+.sem-movimento .abertura { height: auto; }
+.sem-movimento .abertura-palco { position: relative; height: auto; min-height: 0; margin-top: 0; padding: 3rem 0 4rem; display: block; }
+.sem-movimento .abertura-camada { display: block; }
+.sem-movimento .abertura-marca { margin-bottom: 3rem; }
+.sem-movimento .abertura-final { display: grid; }
+.sem-movimento .dica-rolar { display: none; }
+.sem-movimento .cena { height: auto; padding: 3rem 0; }
+.sem-movimento .cena-palco { position: relative; height: auto; overflow: visible; }
+.sem-movimento .cena-palco > img,
+.sem-movimento .cena-palco > canvas,
+.sem-movimento .cena-veu,
+.sem-movimento .cena-progresso { display: none; }
+.sem-movimento .cena-texto { position: static; padding: 0 var(--gutter) 2rem; }
+.sem-movimento .cena-quadros {
+  display: grid; gap: 1rem; padding: 0 var(--gutter);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  list-style: none; margin: 0;
+}
+.sem-movimento .cena-quadros img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.sem-movimento *, .sem-movimento *::before, .sem-movimento *::after { animation: none !important; transition: none !important; }
+
+/* 9. Barra de protótipo ----------------------------------------------------- */
+.barra-prototipo {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 1040;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  max-width: calc(100% - 2rem);
+  padding: .5rem .75rem; border-radius: .5rem;
+  background: rgb(12 8 24 / .92); border: 1px solid var(--noite-3);
+  font-size: .8rem;
+}
+.barra-prototipo strong { color: var(--creme); letter-spacing: .08em; text-transform: uppercase; font-size: .7rem; }
+.barra-prototipo button {
+  min-height: 36px; padding: 0 .7rem; border-radius: 999px;
+  border: 1px solid rgb(244 238 252 / .3); background: transparent; color: var(--texto); font-size: .8rem;
+}
+.barra-prototipo button[aria-pressed="true"] { background: var(--creme); color: var(--noite-0); border-color: var(--creme); }
+
+/* 10. Rodapé curto ---------------------------------------------------------- */
+.rodape-cena { padding: 3rem var(--gutter) 6rem; border-top: 1px solid var(--noite-3); color: var(--texto-suave); font-size: .875rem; }
+.rodape-cena p { max-width: 75ch; }
+
+/* Painel de acessibilidade (offcanvas do Bootstrap) no tema escuro */
+.offcanvas { --bs-offcanvas-bg: var(--noite-1); --bs-offcanvas-color: var(--texto); }
+.btn-close { filter: invert(1) grayscale(1) brightness(2); }
