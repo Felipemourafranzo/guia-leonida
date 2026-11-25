@@ -5,7 +5,7 @@
      - leitura/escrita segura no localStorage
      - anúncios para leitores de tela (região aria-live)
      - avisos visuais (toasts do Bootstrap)
-     - contagem regressiva / status do lançamento
+     - bloco "Já disponível" (dias desde o lançamento) e status no rodapé
      - linha do tempo de novidades (com selo "Novo desde sua última visita")
    ========================================================================== */
 window.GL = (function () {
@@ -104,108 +104,28 @@ window.GL = (function () {
   }
 
   /* ---------------------------------------------------------------------
-     Contagem regressiva / status do lançamento
-     HTML esperado: elemento com [data-contagem] contendo
-       [data-unidade="dias|horas|minutos"], [data-contagem-texto],
-       [data-contagem-pausar] (botão) e [data-contagem-bloco]
-     A contagem atualiza a cada 30 s e tem botão de pausar (WCAG 2.2.2).
+     Bloco "Já disponível" (página inicial): dias desde o lançamento.
+     HTML: [data-disponivel] com [data-dias-lancamento] e [data-dias-rotulo].
+     O número já vem escrito no HTML (funciona sem JS); aqui ele só é
+     atualizado para o dia de hoje (horário de Brasília).
      --------------------------------------------------------------------- */
-  function iniciarContagem() {
-    var caixa = document.querySelector('[data-contagem]');
+  function iniciarDisponivel() {
+    var caixa = document.querySelector('[data-disponivel]');
     if (!caixa || !window.GLDados) { return; }
-    var lancamento = GLDados.lancamento;
-    var alvo = new Date(lancamento.dataISO).getTime();
-    var botaoPausar = caixa.querySelector('[data-contagem-pausar]');
-    var intervalo = null;
-
-    function preencher(unidade, valor) {
-      var el = caixa.querySelector('[data-unidade="' + unidade + '"]');
-      if (el) { el.textContent = String(valor).padStart(2, '0'); }
-    }
-
-    function atualizar() {
-      var agora = Date.now();
-      var restante = alvo - agora;
-      var texto = caixa.querySelector('[data-contagem-texto]');
-
-      // Layout novo (home redesenhada): status numa frase curta
-      var curto = caixa.hasAttribute('data-status-curto');
-
-      if (restante <= 0 && curto) {
-        caixa.querySelector('[data-contagem-bloco]').hidden = true;
-        if (botaoPausar) { botaoPausar.hidden = true; }
-        texto.textContent = 'Já disponível no PS5 e no Xbox Series X|S.';
-        pausar();
-        return;
-      }
-
-      if (restante <= 0) {
-        // Já lançado: troca a contagem pelo selo "Já disponível"
-        var dias = Math.floor((agora - alvo) / 86400000);
-        caixa.querySelector('[data-contagem-bloco]').hidden = true;
-        if (botaoPausar) { botaoPausar.hidden = true; }
-        caixa.querySelector('[data-contagem-titulo]').textContent = 'GTA VI já está disponível!';
-        texto.innerHTML =
-          '<span class="selo-disponivel mb-2"><i class="bi bi-check-circle-fill" aria-hidden="true"></i>' +
-          (dias > 0 ? 'Lançado há ' + dias + (dias === 1 ? ' dia' : ' dias') : 'Lançado hoje!') + '</span><br>' +
-          'Disponível para ' + escaparHTML(lancamento.plataformas) + ' desde ' + escaparHTML(lancamento.dataTexto) +
-          '. PC: ' + escaparHTML(lancamento.pc) + '.';
-        pausar();
-        return;
-      }
-
-      var d = Math.floor(restante / 86400000);
-      var h = Math.floor((restante % 86400000) / 3600000);
-      var m = Math.floor((restante % 3600000) / 60000);
-      preencher('dias', d);
-      preencher('horas', h);
-      preencher('minutos', m);
-      if (curto) {
-        texto.textContent = 'Chega em ' + (d > 0 ? d + (d === 1 ? ' dia' : ' dias') : h + (h === 1 ? ' hora' : ' horas')) +
-          ' ao PS5 e ao Xbox Series X|S.';
-        if (botaoPausar) { botaoPausar.hidden = false; }
-        return;
-      }
-      texto.textContent = 'Faltam ' + d + (d === 1 ? ' dia, ' : ' dias, ') + h + (h === 1 ? ' hora e ' : ' horas e ') +
-        m + (m === 1 ? ' minuto' : ' minutos') + ' para ' + lancamento.dataTexto + ' (horário de Brasília).';
-    }
-
-    function pausar() {
-      clearInterval(intervalo);
-      intervalo = null;
-      if (botaoPausar) {
-        botaoPausar.setAttribute('aria-pressed', 'true');
-        botaoPausar.querySelector('span').textContent = 'Retomar atualização';
-        botaoPausar.querySelector('i').className = 'bi bi-play-fill';
-      }
-    }
-
-    function retomar() {
-      atualizar();
-      intervalo = setInterval(atualizar, 30000);
-      if (botaoPausar) {
-        botaoPausar.setAttribute('aria-pressed', 'false');
-        botaoPausar.querySelector('span').textContent = 'Pausar atualização';
-        botaoPausar.querySelector('i').className = 'bi bi-pause-fill';
-      }
-    }
-
-    if (botaoPausar) {
-      botaoPausar.addEventListener('click', function () {
-        if (intervalo) { pausar(); } else { retomar(); }
-      });
-    }
-    retomar();
+    var lancamento = new Date(GLDados.lancamento.dataISO).getTime();
+    var dias = Math.max(0, Math.floor((Date.now() - lancamento) / 86400000));
+    caixa.querySelector('[data-dias-lancamento]').textContent = dias;
+    caixa.querySelector('[data-dias-rotulo]').textContent =
+      dias === 0 ? 'lançado hoje' : (dias === 1 ? 'dia desde o lançamento' : 'dias desde o lançamento');
   }
 
   /* Status curto no rodapé (todas as páginas) */
   function atualizarStatusRodape() {
     var el = document.querySelector('[data-status-rodape]');
-    if (!el) { return; }
-    var lancado = Date.now() >= new Date('2026-11-19T00:00:00-03:00').getTime();
-    el.textContent = lancado
-      ? 'Status: lançado em 19/11/2026 (PS5 e Xbox Series X|S). PC: a confirmar.'
-      : 'Status: lançamento em 19/11/2026 (PS5 e Xbox Series X|S). PC: a confirmar.';
+    if (!el || !window.GLDados) { return; }
+    var l = GLDados.lancamento;
+    el.textContent = 'Lançado em 19/11/2026 (PS5 e Xbox Series X|S). PC e modo online: ' + l.pc +
+      ' (checado em ' + l.checado + ').';
   }
 
   /* ---------------------------------------------------------------------
@@ -243,7 +163,7 @@ window.GL = (function () {
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    iniciarContagem();
+    iniciarDisponivel();
     atualizarStatusRodape();
     renderizarNovidades();
     preencherAno();

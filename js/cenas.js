@@ -1,27 +1,31 @@
 /* ==========================================================================
    Guia Leonida: cenas.js ("trailer de rolagem")
    --------------------------------------------------------------------------
-   - Abertura: a marca aparece, depois o logo de GTA VI e a frase em degradê
-     revelada palavra por palavra conforme a rolagem.
-   - Cena de vídeo: quadros WebP extraídos de um videoclipe oficial (ffmpeg,
-     ver tools/processar_kit.py) desenhados num <canvas> preso na tela; a
-     rolagem escolhe o quadro. Os quadros carregam aos poucos (1 a cada 8,
-     depois 1 a cada 4, 2 e 1) e a primeira imagem aparece enquanto isso.
-     No celular (até 767 px) ou com "economia de dados", usa a versão leve
-     (720 px, metade dos quadros).
-   - Rolagem suave com Lenis.
+   Carregado em todas as páginas. Cuida de:
+   - Cabeçalho transparente sobre a foto do topo, sólido ao rolar.
+   - Rolagem suave (Lenis), pausada enquanto um modal ou painel está aberto.
+   - Página inicial:
+       abertura (marca → logo de GTA VI → frase em degradê palavra por palavra),
+       hero em camadas, cena de vídeo em <canvas> controlada pela rolagem,
+       tour pelas 6 regiões (Ken Burns + crossfade), fotos em paralaxe,
+       faixa horizontal de destaques e lightbox das fotos.
+   - Páginas internas: leve paralaxe na foto do topo ([data-parallax]).
+
+   Cena de vídeo: quadros WebP extraídos de um videoclipe oficial com ffmpeg
+   (tools/processar_kit.py). Carregam aos poucos (1 a cada 8, depois 4, 2 e
+   1) e a primeira imagem aparece enquanto isso. No celular (até 767 px) ou
+   com "economia de dados", usa a versão leve (720 px, metade dos quadros).
 
    Acessibilidade (obrigatório):
-   - Nada liga com prefers-reduced-motion ou com "Reduzir animações" do
-     painel (GLA11y.movimentoReduzido()). Nesse modo o <html> recebe a
-     classe .sem-movimento e o CSS mostra as cenas como imagens paradas em
-     sequência. Mudou a opção no painel (evento "gl:a11y")? Tudo é desfeito
-     ou religado na hora.
-   - Todo texto está no HTML; a animação só muda opacidade e posição.
+   - Nada anima com prefers-reduced-motion ou com "Reduzir animações" do
+     painel (GLA11y.movimentoReduzido()). Sem a classe "movimento" no <html>
+     o CSS mostra as cenas como imagens paradas em sequência. Mudou a opção
+     no painel (evento "gl:a11y")? Tudo é desfeito ou religado na hora.
+   - Todo texto está no HTML; a animação só muda opacity e transform.
      Nunca visibility/display: o texto apagado continua para o leitor de
      tela, e um link apagado reaparece quando recebe foco (cenas.css).
-   - Só transform/opacity; will-change só enquanto a cena está na tela.
-   Depende de GSAP 3 + ScrollTrigger e Lenis (jsDelivr, versões fixas com SRI).
+   - will-change só enquanto a cena está na tela.
+   Depende de GSAP 3 + ScrollTrigger e Lenis (jsDelivr, versões fixas, SRI).
    ========================================================================== */
 (function () {
   'use strict';
@@ -36,14 +40,18 @@
   }
 
   /* ---------------------------------------------------------------------
-     Cabeçalho: transparente no topo, sólido depois de rolar
+     Cabeçalho: transparente sobre a foto do topo, sólido depois de rolar.
+     Páginas sem foto no topo ganham body.sem-hero (fundo desde o início).
      --------------------------------------------------------------------- */
   function iniciarCabecalho() {
-    var cabecalho = document.querySelector('.cabecalho-cena');
+    var cabecalho = document.querySelector('.cabecalho');
     if (!cabecalho) { return; }
+    var temHero = !!document.querySelector('.hero-pagina, .abertura');
+    document.body.classList.toggle('sem-hero', !temHero);
     var ticando = false;
     function atualizar() {
-      cabecalho.classList.toggle('com-fundo', window.scrollY > window.innerHeight * 0.6);
+      var limite = document.querySelector('.abertura') ? window.innerHeight * 0.6 : 40;
+      cabecalho.classList.toggle('com-fundo', window.scrollY > limite);
       ticando = false;
     }
     window.addEventListener('scroll', function () {
@@ -53,9 +61,9 @@
   }
 
   /* ---------------------------------------------------------------------
-     Frase em degradê: quebra em palavras (só para quem vê; o leitor de
-     tela lê o texto inteiro num span escondido) e posiciona o degradê de cada
-     palavra para formar um degradê contínuo.
+     Frase em degradê: quebra em palavras só para quem vê (aria-hidden); o
+     leitor de tela lê o texto inteiro num span escondido. O degradê de
+     cada palavra é posicionado para formar um degradê contínuo.
      --------------------------------------------------------------------- */
   function prepararFrase(frase) {
     if (frase.dataset.pronta) { return frase.querySelectorAll('.palavra'); }
@@ -101,7 +109,9 @@
     var palavras = prepararFrase(frase);
 
     // Entrada ao abrir a página (não depende da rolagem)
-    gsap.from(marca.children, { opacity: 0, y: 30, scale: 1.04, duration: 1.4, ease: 'expo.out', stagger: 0.12 });
+    gsap.from(marca.querySelectorAll('.titulo-cena'), {
+      opacity: 0, y: 30, scale: 1.04, duration: 1.4, ease: 'expo.out'
+    });
 
     gsap.timeline({
       defaults: { ease: 'none' },
@@ -116,21 +126,55 @@
   }
 
   /* ---------------------------------------------------------------------
+     Paralaxe genérica: [data-velocidade="-0.1"] anda mais devagar (negativo)
+     ou mais rápido (positivo) que a rolagem. [data-parallax] é a foto do
+     topo das páginas internas.
+     --------------------------------------------------------------------- */
+  function animarParalaxe() {
+    document.querySelectorAll('[data-velocidade]').forEach(function (el) {
+      var v = parseFloat(el.getAttribute('data-velocidade')) || 0;
+      var secao = el.closest('section') || el.parentNode;
+      gsap.fromTo(el, { yPercent: -v * 60 }, {
+        yPercent: v * 60,
+        ease: 'none',
+        scrollTrigger: { trigger: secao, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
+    });
+    document.querySelectorAll('[data-parallax]').forEach(function (foto) {
+      var secao = foto.closest('section');
+      gsap.fromTo(foto, { scale: 1.12 }, { scale: 1, duration: 1.8, ease: 'power3.out' });
+      gsap.to(foto, {
+        yPercent: 14,
+        ease: 'none',
+        scrollTrigger: { trigger: secao, start: 'top top', end: 'bottom top', scrub: true }
+      });
+    });
+    // Texto do hero em camadas entra um pouco depois da arte
+    var conteudo = document.querySelector('.hero-camadas-conteudo');
+    if (conteudo) {
+      gsap.from(conteudo.children, {
+        opacity: 0, y: 40, stagger: 0.08, ease: 'power2.out',
+        scrollTrigger: { trigger: conteudo, start: 'top 95%', end: 'top 60%', scrub: 0.5 }
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------------
      Cena de vídeo em canvas
      --------------------------------------------------------------------- */
   function CenaVideo(secao) {
     this.secao = secao;
     this.palco = secao.querySelector('.cena-palco');
     this.canvas = secao.querySelector('canvas');
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d', { alpha: false }); // sem transparência: desenho mais barato
     var leve = window.matchMedia('(max-width: 767.98px)').matches ||
-      (navigator.connection && navigator.connection.saveData);
+      !!(navigator.connection && navigator.connection.saveData);
     var largura = leve ? '720' : '1280';
     this.total = parseInt(secao.getAttribute('data-quadros-' + largura), 10) || 1;
-    this.pasta = secao.dataset.pasta + largura + '/';
+    this.pasta = secao.getAttribute('data-pasta') + largura + '/';
     this.quadros = new Array(this.total);
     this.atual = 0;
-    this.desenhado = -1;
+    this.desenhado = null;
     this.carregando = false;
     this.destruida = false;
     this.redimensionar = this.redimensionar.bind(this);
@@ -141,7 +185,7 @@
     return this.pasta + 'q' + String(i + 1).padStart(3, '0') + '.webp';
   };
   /* Ordem de carga: 0, 8, 16… depois 4, 12… depois 2, 6… depois o resto.
-     Assim a cena inteira fica "rolável" cedo, e vai ganhando detalhe. */
+     Assim a cena inteira fica "rolável" cedo e vai ganhando detalhe. */
   CenaVideo.prototype.carregar = function () {
     if (this.carregando) { return; }
     this.carregando = true;
@@ -152,7 +196,6 @@
         if (!visto[i]) { visto[i] = 1; ordem.push(i); }
       }
     }, this);
-    if (!visto[this.total - 1]) { ordem.push(this.total - 1); }
     var self = this;
     var proximo = 0;
     function baixar() {
@@ -163,7 +206,10 @@
       img.src = self.url(i);
       var pronto = img.decode ? img.decode() : new Promise(function (ok) { img.onload = ok; });
       pronto.then(function () {
-        self.quadros[i] = img;
+        // ImageBitmap já fica pronto para desenhar (menos trabalho a cada quadro)
+        return window.createImageBitmap ? createImageBitmap(img) : img;
+      }).then(function (quadro) {
+        self.quadros[i] = quadro;
         if (i === 0) { self.palco.classList.add('pronta'); }
         self.desenhar(true);
       }).catch(function () { /* quadro faltando: usa o vizinho */ }).then(baixar);
@@ -187,20 +233,23 @@
     this.desenhado = img;
     var c = this.canvas;
     // Equivalente a object-fit: cover
-    var escala = Math.max(c.width / img.naturalWidth, c.height / img.naturalHeight);
-    var w = img.naturalWidth * escala;
-    var h = img.naturalHeight * escala;
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    var escala = Math.max(c.width / iw, c.height / ih);
+    var w = iw * escala;
+    var h = ih * escala;
     this.ctx.drawImage(img, (c.width - w) / 2, (c.height - h) / 2, w, h);
   };
   CenaVideo.prototype.redimensionar = function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.canvas.width = Math.round(this.palco.clientWidth * dpr);
     this.canvas.height = Math.round(this.palco.clientHeight * dpr);
-    this.desenhado = -1;
+    this.desenhado = null;
     this.desenhar(true);
   };
   CenaVideo.prototype.destruir = function () {
     this.destruida = true;
+    this.quadros.forEach(function (q) { if (q && q.close) { q.close(); } }); // libera a memória dos bitmaps
     window.removeEventListener('resize', this.redimensionar);
     this.palco.classList.remove('pronta');
   };
@@ -235,10 +284,130 @@
   }
 
   /* ---------------------------------------------------------------------
+     Tour pelas 6 regiões: um palco preso na tela; cada região entra em
+     crossfade, com zoom lento (Ken Burns) e o texto subindo.
+     --------------------------------------------------------------------- */
+  function animarTour() {
+    var palco = document.querySelector('.tour-palco');
+    if (!palco) { return; }
+    var slides = palco.querySelectorAll('.tour-slide');
+    var tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: palco, start: 'top top', end: 'bottom bottom', scrub: 0.6,
+        onToggle: function (st) {
+          slides.forEach(function (s) { s.style.willChange = st.isActive ? 'opacity' : ''; });
+        }
+      }
+    });
+    slides.forEach(function (slide, i) {
+      var foto = slide.querySelector('img');
+      var texto = slide.querySelectorAll('.tour-texto > *');
+      if (i > 0) { tl.fromTo(slide, { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.15); }
+      tl.fromTo(foto, { scale: 1.16 }, { scale: 1, duration: 1.3 }, Math.max(0, i - 0.15));
+      tl.fromTo(texto, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.25, stagger: 0.05, ease: 'power2.out' }, i === 0 ? 0 : i + 0.05);
+    });
+    tl.to({}, { duration: 0.6 });
+  }
+
+  /* ---------------------------------------------------------------------
+     Faixa horizontal de destaques: a página desce e a faixa anda de lado.
+     --------------------------------------------------------------------- */
+  var faixa = null;
+  function animarFaixa() {
+    var secao = document.querySelector('.destaques');
+    var trilho = secao && secao.querySelector('.destaques-trilho');
+    if (!trilho || trilho.children.length < 2) { return null; }
+    var janela = secao.querySelector('.destaques-janela');
+    raiz.classList.add('com-faixa-animada');
+    function distancia() {
+      return Math.max(0, trilho.scrollWidth - janela.clientWidth + parseFloat(getComputedStyle(janela).paddingLeft) * 2);
+    }
+    function medir() { secao.style.setProperty('--altura-faixa-animada', (distancia() + window.innerHeight * 1.2) + 'px'); }
+    medir();
+    var tween = gsap.to(trilho, {
+      x: function () { return -distancia(); },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: secao, start: 'top top', end: 'bottom bottom', scrub: 0.5,
+        invalidateOnRefresh: true, onRefreshInit: medir
+      }
+    });
+    faixa = { tween: tween, distancia: distancia };
+    return function () {
+      raiz.classList.remove('com-faixa-animada');
+      secao.style.removeProperty('--altura-faixa-animada');
+      faixa = null;
+    };
+  }
+
+  /* Botões anterior/próximo da faixa (funcionam com e sem animação) */
+  function iniciarBotoesFaixa() {
+    var secao = document.querySelector('.destaques');
+    if (!secao) { return; }
+    var janela = secao.querySelector('.destaques-janela');
+    var trilho = secao.querySelector('.destaques-trilho');
+    var indice = 0;
+    function itens() { return Array.prototype.slice.call(trilho.children); }
+    function irPara(i) {
+      var lista = itens();
+      indice = Math.max(0, Math.min(lista.length - 1, i));
+      var alvo = lista[indice];
+      if (faixa && faixa.tween.scrollTrigger) {
+        // Com animação: rola a página até o ponto em que o card aparece
+        var st = faixa.tween.scrollTrigger;
+        var p = Math.min(1, alvo.offsetLeft / Math.max(1, faixa.distancia()));
+        rolarPara(st.start + (st.end - st.start) * p);
+      } else {
+        janela.scrollTo({ left: alvo.offsetLeft, behavior: 'auto' });
+      }
+    }
+    secao.querySelector('[data-destaques-anterior]').addEventListener('click', function () { irPara(indice - 1); });
+    secao.querySelector('[data-destaques-proximo]').addEventListener('click', function () { irPara(indice + 1); });
+    // Tab dentro da faixa: o card focado sempre aparece na tela
+    trilho.addEventListener('focusin', function (e) {
+      var i = itens().indexOf(e.target.closest('.destaque-item'));
+      if (i < 0) { return; }
+      if (i !== indice && faixa) { irPara(i); }
+      indice = i;
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+     Lightbox das fotos do bloco editorial (modal do Bootstrap)
+     --------------------------------------------------------------------- */
+  function iniciarLightbox() {
+    var modal = document.getElementById('lightbox');
+    if (!modal || !window.bootstrap) { return; }
+    var img = modal.querySelector('[data-lightbox-img]');
+    var legenda = modal.querySelector('[data-lightbox-legenda]');
+    document.addEventListener('click', function (e) {
+      var botao = e.target.closest('[data-ampliar]');
+      if (!botao) { return; }
+      var miniatura = botao.querySelector('img');
+      img.src = botao.getAttribute('data-ampliar');
+      img.alt = miniatura.alt;
+      legenda.textContent = miniatura.alt + '. Foto: © Rockstar Games.';
+      bootstrap.Modal.getOrCreateInstance(modal).show();
+    });
+  }
+
+  /* ---------------------------------------------------------------------
      Lenis (rolagem suave) ligado ao relógio do GSAP
      --------------------------------------------------------------------- */
   var lenis = null;
   var tick = null;
+  function rolarPara(y) {
+    if (lenis) { lenis.scrollTo(y); } else { window.scrollTo({ top: y, behavior: 'auto' }); }
+  }
+  function pausarLenis() { if (lenis) { lenis.stop(); } }
+  function retomarLenis() { if (lenis) { lenis.start(); } }
+  function ancora(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href').length < 2 || !lenis) { return; }
+    var alvo = document.getElementById(a.getAttribute('href').slice(1));
+    if (alvo) { lenis.scrollTo(alvo, { immediate: true }); }
+  }
   function ligarLenis() {
     if (lenis || !window.Lenis) { return; }
     lenis = new Lenis({ duration: 1.15, smoothWheel: true, autoRaf: false });
@@ -246,7 +415,6 @@
     tick = function (t) { lenis.raf(t * 1000); };
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
-    // Âncoras internas (ex.: "Pular para o conteúdo") passam pelo Lenis
     document.addEventListener('click', ancora);
   }
   function desligarLenis() {
@@ -255,12 +423,6 @@
     document.removeEventListener('click', ancora);
     lenis.destroy();
     lenis = null;
-  }
-  function ancora(e) {
-    var a = e.target.closest('a[href^="#"]');
-    if (!a || a.getAttribute('href').length < 2) { return; }
-    var alvo = document.querySelector(a.getAttribute('href'));
-    if (alvo && lenis) { lenis.scrollTo(alvo, { immediate: true }); }
   }
 
   /* ---------------------------------------------------------------------
@@ -273,32 +435,40 @@
     if (permitido === estado) { return; }
     estado = permitido;
     if (desfazer) { desfazer(); desfazer = null; }
-    raiz.classList.toggle('sem-movimento', !permitido);
+    raiz.classList.toggle('movimento', permitido);
     if (!permitido) { return; }
 
     gsap.registerPlugin(ScrollTrigger);
-    var ctx = gsap.context(function () {});
-    var pararCenas;
-    ctx.add(function () {
+    var pararCenas = null;
+    var pararFaixa = null;
+    var ctx = gsap.context(function () {
       animarAbertura();
+      animarParalaxe();
       pararCenas = animarCenas();
+      animarTour();
+      pararFaixa = animarFaixa();
     });
     ligarLenis();
     ScrollTrigger.refresh();
     desfazer = function () {
       desligarLenis();
       if (pararCenas) { pararCenas(); }
+      if (pararFaixa) { pararFaixa(); }
       ctx.revert(); // devolve todo elemento ao estado original (visível)
     };
   }
 
-  // Antes do primeiro desenho: decide o modo para não "piscar" a versão errada
-  var reduzidoAgora = window.GLA11y ? GLA11y.movimentoReduzido()
-    : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  raiz.classList.toggle('sem-movimento', reduzidoAgora || !window.gsap);
+  // Antes do primeiro desenho: sem GSAP, as cenas já nascem paradas
+  if (!window.gsap || !window.ScrollTrigger) { raiz.classList.remove('movimento'); }
 
   document.addEventListener('DOMContentLoaded', function () {
     iniciarCabecalho();
+    iniciarLightbox();
+    iniciarBotoesFaixa();
+    // Modal, painel ou menu aberto: a página de trás não rola
+    ['show.bs.modal', 'show.bs.offcanvas'].forEach(function (ev) { document.addEventListener(ev, pausarLenis); });
+    ['hidden.bs.modal', 'hidden.bs.offcanvas'].forEach(function (ev) { document.addEventListener(ev, retomarLenis); });
+
     var fontes = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     fontes.then(configurar);
     document.addEventListener('gl:a11y', configurar);
@@ -311,12 +481,4 @@
       }, 150);
     });
   });
-
-  // Usado pela barra do protótipo para refazer o degradê depois de trocar a fonte
-  window.GLCenas = {
-    refazerDegrade: function () {
-      document.querySelectorAll('.frase-sol[data-pronta]').forEach(posicionarDegrade);
-      if (window.ScrollTrigger) { ScrollTrigger.refresh(); }
-    }
-  };
 })();
