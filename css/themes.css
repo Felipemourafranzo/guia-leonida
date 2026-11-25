@@ -1,55 +1,23 @@
-/* ==========================================================================
-   Guia Leonida: temas e tokens de cor (redesign "trailer de rolagem")
-   --------------------------------------------------------------------------
-   Este arquivo define a PALETA e a TIPOGRAFIA do site como tokens (custom
-   properties) e liga esses tokens às variáveis do Bootstrap 5.3 (--bs-*).
-
-   Três modos:
-     [data-bs-theme="dark"]   noite em Leonida (PADRÃO do site)
-     [data-bs-theme="light"]  areia ao meio-dia (opção do painel)
-     [data-contraste="alto"]  alto contraste (preto, branco, amarelo, ciano)
-
-   As cenas com foto (página inicial e topo das páginas internas) usam
-   data-bs-theme="dark" no próprio elemento: ficam escuras em qualquer tema.
-
-   Paleta base: roxo-noite #120b22 → #1b1030, rosa #ff4fa3, laranja #ff8a3d,
-   creme #ffe8a3 (citações) e ciano só como detalhe.
-   Todos os pares texto/fundo foram conferidos com tools/contraste.py
-   (fórmula da WCAG). O resultado está em docs/contraste.md.
-   Se mudar alguma cor aqui, atualize o script e rode de novo.
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. Tokens que não mudam com o tema
-   -------------------------------------------------------------------------- */
 :root {
-  /* Tipografia: títulos condensados em caixa alta (Big Shoulders Display,
-     de desenho art déco) e texto em Inter. Atkinson Hyperlegible é a opção
-     para dislexia do painel. */
   --fonte-texto: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --fonte-titulo: "Big Shoulders Display", "Arial Narrow", "Inter", sans-serif;
   --fonte-dislexia: "Atkinson Hyperlegible", "Verdana", sans-serif;
 
-  /* Escala de tamanho da fonte (alterada pelo painel de acessibilidade) */
   --escala-fonte: 1;
 
-  /* Formas e espaços: cantos quase retos, muito respiro */
   --raio: 4px;
   --raio-pequeno: 2px;
   --raio-pilula: 999px;
   --largura-foco: 3px;
-  --alvo-minimo: 44px; /* WCAG 2.5.8 pede 24px; usamos 44px por conforto */
+  --alvo-minimo: 44px;
   --gutter: clamp(1rem, 4vw, 3.5rem);
   --largura-max: 84rem;
   --altura-faixa: 2rem;
   --altura-cabecalho: 4.25rem;
 
-  /* Movimento (zerado quando o usuário pede menos movimento) */
   --duracao: .25s;
   --ease: cubic-bezier(.16, 1, .3, 1);
 
-  /* Cores puras da marca: só decoração (degradês, brilhos, faixas),
-     NUNCA texto pequeno sobre fundo claro */
   --rosa: #ff4fa3;
   --laranja: #ff8a3d;
   --creme: #ffe8a3;
@@ -61,49 +29,41 @@
   --degrade-sol: linear-gradient(90deg, var(--rosa) 0%, var(--laranja) 55%, var(--creme) 100%);
   --degrade-ceu: linear-gradient(180deg, var(--noite-2) 0%, var(--noite-1) 100%);
 
-  /* Neon com moderação: só títulos de seção, item ativo do menu, botão
-     principal e letreiros pontuais */
   --brilho-rosa: 0 0 .35em rgb(255 79 163 / .55), 0 0 1.2em rgb(255 79 163 / .25);
   --brilho-creme: 0 0 .6em rgb(255 232 163 / .45);
   --brilho-botao: 0 0 1.4rem rgb(255 79 163 / .35);
 }
 
-/* --------------------------------------------------------------------------
-   2. Escuro: "noite em Leonida" (padrão)
-   -------------------------------------------------------------------------- */
 :root,
 [data-bs-theme="dark"] {
   --cor-fundo: #120b22;
-  --cor-fundo-2: #1b1030;          /* faixas alternadas */
-  --cor-superficie: #1b1030;       /* painéis, campos, modais */
+  --cor-fundo-2: #1b1030;
+  --cor-superficie: #1b1030;
   --cor-superficie-2: #2a1a47;
   --cor-texto: #f4eefc;
   --cor-texto-suave: #c9bddf;
   --cor-titulo: #f4eefc;
-  --cor-destaque: #ffe8a3;          /* sobretítulos, citações */
-  --cor-primaria: #ff4fa3;          /* links, ação */
+  --cor-destaque: #ffe8a3;
+  --cor-primaria: #ff4fa3;
   --cor-primaria-hover: #ff7dbb;
   --cor-sobre-primaria: #0c0818;
   --cor-secundaria: #ff8a3d;
   --cor-acento: #5ee7ff;
-  --cor-borda: #33245a;             /* divisões decorativas */
-  --cor-borda-campo: #8f7cc0;       /* bordas de campo (3:1) */
+  --cor-borda: #33245a;
+  --cor-borda-campo: #8f7cc0;
   --cor-foco: #ffe8a3;
   --cor-erro: #ff9b9b;
   --cor-sucesso: #6ee7b0;
-  --veu: 12 8 24;                   /* rgb do véu sobre fotos */
-  --cor-card: #0c0818;              /* corpo dos cards do catálogo */
+  --veu: 12 8 24;
+  --cor-card: #0c0818;
   --sombra-card: none;
-  --degrade-texto: var(--degrade-sol); /* degradê em títulos grandes */
+  --degrade-texto: var(--degrade-sol);
   color-scheme: dark;
 }
 
-/* --------------------------------------------------------------------------
-   3. Claro: "areia ao meio-dia"
-   -------------------------------------------------------------------------- */
 [data-bs-theme="light"] {
   --cor-fundo: #fbf4ea;
-  --cor-fundo-2: #f8e6d8;           /* faixas pêssego */
+  --cor-fundo-2: #f8e6d8;
   --cor-superficie: #ffffff;
   --cor-superficie-2: #f3e8da;
   --cor-texto: #1b1030;
@@ -123,14 +83,11 @@
   --veu: 12 8 24;
   --cor-card: #ffffff;
   --sombra-card: 0 .75rem 2rem rgb(120 60 40 / .12);
-  /* No claro, o degradê de títulos usa tons escuros do pôr do sol (contraste) */
+
   --degrade-texto: linear-gradient(90deg, #b3135f 0%, #9a3412 60%, #8c3a0a 100%);
   color-scheme: light;
 }
 
-/* --------------------------------------------------------------------------
-   4. Alto contraste (vale por cima do claro e do escuro)
-   -------------------------------------------------------------------------- */
 [data-contraste="alto"],
 [data-contraste="alto"] [data-bs-theme] {
   --cor-fundo: #000000;
@@ -162,9 +119,6 @@
   color-scheme: dark;
 }
 
-/* --------------------------------------------------------------------------
-   5. Ligação dos tokens com o Bootstrap 5.3
-   -------------------------------------------------------------------------- */
 :root,
 [data-bs-theme],
 [data-contraste="alto"] {
@@ -195,7 +149,6 @@
   --bs-border-radius-lg: var(--raio);
 }
 
-/* Botões do Bootstrap usando a paleta */
 .btn-primary {
   --bs-btn-color: var(--cor-sobre-primaria);
   --bs-btn-bg: var(--cor-primaria);
@@ -233,7 +186,6 @@
   --bs-btn-active-border-color: var(--cor-texto);
 }
 
-/* Campos de formulário com borda de 3:1 (WCAG 1.4.11) */
 .form-control,
 .form-select,
 .form-check-input {
@@ -249,7 +201,6 @@
   border-color: var(--cor-primaria);
 }
 
-/* O "check" fica escuro sobre o rosa (e preto sobre o amarelo do alto contraste) */
 [data-bs-theme="dark"] .form-check-input:checked[type="checkbox"],
 [data-contraste="alto"] .form-check-input:checked[type="checkbox"] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%230c0818' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");

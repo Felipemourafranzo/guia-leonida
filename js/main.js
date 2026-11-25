@@ -1,20 +1,6 @@
-/* ==========================================================================
-   Guia Leonida: main.js
-   --------------------------------------------------------------------------
-   Funções comuns a todas as páginas, expostas no objeto global "GL":
-     - leitura/escrita segura no localStorage
-     - anúncios para leitores de tela (região aria-live)
-     - avisos visuais (toasts do Bootstrap)
-     - bloco "Já disponível" (dias desde o lançamento) e status no rodapé
-     - linha do tempo de novidades (com selo "Novo desde sua última visita")
-   ========================================================================== */
 window.GL = (function () {
   'use strict';
 
-  /* ---------------------------------------------------------------------
-     Armazenamento: sempre com try/catch, porque o localStorage pode estar
-     bloqueado (navegação privada, configurações do navegador).
-     --------------------------------------------------------------------- */
   function lerJSON(chave, padrao) {
     try {
       var bruto = localStorage.getItem(chave);
@@ -33,7 +19,6 @@ window.GL = (function () {
     }
   }
 
-  /* Evita injeção de HTML ao montar textos dinâmicos */
   function escaparHTML(texto) {
     return String(texto)
       .replace(/&/g, '&amp;')
@@ -43,7 +28,6 @@ window.GL = (function () {
       .replace(/'/g, '&#39;');
   }
 
-  /* Remove acentos e deixa minúsculo: "Região" -> "regiao" (usado na busca) */
   function normalizar(texto) {
     return String(texto)
       .normalize('NFD')
@@ -52,11 +36,6 @@ window.GL = (function () {
       .trim();
   }
 
-  /* ---------------------------------------------------------------------
-     Anúncios para leitores de tela.
-     Esvaziamos a região antes de escrever para que a mesma mensagem
-     repetida também seja lida.
-     --------------------------------------------------------------------- */
   var temporizadorAnuncio = null;
   function anunciar(mensagem) {
     var regiao = document.getElementById('anunciador');
@@ -68,12 +47,6 @@ window.GL = (function () {
     }, 100);
   }
 
-  /* ---------------------------------------------------------------------
-     Toast (aviso visual). O texto também é anunciado pela região
-     #anunciador, por isso o toast em si não é uma região "live".
-     Quando o aviso tem um link de ação, ele NÃO some sozinho
-     (WCAG 2.2.1: o usuário precisa de tempo para chegar ao link).
-     --------------------------------------------------------------------- */
   function avisar(mensagem, opcoes) {
     opcoes = opcoes || {};
     var area = document.getElementById('area-toasts');
@@ -103,12 +76,6 @@ window.GL = (function () {
     anunciar(mensagem + (temAcao ? ' ' + opcoes.acao.texto + ': link disponível no aviso.' : ''));
   }
 
-  /* ---------------------------------------------------------------------
-     Bloco "Já disponível" (página inicial): dias desde o lançamento.
-     HTML: [data-disponivel] com [data-dias-lancamento] e [data-dias-rotulo].
-     O número já vem escrito no HTML (funciona sem JS); aqui ele só é
-     atualizado para o dia de hoje (horário de Brasília).
-     --------------------------------------------------------------------- */
   function iniciarDisponivel() {
     var caixa = document.querySelector('[data-disponivel]');
     if (!caixa || !window.GLDados) { return; }
@@ -119,7 +86,6 @@ window.GL = (function () {
       dias === 0 ? 'lançado hoje' : (dias === 1 ? 'dia desde o lançamento' : 'dias desde o lançamento');
   }
 
-  /* Status curto no rodapé (todas as páginas) */
   function atualizarStatusRodape() {
     var el = document.querySelector('[data-status-rodape]');
     if (!el || !window.GLDados) { return; }
@@ -128,11 +94,6 @@ window.GL = (function () {
       ' (checado em ' + l.checado + ').';
   }
 
-  /* ---------------------------------------------------------------------
-     Novidades: linha do tempo. Marca como "Novo" o que foi publicado depois
-     da última visita do usuário (engajamento: motivo para voltar).
-     HTML: <ol class="linha-tempo" data-novidades data-limite="4"></ol>
-     --------------------------------------------------------------------- */
   function renderizarNovidades() {
     var lista = document.querySelector('[data-novidades]');
     if (!lista || !window.GLDados) { return; }
@@ -155,7 +116,6 @@ window.GL = (function () {
     salvarJSON('gl-ultima-visita', Date.now());
   }
 
-  /* Preenche o ano atual onde houver [data-ano] */
   function preencherAno() {
     document.querySelectorAll('[data-ano]').forEach(function (el) {
       el.textContent = new Date().getFullYear();

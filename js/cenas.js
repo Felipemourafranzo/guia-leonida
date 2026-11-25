@@ -1,33 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: cenas.js ("trailer de rolagem")
-   --------------------------------------------------------------------------
-   Carregado em todas as páginas. Cuida de:
-   - Cabeçalho transparente sobre a foto do topo, sólido ao rolar.
-   - Rolagem suave (Lenis), pausada enquanto um modal ou painel está aberto.
-   - Página inicial:
-       abertura (marca → logo de GTA VI → frase em degradê palavra por palavra),
-       hero em camadas, cena de vídeo em <canvas> controlada pela rolagem,
-       tour pelas 6 regiões (Ken Burns + crossfade), fotos em paralaxe,
-       faixa horizontal de destaques e lightbox das fotos.
-   - Mapa: o pôster se afasta de Vice City e as 6 regiões acendem.
-   - Páginas internas: leve paralaxe na foto do topo ([data-parallax]).
-
-   Cena de vídeo: quadros WebP extraídos de um videoclipe oficial com ffmpeg
-   (tools/processar_kit.py). Carregam aos poucos (1 a cada 8, depois 4, 2 e
-   1) e a primeira imagem aparece enquanto isso. No celular (até 767 px) ou
-   com "economia de dados", usa a versão leve (720 px, metade dos quadros).
-
-   Acessibilidade (obrigatório):
-   - Nada anima com prefers-reduced-motion ou com "Reduzir animações" do
-     painel (GLA11y.movimentoReduzido()). Sem a classe "movimento" no <html>
-     o CSS mostra as cenas como imagens paradas em sequência. Mudou a opção
-     no painel (evento "gl:a11y")? Tudo é desfeito ou religado na hora.
-   - Todo texto está no HTML; a animação só muda opacity e transform.
-     Nunca visibility/display: o texto apagado continua para o leitor de
-     tela, e um link apagado reaparece quando recebe foco (cenas.css).
-   - will-change só enquanto a cena está na tela.
-   Depende de GSAP 3 + ScrollTrigger e Lenis (jsDelivr, versões fixas, SRI).
-   ========================================================================== */
 (function () {
   'use strict';
 
@@ -40,16 +10,12 @@
     return !reduzido;
   }
 
-  /* ---------------------------------------------------------------------
-     Cabeçalho: transparente sobre a foto do topo, sólido depois de rolar.
-     Páginas sem foto no topo ganham body.sem-hero (fundo desde o início).
-     --------------------------------------------------------------------- */
   function iniciarCabecalho() {
     var cabecalho = document.querySelector('.cabecalho');
     if (!cabecalho) { return; }
     var temHero = !!document.querySelector('.hero-pagina, .abertura');
     document.body.classList.toggle('sem-hero', !temHero);
-    // A abertura da página inicial é clara no tema claro: o cabeçalho usa texto escuro sobre ela
+
     document.body.classList.toggle('hero-claro', !!document.querySelector('.abertura'));
     var ticando = false;
     function atualizar() {
@@ -63,11 +29,6 @@
     atualizar();
   }
 
-  /* ---------------------------------------------------------------------
-     Frase em degradê: quebra em palavras só para quem vê (aria-hidden); o
-     leitor de tela lê o texto inteiro num span escondido. O degradê de
-     cada palavra é posicionado para formar um degradê contínuo.
-     --------------------------------------------------------------------- */
   function prepararFrase(frase) {
     if (frase.dataset.pronta) { return frase.querySelectorAll('.palavra'); }
     var texto = frase.textContent.trim().replace(/\s+/g, ' ');
@@ -99,9 +60,6 @@
     });
   }
 
-  /* ---------------------------------------------------------------------
-     Abertura
-     --------------------------------------------------------------------- */
   function animarAbertura() {
     var secao = document.querySelector('.abertura');
     if (!secao) { return; }
@@ -111,7 +69,6 @@
     var dica = secao.querySelector('.dica-rolar');
     var palavras = prepararFrase(frase);
 
-    // Entrada ao abrir a página (não depende da rolagem)
     gsap.from(marca.querySelectorAll('.titulo-cena'), {
       opacity: 0, y: 30, scale: 1.04, duration: 1.4, ease: 'expo.out'
     });
@@ -125,14 +82,9 @@
       .fromTo(logo, { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.22, ease: 'power2.out' }, 0.16)
       .fromTo(frase, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.16, ease: 'power2.out' }, 0.24)
       .fromTo(palavras, { opacity: 0.15 }, { opacity: 1, duration: 0.05, stagger: 0.045 }, 0.38)
-      .to({}, { duration: 0.12 }); // respiro antes da próxima cena
+      .to({}, { duration: 0.12 });
   }
 
-  /* ---------------------------------------------------------------------
-     Paralaxe genérica: [data-velocidade="-0.1"] anda mais devagar (negativo)
-     ou mais rápido (positivo) que a rolagem. [data-parallax] é a foto do
-     topo das páginas internas.
-     --------------------------------------------------------------------- */
   function animarParalaxe() {
     document.querySelectorAll('[data-velocidade]').forEach(function (el) {
       var v = parseFloat(el.getAttribute('data-velocidade')) || 0;
@@ -152,7 +104,7 @@
         scrollTrigger: { trigger: secao, start: 'top top', end: 'bottom top', scrub: true }
       });
     });
-    // Texto do hero em camadas entra um pouco depois da arte
+
     var conteudo = document.querySelector('.hero-camadas-conteudo');
     if (conteudo) {
       gsap.from(conteudo.children, {
@@ -162,26 +114,24 @@
     }
   }
 
-  /* ---------------------------------------------------------------------
-     Cena de vídeo em canvas
-     --------------------------------------------------------------------- */
   function CenaVideo(secao) {
     this.secao = secao;
     this.palco = secao.querySelector('.cena-palco');
     this.canvas = secao.querySelector('canvas');
-    this.ctx = this.canvas.getContext('2d', { alpha: false }); // sem transparência: desenho mais barato
+    this.ctx = this.canvas.getContext('2d', { alpha: false });
     var leve = window.matchMedia('(max-width: 767.98px)').matches ||
       !!(navigator.connection && navigator.connection.saveData);
     var largura = leve ? '720' : '1280';
     this.total = parseInt(secao.getAttribute('data-quadros-' + largura), 10) || 1;
     this.pasta = secao.getAttribute('data-pasta') + largura + '/';
-    // Ponto de foco horizontal do recorte (0 = esquerda, .5 = centro, 1 = direita),
-    // útil no celular, onde a tela em pé corta as laterais do vídeo
+
     this.focoX = parseFloat(secao.getAttribute('data-foco-x'));
     if (isNaN(this.focoX)) { this.focoX = 0.5; }
     this.quadros = new Array(this.total);
     this.atual = 0;
+    this.posicao = 0;
     this.desenhado = null;
+    this.mistura = -1;
     this.carregando = false;
     this.destruida = false;
     this.redimensionar = this.redimensionar.bind(this);
@@ -191,8 +141,7 @@
   CenaVideo.prototype.url = function (i) {
     return this.pasta + 'q' + String(i + 1).padStart(3, '0') + '.webp';
   };
-  /* Ordem de carga: 0, 8, 16… depois 4, 12… depois 2, 6… depois o resto.
-     Assim a cena inteira fica "rolável" cedo e vai ganhando detalhe. */
+
   CenaVideo.prototype.carregar = function () {
     if (this.carregando) { return; }
     this.carregando = true;
@@ -213,15 +162,14 @@
       img.src = self.url(i);
       var pronto = img.decode ? img.decode() : new Promise(function (ok) { img.onload = ok; });
       pronto.then(function () {
-        // ImageBitmap já fica pronto para desenhar (menos trabalho a cada quadro)
         return window.createImageBitmap ? createImageBitmap(img) : img;
       }).then(function (quadro) {
         self.quadros[i] = quadro;
         if (i === 0) { self.palco.classList.add('pronta'); }
         self.desenhar(true);
-      }).catch(function () { /* quadro faltando: usa o vizinho */ }).then(baixar);
+      }).catch(function () { }).then(baixar);
     }
-    for (var n = 0; n < 4; n++) { baixar(); } // 4 downloads em paralelo
+    for (var n = 0; n < 4; n++) { baixar(); }
   };
   CenaVideo.prototype.vizinho = function (i) {
     for (var d = 0; d < this.total; d++) {
@@ -231,21 +179,31 @@
     return null;
   };
   CenaVideo.prototype.irPara = function (progresso) {
-    this.atual = Math.min(this.total - 1, Math.max(0, Math.round(progresso * (this.total - 1))));
+    this.posicao = Math.min(this.total - 1, Math.max(0, progresso * (this.total - 1)));
+    this.atual = Math.floor(this.posicao);
     this.desenhar(false);
   };
-  CenaVideo.prototype.desenhar = function (forcar) {
-    var img = this.vizinho(this.atual);
-    if (!img || (!forcar && img === this.desenhado)) { return; }
-    this.desenhado = img;
+  CenaVideo.prototype.pintar = function (img, alfa) {
     var c = this.canvas;
-    // Equivalente a object-fit: cover
     var iw = img.naturalWidth || img.width;
     var ih = img.naturalHeight || img.height;
     var escala = Math.max(c.width / iw, c.height / ih);
     var w = iw * escala;
     var h = ih * escala;
+    this.ctx.globalAlpha = alfa;
     this.ctx.drawImage(img, (c.width - w) * this.focoX, (c.height - h) / 2, w, h);
+    this.ctx.globalAlpha = 1;
+  };
+  CenaVideo.prototype.desenhar = function (forcar) {
+    var img = this.vizinho(this.atual);
+    if (!img) { return; }
+    var seguinte = this.atual + 1 < this.total ? this.quadros[this.atual + 1] : null;
+    var fracao = seguinte && seguinte !== img ? Math.round((this.posicao - this.atual) * 12) / 12 : 0;
+    if (!forcar && img === this.desenhado && fracao === this.mistura) { return; }
+    this.desenhado = img;
+    this.mistura = fracao;
+    this.pintar(img, 1);
+    if (fracao > 0) { this.pintar(seguinte, fracao); }
   };
   CenaVideo.prototype.redimensionar = function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -256,7 +214,7 @@
   };
   CenaVideo.prototype.destruir = function () {
     this.destruida = true;
-    this.quadros.forEach(function (q) { if (q && q.close) { q.close(); } }); // libera a memória dos bitmaps
+    this.quadros.forEach(function (q) { if (q && q.close) { q.close(); } });
     window.removeEventListener('resize', this.redimensionar);
     this.palco.classList.remove('pronta');
   };
@@ -269,7 +227,6 @@
       var texto = secao.querySelectorAll('.cena-texto > *');
       var barra = secao.querySelector('.cena-progresso span');
 
-      // Começa a baixar quando a cena está a ~1,5 tela de distância
       ScrollTrigger.create({
         trigger: secao, start: 'top bottom+=150%', once: true,
         onEnter: function () { cena.carregar(); }
@@ -290,10 +247,6 @@
     return function () { cenas.forEach(function (c) { c.destruir(); }); };
   }
 
-  /* ---------------------------------------------------------------------
-     Tour pelas 6 regiões: um palco preso na tela; cada região entra em
-     crossfade, com zoom lento (Ken Burns) e o texto subindo.
-     --------------------------------------------------------------------- */
   function animarTour() {
     var palco = document.querySelector('.tour-palco');
     if (!palco) { return; }
@@ -311,7 +264,6 @@
       var foto = slide.querySelector('img');
       var texto = slide.querySelectorAll('.tour-texto > *');
       if (i > 0) {
-        // O texto da região anterior sai antes de a próxima entrar: nunca dois textos na tela
         tl.to(slides[i - 1].querySelectorAll('.tour-texto > *'), { opacity: 0, y: -30, duration: 0.15, stagger: 0.02 }, i - 0.3);
         tl.fromTo(slide, { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.15);
       }
@@ -321,18 +273,13 @@
     tl.to({}, { duration: 0.6 });
   }
 
-  /* ---------------------------------------------------------------------
-     Cena do mapa (mapa.html): o pôster começa aproximado em Vice City e se
-     afasta até mostrar o estado inteiro; depois as 6 regiões acendem uma a
-     uma, no mapa e na lista ao lado.
-     --------------------------------------------------------------------- */
   function animarMapaCena() {
     var secao = document.querySelector('.mapa-cena');
     if (!secao) { return; }
     var poster = secao.querySelector('.mapa-cena-poster');
     var pinos = secao.querySelectorAll('.mapa-pino');
     var itens = secao.querySelectorAll('.mapa-cena-lista li');
-    poster.style.transformOrigin = '67.3% 52.1%'; // Vice City no pôster
+    poster.style.transformOrigin = '67.3% 52.1%';
     gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
@@ -346,9 +293,6 @@
       .to({}, { duration: 0.1 });
   }
 
-  /* ---------------------------------------------------------------------
-     Faixa horizontal de destaques: a página desce e a faixa anda de lado.
-     --------------------------------------------------------------------- */
   var faixa = null;
   function animarFaixa() {
     var secao = document.querySelector('.destaques');
@@ -377,7 +321,6 @@
     };
   }
 
-  /* Botões anterior/próximo da faixa (funcionam com e sem animação) */
   function iniciarBotoesFaixa() {
     var secao = document.querySelector('.destaques');
     if (!secao) { return; }
@@ -390,7 +333,6 @@
       indice = Math.max(0, Math.min(lista.length - 1, i));
       var alvo = lista[indice];
       if (faixa && faixa.tween.scrollTrigger) {
-        // Com animação: rola a página até o ponto em que o card aparece
         var st = faixa.tween.scrollTrigger;
         var p = Math.min(1, alvo.offsetLeft / Math.max(1, faixa.distancia()));
         rolarPara(st.start + (st.end - st.start) * p);
@@ -400,7 +342,7 @@
     }
     secao.querySelector('[data-destaques-anterior]').addEventListener('click', function () { irPara(indice - 1); });
     secao.querySelector('[data-destaques-proximo]').addEventListener('click', function () { irPara(indice + 1); });
-    // Tab dentro da faixa: o card focado sempre aparece na tela
+
     trilho.addEventListener('focusin', function (e) {
       var i = itens().indexOf(e.target.closest('.destaque-item'));
       if (i < 0) { return; }
@@ -409,9 +351,6 @@
     });
   }
 
-  /* ---------------------------------------------------------------------
-     Lightbox das fotos do bloco editorial (modal do Bootstrap)
-     --------------------------------------------------------------------- */
   function iniciarLightbox() {
     var modal = document.getElementById('lightbox');
     if (!modal || !window.bootstrap) { return; }
@@ -428,9 +367,6 @@
     });
   }
 
-  /* ---------------------------------------------------------------------
-     Lenis (rolagem suave) ligado ao relógio do GSAP
-     --------------------------------------------------------------------- */
   var lenis = null;
   var tick = null;
   function rolarPara(y) {
@@ -461,9 +397,6 @@
     lenis = null;
   }
 
-  /* ---------------------------------------------------------------------
-     Liga e desliga tudo conforme as preferências
-     --------------------------------------------------------------------- */
   var desfazer = null;
   var estado = null;
   function configurar() {
@@ -487,27 +420,32 @@
     });
     ligarLenis();
     ScrollTrigger.refresh();
+    raiz.classList.add('cenas-prontas');
     desfazer = function () {
+      raiz.classList.remove('cenas-prontas');
       desligarLenis();
       if (pararCenas) { pararCenas(); }
       if (pararFaixa) { pararFaixa(); }
-      ctx.revert(); // devolve todo elemento ao estado original (visível)
+      ctx.revert();
     };
   }
 
-  // Antes do primeiro desenho: sem GSAP, as cenas já nascem paradas
   if (!window.gsap || !window.ScrollTrigger) { raiz.classList.remove('movimento'); }
 
   document.addEventListener('DOMContentLoaded', function () {
     iniciarCabecalho();
     iniciarLightbox();
     iniciarBotoesFaixa();
-    // Modal, painel ou menu aberto: a página de trás não rola
+
     ['show.bs.modal', 'show.bs.offcanvas'].forEach(function (ev) { document.addEventListener(ev, pausarLenis); });
     ['hidden.bs.modal', 'hidden.bs.offcanvas'].forEach(function (ev) { document.addEventListener(ev, retomarLenis); });
 
+    configurar();
     var fontes = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-    fontes.then(configurar);
+    fontes.then(function () {
+      document.querySelectorAll('.frase-sol[data-pronta]').forEach(posicionarDegrade);
+      if (estado && window.ScrollTrigger) { ScrollTrigger.refresh(); }
+    });
     document.addEventListener('gl:a11y', configurar);
     window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', configurar);
     var espera;

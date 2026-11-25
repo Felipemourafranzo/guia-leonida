@@ -1,26 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: mapa.js (pôster oficial do mapa com zoom e marcadores)
-   --------------------------------------------------------------------------
-   HTML esperado (mapa.html):
-     .mapa-zoom[data-mapa]           janela do mapa (recebe foco pelo teclado)
-       .mapa-camada                  imagem do pôster + marcadores (é ela que
-                                     recebe translate/scale)
-         img
-         button.mapa-marcador[data-regiao][style="left: x%; top: y%"]
-       .mapa-controles button[data-zoom="+1|-1|0"]
-     .regiao-item[data-regiao]       lista das regiões no painel lateral
-     [data-painel-regiao]            onde aparece o cartão-postal da região
-
-   Como usar:
-     - roda do mouse ou pinça (celular) para aproximar e afastar;
-     - arrastar com o mouse ou o dedo para mover;
-     - teclado (com o mapa focado): setas movem, + e − dão zoom, 0 centraliza;
-     - botões + / − / centralizar para quem não usa mouse;
-     - cada marcador (ou item da lista ao lado) leva o mapa até a região e
-       mostra o cartão-postal oficial no painel lateral.
-   A tabela das regiões, na mesma página, é a alternativa em texto.
-   Só transform na camada; sem animação quando o usuário pede menos movimento.
-   ========================================================================== */
 (function () {
   'use strict';
 
@@ -35,11 +12,10 @@
   function iniciarMapa(janela) {
     var camada = janela.querySelector('.mapa-camada');
     var img = camada.querySelector('img');
-    var proporcao = img.getAttribute('height') / img.getAttribute('width'); // altura/largura do pôster
+    var proporcao = img.getAttribute('height') / img.getAttribute('width');
     var estado = { x: 0, y: 0, s: 1 };
     var base = { w: 0, h: 0 };
 
-    /* Tamanho "inteiro na tela" (escala 1): o pôster cabe todo na janela */
     function medir() {
       var jw = janela.clientWidth;
       var jh = janela.clientHeight;
@@ -51,7 +27,6 @@
       aplicar(false);
     }
 
-    /* Não deixa o pôster sair todo da janela */
     function limitar() {
       var jw = janela.clientWidth;
       var jh = janela.clientHeight;
@@ -69,7 +44,6 @@
       if (nivel) { nivel.textContent = 'Zoom: ' + Math.round(estado.s * 100) + '%'; }
     }
 
-    /* Zoom mantendo fixo o ponto (px, py) da janela */
     function zoom(fator, px, py, animar) {
       var nova = Math.min(ESCALA_MAX, Math.max(ESCALA_MIN, estado.s * fator));
       if (px === undefined) { px = janela.clientWidth / 2; py = janela.clientHeight / 2; }
@@ -87,7 +61,6 @@
       aplicar(animar);
     }
 
-    /* Leva um ponto do pôster (em %) para o centro, com zoom */
     function focarPonto(px, py, escala) {
       estado.s = escala;
       estado.x = janela.clientWidth / 2 - (px / 100) * base.w * escala;
@@ -96,19 +69,17 @@
       aplicar(true);
     }
 
-    /* Roda do mouse */
     janela.addEventListener('wheel', function (e) {
       e.preventDefault();
       var r = janela.getBoundingClientRect();
       zoom(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top, false);
     }, { passive: false });
 
-    /* Arraste e pinça (Pointer Events) */
     var ponteiros = {};
     var inicio = null;
     function lista() { return Object.keys(ponteiros).map(function (k) { return ponteiros[k]; }); }
     janela.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('button')) { return; } // botões e marcadores continuam clicáveis
+      if (e.target.closest('button')) { return; }
       janela.setPointerCapture(e.pointerId);
       ponteiros[e.pointerId] = { x: e.clientX, y: e.clientY };
       janela.classList.add('arrastando');
@@ -141,7 +112,6 @@
     janela.addEventListener('pointerup', soltar);
     janela.addEventListener('pointercancel', soltar);
 
-    /* Teclado (com o foco no mapa) */
     janela.addEventListener('keydown', function (e) {
       if (e.target !== janela) { return; }
       var passo = 60;
@@ -159,7 +129,6 @@
       if (tratado) { e.preventDefault(); limitar(); aplicar(true); }
     });
 
-    /* Botões + / − / centralizar */
     janela.querySelectorAll('[data-zoom]').forEach(function (botao) {
       botao.addEventListener('click', function () {
         var v = botao.getAttribute('data-zoom');
@@ -173,8 +142,6 @@
     return { focarPonto: focarPonto };
   }
 
-  /* Região escolhida: marcadores do mapa e lista do painel lateral abrem a
-     mesma região; o mapa "voa" até ela e o painel mostra o cartão-postal. */
   function iniciarMarcadores(mapa) {
     var painel = document.querySelector('[data-painel-regiao]');
     var marcadores = Array.prototype.slice.call(document.querySelectorAll('.mapa-marcador'));
@@ -210,7 +177,6 @@
       b.addEventListener('click', function () { abrir(b.getAttribute('data-regiao'), true); });
     });
 
-    /* Links da página inicial ("Ver no mapa") chegam com #regiao-<id> */
     var alvo = location.hash.replace('#regiao-', '');
     if (alvo && alvo !== location.hash) {
       abrir(alvo, true);

@@ -1,31 +1,4 @@
 #!/usr/bin/env python3
-"""Processa o kit de mídia oficial de GTA VI para o Guia Leonida.
-
-Uso:
-    python3 tools/processar_kit.py <pasta-do-kit-descompactado> [etapas]
-    etapas (opcional, separadas por vírgula): artes,logo,capturas,miniaturas,quadros
-    (quadros:<nome> refaz só a cena com esse nome, ex.: quadros:jason)
-
-A pasta do kit deve ter os quatro ZIPs oficiais descompactados lado a lado
-(https://www.rockstargames.com/VI/media):
-    GTAVI_Artwork_Wallpapers/   GTAVI_Screenshots/
-    GTAVI_Videos/               GTAVI_Vintage_Vice_City_Pack/
-    GTAVI_Ultimate_Edition_Benefits/
-
-O que o script gera:
-1. Ilustrações oficiais, cartões-postais e pôster do mapa em WebP
-   (1600 e 800 px; o mapa em 2400 e 1200 px) em assets/img/jogo/.
-2. O logo de GTA VI recortado com transparência (diferença entre a arte
-   "com logotipo" e a mesma arte sem logotipo), em assets/img/jogo/.
-3. Miniaturas (480 px) das capturas ainda não usadas e do pacote Vintage
-   Vice City para a folha de contato, em docs/folha-de-contato/.
-4. Os quadros da cena de vídeo controlada pela rolagem (ffmpeg), em
-   assets/cenas/<nome>/<largura>/.
-5. O manifesto (assets/img/jogo/manifesto.json) com origem e alt de cada
-   imagem nova, sem apagar as que já estavam lá.
-
-Requer Python 3 + Pillow + numpy e o ffmpeg no PATH.
-"""
 import json
 import subprocess
 import sys
@@ -52,7 +25,6 @@ PAGINA_VIDEOS = 'https://www.rockstargames.com/VI/media/videos'
 ZIP_VIDEOS = ('https://media-rockstargames-com.akamaized.net/VI/downloads/'
               'videos/GTAVI_Videos.zip')
 
-# (arquivo de saída, caminho no ZIP de ilustrações, grupo, alt)
 ARTES = [
     ('arte-jason-lucia-praia', 'Jason_and_Lucia_Beach/Jason_and_Lucia_Beach_landscape.jpg', 'arte',
      'Ilustração oficial: Lucia abraçada a Jason na beira da baía ao pôr do sol, com palmeiras e os '
@@ -82,7 +54,6 @@ ARTES = [
      'luvas em frente a um muro grafitado'),
     ('arte-real-dimez', 'Real_Dimez/Real_Dimez_landscape.jpg', 'arte',
      'Ilustração oficial: Bae-Luxe e Roxy, da dupla Real Dimez, posando diante de um hotel art déco'),
-    # Cartões-postais das 6 regiões
     ('postal-vice-city', 'Postcards/Vice_City/Vice_City_Postcard_landscape.jpg', 'postal',
      'Cartão-postal oficial “Visit Leonida” de Vice City: prédios da cidade à beira da baía turquesa, '
      'com jet skis na água'),
@@ -103,7 +74,6 @@ ARTES = [
      'com o sol atravessando as árvores'),
 ]
 
-# Versões em retrato (celular) de algumas artes: (saída, caminho, alt igual ao da paisagem)
 RETRATOS = [
     ('arte-jason-lucia-praia-retrato', 'Jason_and_Lucia_Beach/Jason_and_Lucia_Beach_phone.jpg',
      'arte-jason-lucia-praia'),
@@ -114,19 +84,15 @@ MAPA = ('mapa-leonida-poster', 'Leonida_Map_and_Cover_Art_Poster/Leonida_Map_Pos
         'Port Gellhorn, Ambrosia, Grassrivers e o Mount Kalaga, os condados, as estradas e as Leonida '
         'Keys ao sul')
 
-# Logo: a mesma ilustração com e sem o logotipo
 LOGO = ('logo-gta-vi',
         'Jason_and_Lucia_Robbery/Jason_and_Lucia_Robbery_landscape.jpg',
         'Jason_and_Lucia_Robbery_With_Logo/Jason_and_Lucia_Robbery_With_Logo_landscape.jpg',
-        (200, 160, 1440, 1080))  # área onde o logo está na arte 3840×2160
+        (200, 160, 1440, 1080))
 
 ZIP_ULTIMATE = ('https://media-rockstargames-com.akamaized.net/VI/downloads/'
                 'screenshots/GTAVI_Ultimate_Edition_Benefits.zip')
 
-# Capturas escolhidas na folha de contato: (saída, arquivo original, pacote, grupo, alt)
-# pacote: 'capturas' | 'ultimate' | 'vintage'
 CAPTURAS = [
-    # Tour pelas 6 regiões (página inicial)
     ('tour-vice-city', 'Vice_City_11.jpg', 'capturas', 'tour',
      'Prédio alto de Vice City ao pôr do sol, com a baía, as ilhas e um helicóptero ao fundo'),
     ('tour-leonida-keys', 'Leonida_Keys_06.jpg', 'capturas', 'tour',
@@ -139,7 +105,6 @@ CAPTURAS = [
      'Grupo de motociclistas numa estrada de Ambrosia, com postes, lojas e um letreiro antigo ao fundo'),
     ('tour-mount-kalaga', 'Mount_Kalaga_National_Park_05.jpg', 'capturas', 'tour',
      'Veados bebendo água num riacho no meio da mata do Mount Kalaga National Park'),
-    # Bloco editorial de Jason e Lucia
     ('editorial-lucia-noite', 'Jason_and_Lucia_10.jpg', 'capturas', 'editorial',
      'Lucia de vestido sentada na beira de uma cama, com a janela aberta para os prédios iluminados de Vice City'),
     ('editorial-jason-lucia-carro', 'Jason_and_Lucia_17.jpg', 'capturas', 'editorial',
@@ -148,7 +113,6 @@ CAPTURAS = [
      'Jason pilotando uma moto azul à noite, iluminado pelas luzes de uma viatura'),
     ('citacao-vice-city-posto', 'Vice_City_22.jpg', 'capturas', 'editorial',
      'Avenida de Vice City ao anoitecer, com o letreiro de um posto de gasolina e os prédios do centro atrás'),
-    # Veículos com nome oficial
     ('veiculo-grotti-cheetah', 'ULTIMATE_EDITION_GROTTI_CHEETAH_01.jpg', 'ultimate', 'veiculo',
      'Grotti Cheetah (1995) branco com faixas vermelhas na frente de um estacionamento circular'),
     ('veiculo-shitzu-squalo', 'ULTIMATE_EDITION_SQUALO_01.jpg', 'ultimate', 'veiculo',
@@ -165,7 +129,6 @@ CAPTURAS = [
      'Vapid Stanier (1955) amarelo e branco estacionado numa rua de Vice City à noite, sob luzes de neon'),
 ]
 
-# Cenas de vídeo: (nome, arquivo no ZIP de vídeos, alt do primeiro quadro)
 CENAS_VIDEO = [
     ('lucia', 'Lucia_Caminos_Video_Clip.mp4',
      'Lucia Caminos se debruça na janela de um carro parado numa avenida de Vice City à noite, '
@@ -216,15 +179,11 @@ def processar_artes(kit, novos):
 
 
 def recortar_logo(kit, novos):
-    """O logo é branco; com a arte sem logo (fundo) e a arte com logo (resultado),
-    a opacidade de cada pixel sai de: resultado = a·255 + (1 − a)·fundo."""
     nome, sem, com, (x0, y0, x1, y1) = LOGO
     pasta = kit / 'GTAVI_Artwork_Wallpapers'
     fundo = np.asarray(Image.open(pasta / sem).convert('RGB'), dtype=float)[y0:y1, x0:x1]
     final = np.asarray(Image.open(pasta / com).convert('RGB'), dtype=float)[y0:y1, x0:x1]
     alfa = ((final - fundo) / np.maximum(255 - fundo, 1)).clip(0, 1).min(axis=2)
-    # Fica só o que encosta num traço firme do logo (some o ruído do JPEG e um avião
-    # que mudou de lugar entre as duas artes)
     firme = Image.fromarray(((alfa > 0.85) * 255).astype('uint8')).filter(ImageFilter.MaxFilter(9))
     alfa = alfa * (np.asarray(firme) > 0)
     alfa = np.where(alfa > 0.9, 1, alfa)
@@ -246,7 +205,6 @@ def recortar_logo(kit, novos):
 
 
 def processar_capturas(kit, novos):
-    """Converte as capturas escolhidas na folha de contato (1600 e 800 px)."""
     pastas = {'capturas': ('GTAVI_Screenshots', PAGINA_CAPTURAS, ZIP_CAPTURAS),
               'ultimate': ('GTAVI_Ultimate_Edition_Benefits', PAGINA_CAPTURAS, ZIP_ULTIMATE),
               'vintage': ('GTAVI_Vintage_Vice_City_Pack', PAGINA_CAPTURAS, ZIP_VINTAGE)}
@@ -260,7 +218,6 @@ def processar_capturas(kit, novos):
 
 
 def miniaturas(kit, usados):
-    """Miniaturas das capturas que ainda não usamos, para a folha de contato."""
     FOLHA.mkdir(parents=True, exist_ok=True)
     itens = []
     fontes = [(p, 'Capturas de tela', ZIP_CAPTURAS) for p in sorted((kit / 'GTAVI_Screenshots').rglob('*.jpg'))]
@@ -283,9 +240,6 @@ def miniaturas(kit, usados):
 
 
 def quadros(kit, so=None):
-    """Quadros da cena de vídeo. Os videoclipes têm só 30 a 45 quadros (1 a 1,5 s em 30 fps),
-    então o ffmpeg cria os quadros intermediários (minterpolate) para a rolagem ficar macia.
-    Desktop: 1280 px, ~87 quadros. Celular: 720 px, metade dos quadros."""
     for nome, video, _alt in CENAS_VIDEO:
         if so and nome not in so:
             continue

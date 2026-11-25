@@ -1,32 +1,5 @@
 #!/usr/bin/env node
-/* ==========================================================================
-   Guia Leonida: prints.mjs
-   --------------------------------------------------------------------------
-   Tira prints do site com o Google Chrome em modo headless (DevTools
-   Protocol, sem instalar nada: o Node 22+ já tem WebSocket).
 
-   Uso:
-     node tools/prints.mjs <url> <largura>x<altura> <saida.jpg> [alvo] [opções]
-
-     alvo     onde rolar antes do print: "topo" (padrão), "fim",
-              "<seletor CSS>@<progresso 0..1>" (ex.: ".tour@0.3") ou um
-              número de pixels
-     opções   --reduzir     emula prefers-reduced-motion: reduce
-              --espera=ms   espera depois de rolar (padrão 1800)
-              --pagina      print da página inteira (só sem movimento)
-              --armazenar='{"chave": valor}'  grava no localStorage e recarrega
-                            (tema, painel de acessibilidade, usuário logado…)
-              --antes='js'  roda este JavaScript (pode usar await) antes de rolar
-              --tab=N       aperta Tab N vezes (para mostrar o foco do teclado)
-              --depois='js' roda este JavaScript depois das teclas e mostra o retorno
-              --medir       mostra o LCP, o peso baixado até o print e os quadros
-                            por segundo enquanto rola até o alvo
-              --axe         roda o axe-core 4.10.2 (WCAG 2.0/2.1/2.2 A e AA +
-                            boas práticas) depois do print e lista as violações
-
-   Também mostra no terminal os erros do console e as requisições que
-   falharam, para servir de verificação rápida.
-   ========================================================================== */
 import { spawn } from 'node:child_process';
 import { writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -62,7 +35,7 @@ try {
   let alvos;
   for (let i = 0; i < 50 && !alvos; i++) {
     await dormir(150);
-    try { alvos = await (await fetch(`http://127.0.0.1:${porta}/json`)).json(); } catch { /* ainda subindo */ }
+    try { alvos = await (await fetch(`http://127.0.0.1:${porta}/json`)).json(); } catch {  }
   }
   const pagina = alvos.find((t) => t.type === 'page');
   ws = new WebSocket(pagina.webSocketDebuggerUrl);
@@ -116,7 +89,7 @@ try {
           return `(() => { const s = document.querySelector(${JSON.stringify(sel)});
             return s.getBoundingClientRect().top + scrollY + Math.max(0, s.offsetHeight - innerHeight) * ${Number(p || 0)}; })()`;
         })();
-    // Rola aos poucos, como uma pessoa, para as cenas acompanharem
+
     await avaliar(`(async () => { const alvo = ${y}; const passos = 12;
       for (let i = 1; i <= passos; i++) { window.scrollTo(0, scrollY + (alvo - scrollY) / (passos - i + 1)); await new Promise(r => setTimeout(r, 60)); }
       window.scrollTo(0, alvo); })()`);

@@ -1,19 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: cenas.css (página inicial como "trailer de rolagem")
-   --------------------------------------------------------------------------
-   Só as cenas da página inicial. Tokens em css/themes.css e componentes
-   gerais (cabeçalho, botões, cards, rodapé) em css/style.css.
-
-   Duas versões de cada cena:
-   - .movimento no <html> (posta por theme.js e confirmada por js/cenas.js
-     quando o GSAP carregou): partes presas na tela (position: sticky) e
-     animadas pela rolagem (só transform e opacity);
-   - sem essa classe (prefers-reduced-motion, "Reduzir animações" do painel
-     ou JavaScript desligado): tudo parado, em sequência, com as mesmas
-     informações. As regras abaixo de html:not(.movimento) cuidam disso.
-   ========================================================================== */
-
-/* 1. Abertura --------------------------------------------------------------- */
 .abertura { position: relative; height: 320vh; background: var(--noite-1); color: #f4eefc; }
 .abertura-palco {
   position: sticky;
@@ -53,6 +37,7 @@
   color: transparent;
 }
 .abertura-final { align-content: center; gap: clamp(1.5rem, 5vh, 3rem); }
+html.movimento:not(.cenas-prontas) .abertura-final { opacity: 0; }
 .abertura-logo { width: min(46vw, 22rem, 34vh); height: auto; filter: drop-shadow(0 0 1.5rem rgb(255 79 163 / .35)); }
 .frase-sol {
   max-width: 18ch;
@@ -63,15 +48,14 @@
   font-size: clamp(2.2rem, 6.4vw, 5.5rem);
   line-height: .98;
   letter-spacing: .02em;
-  /* Sem JS ou sem movimento: um degradê só na frase inteira */
+
   background: var(--degrade-texto);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .frase-sol[data-pronta] { background: none; }
-/* Cada palavra recebe o mesmo degradê, posicionado pelo JS (--x/--w),
-   para parecer um degradê só atravessando a frase inteira */
+
 .frase-sol .palavra {
   background-image: var(--degrade-texto);
   background-size: var(--w, 100%) 100%;
@@ -103,7 +87,6 @@
   .abertura-logo { width: 62vw; }
 }
 
-/* 2. Hero em camadas ---------------------------------------------------------- */
 .hero-camadas {
   position: relative;
   isolation: isolate;
@@ -151,7 +134,7 @@
 .hero-camadas h2 { font-size: clamp(3.5rem, 2rem + 7vw, 8.5rem); color: #f4eefc; margin-bottom: 1.25rem; }
 .hero-camadas .lead { color: #f4eefc; margin-bottom: 1.75rem; }
 .hero-camadas .credito-foto { position: absolute; right: var(--gutter); bottom: .75rem; margin: 0; font-size: .7rem; color: #c9bddf; }
-/* Busca rápida discreta: uma linha só */
+
 .busca-rapida {
   display: flex;
   align-items: center;
@@ -182,7 +165,6 @@
   .hero-camadas::before { background: linear-gradient(0deg, rgb(18 11 34 / .97) 0%, rgb(18 11 34 / .6) 45%, rgb(18 11 34 / .1) 75%); }
 }
 
-/* 3. Já disponível ------------------------------------------------------------ */
 .ja-disponivel { padding-block: clamp(4rem, 9vw, 7rem); background: var(--cor-fundo); border-bottom: 1px solid var(--cor-borda); }
 .ja-disponivel-grade { display: grid; gap: 2.5rem; align-items: center; }
 @media (min-width: 992px) { .ja-disponivel-grade { grid-template-columns: 1.1fr .9fr 1.1fr; } }
@@ -217,7 +199,6 @@
 .links-oficiais a:hover { color: var(--cor-primaria); }
 .links-oficiais li.texto-suave { padding-top: .75rem; font-size: .9rem; }
 
-/* 4. Cena de vídeo controlada pela rolagem ------------------------------------ */
 .cena { position: relative; height: 420vh; background: var(--noite-0); color: #f4eefc; }
 .cena-palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .cena-palco > img,
@@ -250,7 +231,7 @@
 }
 .cena-progresso span { display: block; width: 100%; height: 100%; background: var(--degrade-sol); transform-origin: top; transform: scaleY(0); }
 .cena-quadros { display: none; }
-/* Variação: texto do lado direito, véu espelhado e barra de progresso à esquerda */
+
 .cena-direita .cena-veu {
   background:
     linear-gradient(270deg, rgb(12 8 24 / .8) 0%, rgb(12 8 24 / .35) 45%, transparent 70%),
@@ -266,22 +247,20 @@
   .cena-direita .cena-progresso { left: auto; right: var(--gutter); }
 }
 
-/* Texto ou link apagado pela animação reaparece ao receber foco do teclado */
 .cena-texto:focus-within > *,
 .abertura-camada:focus-within,
 .tour-slide:focus-within,
 .tour-slide:focus-within .tour-texto > * { opacity: 1 !important; transform: none !important; }
 .tour-slide:focus-within { z-index: 5; }
 
-/* 5. Tour pelas 6 regiões ------------------------------------------------------ */
 .tour { position: relative; background: var(--noite-0); color: #f4eefc; }
 .tour-intro { padding: clamp(5rem, 12vw, 9rem) var(--gutter) clamp(3rem, 6vw, 4rem); max-width: var(--largura-max); margin-inline: auto; }
 .tour-intro h2 { font-size: clamp(3rem, 2rem + 6vw, 8rem); margin-bottom: 1rem; }
 .tour-intro p { color: #c9bddf; font-size: 1.15rem; max-width: 40ch; }
-/* Com movimento: um palco preso na tela e os slides empilhados, trocando em crossfade */
+
 .tour-palco { position: relative; height: 600vh; }
 .tour-trilho { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
-.tour-slide { position: absolute; inset: 0; overflow: hidden; background: var(--noite-0); isolation: isolate; } /* cada slide empilha o próprio texto */
+.tour-slide { position: absolute; inset: 0; overflow: hidden; background: var(--noite-0); isolation: isolate; }
 .tour-slide + .tour-slide { opacity: 0; }
 .tour-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 60% 50%; }
 .tour-slide::after {
@@ -300,7 +279,7 @@
   bottom: clamp(2rem, 8vh, 5rem);
 }
 .tour-numero { font: 700 .8rem/1 var(--fonte-texto); letter-spacing: .3em; color: var(--creme); margin-bottom: .75rem; }
-/* Nome gigante no canto */
+
 .tour-texto h3 {
   font-size: clamp(3.5rem, 2rem + 11vw, 13rem);
   line-height: .82;
@@ -311,7 +290,6 @@
 .tour-texto p:not(.tour-numero) { max-width: 36ch; font-size: clamp(1rem, 1.4vw, 1.2rem); margin-bottom: 1.25rem; }
 .tour-texto .btn-linha { color: #f4eefc; }
 
-/* 6. Bloco editorial Jason e Lucia -------------------------------------------- */
 .editorial { padding-block: clamp(5rem, 12vw, 10rem); overflow: hidden; }
 .editorial-grade { display: grid; gap: clamp(3rem, 6vw, 5rem); align-items: center; }
 @media (min-width: 992px) { .editorial-grade { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); } }
@@ -338,7 +316,6 @@
 .btn-ampliar:hover img { transform: scale(1.04); }
 .lightbox .modal-body img { width: 100%; height: auto; border-radius: var(--raio); }
 
-/* Citação gigante sobre foto */
 .citacao {
   position: relative;
   isolation: isolate;
@@ -368,7 +345,6 @@
 .citacao figcaption { font: 700 .8rem/1.3 var(--fonte-texto); letter-spacing: .25em; text-transform: uppercase; color: #f4eefc; }
 .citacao figcaption::before { content: "— "; }
 
-/* 7. Destaques do catálogo (faixa horizontal) ---------------------------------- */
 .destaques { position: relative; background: var(--cor-fundo-2); }
 .destaques-palco { padding-block: clamp(4rem, 10vw, 7rem); }
 .destaques-cabecalho {
@@ -403,7 +379,7 @@
 }
 .destaques-trilho { display: flex; gap: 1.25rem; margin: 0; padding: 0 0 1.25rem; width: max-content; }
 .destaque-item { width: clamp(16rem, 70vw, 20rem); flex: none; scroll-snap-align: start; }
-/* Com movimento, a página desce e a faixa anda de lado (js/cenas.js) */
+
 .com-faixa-animada .destaques { height: var(--altura-faixa-animada, 300vh); }
 .com-faixa-animada .destaques-palco {
   position: sticky;
@@ -414,21 +390,19 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  overflow: clip; /* "clip" não deixa o foco do teclado rolar o palco por conta própria */
+  overflow: clip;
 }
 .com-faixa-animada .destaques-janela { overflow: visible; scroll-snap-type: none; }
 .com-faixa-animada .destaques-palco { padding-block: calc(var(--altura-cabecalho) + 1rem) 2rem; }
-/* Na faixa, a foto do card é quadrada para caber inteira na tela */
+
 .destaques .card-guia .card-foto { aspect-ratio: 1 / 1; }
 @media (max-height: 760px) { .destaques .card-guia .card-foto { aspect-ratio: 4 / 3; } }
 
-/* 8. Galeria ------------------------------------------------------------------- */
 .galeria { background: var(--noite-0); color: #f4eefc; padding-top: clamp(4rem, 10vw, 7rem); }
 .galeria-cabecalho { margin-bottom: 2rem; }
 .galeria-cabecalho h2 { color: #f4eefc; }
 .galeria-cabecalho .texto-suave { color: #c9bddf; }
 
-/* 9. Novidades + chamada do checklist ------------------------------------------ */
 .novidades-grade { display: grid; gap: clamp(3rem, 6vw, 5rem); align-items: start; }
 @media (min-width: 992px) {
   .novidades-grade { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
@@ -440,16 +414,13 @@
 .chamada-checklist h2 { font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem); }
 .chamada-checklist p { color: var(--cor-texto-suave); }
 
-/* 10. Tema claro: "Vice City de dia" ----------------------------------------
-   As cenas com foto continuam escuras (data-bs-theme="dark" no próprio
-   elemento). O resto ganha céu de amanhecer, areia e pêssego. */
 [data-bs-theme="light"] .abertura { background: #fbf4ea; color: var(--cor-texto); }
 [data-bs-theme="light"] .abertura-palco {
   background:
     radial-gradient(38% 30% at 50% 108%, rgb(255 138 61 / .45), transparent 70%),
     linear-gradient(180deg, #fff6e6 0%, #ffe2cc 45%, #ffc9d6 100%);
 }
-/* Sol de fim de tarde cortado por faixas, atrás do texto (decorativo) */
+
 [data-bs-theme="light"] .abertura-palco::before {
   content: "";
   position: absolute;
@@ -472,8 +443,14 @@
 [data-bs-theme="light"] .abertura-marca .titulo-cena { color: var(--cor-titulo); }
 [data-bs-theme="light"] .abertura-marca .titulo-cena small,
 [data-bs-theme="light"] .dica-rolar { color: var(--cor-texto-suave); }
-/* O logo oficial é branco; no amanhecer ele fica escuro (só o filtro muda) */
-[data-bs-theme="light"] .abertura-logo { filter: brightness(0) drop-shadow(0 0 1.5rem rgb(255 79 163 / .35)); }
+
+[data-bs-theme="light"] .abertura-logo {
+  filter: none;
+  object-position: -200vw 0;
+  background: linear-gradient(135deg, #3b1a6e 0%, #6d28d9 45%, #b3135f 100%);
+  -webkit-mask: url("../assets/img/jogo/logo-gta-vi-1100.webp") center / contain no-repeat;
+  mask: url("../assets/img/jogo/logo-gta-vi-1100.webp") center / contain no-repeat;
+}
 [data-bs-theme="light"] .ja-disponivel {
   background:
     radial-gradient(40% 70% at 100% 0%, rgb(255 159 191 / .35), transparent 70%),
@@ -485,7 +462,6 @@
 [data-bs-theme="light"] .btn-ampliar { box-shadow: 0 1.5rem 3rem rgb(120 60 40 / .25); }
 [data-bs-theme="light"] .chamada-checklist { box-shadow: var(--sombra-card); border-color: transparent; }
 
-/* 11. Sem movimento (ou sem JS): tudo parado, em sequência --------------------------------- */
 html:not(.movimento) .abertura { height: auto; }
 html:not(.movimento) .abertura-palco { position: relative; height: auto; margin-top: 0; padding: 4rem 0 5rem; display: block; }
 html:not(.movimento) .abertura-camada { display: block; }

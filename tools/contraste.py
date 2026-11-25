@@ -1,36 +1,5 @@
-"""
-Verificador de contraste do Guia Leonida.
-
-Calcula a razão de contraste de cada par texto/fundo usado no site com a
-fórmula oficial da WCAG 2.x (luminância relativa) e gera a tabela em
-docs/contraste.md.
-
-Como rodar (na raiz do projeto):
-    python tools/contraste.py
-
-Fórmula (WCAG 2.2, critérios 1.4.3, 1.4.6 e 1.4.11):
-    1. Converter cada canal sRGB (0–255) para 0–1: c = canal / 255
-    2. Linearizar: c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-    3. Luminância: L = 0.2126 * R + 0.7152 * G + 0.0722 * B
-    4. Razão: (L_clara + 0.05) / (L_escura + 0.05)
-
-Limites:
-    texto normal          AA 4.5:1   AAA 7:1
-    texto grande (>=24px
-    ou >=18.66px negrito) AA 3:1     AAA 4.5:1
-    componentes de UI e
-    indicador de foco     AA 3:1 (critério 1.4.11, não há AAA)
-
-IMPORTANTE: as cores abaixo precisam ser as mesmas de css/themes.css
-(e as fixas das cenas, de css/style.css e css/cenas.css).
-Se mudar uma cor lá, mude aqui e rode o script de novo.
-"""
-
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Paletas (espelho dos tokens de css/themes.css)
-# ---------------------------------------------------------------------------
 PALETAS = {
     "Escuro": {
         "fundo": "#120B22",
@@ -85,8 +54,6 @@ PALETAS = {
     },
 }
 
-# Pares usados de verdade no site: (frente, fundo, onde é usado, tipo)
-# tipo: "texto" (4.5:1), "grande" (3:1) ou "ui" (3:1)
 PARES = [
     ("texto", "fundo", "Texto do corpo sobre o fundo da página", "texto"),
     ("texto", "fundo-2", "Texto nas faixas alternadas", "texto"),
@@ -109,10 +76,6 @@ PARES = [
     ("foco", "superficie", "Contorno de foco sobre painéis", "ui"),
 ]
 
-# Cores FIXAS das cenas com foto (página inicial, topo das páginas, cards e
-# rodapé): ficam iguais em qualquer tema. O fundo é o ponto mais claro do
-# véu escuro que fica sob o texto (cor do véu com a opacidade mínima usada
-# atrás do texto). (frente, fundo, uso)
 CENAS = [
     ("#F4EEFC", "#0C0818", "Texto claro nas cenas, nos cards do catálogo e no rodapé"),
     ("#C9BDDF", "#0C0818", "Resumo dos cards e textos secundários das cenas"),
@@ -128,9 +91,6 @@ CENAS = [
     ("#F4EEFC", "#2D2440", "Texto sobre o véu mais claro das cenas (véu de 85% sobre foto clara)"),
 ]
 
-# Tema claro: títulos GRANDES em degradê escuro sobre o céu de amanhecer da
-# abertura e o sol listrado (35% de opacidade). Medidos como texto grande (3:1)
-# contra o ponto mais claro e o mais escuro do fundo. (frente, fundo, uso)
 GRANDES_CLARO = [
     ("#B3135F", "#FFF6E6", "Degradê dos títulos (rosa) sobre o céu claro do topo"),
     ("#B3135F", "#FF9EC4", "Degradê dos títulos (rosa) sobre a parte rosa do sol"),
@@ -140,7 +100,6 @@ GRANDES_CLARO = [
     ("#1B1030", "#FF9EC4", "Título \"Guia Leonida\" sobre o sol"),
 ]
 
-# Exemplo "antes e depois" para o relatório
 ANTES_DEPOIS = [
     {
         "nome": "Rosa da paleta nova no modo claro",
@@ -191,13 +150,11 @@ LIMITES = {"texto": (4.5, 7.0), "grande": (3.0, 4.5), "ui": (3.0, None)}
 
 
 def hex_para_rgb(cor: str) -> tuple[int, int, int]:
-    """Converte '#RRGGBB' em (r, g, b)."""
     cor = cor.lstrip("#")
     return tuple(int(cor[i:i + 2], 16) for i in (0, 2, 4))
 
 
 def luminancia(cor: str) -> float:
-    """Luminância relativa segundo a WCAG."""
     def canal(c: int) -> float:
         c = c / 255
         return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -207,14 +164,12 @@ def luminancia(cor: str) -> float:
 
 
 def razao(cor1: str, cor2: str) -> float:
-    """Razão de contraste entre duas cores (de 1 a 21)."""
     l1, l2 = luminancia(cor1), luminancia(cor2)
     clara, escura = max(l1, l2), min(l1, l2)
     return (clara + 0.05) / (escura + 0.05)
 
 
 def avaliar(valor: float, tipo: str) -> tuple[str, str]:
-    """Retorna ('Passa'/'Falha' no AA, 'Passa'/'Falha'/'—' no AAA)."""
     aa, aaa = LIMITES[tipo]
     r_aa = "✅ Passa" if valor >= aa else "❌ Falha"
     if aaa is None:
@@ -225,7 +180,6 @@ def avaliar(valor: float, tipo: str) -> tuple[str, str]:
 
 
 def fmt(valor: float) -> str:
-    """Formata a razão no padrão brasileiro (vírgula decimal)."""
     return f"{valor:.2f}:1".replace(".", ",")
 
 
@@ -345,7 +299,6 @@ if __name__ == "__main__":
     texto, falhas = gerar()
     destino = Path(__file__).resolve().parent.parent / "docs" / "contraste.md"
     destino.write_text(texto, encoding="utf-8", newline="\n")
-    # Resumo no terminal
     for nome, paleta in PALETAS.items():
         for frente, fundo, uso, tipo in PARES:
             r = razao(paleta[frente], paleta[fundo])

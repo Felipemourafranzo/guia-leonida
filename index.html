@@ -3,37 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guia Leonida | Guia de fã não oficial de GTA VI</title>
-  <meta name="description" content="Guia de fã não oficial de GTA VI: veículos, personagens, regiões de Leonida, dicas para iniciantes, novidades e checklist de progresso.">
+  <title>Guia Leonida | Guia não oficial de GTA VI</title>
+  <meta name="description" content="Guia não oficial de GTA VI: veículos, personagens, regiões de Leonida, dicas para iniciantes, novidades e checklist de progresso.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#120b22">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-  <!-- Tema e preferências de acessibilidade aplicados antes de desenhar a página (evita "flash") -->
   <script src="js/theme.js"></script>
 
-  <!-- Fontes: Big Shoulders Display (títulos condensados), Inter (texto) e
-       Atkinson Hyperlegible (opção para dislexia do painel) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap">
 
-  <!-- Bootstrap 5.3.3 e Bootstrap Icons 1.11.3 (versões fixas, com verificação de integridade SRI) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
 
-  <!-- Estilos do site (themes.css depois do Bootstrap para sobrescrever as variáveis) -->
   <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/cenas.css">
 
-  <!-- O logo da abertura chega cedo (é a primeira imagem da página) -->
   <link rel="preload" as="image" href="assets/img/jogo/logo-gta-vi-550.webp" imagesrcset="assets/img/jogo/logo-gta-vi-550.webp 550w, assets/img/jogo/logo-gta-vi-1100.webp 1100w" imagesizes="(max-width: 575px) 62vw, 22rem">
 </head>
 <body>
   <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- Símbolos decorativos reutilizados (palmeira e o sol da marca) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
       <linearGradient id="grad-sol" x1="0" y1="0" x2="0" y2="1">
@@ -56,7 +49,6 @@
     </symbol>
   </svg>
 
-  <!-- Faixa fina do topo -->
   <div class="faixa-topo" role="region" aria-label="Lançamento">
     <svg class="palmeiras esq" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#palmeira"/></svg>
     GTA VI já disponível · PS5 e Xbox Series X|S
@@ -66,7 +58,7 @@
   <header class="cabecalho">
     <a class="marca" href="index.html">
       <svg aria-hidden="true" focusable="false"><use href="#sol-gl"/></svg>
-      <span>Guia Leonida <small>Guia de fã</small></span>
+      <span>Guia Leonida</span>
     </a>
     <nav class="menu-principal" aria-label="Navegação principal">
       <ul>
@@ -94,15 +86,12 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ============ 1. ABERTURA ============
-         Tela roxa: a marca aparece, depois o logo de GTA VI e a frase em degradê,
-         revelada palavra por palavra conforme a rolagem (js/cenas.js). -->
     <section class="abertura" aria-labelledby="titulo-principal">
       <div class="abertura-palco">
         <div class="abertura-camada abertura-marca">
           <h1 id="titulo-principal" class="titulo-cena">
             Guia <span class="linha-sol">Leonida</span>
-            <small>Guia de fã não oficial de GTA&nbsp;VI</small>
+            <small>Guia não oficial de GTA&nbsp;VI</small>
           </h1>
         </div>
         <div class="abertura-camada abertura-final">
@@ -110,7 +99,7 @@
                srcset="assets/img/jogo/logo-gta-vi-550.webp 550w, assets/img/jogo/logo-gta-vi-1100.webp 1100w"
                sizes="(max-width: 575px) 62vw, 22rem" width="550" height="414"
                alt="Grand Theft Auto VI" fetchpriority="high">
-          <p class="frase-sol">Seis regiões, dois fugitivos e um estado inteiro para explorar.</p>
+          <p class="frase-sol">Dois fugitivos e um estado inteiro para explorar.</p>
         </div>
         <p class="dica-rolar" aria-hidden="true">
           Role
@@ -119,8 +108,6 @@
       </div>
     </section>
 
-    <!-- ============ 2. HERO EM CAMADAS ============
-         A arte oficial anda devagar, as palmeiras da frente andam mais rápido. -->
     <section class="hero-camadas" data-bs-theme="dark" aria-labelledby="titulo-boas-vindas">
       <picture class="hero-camadas-fundo" data-velocidade="-0.12">
         <source media="(max-width: 767px)" srcset="assets/img/jogo/arte-jason-lucia-praia-retrato-900.webp" width="900" height="1950">
@@ -136,7 +123,7 @@
         <use href="#palmeira" x="900" y="120" width="140" height="140"/>
       </svg>
       <div class="hero-camadas-conteudo">
-        <p class="sobretitulo">Guia de fã · Já disponível</p>
+        <p class="sobretitulo">Já disponível</p>
         <h2 id="titulo-boas-vindas">Bem-vindo<br>a Leonida</h2>
         <p class="lead">Veículos, personagens, as seis regiões e um checklist para acompanhar seu progresso em GTA&nbsp;VI. Tudo com fonte.</p>
         <form class="busca-rapida" role="search" action="guia.html" method="get" aria-label="Busca rápida no guia">
@@ -148,7 +135,6 @@
       <p class="credito-foto">Arte: © Rockstar Games</p>
     </section>
 
-    <!-- ============ 3. JÁ DISPONÍVEL ============ -->
     <section class="ja-disponivel" aria-labelledby="titulo-disponivel" data-disponivel>
       <div class="container-largo ja-disponivel-grade">
         <div>
@@ -169,9 +155,6 @@
       </div>
     </section>
 
-    <!-- ============ 4. CENA DE VÍDEO: LUCIA ============
-         Quadros do "Videoclipe da Lucia Caminos" (kit oficial, © Rockstar Games), desenhados num
-         <canvas> preso na tela conforme a rolagem: 87 quadros em 1280 px; 44 em 720 px no celular. -->
     <section class="cena" data-bs-theme="dark" aria-labelledby="titulo-lucia"
              data-pasta="assets/cenas/lucia/" data-quadros-1280="87" data-quadros-720="44" data-foco-x="0.6">
       <div class="cena-palco">
@@ -186,7 +169,7 @@
         </div>
         <div class="cena-progresso" aria-hidden="true"><span></span></div>
       </div>
-      <!-- Sem animação: a cena vira três imagens paradas, em ordem -->
+
       <ol class="cena-quadros">
         <li><img src="assets/cenas/lucia/1280/q001.webp" width="1280" height="720" loading="lazy" decoding="async"
                  alt="Lucia, dentro de um carro parado numa avenida de Vice City à noite, começa a se virar para a janela"></li>
@@ -197,9 +180,6 @@
       </ol>
     </section>
 
-    <!-- CENA DE VÍDEO: JASON (texto do lado direito, para variar o ritmo)
-         Quadros do "Videoclipe do Jason Duval" (kit oficial, © Rockstar Games):
-         57 quadros em 1280 px; 29 em 720 px no celular. -->
     <section class="cena cena-direita" data-bs-theme="dark" aria-labelledby="titulo-jason"
              data-pasta="assets/cenas/jason/" data-quadros-1280="57" data-quadros-720="29" data-foco-x="0.72">
       <div class="cena-palco">
@@ -214,7 +194,7 @@
         </div>
         <div class="cena-progresso" aria-hidden="true"><span></span></div>
       </div>
-      <!-- Sem animação: a cena vira três imagens paradas, em ordem -->
+
       <ol class="cena-quadros">
         <li><img src="assets/cenas/jason/1280/q001.webp" width="1280" height="720" loading="lazy" decoding="async"
                  alt="Jason, de bandana vermelha e óculos amarelos, entra numa loja de conveniência"></li>
@@ -225,8 +205,6 @@
       </ol>
     </section>
 
-    <!-- ============ 5. TOUR PELAS 6 REGIÕES ============
-         Cada região é uma cena presa em tela cheia, com zoom lento (Ken Burns) e troca em crossfade. -->
     <section class="tour" id="regioes" data-bs-theme="dark" aria-labelledby="titulo-tour">
       <div class="tour-intro">
         <p class="sobretitulo">Seis regiões</p>
@@ -299,7 +277,6 @@
       </div>
     </section>
 
-    <!-- ============ 6. JASON E LUCIA (bloco editorial) ============ -->
     <section class="editorial" aria-labelledby="titulo-dupla">
       <div class="container-largo editorial-grade">
         <div class="editorial-texto">
@@ -338,7 +315,6 @@
       </div>
     </section>
 
-    <!-- Citação gigante sobre foto -->
     <section class="citacao" data-bs-theme="dark" aria-label="Citação">
       <img class="citacao-foto" data-velocidade="-0.1" src="assets/img/jogo/citacao-vice-city-posto-1600.webp"
            srcset="assets/img/jogo/citacao-vice-city-posto-800.webp 800w, assets/img/jogo/citacao-vice-city-posto-1600.webp 1600w"
@@ -351,10 +327,6 @@
       </figure>
     </section>
 
-    <!-- ============ 7. DESTAQUES DO CATÁLOGO (faixa horizontal) ============
-         Com animação, a faixa anda para o lado conforme a página desce; os botões
-         levam ao card anterior/próximo pelo teclado. Sem animação, é uma faixa
-         que rola de lado normalmente. -->
     <section class="destaques" aria-labelledby="titulo-destaques">
       <div class="destaques-palco">
         <div class="container-largo destaques-cabecalho">
@@ -382,12 +354,10 @@
       </div>
     </section>
 
-    <!-- ============ 8. GALERIA (carrossel acessível) ============ -->
     <section class="galeria" data-bs-theme="dark" aria-labelledby="titulo-carrossel">
       <div class="container-largo galeria-cabecalho">
         <p class="sobretitulo">Galeria</p>
         <h2 id="titulo-carrossel">Um passeio<br>por Leonida</h2>
-        <p class="texto-suave">Use os botões abaixo das imagens ou as setas do teclado. A troca automática pode ser pausada a qualquer momento.</p>
       </div>
 
       <div class="carrossel" data-carrossel role="region" aria-roledescription="carrossel" aria-label="Paisagens e personagens de Leonida">
@@ -451,7 +421,6 @@
       </div>
     </section>
 
-    <!-- ============ 9. NOVIDADES + CHECKLIST ============ -->
     <section class="secao" aria-labelledby="titulo-novidades">
       <div class="container-largo novidades-grade">
         <div>
@@ -481,7 +450,6 @@
 
   </main>
 
-  <!-- Lightbox acessível (modal do Bootstrap): mostra a foto ampliada do bloco editorial -->
   <div class="modal fade lightbox" id="lightbox" tabindex="-1" aria-labelledby="lightbox-titulo" data-bs-theme="dark">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
@@ -497,7 +465,6 @@
     </div>
   </div>
 
-  <!-- Menu em tela cheia (celular) -->
   <div class="offcanvas offcanvas-top menu-tela-cheia" tabindex="-1" id="menu-celular" aria-labelledby="menu-celular-titulo" data-bs-theme="dark">
     <div class="offcanvas-header">
       <h2 class="visually-hidden" id="menu-celular-titulo">Menu</h2>
@@ -514,12 +481,10 @@
           <li><a href="login.html" data-link-conta><span data-link-conta-texto>Entrar</span></a></li>
         </ul>
       </nav>
-      <p class="menu-rodape">Guia de fã não oficial de GTA VI.</p>
+      <p class="menu-rodape">Guia não oficial de GTA VI.</p>
     </div>
   </div>
 
-  <!-- Painel de acessibilidade (offcanvas): aberto pelo botão do cabeçalho em qualquer página.
-       O conteúdo dos controles é criado por js/a11y.js. -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="painel-a11y" aria-labelledby="painel-a11y-titulo">
     <div class="offcanvas-header">
       <h2 class="offcanvas-title" id="painel-a11y-titulo">Acessibilidade</h2>
@@ -539,9 +504,9 @@
       <div>
         <a class="marca" href="index.html">
           <svg aria-hidden="true" focusable="false"><use href="#sol-gl"/></svg>
-          <span>Guia Leonida <small>Guia de fã</small></span>
+          <span>Guia Leonida</span>
         </a>
-        <p class="texto-suave">Guia de fã não oficial de GTA VI: veículos, personagens, as seis regiões e um checklist, tudo com fonte.</p>
+        <p class="texto-suave">Guia não oficial de GTA VI: veículos, personagens, as seis regiões e um checklist, tudo com fonte.</p>
         <p class="texto-suave mb-0" data-status-rodape>Lançado em 19/11/2026 (PS5 e Xbox Series X|S).</p>
       </div>
 
@@ -590,7 +555,7 @@
         com a data da última checagem.
       </p>
       <p class="creditos mb-0">
-        Desenvolvido por <span data-autor>Felipe Moura Franzo</span> para a disciplina Desenvolvimento de Interfaces (2/2026).
+        Desenvolvido por <span data-autor>Felipe Moura Franzo</span>.
         Feito com HTML, CSS, JavaScript e <a href="https://getbootstrap.com/" rel="noopener" target="_blank">Bootstrap 5.3<span class="visually-hidden"> (abre em nova aba)</span></a>.
         Ícones: <a href="https://icons.getbootstrap.com/" rel="noopener" target="_blank">Bootstrap Icons<span class="visually-hidden"> (abre em nova aba)</span></a>.
         Fontes: Big Shoulders Display, Inter e Atkinson Hyperlegible (Google Fonts). Imagens, mapa e quadros de vídeo do jogo:
@@ -599,13 +564,11 @@
     </div>
   </footer>
 
-  <!-- Região de anúncios para leitores de tela + área dos avisos visuais (toasts) -->
   <div id="anunciador" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="area-toasts"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <!-- Movimento: GSAP 3 + ScrollTrigger e Lenis (versões fixas, com SRI). Só ligam sem
-       "Reduzir animações" e sem prefers-reduced-motion (ver js/cenas.js). -->
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js" integrity="sha384-R18XzqnxvVLEF+BYfhpmDx30v7eP83fAckyfoRzK7/Uf6nGqufcmsk0eAKo7S3RU" crossorigin="anonymous"></script>

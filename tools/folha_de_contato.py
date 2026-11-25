@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-"""Gera docs/folha-de-contato-kit.html: a folha de contato do material novo do kit oficial.
-
-Uso: python3 tools/folha_de_contato.py
-
-Lê assets/img/jogo/manifesto.json (ilustrações, postais, mapa, logo),
-docs/folha-de-contato/candidatas.json (capturas ainda não usadas, geradas por
-tools/processar_kit.py) e assets/cenas/*/cena.json (quadros das cenas de vídeo).
-Cada imagem tem uma caixa "Usar"; o botão "Copiar escolhidas" copia a lista
-para colar na conversa. As marcações ficam só neste navegador (localStorage).
-"""
 import html
 import json
 from collections import OrderedDict
@@ -69,7 +59,6 @@ def main():
                       f'<a href="https://www.rockstargames.com/VI/media">kit de mídia oficial</a>.</p>'
                       f'<div class="grade">{"".join(figs)}</div></section>')
 
-    # Cenas de vídeo
     for cena_json in sorted((RAIZ / 'assets/cenas').glob('*/cena.json')):
         cena = json.loads(cena_json.read_text(encoding='utf-8'))
         n = cena['quadros']['1280']
@@ -83,7 +72,6 @@ def main():
                       f'os intermediários foram criados pelo ffmpeg (minterpolate), porque o clipe tem só 1,5 s.</p>'
                       f'<div class="grade grade-quadros">{figs}</div></section>')
 
-    # Candidatas
     por_pasta = OrderedDict()
     for c in candidatas:
         por_pasta.setdefault(c['pasta'], []).append(c)

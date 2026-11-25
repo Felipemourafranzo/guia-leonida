@@ -1,42 +1,6 @@
-/* ==========================================================================
-   Guia Leonida: style.css (redesign "trailer de rolagem")
-   --------------------------------------------------------------------------
-   Componentes do site. As CORES e FONTES vêm de css/themes.css (tokens
-   --cor-*, --fonte-*); as cenas animadas da página inicial ficam em
-   css/cenas.css.
-
-   Princípios do redesign (inspirados no site oficial de GTA VI, sem copiar):
-   - A foto do jogo carrega o design: fotos sangrando até a borda, texto curto.
-   - Títulos condensados em caixa alta, com espaçamento largo nos rótulos.
-   - Cantos quase retos (4px), muito espaço vazio, nada de caixa em tudo.
-   - Neon com moderação: brilho só em títulos de seção, item ativo do menu,
-     botão principal e letreiros pontuais.
-
-   Índice
-     1. Base e tipografia
-     2. Acessibilidade: pular conteúdo, foco, alvos
-     3. Faixa do topo, cabeçalho e menu em tela cheia
-     4. Botões
-     5. Hero das páginas internas
-     6. Seções e títulos
-     7. Cards do catálogo
-     8. Carrossel (galeria)
-     9. Busca e abas (guia.html)
-    10. Mapa (mapa.html)
-    11. Linha do tempo
-    12. Formulários (contato e login)
-    13. Checklist e progresso
-    14. Painel de acessibilidade, modal e toasts
-    15. Rodapé
-    16. Preferências de acessibilidade (classes no <html>)
-    17. Movimento reduzido, alto contraste, cores forçadas e impressão
-   ========================================================================== */
-
-/* 1. Base e tipografia ---------------------------------------------------- */
 html {
-  /* O painel muda --escala-fonte (0.875 a 1.5); como tudo usa rem, o site acompanha */
   font-size: calc(100% * var(--escala-fonte));
-  scroll-padding-top: calc(var(--altura-cabecalho) + 1rem); /* âncoras fora do cabeçalho (WCAG 2.4.11) */
+  scroll-padding-top: calc(var(--altura-cabecalho) + 1rem);
   background: var(--cor-fundo);
 }
 
@@ -54,7 +18,6 @@ body {
 
 main { flex: 1 0 auto; }
 
-/* O atributo hidden sempre vence classes como .d-flex do Bootstrap */
 [hidden] { display: none !important; }
 
 h1, h2, h3, h4, .titulo-display {
@@ -69,7 +32,7 @@ h1 { font-size: clamp(3rem, 2rem + 6vw, 7.5rem); }
 h2 { font-size: clamp(2.25rem, 1.6rem + 3vw, 4.5rem); }
 h3 { font-size: clamp(1.5rem, 1.3rem + .6vw, 1.85rem); letter-spacing: .03em; line-height: 1; }
 h4 { font-size: 1.25rem; }
-/* Títulos "pequenos" (.h3, .h4 do Bootstrap) continuam condensados */
+
 .h3, .h4, .h5 { font-family: var(--fonte-titulo); font-weight: 800; text-transform: uppercase; letter-spacing: .03em; line-height: 1.05; }
 
 p { max-width: 70ch; }
@@ -79,7 +42,6 @@ p { max-width: 70ch; }
 .texto-primaria { color: var(--cor-primaria); }
 .texto-acento { color: var(--cor-acento); }
 
-/* Rótulo acima de títulos: caixa alta, espaçamento largo, cor creme */
 .sobretitulo,
 .rotulo-cena {
   display: inline-block;
@@ -90,7 +52,6 @@ p { max-width: 70ch; }
   color: var(--cor-destaque);
 }
 
-/* Degradê pôr do sol: só em palavras grandes e pontuais (nunca texto corrido) */
 .texto-neon,
 .texto-sol {
   background: var(--degrade-sol);
@@ -104,7 +65,6 @@ p { max-width: 70ch; }
   background-clip: text;
 }
 
-/* Links em texto corrido são sublinhados: não dependem só da cor (WCAG 1.4.1) */
 a { color: var(--cor-primaria); text-underline-offset: .2em; }
 a:hover { color: var(--cor-primaria-hover); }
 main p a,
@@ -116,7 +76,6 @@ img, svg { max-width: 100%; height: auto; }
 
 .container-largo { width: 100%; max-width: var(--largura-max); margin-inline: auto; padding-inline: var(--gutter); }
 
-/* 2. Acessibilidade: pular conteúdo, foco visível, alvos ---------------------- */
 .pular-conteudo {
   position: fixed;
   left: 1rem;
@@ -130,7 +89,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .pular-conteudo:focus { top: 1rem; color: var(--noite-0); }
 
-/* Foco SEMPRE visível e com 3px (WCAG 2.4.7 e 2.4.13) */
 :focus-visible {
   outline: var(--largura-foco) solid var(--cor-foco) !important;
   outline-offset: 3px !important;
@@ -138,7 +96,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 main:focus { outline: none; }
 
-/* Alvo mínimo de toque (WCAG 2.5.8 pede 24px; usamos 44px) */
 .btn, .nav-link, .page-link, .btn-close { min-height: 2.75rem; }
 .form-check-input { min-height: 1.5rem; width: 1.5rem; height: 1.5rem; margin-top: .05rem; }
 .form-switch .form-check-input { width: 2.75rem; }
@@ -146,7 +103,6 @@ main:focus { outline: none; }
 .form-check .form-check-input { float: none; margin-left: 0; flex-shrink: 0; }
 .form-switch { padding-left: 0; }
 
-/* 3. Faixa do topo, cabeçalho e menu ----------------------------------------- */
 .faixa-topo {
   position: relative;
   z-index: 1031;
@@ -171,8 +127,6 @@ main:focus { outline: none; }
   .faixa-topo .palmeiras { display: none; }
 }
 
-/* Cabeçalho mínimo: transparente sobre a foto do topo e sólido ao rolar.
-   Páginas sem foto no topo (body.sem-hero) já começam com fundo. */
 .cabecalho {
   position: sticky;
   top: 0;
@@ -183,8 +137,7 @@ main:focus { outline: none; }
   justify-content: space-between;
   gap: 1rem;
   padding: .5rem var(--gutter);
-  /* Cores do cabeçalho: claras sobre a foto do topo; no tema claro, depois de
-     rolar (ou sobre a abertura clara), viram escuras sobre fundo creme */
+
   --cab-texto: #f4eefc;
   --cab-suave: #c9bddf;
   --cab-ativo: var(--creme);
@@ -249,7 +202,7 @@ main:focus { outline: none; }
   position: relative;
 }
 .menu-principal a:hover { color: var(--cab-ativo); }
-/* Página atual: cor + brilho + traço (não depende só da cor) */
+
 .menu-principal a[aria-current="page"] { color: var(--cab-ativo); text-shadow: var(--brilho-creme); }
 [data-bs-theme="light"] .menu-principal a[aria-current="page"] { text-shadow: none; }
 .menu-principal a[aria-current="page"]::after {
@@ -298,7 +251,6 @@ main:focus { outline: none; }
   .marca small { letter-spacing: .2em; }
 }
 
-/* Menu em tela cheia no celular (offcanvas do Bootstrap) */
 .menu-tela-cheia.offcanvas-top { height: 100dvh; background: var(--noite-1); color: #f4eefc; }
 .menu-tela-cheia .offcanvas-body { display: flex; flex-direction: column; justify-content: center; padding-inline: var(--gutter); }
 .menu-tela-cheia ul { list-style: none; margin: 0; padding: 0; }
@@ -318,7 +270,6 @@ main:focus { outline: none; }
 .menu-tela-cheia a[aria-current="page"] { color: var(--rosa); text-shadow: var(--brilho-rosa); }
 .menu-tela-cheia .menu-rodape { margin-top: 2.5rem; color: #c9bddf; font-size: .9rem; }
 
-/* 4. Botões --------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -331,7 +282,7 @@ main:focus { outline: none; }
 }
 .btn-lg { padding: .8rem 1.75rem; font-size: 1rem; }
 .btn-sm { padding-inline: .9rem; }
-/* Botão principal: degradê pôr do sol + brilho suave (um por tela) */
+
 .btn-sol {
   display: inline-flex;
   align-items: center;
@@ -365,7 +316,6 @@ main:focus { outline: none; }
 .btn-linha:hover { border-color: var(--cor-destaque); color: var(--cor-destaque); }
 [data-bs-theme="light"] .btn-linha { border-color: var(--cor-borda-campo); }
 
-/* 5. Hero das páginas internas: foto oficial em tela cheia, título gigante --- */
 .hero-pagina {
   position: relative;
   isolation: isolate;
@@ -420,34 +370,30 @@ main:focus { outline: none; }
   letter-spacing: .05em;
 }
 
-/* 6. Seções e títulos ------------------------------------------------------- */
 .secao { padding-block: clamp(4rem, 10vw, 8rem); }
 .secao-alternada { background: var(--cor-fundo-2); }
 .secao-cabecalho { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
 .secao-cabecalho h2 { margin-bottom: .75rem; }
 .secao-cabecalho p { color: var(--cor-texto-suave); margin: 0; }
-/* Neon com moderação: título de seção com brilho rosa */
+
 .titulo-neon { color: var(--rosa); text-shadow: var(--brilho-rosa); }
 [data-bs-theme="light"] .titulo-neon { color: var(--cor-primaria); text-shadow: none; }
 
-/* Bloco de texto editorial (texto em coluna, curto) */
 .coluna-texto { max-width: 38rem; }
 .coluna-texto p { color: var(--cor-texto-suave); font-size: 1.1rem; }
 
-/* Lista de fatos com marcador discreto */
 .lista-fatos { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
 .lista-fatos li { display: flex; gap: .6rem; align-items: flex-start; color: var(--cor-texto-suave); }
 .lista-fatos li::before { content: ""; flex: none; width: .5rem; height: .5rem; margin-top: .55rem; background: var(--cor-primaria); }
 .lista-fatos .bi { display: none; }
 
-/* Bloco de texto sobre superfície (avisos, painéis laterais) */
 .painel {
   background: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio);
   padding: clamp(1.25rem, 3vw, 2rem);
 }
-/* Compatibilidade: o antigo card explicativo vira um painel simples, sem ícone */
+
 .card-explicativo {
   height: 100%;
   background: var(--cor-superficie);
@@ -458,7 +404,6 @@ main:focus { outline: none; }
 .card-explicativo .icone-card { display: none; }
 .card-explicativo p, .card-explicativo li { color: var(--cor-texto-suave); }
 
-/* 7. Cards do catálogo: foto grande e texto por cima ------------------------ */
 .card-guia {
   position: relative;
   height: 100%;
@@ -510,7 +455,6 @@ main:focus { outline: none; }
 .card-guia .resumo { color: var(--cor-texto-suave); margin: 0; font-size: .95rem; }
 .card-guia .card-acoes { margin-top: auto; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 
-/* Categoria: rótulo em caixa alta com traço colorido (não depende só da cor) */
 .selo-categoria {
   display: inline-flex;
   align-items: center;
@@ -526,7 +470,7 @@ main:focus { outline: none; }
 .cat-veiculos { color: #ffb27d; }
 .cat-regioes { color: #8eeeff; }
 .cat-dicas { color: var(--creme); }
-/* Fora dos cards (fundo do tema), o rótulo usa a cor de texto do tema */
+
 [data-bs-theme="light"] .selo-categoria:not(.card-guia .selo-categoria) { color: var(--cor-destaque); }
 
 .selo-status {
@@ -540,7 +484,6 @@ main:focus { outline: none; }
 .selo-status .bi { color: var(--cor-acento); }
 .selo-status.sem-confirmacao .bi { color: var(--cor-secundaria); }
 
-/* Botão de favoritar (aria-pressed) */
 .btn-favorito {
   display: inline-flex;
   align-items: center;
@@ -558,9 +501,8 @@ main:focus { outline: none; }
 }
 .btn-favorito:hover { border-color: var(--cor-primaria); color: var(--cor-primaria); }
 .btn-favorito[aria-pressed="true"] { color: var(--cor-primaria); border-color: var(--cor-primaria); }
-.btn-favorito[aria-pressed="true"] .bi::before { content: "\f415"; } /* bi-heart-fill */
+.btn-favorito[aria-pressed="true"] .bi::before { content: "\f415"; }
 
-/* 8. Carrossel (galeria de lançamento) ---------------------------------------- */
 .carrossel { position: relative; background: var(--noite-0); color: #f4eefc; }
 .carrossel-trilho { position: relative; aspect-ratio: 21 / 9; }
 @media (max-width: 991.98px) { .carrossel-trilho { aspect-ratio: 16 / 10; } }
@@ -624,7 +566,6 @@ main:focus { outline: none; }
 .carrossel-indicadores button[aria-current="true"]::before { width: 2.5rem; height: 5px; background: var(--rosa); }
 .carrossel-botoes { display: flex; gap: .4rem; }
 
-/* 9. Busca e abas ------------------------------------------------------------ */
 .painel-busca {
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--cor-borda);
@@ -663,7 +604,7 @@ main:focus { outline: none; }
 }
 .abas-categorias [role="tab"] .bi { display: none; }
 .abas-categorias [role="tab"]:hover { border-color: var(--cor-primaria); }
-/* Aba selecionada: fundo preenchido + traço (não só cor) */
+
 .abas-categorias [role="tab"][aria-selected="true"] {
   background: var(--cor-texto);
   border-color: var(--cor-texto);
@@ -687,9 +628,6 @@ main:focus { outline: none; }
 }
 .estado-vazio .bi { font-size: 2.5rem; color: var(--cor-destaque); }
 
-/* 10. Mapa ----------------------------------------------------------------- */
-
-/* Cena de rolagem: o pôster se afasta de Vice City e as regiões acendem */
 .mapa-cena { position: relative; background: var(--noite-1); color: #f4eefc; }
 .movimento .mapa-cena { height: 320vh; }
 .mapa-cena-palco {
@@ -758,7 +696,6 @@ main:focus { outline: none; }
   .movimento .mapa-cena-lista strong { font-size: 1rem; }
 }
 
-/* Mapa interativo: mapa + painel lateral */
 .mapa-explorar { display: grid; gap: 1.5rem; }
 @media (min-width: 992px) { .mapa-explorar { grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr); } }
 .mapa-zoom {
@@ -766,10 +703,10 @@ main:focus { outline: none; }
   height: min(80vh, 52rem);
   min-height: 26rem;
   overflow: hidden;
-  touch-action: none;           /* o JS cuida do arraste e da pinça */
+  touch-action: none;
   cursor: grab;
   border-radius: var(--raio);
-  /* Mar no tom do pôster, com uma grade de latitude e longitude discreta */
+
   background:
     linear-gradient(rgb(255 255 255 / .07) 1px, transparent 1px) 0 0 / 3rem 3rem,
     linear-gradient(90deg, rgb(255 255 255 / .07) 1px, transparent 1px) 0 0 / 3rem 3rem,
@@ -816,7 +753,7 @@ main:focus { outline: none; }
   font-size: .75rem;
   letter-spacing: 0;
 }
-/* Anel pulsando em volta do número (some com "Reduzir animações") */
+
 .mapa-marcador b::after {
   content: "";
   position: absolute;
@@ -863,7 +800,7 @@ main:focus { outline: none; }
   letter-spacing: .05em;
   max-width: calc(100% - 6rem);
 }
-/* Painel lateral: lista das regiões + cartão-postal da escolhida */
+
 .mapa-painel {
   display: grid;
   gap: 1.25rem;
@@ -901,7 +838,6 @@ main:focus { outline: none; }
 .postal-regiao h3 { font-size: clamp(2rem, 1.6rem + 1.2vw, 2.75rem); }
 .postal-regiao p { color: var(--cor-texto-suave); }
 
-/* Tabelas com a paleta do site */
 .table {
   --bs-table-bg: transparent;
   --bs-table-color: var(--cor-texto);
@@ -910,7 +846,6 @@ main:focus { outline: none; }
 .table caption { caption-side: top; color: var(--cor-texto-suave); }
 .table th { font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cor-destaque); }
 
-/* 11. Linha do tempo ---------------------------------------------------------- */
 .linha-tempo { list-style: none; padding: 0; margin: 0; position: relative; }
 .linha-tempo::before {
   content: "";
@@ -939,7 +874,6 @@ main:focus { outline: none; }
 .linha-tempo p { color: var(--cor-texto-suave); margin-bottom: .25rem; }
 .linha-tempo .badge { letter-spacing: .05em; }
 
-/* 12. Formulários --------------------------------------------------------- */
 .cartao-formulario {
   background: var(--cor-superficie);
   border: 1px solid var(--cor-borda);
@@ -951,7 +885,6 @@ main:focus { outline: none; }
 .form-control, .form-select { min-height: 3rem; border-radius: var(--raio); }
 .form-text { color: var(--cor-texto-suave); }
 
-/* Mensagem de erro com ícone (não só cor) */
 .mensagem-erro {
   display: none;
   align-items: flex-start;
@@ -1015,7 +948,6 @@ main:focus { outline: none; }
 }
 .abas-login .nav-link.active { color: var(--cor-texto); border-bottom-color: var(--cor-primaria); background: transparent; }
 
-/* 13. Checklist e progresso --------------------------------------------------- */
 .progresso-wrapper { padding: 1.25rem 0; border-block: 1px solid var(--cor-borda); }
 .barra-progresso {
   height: .75rem;
@@ -1049,7 +981,6 @@ main:focus { outline: none; }
 .grupo-checklist .form-check-label { cursor: pointer; }
 .grupo-checklist .form-check-input:checked + .form-check-label { text-decoration: line-through; color: var(--cor-texto-suave); }
 
-/* 14. Painel de acessibilidade, modal e toasts --------------------------------- */
 .offcanvas { --bs-offcanvas-bg: var(--cor-superficie); --bs-offcanvas-color: var(--cor-texto); }
 .offcanvas-title { font-size: 2rem; }
 .painel-a11y { display: grid; gap: 1.25rem; min-width: 0; }
@@ -1098,7 +1029,6 @@ main:focus { outline: none; }
 .toast { background: var(--cor-superficie); color: var(--cor-texto); border: 1px solid var(--cor-borda-campo); }
 .toast-header { background: var(--cor-superficie-2); color: var(--cor-texto); }
 
-/* 15. Rodapé escuro com palmeiras -------------------------------------------- */
 .rodape {
   flex-shrink: 0;
   position: relative;
@@ -1115,7 +1045,7 @@ main:focus { outline: none; }
   fill: var(--noite-3);
   pointer-events: none;
 }
-/* Linha do horizonte em degradê, na base das palmeiras */
+
 .rodape::before {
   content: "";
   position: absolute;
@@ -1150,16 +1080,11 @@ main:focus { outline: none; }
 .rodape .aviso-legal { font-size: .875rem; color: #f4eefc; max-width: none; }
 .rodape .creditos { font-size: .85rem; color: #c9bddf; max-width: none; }
 
-/* Tema claro: o alto do rodapé vira um céu de fim de tarde, com as palmeiras
-   em silhueta contra ele (o resto do rodapé continua escuro) */
 [data-bs-theme="light"] {
   --rodape-ceu: linear-gradient(180deg, #fbf4ea 0, #ffd9c2 calc(clamp(4.5rem, 9vw, 7.5rem) * .55), #ff9fbf calc(clamp(4.5rem, 9vw, 7.5rem) - 2px), var(--noite-0) clamp(4.5rem, 9vw, 7.5rem));
 }
 [data-bs-theme="light"] .rodape .palmeiras-rodape { fill: var(--noite-1); }
 
-/* 16. Preferências de acessibilidade (classes aplicadas no <html>) --------- */
-
-/* Fonte amigável para dislexia (Atkinson Hyperlegible) */
 .a11y-dislexia,
 .a11y-dislexia body,
 .a11y-dislexia h1, .a11y-dislexia h2, .a11y-dislexia h3, .a11y-dislexia h4,
@@ -1172,7 +1097,6 @@ main:focus { outline: none; }
   letter-spacing: .02em !important;
 }
 
-/* Espaçamento de texto (valores do critério WCAG 1.4.12) */
 .a11y-espacamento body { line-height: 1.8; }
 .a11y-espacamento p, .a11y-espacamento li, .a11y-espacamento label, .a11y-espacamento dd {
   letter-spacing: .12em !important;
@@ -1181,10 +1105,8 @@ main:focus { outline: none; }
 }
 .a11y-espacamento p { margin-bottom: 2em; }
 
-/* Sublinhar todos os links */
 .a11y-sublinhar a:not(.btn) { text-decoration: underline !important; text-decoration-thickness: 2px !important; }
 
-/* 17. Movimento reduzido e alto contraste ---------------------------------- */
 .a11y-reduzir-movimento { --duracao: 0s; scroll-behavior: auto; }
 .a11y-reduzir-movimento *,
 .a11y-reduzir-movimento *::before,
@@ -1208,7 +1130,6 @@ main:focus { outline: none; }
   .card-guia:hover .card-imagem, .card-guia:focus-within .card-imagem { transform: none; }
 }
 
-/* Alto contraste: bordas visíveis, sem sombras, brilhos nem degradês */
 [data-contraste="alto"] body,
 [data-contraste="alto"] .rodape,
 [data-contraste="alto"] .card-guia,
@@ -1218,7 +1139,7 @@ main:focus { outline: none; }
 [data-contraste="alto"] .cartao-formulario,
 [data-contraste="alto"] .painel,
 [data-contraste="alto"] .mapa-zoom { border: 2px solid #fff; }
-/* Véu preto sólido só onde fica o texto; a foto continua visível em cima */
+
 [data-contraste="alto"] .card-guia .card-foto::after { background: linear-gradient(0deg, #000 0%, #000 38%, rgb(0 0 0 / 0) 62%); }
 [data-contraste="alto"] .hero-pagina::before { background: linear-gradient(0deg, #000 0%, #000 45%, rgb(0 0 0 / .2) 80%); }
 [data-contraste="alto"] .texto-neon,
@@ -1235,7 +1156,6 @@ main:focus { outline: none; }
 [data-contraste="alto"] .rodape::before { background: #fff; }
 [data-contraste="alto"] .barra-progresso-preenchida { background: #ffff00; }
 
-/* Modo forçado do Windows (cores do sistema) */
 @media (forced-colors: active) {
   .btn-favorito, .abas-categorias [role="tab"], .btn-sol, .btn-linha, .mapa-marcador { border: 1px solid CanvasText; }
   .abas-categorias [role="tab"][aria-selected="true"] { outline: 3px solid Highlight; }
@@ -1243,7 +1163,6 @@ main:focus { outline: none; }
   .texto-neon, .texto-sol, .frase-sol, .frase-sol .palavra { background: none !important; color: CanvasText !important; }
 }
 
-/* Impressão: só o conteúdo */
 @media print {
   .faixa-topo, .cabecalho, .rodape, .pular-conteudo, .carrossel-controles, .offcanvas, .mapa-controles { display: none !important; }
   body { background: #fff; color: #000; }

@@ -293,7 +293,7 @@ Um commit por etapa do pedido de redesign:
   anterior saindo antes da próxima entrar.
 - **Mapa rolando junto com o zoom:** o Lenis também escutava a roda do mouse; o mapa ganhou
   `data-lenis-prevent`.
-- **Frase da abertura** trocada por "Seis regiões, dois fugitivos e um estado inteiro para explorar."
+- **Frase da abertura** trocada por "Seis regiões, dois fugitivos e um estado inteiro para explorar." (encurtada na Etapa 15).
 - **Cena do Jason** depois da da Lucia (57 quadros do videoclipe oficial), com o texto do lado direito;
   o canvas ganhou um ponto de foco horizontal (`data-foco-x`) para o recorte do celular.
 - **Mapa:** cena de rolagem nova (o pôster se afasta de Vice City e as regiões acendem no mapa e na
@@ -306,6 +306,20 @@ Um commit por etapa do pedido de redesign:
   card focado saía da tela; o palco passou a usar `overflow: clip`.
 - Rascunho do relatório e auditoria atualizados; 26 prints em `docs/prints/`. axe-core: 0 violações nas 7
   páginas nos dois temas, também no meio das cenas; contraste: nenhum par abaixo do AA.
+
+### Etapa 15: ajustes finais
+- **Abertura:** frase encurtada para "Dois fugitivos e um estado inteiro para explorar."; no tema claro, o
+  logo de GTA VI deixa de ser preto e ganha o degradê roxo (o próprio logo vira máscara de um fundo em
+  degradê).
+- **Voltar para o Início:** as camadas da abertura apareciam sobrepostas por um instante, porque as cenas
+  só eram montadas depois de as fontes carregarem. Agora montam no `DOMContentLoaded`, a frase é
+  reposicionada quando as fontes chegam e a última camada fica invisível até a cena estar pronta
+  (`html.cenas-prontas`).
+- **Cenas da Lucia e do Jason:** o canvas mistura cada quadro com o seguinte conforme a rolagem, para o
+  movimento parecer mais fluido sem baixar mais imagens.
+- **Textos:** "Guia de fã" saiu da marca e das descrições, e saíram a nota da galeria, o "Em texto" do mapa
+  e a menção à disciplina no rodapé.
+- **Código** sem comentários; as decisões estão descritas neste README.
 
 ## 7. Decisões de design
 

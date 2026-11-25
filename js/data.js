@@ -1,33 +1,8 @@
-/* ==========================================================================
-   Guia Leonida: data.js
-   --------------------------------------------------------------------------
-   Todos os dados do site (catálogo, novidades, checklist e status do
-   lançamento) ficam aqui, num único objeto global "GLDados".
-
-   Por que um arquivo .js e não .json?
-   Ler um .json exige fetch(), e o fetch() é bloqueado quando a página é
-   aberta direto pelo arquivo (file://). Com um .js comum o site funciona
-   tanto no GitHub Pages quanto com um duplo clique no index.html.
-
-   Regras de conteúdo:
-   - Tudo foi conferido em fontes oficiais (site da Rockstar, Newswire, kit
-     de mídia oficial) ou em veículos confiáveis. A fonte de cada item fica
-     no campo "fonte".
-   - status:
-       "confirmado"       anunciado pela Rockstar ou mostrado no material oficial
-       "sem-confirmacao"  a Rockstar ainda não divulgou (o campo "checado"
-                          guarda a data da última checagem)
-       "serie"            dica que vale para os GTAs anteriores; checada contra
-                          o material oficial de GTA VI na data de "checado"
-   - Nada foi inventado. Pesquisa atualizada em 25/11/2026, seis dias depois
-     do lançamento (19/11/2026).
-   ========================================================================== */
 (function () {
   'use strict';
 
   var CHECADO = '25/11/2026';
 
-  /* Fontes reutilizadas em vários itens */
   var FONTES = {
     siteOficial: {
       titulo: 'Rockstar Games: site oficial de Grand Theft Auto VI',
@@ -103,11 +78,7 @@
     }
   };
 
-  /* ------------------------------------------------------------------------
-     Status do lançamento (bloco "Já disponível" e rodapé)
-     ------------------------------------------------------------------------ */
   var lancamento = {
-    // Meia-noite de 19/11/2026 no horário de Brasília (UTC-3)
     dataISO: '2026-11-19T00:00:00-03:00',
     dataTexto: '19 de novembro de 2026',
     plataformas: 'PlayStation 5 e Xbox Series X|S',
@@ -118,10 +89,6 @@
     fonte: FONTES.newswireLancamento
   };
 
-  /* ------------------------------------------------------------------------
-     Catálogo: categorias e itens
-     categoria: "veiculos" | "personagens" | "regioes" | "dicas"
-     ------------------------------------------------------------------------ */
   var categorias = {
     veiculos: { rotulo: 'Veículos', singular: 'Veículo', icone: 'bi-car-front-fill' },
     personagens: { rotulo: 'Personagens', singular: 'Personagem', icone: 'bi-person-fill' },
@@ -130,7 +97,6 @@
   };
 
   var itens = [
-    /* ---------------------------- Personagens ---------------------------- */
     {
       id: 'jason-duval',
       categoria: 'personagens',
@@ -240,7 +206,6 @@
       fonte: FONTES.soEmLeonida
     },
 
-    /* ----------------------------- Regiões ------------------------------- */
     {
       id: 'vice-city',
       categoria: 'regioes',
@@ -327,9 +292,6 @@
       fonte: FONTES.mapaOficial
     },
 
-    /* ----------------------------- Veículos ------------------------------ */
-    /* Com nome oficial: aparecem com o nome nas capturas da Ultimate Edition
-       e do Pacote Vintage Vice City, publicadas pela Rockstar. */
     {
       id: 'grotti-cheetah',
       categoria: 'veiculos',
@@ -480,7 +442,6 @@
       fonte: FONTES.capturas
     },
 
-    /* ------------------------------ Dicas -------------------------------- */
     {
       id: 'dica-espaco',
       categoria: 'dicas',
@@ -595,9 +556,6 @@
     }
   ];
 
-  /* ------------------------------------------------------------------------
-     Novidades (linha do tempo), da mais nova para a mais antiga
-     ------------------------------------------------------------------------ */
   var novidades = [
     {
       data: '2026-11-23',
@@ -671,9 +629,6 @@
     }
   ];
 
-  /* ------------------------------------------------------------------------
-     Checklist de progresso (salvo por usuário em checklist.js)
-     ------------------------------------------------------------------------ */
   var checklist = [
     {
       grupo: 'Antes de jogar',
@@ -719,7 +674,6 @@
     }
   ];
 
-  /* Exporta tudo num objeto global, somente leitura */
   window.GLDados = Object.freeze({
     fontes: FONTES,
     lancamento: lancamento,

@@ -1,22 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: a11y.js (painel de acessibilidade)
-   --------------------------------------------------------------------------
-   Cria os controles do painel de acessibilidade dentro de qualquer
-   elemento com o atributo [data-painel-a11y]. O painel existe:
-     - no offcanvas do cabeçalho (todas as páginas)  data-painel-a11y="oc"
-     - na página acessibilidade.html                  data-painel-a11y="pg"
-   O valor do atributo vira prefixo dos ids, para não repetir ids quando
-   os dois painéis estão na mesma página.
-
-   Preferências salvas no localStorage (chave "gl-a11y"):
-     escala            tamanho da fonte (0.875 a 1.5)
-     contraste         alto contraste (true/false)
-     reduzirMovimento  desliga animações e o carrossel automático
-     dislexia          fonte Atkinson Hyperlegible
-     espacamento       mais espaço entre linhas, letras e palavras
-     sublinhar         sublinha todos os links
-   O tema claro/escuro é guardado à parte por theme.js ("gl-tema").
-   ========================================================================== */
 (function () {
   'use strict';
 
@@ -24,7 +5,6 @@
   var ESCALAS = [0.875, 1, 1.125, 1.25, 1.375, 1.5];
   var raiz = document.documentElement;
 
-  /* Opções liga/desliga: chave, rótulo, descrição e classe no <html> */
   var OPCOES = [
     { chave: 'contraste', rotulo: 'Alto contraste', descricao: 'Fundo preto, texto branco e destaques em amarelo.' },
     { chave: 'reduzirMovimento', rotulo: 'Reduzir animações', descricao: 'Desliga transições e a troca automática do carrossel.', classe: 'a11y-reduzir-movimento' },
@@ -44,7 +24,6 @@
     if (window.GL) { GL.salvarJSON(CHAVE, prefs); }
   }
 
-  /* Aplica as preferências no <html> */
   function aplicar(prefs) {
     if (prefs.contraste) {
       raiz.setAttribute('data-contraste', 'alto');
@@ -55,7 +34,7 @@
     OPCOES.forEach(function (op) {
       if (op.classe) { raiz.classList.toggle(op.classe, !!prefs[op.chave]); }
     });
-    // Avisa outros scripts (ex.: o carrossel para de girar sozinho)
+
     document.dispatchEvent(new CustomEvent('gl:a11y', { detail: prefs }));
   }
 
@@ -63,9 +42,6 @@
     return Math.round(escala * 100) + '%';
   }
 
-  /* -------------------------------------------------------------------
-     Monta o HTML de um painel
-     ------------------------------------------------------------------- */
   function montarPainel(container) {
     var p = container.getAttribute('data-painel-a11y') || 'a11y';
 
@@ -80,7 +56,7 @@
     }).join('');
 
     container.innerHTML =
-      // Tema
+
       '<fieldset>' +
         '<legend>Tema de cores</legend>' +
         '<div class="opcoes-tema">' +
@@ -90,7 +66,7 @@
         '</div>' +
         '<p class="small texto-suave mt-2 mb-0">"Sistema" segue a configuração do seu aparelho.</p>' +
       '</fieldset>' +
-      // Fonte
+
       '<div class="grupo-a11y" role="group" aria-labelledby="' + p + '-fonte-titulo">' +
         '<p class="grupo-a11y-titulo" id="' + p + '-fonte-titulo">Tamanho do texto</p>' +
         '<div class="controle-fonte">' +
@@ -102,7 +78,7 @@
           '<button type="button" class="btn btn-link" data-fonte="0">Padrão</button>' +
         '</div>' +
       '</div>' +
-      // Liga/desliga
+
       '<fieldset>' +
         '<legend>Leitura e movimento</legend>' +
         htmlOpcoes +
@@ -119,9 +95,6 @@
       '<label class="btn" for="' + id + '"><i class="bi ' + icone + '" aria-hidden="true"></i>' + rotulo + '</label>';
   }
 
-  /* -------------------------------------------------------------------
-     Eventos dos controles
-     ------------------------------------------------------------------- */
   function ligarEventos(container) {
     container.addEventListener('change', function (evento) {
       var alvo = evento.target;
@@ -167,7 +140,6 @@
     });
   }
 
-  /* Atualiza TODOS os painéis da página para refletir as preferências */
   function sincronizar() {
     var prefs = ler();
     var tema = window.GLTema ? GLTema.ler() : 'sistema';
@@ -195,11 +167,10 @@
     aplicar(ler());
     document.querySelectorAll('[data-painel-a11y]').forEach(montarPainel);
     sincronizar();
-    // Se o tema mudar pelo botão do cabeçalho, o painel acompanha
+
     document.addEventListener('gl:tema', sincronizar);
   });
 
-  /* API usada por outros scripts (ex.: carrossel) */
   window.GLA11y = {
     preferencias: ler,
     movimentoReduzido: function () {

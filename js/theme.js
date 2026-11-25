@@ -1,18 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: theme.js
-   --------------------------------------------------------------------------
-   Controla o modo claro/escuro e aplica, o mais cedo possível, as
-   preferências de acessibilidade salvas.
-
-   Este arquivo é carregado no <head> SEM "defer" de propósito: assim o tema
-   é aplicado antes de a página ser desenhada e não acontece o "flash" de
-   tema errado (a página piscar branca antes de ficar escura).
-
-   Preferência salva no localStorage (chave "gl-tema"):
-     "escuro"   modo escuro (padrão do site: "noite em Leonida")
-     "claro"    força o modo claro
-     "sistema"  segue o prefers-color-scheme do sistema operacional
-   ========================================================================== */
 (function () {
   'use strict';
 
@@ -21,20 +6,16 @@
   var raiz = document.documentElement;
   var consultaEscuro = window.matchMedia('(prefers-color-scheme: dark)');
 
-  /* localStorage pode falhar (modo privado, bloqueio de cookies): por isso
-     toda leitura/escrita fica dentro de try/catch. */
   function lerPreferencia() {
     try {
       var valor = localStorage.getItem(CHAVE_TEMA);
-      // Sem escolha salva, o site abre no escuro (identidade "noite em Leonida")
+
       return valor === 'claro' || valor === 'escuro' || valor === 'sistema' ? valor : 'escuro';
     } catch (erro) {
       return 'escuro';
     }
   }
 
-  /* Converte a preferência ("claro", "escuro", "sistema") no valor que o
-     Bootstrap entende em data-bs-theme ("light" ou "dark"). */
   function temaEfetivo(preferencia) {
     if (preferencia === 'sistema') {
       return consultaEscuro.matches ? 'dark' : 'light';
@@ -42,7 +23,6 @@
     return preferencia === 'escuro' ? 'dark' : 'light';
   }
 
-  /* Atualiza o texto e o ícone de todos os botões de alternar tema. */
   function atualizarBotoes() {
     var escuro = raiz.getAttribute('data-bs-theme') === 'dark';
     var botoes = document.querySelectorAll('[data-alternar-tema]');
@@ -62,12 +42,10 @@
     atualizarBotoes();
   }
 
-  /* Salva a escolha do usuário e avisa os outros scripts (ex.: o painel de
-     acessibilidade, que mostra a opção marcada). */
   function definir(preferencia) {
     try {
       localStorage.setItem(CHAVE_TEMA, preferencia);
-    } catch (erro) { /* sem armazenamento: o tema vale só nesta página */ }
+    } catch (erro) { }
     aplicar(preferencia);
     document.dispatchEvent(new CustomEvent('gl:tema', {
       detail: { preferencia: preferencia, tema: raiz.getAttribute('data-bs-theme') }
@@ -79,16 +57,12 @@
     definir(escuro ? 'claro' : 'escuro');
   }
 
-  /* Se a preferência for "sistema", acompanha a troca do sistema em tempo real */
   consultaEscuro.addEventListener('change', function () {
     if (lerPreferencia() === 'sistema') {
       aplicar('sistema');
     }
   });
 
-  /* ---- Aplicação antecipada das preferências de acessibilidade ----------
-     O painel completo fica em a11y.js; aqui só aplicamos o que já estava
-     salvo, para a página já nascer com fonte maior, alto contraste etc. */
   function aplicarA11ySalva() {
     var prefs = {};
     try {
@@ -104,22 +78,16 @@
     raiz.classList.toggle('a11y-espacamento', !!prefs.espacamento);
     raiz.classList.toggle('a11y-sublinhar', !!prefs.sublinhar);
 
-    /* Com animações permitidas, o hero começa escondido para a entrada do
-       GSAP (js/movimento.js). Se o script não carregar, o CSS mostra tudo
-       sozinho depois de 2,5 s (ver .gl-entrada em leonida.css). */
     var reduzido = !!prefs.reduzirMovimento ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     raiz.classList.toggle('gl-entrada', !reduzido);
-    // Cenas da página inicial (css/cenas.css): só ficam animadas com a classe
-    // "movimento"; sem ela (ou sem JS) viram imagens paradas em sequência.
-    // js/cenas.js tira a classe se o GSAP não carregar.
+
     raiz.classList.toggle('movimento', !reduzido);
   }
 
   aplicar(lerPreferencia());
   aplicarA11ySalva();
 
-  /* Liga os botões de alternar tema quando o HTML terminar de carregar */
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-alternar-tema]').forEach(function (botao) {
       botao.addEventListener('click', alternar);
@@ -127,7 +95,6 @@
     atualizarBotoes();
   });
 
-  /* API pública usada por a11y.js */
   window.GLTema = {
     ler: lerPreferencia,
     definir: definir,

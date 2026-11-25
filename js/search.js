@@ -1,18 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: search.js (catálogo, busca, abas e favoritos)
-   --------------------------------------------------------------------------
-   Responsável por:
-     1. Criar os cards do catálogo a partir de GLDados (data.js)
-     2. Busca por texto em tempo real + abas de categoria (guia.html)
-     3. Estado "nenhum resultado encontrado"
-     4. Botão de favoritar (só para usuário logado, ver auth.js)
-     5. Janela de detalhes (modal do Bootstrap) com a fonte da informação
-     6. Destaques da página inicial, regiões (mapa.html) e lista de
-        favoritos (checklist.html), que reaproveitam o mesmo card
-
-   As abas seguem o padrão "Tabs" do WAI-ARIA: role="tablist"/"tab"/
-   "tabpanel", aria-selected, e as setas ← → movem entre as abas.
-   ========================================================================== */
 window.GLCatalogo = (function () {
   'use strict';
 
@@ -22,10 +7,6 @@ window.GLCatalogo = (function () {
     return GLDados.itens.filter(function (item) { return item.id === id; })[0];
   }
 
-  /* ---------------------------------------------------------------------
-     Card de um item. nivel = nível do título (h2/h3) para manter a
-     hierarquia correta em cada página.
-     --------------------------------------------------------------------- */
   function criarCard(item, nivel) {
     nivel = nivel || 3;
     var cat = GLDados.categorias[item.categoria];
@@ -53,8 +34,6 @@ window.GLCatalogo = (function () {
     '</article>';
   }
 
-  /* Selo de status: confirmado, sem confirmação (com a data da checagem) ou
-     dica que vale para a série */
   function textoStatus(item) {
     if (item.status === 'sem-confirmacao') { return 'Ainda não divulgado · checado em ' + item.checado; }
     if (item.status === 'serie') { return 'Vale nos GTAs anteriores · checado em ' + item.checado; }
@@ -66,15 +45,12 @@ window.GLCatalogo = (function () {
     return '<span class="selo-status' + classe + '"><i class="bi ' + icone + '" aria-hidden="true"></i>' + esc(textoStatus(item)) + '</span>';
   }
 
-  /* Quando um card some enquanto tinha o foco, o foco não pode se perder
-     (WCAG 2.4.3). Vai para o elemento [data-foco-alternativo] mais próximo. */
   function focarAlternativo(lista) {
     var secao = lista.closest('section') || document;
     var alvo = secao.querySelector('[data-foco-alternativo]');
     if (alvo) { alvo.focus(); }
   }
 
-  /* Lista de cards dentro de <li> (a lista informa a quantidade ao leitor de tela) */
   function listaDeCards(itens, nivel, classeColuna) {
     classeColuna = classeColuna || 'col-sm-6 col-lg-4 col-xl-3';
     return itens.map(function (item) {
@@ -82,16 +58,12 @@ window.GLCatalogo = (function () {
     }).join('');
   }
 
-  /* ---------------------------------------------------------------------
-     Favoritos (delegação de eventos: funciona em qualquer card da página)
-     --------------------------------------------------------------------- */
   function aoClicarFavorito(botao) {
     var id = botao.getAttribute('data-favoritar');
     var item = buscarItem(id);
     var novoEstado = window.GLAuth ? GLAuth.alternarFavorito(id) : null;
 
     if (novoEstado === null) {
-      // Visitante: explica e oferece o login, voltando para esta página depois
       var pagina = location.pathname.split('/').pop() || 'index.html';
       GL.avisar('Entre na sua conta para salvar favoritos.', {
         icone: 'bi-person-lock',
@@ -100,7 +72,7 @@ window.GLCatalogo = (function () {
       });
       return;
     }
-    // Atualiza todos os botões do mesmo item (pode haver mais de um na página)
+
     document.querySelectorAll('[data-favoritar="' + id + '"]').forEach(function (b) {
       b.setAttribute('aria-pressed', novoEstado ? 'true' : 'false');
     });
@@ -109,9 +81,6 @@ window.GLCatalogo = (function () {
       : 'Removido dos favoritos: ' + item.nome + '.');
   }
 
-  /* ---------------------------------------------------------------------
-     Modal de detalhes (criado uma vez; o Bootstrap cuida do foco)
-     --------------------------------------------------------------------- */
   var modal = null;
   function abrirDetalhes(id) {
     var item = buscarItem(id);
@@ -165,9 +134,6 @@ window.GLCatalogo = (function () {
     modal.show();
   }
 
-  /* ---------------------------------------------------------------------
-     Página do guia: busca + abas
-     --------------------------------------------------------------------- */
   function iniciarGuia() {
     var campo = document.getElementById('busca');
     var listaAbas = document.getElementById('abas-categorias');
@@ -196,7 +162,7 @@ window.GLCatalogo = (function () {
         if (!palavras.length) { return true; }
         var texto = GL.normalizar([item.nome, item.resumo, item.tags.join(' '),
           GLDados.categorias[item.categoria].rotulo, item.inspiracao || ''].join(' '));
-        // Todas as palavras digitadas precisam aparecer (busca "E")
+
         return palavras.every(function (p) { return texto.indexOf(p) !== -1; });
       });
     }
@@ -205,7 +171,6 @@ window.GLCatalogo = (function () {
     function renderizar(anunciarResultado) {
       var itens = filtrar(estado.categoria);
 
-      // Contadores em cada aba (respeitando o texto digitado)
       abas.forEach(function (aba) {
         var cat = aba.getAttribute('data-categoria');
         var span = aba.querySelector('.contador');
@@ -221,7 +186,6 @@ window.GLCatalogo = (function () {
       vazio.hidden = itens.length !== 0;
       if (focoDentro) { focarAlternativo(resultados); }
 
-      // O painel é rotulado pela aba selecionada (padrão WAI-ARIA Tabs)
       var abaAtual = abas.filter(function (a) { return a.getAttribute('data-categoria') === estado.categoria; })[0];
       if (abaAtual) { resultados.parentElement.setAttribute('aria-labelledby', abaAtual.id); }
 
@@ -236,13 +200,11 @@ window.GLCatalogo = (function () {
       var termoVazio = document.getElementById('termo-vazio');
       if (termoVazio) { termoVazio.textContent = estado.termo ? '"' + estado.termo + '"' : 'esses filtros'; }
 
-      // Mantém a URL atualizada: dá para compartilhar a busca
       var novaUrl = new URLSearchParams();
       if (estado.termo) { novaUrl.set('q', estado.termo); }
       if (estado.categoria !== 'todos') { novaUrl.set('cat', estado.categoria); }
       history.replaceState(null, '', location.pathname + (novaUrl.toString() ? '?' + novaUrl : ''));
 
-      // Anuncia o total só depois que a pessoa para de digitar
       if (anunciarResultado) {
         clearTimeout(temporizadorAnuncio);
         temporizadorAnuncio = setTimeout(function () { GL.anunciar(frase); }, 700);
@@ -254,7 +216,6 @@ window.GLCatalogo = (function () {
       renderizar(true);
     });
 
-    /* Enter no campo não recarrega a página */
     campo.form && campo.form.addEventListener('submit', function (e) { e.preventDefault(); });
 
     function selecionarAba(aba, focar) {
@@ -305,7 +266,6 @@ window.GLCatalogo = (function () {
       });
     });
 
-    // Com "só favoritos" ligado, desfavoritar remove o card da lista
     document.addEventListener('gl:favoritos', function () {
       if (estado.favoritos) { renderizar(false); }
     });
@@ -313,7 +273,6 @@ window.GLCatalogo = (function () {
     renderizar(false);
   }
 
-  /* Destaques da página inicial: <ul data-destaques="id1,id2"> */
   function iniciarDestaques() {
     var lista = document.querySelector('[data-destaques]');
     if (!lista) { return; }
@@ -321,7 +280,6 @@ window.GLCatalogo = (function () {
     lista.innerHTML = listaDeCards(itens, 3, lista.getAttribute('data-classe') || 'col-sm-6 col-xl-3');
   }
 
-  /* Regiões em mapa.html: <ul data-lista-regioes> */
   function iniciarRegioes() {
     var lista = document.querySelector('[data-lista-regioes]');
     if (!lista) { return; }
@@ -331,7 +289,6 @@ window.GLCatalogo = (function () {
     }).join('');
   }
 
-  /* Favoritos em checklist.html: <ul data-lista-favoritos> */
   function renderizarFavoritos() {
     var lista = document.querySelector('[data-lista-favoritos]');
     var vazio = document.querySelector('[data-favoritos-vazio]');
@@ -340,7 +297,7 @@ window.GLCatalogo = (function () {
     var itens = usuario ? GLAuth.favoritos().map(buscarItem).filter(Boolean) : [];
     var focoDentro = lista.contains(document.activeElement);
     lista.innerHTML = listaDeCards(itens, 3, 'col-sm-6 col-lg-4');
-    // Se o botão focado sumiu (item desfavoritado), o foco vai para o título da seção
+
     if (focoDentro) { focarAlternativo(lista); }
     lista.hidden = itens.length === 0;
     if (vazio) {
@@ -354,7 +311,6 @@ window.GLCatalogo = (function () {
   document.addEventListener('DOMContentLoaded', function () {
     if (!window.GLDados) { return; }
 
-    // Cliques nos botões dos cards (funciona para cards criados depois também)
     document.addEventListener('click', function (evento) {
       var fav = evento.target.closest('[data-favoritar]');
       if (fav) { aoClicarFavorito(fav); return; }

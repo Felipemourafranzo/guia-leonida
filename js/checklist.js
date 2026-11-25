@@ -1,14 +1,3 @@
-/* ==========================================================================
-   Guia Leonida: checklist.js (checklist de progresso por usuário)
-   --------------------------------------------------------------------------
-   - Monta os grupos do checklist (GLDados.checklist) como <fieldset>
-     com caixas de seleção, dentro de [data-checklist]
-   - Salva o que foi marcado para o usuário logado (GLAuth)
-   - Atualiza a barra de progresso (role="progressbar") e o texto
-     "X de Y itens (Z%)"; a mudança é anunciada para leitores de tela
-   - Visitante (sem login) vê o checklist desativado e um convite para entrar
-   - [data-resumo-progresso] mostra um resumo em outras páginas (ex.: início)
-   ========================================================================== */
 (function () {
   'use strict';
 
@@ -33,7 +22,6 @@
     return p.feitos + ' de ' + p.total + ' itens concluídos (' + p.porcentagem + '%)';
   }
 
-  /* Barra de progresso: role="progressbar" + texto visível */
   function htmlBarra(p, id) {
     return '<div class="d-flex justify-content-between flex-wrap gap-2 mb-2">' +
         '<span class="fw-semibold" id="' + id + '-rotulo">Seu progresso</span>' +
@@ -59,7 +47,6 @@
     return p;
   }
 
-  /* Resumo para outras páginas */
   function renderizarResumo() {
     var alvo = document.querySelector('[data-resumo-progresso]');
     if (!alvo || !window.GLAuth) { return; }
@@ -71,7 +58,6 @@
     alvo.innerHTML = htmlBarra(calcular(), 'resumo-progresso');
   }
 
-  /* Página do checklist */
   function renderizarChecklist() {
     var container = document.querySelector('[data-checklist]');
     if (!container) { return; }

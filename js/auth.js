@@ -1,37 +1,14 @@
-/* ==========================================================================
-   Guia Leonida: auth.js (login e cadastro SIMULADOS)
-   --------------------------------------------------------------------------
-   ATENÇÃO: ISTO NÃO É AUTENTICAÇÃO DE VERDADE.
-   O site não tem servidor (backend). As contas ficam apenas no
-   localStorage do navegador de quem está usando. Qualquer pessoa com
-   acesso ao navegador consegue ver e apagar esses dados pelas ferramentas
-   de desenvolvedor. A senha é guardada como hash SHA-256 só para não ficar
-   em texto puro, mas sem servidor isso NÃO é segurança real.
-   Serve apenas para demonstrar a interface de login e permitir que cada
-   "usuário" tenha seus próprios favoritos e checklist.
-
-   Chaves no localStorage:
-     gl-usuarios            lista de contas [{nome, email, senhaHash, criadoEm}]
-     gl-sessao              conta logada {nome, email}
-     gl-favoritos:<email>   ids dos itens favoritados
-     gl-checklist:<email>   {idDoItem: true}
-   ========================================================================== */
 window.GLAuth = (function () {
   'use strict';
 
   var CHAVE_USUARIOS = 'gl-usuarios';
   var CHAVE_SESSAO = 'gl-sessao';
 
-  /* Páginas para onde podemos voltar depois do login (evita redirecionar
-     para sites externos através do parâmetro ?voltar=) */
   var PAGINAS_PERMITIDAS = ['index.html', 'guia.html', 'mapa.html', 'checklist.html', 'contato.html', 'acessibilidade.html'];
 
   function usuarios() { return GL.lerJSON(CHAVE_USUARIOS, []); }
   function usuarioAtual() { return GL.lerJSON(CHAVE_SESSAO, null); }
 
-  /* Hash SHA-256 da senha (Web Crypto). Se o navegador não oferecer a
-     API (ex.: página aberta sem HTTPS em alguns navegadores), usamos um
-     hash simples, só para não guardar a senha em texto puro. */
   function gerarHash(texto) {
     if (window.crypto && crypto.subtle && window.TextEncoder) {
       return crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto)).then(function (buffer) {
@@ -47,7 +24,6 @@ window.GLAuth = (function () {
 
   function normalizarEmail(email) { return String(email).trim().toLowerCase(); }
 
-  /* Cria a conta. Retorna Promise com {ok, erro, campo} */
   function cadastrar(nome, email, senha) {
     email = normalizarEmail(email);
     var lista = usuarios();
@@ -66,7 +42,6 @@ window.GLAuth = (function () {
     });
   }
 
-  /* Faz login. Retorna Promise com {ok, erro, campo} */
   function entrar(email, senha) {
     email = normalizarEmail(email);
     var usuario = usuarios().filter(function (u) { return u.email === email; })[0];
@@ -84,11 +59,10 @@ window.GLAuth = (function () {
   }
 
   function sair() {
-    try { localStorage.removeItem(CHAVE_SESSAO); } catch (erro) { /* ignora */ }
+    try { localStorage.removeItem(CHAVE_SESSAO); } catch (erro) { }
     atualizarCabecalho();
   }
 
-  /* ---------------------------- Favoritos ---------------------------- */
   function chaveFavoritos() {
     var u = usuarioAtual();
     return u ? 'gl-favoritos:' + u.email : null;
@@ -99,8 +73,6 @@ window.GLAuth = (function () {
   }
   function ehFavorito(id) { return favoritos().indexOf(id) !== -1; }
 
-  /* Alterna o favorito. Retorna true/false (novo estado) ou null se não
-     houver usuário logado. */
   function alternarFavorito(id) {
     var chave = chaveFavoritos();
     if (!chave) { return null; }
@@ -112,7 +84,6 @@ window.GLAuth = (function () {
     return posicao === -1;
   }
 
-  /* ---------------------------- Checklist ---------------------------- */
   function lerChecklist() {
     var u = usuarioAtual();
     return u ? GL.lerJSON('gl-checklist:' + u.email, {}) : {};
@@ -122,7 +93,6 @@ window.GLAuth = (function () {
     if (u) { GL.salvarJSON('gl-checklist:' + u.email, estado); }
   }
 
-  /* ------------------ Link "Entrar / Minha conta" no menu ------------------ */
   function primeiroNome(nome) { return String(nome).split(' ')[0]; }
 
   function atualizarCabecalho() {
@@ -140,14 +110,13 @@ window.GLAuth = (function () {
         if (icone) { icone.className = 'bi bi-person-circle'; }
       }
     });
-    // Elementos que só fazem sentido para quem não está logado (ex.: "Criar conta")
+
     document.querySelectorAll('[data-somente-visitante]').forEach(function (el) {
       el.hidden = !!u;
     });
     document.dispatchEvent(new CustomEvent('gl:sessao', { detail: { usuario: u } }));
   }
 
-  /* --------------------------- Página de login --------------------------- */
   function destinoDepoisDoLogin() {
     var voltar = new URLSearchParams(location.search).get('voltar');
     return PAGINAS_PERMITIDAS.indexOf(voltar) !== -1 ? voltar : null;
@@ -175,7 +144,6 @@ window.GLAuth = (function () {
     var formCadastro = document.getElementById('form-cadastro');
     if (!formEntrar || !formCadastro || !window.GLForm) { return; }
 
-    // Ao concluir: mostra o painel da conta (ou volta para a página de origem)
     function concluir(mensagem) {
       var destino = destinoDepoisDoLogin();
       GL.avisar(mensagem, { icone: 'bi-check-circle-fill', titulo: 'Tudo certo' });
@@ -228,7 +196,6 @@ window.GLAuth = (function () {
       });
     }
 
-    // Abre direto na aba "Cadastrar" com ?aba=cadastro
     if (new URLSearchParams(location.search).get('aba') === 'cadastro' && window.bootstrap) {
       var abaCadastro = document.getElementById('aba-cadastro');
       if (abaCadastro) { bootstrap.Tab.getOrCreateInstance(abaCadastro).show(); }

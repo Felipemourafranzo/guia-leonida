@@ -1,35 +1,11 @@
-/* ==========================================================================
-   Guia Leonida: form.js (validação acessível de formulários)
-   --------------------------------------------------------------------------
-   Um "mini-framework" de validação usado pelo formulário de contato e
-   pelos formulários de login/cadastro (auth.js).
-
-   Como os erros ficam acessíveis (WCAG 3.3.1, 3.3.3, 4.1.3):
-     - cada campo tem um <p id="CAMPO-erro" class="mensagem-erro"> ligado
-       pelo aria-describedby do campo
-     - campos com erro recebem aria-invalid="true" e borda mais grossa,
-       e a mensagem tem ícone (não depende só da cor)
-     - ao tentar enviar com erros, aparece um RESUMO no topo do formulário
-       com links para cada campo; o foco vai para esse resumo e a
-       quantidade de erros é anunciada pela região aria-live
-     - depois da primeira tentativa, os erros somem/aparecem enquanto a
-       pessoa corrige (validação "ao vivo" só depois de tentar enviar)
-
-   O envio é SIMULADO: o site não tem servidor.
-   ========================================================================== */
 window.GLForm = (function () {
   'use strict';
 
-  /* ------------------------------------------------------------------
-     Regras: cada uma recebe (valor, campo, formulário) e devolve a
-     mensagem de erro ou null quando está tudo certo.
-     ------------------------------------------------------------------ */
   var regras = {
     obrigatorio: function (mensagem) {
       return function (valor) { return valor.trim() ? null : mensagem; };
     },
     email: function (mensagem) {
-      // Formato simples: algo@algo.dominio (sem espaços)
       var padrao = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
       return function (valor) {
         if (!valor.trim()) { return null; }
@@ -60,7 +36,6 @@ window.GLForm = (function () {
     return campo.type === 'checkbox' ? (campo.checked ? 'sim' : '') : campo.value;
   }
 
-  /* Mostra ou limpa o erro de um campo */
   function definirErro(campo, mensagem) {
     var saida = document.getElementById(campo.id + '-erro');
     if (mensagem) {
@@ -72,16 +47,11 @@ window.GLForm = (function () {
     }
   }
 
-  /* ------------------------------------------------------------------
-     configurar(form, regrasPorCampo, aoEnviar)
-       aoEnviar(dados) deve devolver uma Promise com
-         { ok: true }  ou  { erros: [{ campo: 'id', mensagem: '...' }] }
-     ------------------------------------------------------------------ */
   function configurar(form, regrasPorCampo, aoEnviar) {
     var tentouEnviar = false;
     var resumo = form.querySelector('[data-resumo-erros]');
     var botao = form.querySelector('[type="submit"]');
-    form.setAttribute('novalidate', ''); // usamos a nossa validação, não a do navegador
+    form.setAttribute('novalidate', '');
 
     function validarCampo(id) {
       var campo = form.querySelector('#' + id);
@@ -131,7 +101,6 @@ window.GLForm = (function () {
       }
     }
 
-    /* Links do resumo: levam o foco para o campo certo */
     if (resumo) {
       resumo.addEventListener('click', function (evento) {
         var link = evento.target.closest('a[href^="#"]');
@@ -142,8 +111,6 @@ window.GLForm = (function () {
       });
     }
 
-    /* Validação ao vivo depois da primeira tentativa de envio.
-       Antes disso, valida só ao sair de um campo já preenchido. */
     Object.keys(regrasPorCampo).forEach(function (id) {
       var campo = form.querySelector('#' + id);
       var evento = campo.type === 'checkbox' || campo.tagName === 'SELECT' ? 'change' : 'input';
@@ -194,7 +161,7 @@ window.GLForm = (function () {
         var campo = form.querySelector('#' + id);
         dados[id] = campo.type === 'checkbox' ? campo.checked : campo.value.trim();
       });
-      // Campos sem regra (ex.: opcionais) também entram nos dados
+
       Array.prototype.forEach.call(form.elements, function (campo) {
         if (campo.id && !(campo.id in dados) && campo.name) {
           dados[campo.id] = campo.type === 'checkbox' ? campo.checked : campo.value.trim();
@@ -215,7 +182,6 @@ window.GLForm = (function () {
       });
     });
 
-    /* Limpa erros quando o formulário é reiniciado */
     form.addEventListener('reset', function () {
       tentouEnviar = false;
       Object.keys(regrasPorCampo).forEach(function (id) { definirErro(form.querySelector('#' + id), null); });
@@ -223,10 +189,6 @@ window.GLForm = (function () {
     });
   }
 
-  /* ------------------------------------------------------------------
-     Botões "mostrar senha" (WCAG 3.3.8: ajuda a não errar a senha)
-     <button data-mostrar-senha="idDoCampo" aria-pressed="false">
-     ------------------------------------------------------------------ */
   function iniciarMostrarSenha() {
     document.querySelectorAll('[data-mostrar-senha]').forEach(function (botao) {
       var campo = document.getElementById(botao.getAttribute('data-mostrar-senha'));
@@ -239,7 +201,6 @@ window.GLForm = (function () {
     });
   }
 
-  /* Contador de caracteres: <span data-contador-de="idDoCampo" data-maximo="1000"> */
   function iniciarContadores() {
     document.querySelectorAll('[data-contador-de]').forEach(function (saida) {
       var campo = document.getElementById(saida.getAttribute('data-contador-de'));
@@ -255,9 +216,6 @@ window.GLForm = (function () {
     });
   }
 
-  /* ------------------------------------------------------------------
-     Formulário de contato (contato.html)
-     ------------------------------------------------------------------ */
   var ASSUNTOS = ['duvida', 'sugestao', 'correcao', 'acessibilidade', 'outro'];
 
   function iniciarContato() {
@@ -265,13 +223,11 @@ window.GLForm = (function () {
     if (!form) { return; }
     var sucesso = document.getElementById('contato-sucesso');
 
-    // Pré-seleciona o assunto vindo do link (ex.: rodapé "Relatar uma barreira")
     var assunto = new URLSearchParams(location.search).get('assunto');
     if (ASSUNTOS.indexOf(assunto) !== -1) {
       form.querySelector('#contato-assunto').value = assunto;
     }
 
-    // Se a pessoa está logada, já preenche nome e e-mail (WCAG 3.3.7: evitar digitar de novo)
     var usuario = window.GLAuth && GLAuth.usuarioAtual();
     if (usuario) {
       form.querySelector('#contato-nome').value = usuario.nome;
@@ -289,7 +245,6 @@ window.GLForm = (function () {
       ],
       'contato-consentimento': [regras.marcado('Marque a caixa de consentimento para enviar.')]
     }, function (dados) {
-      // ENVIO SIMULADO: espera 1,2 s como se fosse a rede e guarda no navegador
       return new Promise(function (resolver) {
         setTimeout(function () {
           var protocolo = 'GL-' + Date.now().toString(36).toUpperCase().slice(-6);
